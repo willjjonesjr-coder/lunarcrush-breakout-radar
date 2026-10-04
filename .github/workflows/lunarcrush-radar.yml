@@ -1,0 +1,73 @@
+name: LunarCrush Breakout Radar
+
+on:
+  workflow_dispatch:
+    inputs:
+      top:
+        description: "Number of finalists"
+        required: false
+        default: "15"
+  schedule:
+    - cron: "15 8 * * *"
+      timezone: "America/New_York"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lunarcrush-breakout-radar
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run breakout scanner
+        env:
+          LUNARCRUSH_API_KEY: ${{ secrets.LUNARCRUSH_API_KEY }}
+          RADAR_TOP: ${{ inputs.top || '15' }}
+        run: python scanner.py --top "$RADAR_TOP"
+
+      - name: Archive today's radar
+        shell: bash
+        run: |
+          mkdir -p reports/archive
+          DAY=$(date -u +%Y-%m-%d)
+          cp reports/breakout_radar.csv "reports/archive/breakout_radar_${DAY}.csv"
+          cp reports/breakout_radar.json "reports/archive/breakout_radar_${DAY}.json"
+
+      - name: Commit updated data and reports
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data reports
+          if git diff --cached --quiet; then
+            echo "No report changes to commit."
+          else
+            git commit -m "Update LunarCrush breakout radar"
+            git push
+          fi
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lunarcrush-breakout-radar
+          path: |
+            reports/breakout_radar.csv
+            reports/breakout_radar.json
+          retention-days: 30
