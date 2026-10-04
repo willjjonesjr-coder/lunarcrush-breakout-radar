@@ -1,0 +1,42 @@
+{
+  "base_url": "https://lunarcrush.com/api4",
+  "requests_per_minute": 10,
+  "daily_request_budget": 2000,
+
+  "universe": {
+    "page_size": 1000,
+    "min_market_cap": 250000000,
+    "max_market_cap": 10000000000,
+    "min_volume_24h": 10000000,
+    "max_7d_price_change": 35,
+    "exclude_symbols": ["USDT", "USDC", "DAI", "FDUSD", "USDE", "USDS", "TUSD", "USDD"]
+  },
+
+  "funnel": {
+    "snapshot_candidates": 100,
+    "historical_candidates": 60,
+    "finalists": 15
+  },
+
+  "history": {
+    "bucket": "day",
+    "lookback_days": 90,
+    "max_rows_per_request": 1000
+  },
+
+  "scoring": {
+    "social_acceleration": 25,
+    "contributor_acceleration": 15,
+    "engagement_acceleration": 15,
+    "sentiment_acceleration": 10,
+    "social_dominance_acceleration": 10,
+    "volume_acceleration": 10,
+    "price_divergence": 10,
+    "galaxy_score": 5
+  },
+
+  "output": {
+    "data_dir": "data",
+    "reports_dir": "reports"
+  }
+}
