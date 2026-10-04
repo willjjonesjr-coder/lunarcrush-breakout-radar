@@ -1,0 +1,38 @@
+name: LunarCrush Backtest
+
+on:
+  workflow_dispatch:
+    inputs:
+      horizon:
+        description: "Forward horizon in daily observations"
+        default: "14"
+        required: true
+      threshold:
+        description: "Research signal threshold (different from live breakout score)"
+        default: "25"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - run: pip install -r requirements.txt
+      - name: Evaluate saved history
+        env:
+          HORIZON: ${{ inputs.horizon }}
+          THRESHOLD: ${{ inputs.threshold }}
+        run: python backtest.py --horizon "$HORIZON" --threshold "$THRESHOLD"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lunarcrush-backtest
+          path: reports/backtest.csv
+          retention-days: 30
