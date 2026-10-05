@@ -4,16 +4,24 @@ on:
   workflow_dispatch:
     inputs:
       horizon:
-        description: "Forward horizon in daily observations"
+        description: "Single-run horizon in daily observations"
         default: "14"
         required: true
       threshold:
-        description: "Research signal threshold (different from live breakout score)"
+        description: "Single-run research threshold"
         default: "25"
         required: true
+      matrix:
+        description: "Compare thresholds 20/25/30/35/40 and horizons 7/14/30"
+        type: boolean
+        default: true
 
 permissions:
   contents: write
+
+concurrency:
+  group: lunarcrush-breakout-radar
+  cancel-in-progress: false
 
 jobs:
   backtest:
@@ -30,9 +38,29 @@ jobs:
         env:
           HORIZON: ${{ inputs.horizon }}
           THRESHOLD: ${{ inputs.threshold }}
-        run: python backtest.py --horizon "$HORIZON" --threshold "$THRESHOLD"
+          MATRIX: ${{ inputs.matrix }}
+        shell: bash
+        run: |
+          OPTIONS=()
+          if [ "$MATRIX" = "true" ]; then OPTIONS+=(--matrix); fi
+          python backtest.py --horizon "$HORIZON" --threshold "$THRESHOLD" "${OPTIONS[@]}"
+      - name: Archive and commit reports
+        shell: bash
+        run: |
+          RUN_TAG="$(date -u +%Y-%m-%d)_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
+          mkdir -p "reports/archive/backtest_${RUN_TAG}"
+          cp reports/backtest*.csv "reports/archive/backtest_${RUN_TAG}/"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports
+          if ! git diff --cached --quiet; then
+            git commit -m "Update backtest comparison reports"
+            git pull --rebase
+            git push
+          fi
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: lunarcrush-backtest
-          path: reports/backtest.csv
+          path: reports/backtest*.csv
           retention-days: 30
