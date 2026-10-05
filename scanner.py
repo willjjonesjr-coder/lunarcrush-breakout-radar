@@ -206,9 +206,10 @@ def score_candidates(df, cfg):
         out[f"{col}_score"] = component
         score = score + weight * component
 
-    # Penalties: don't reward a move that is already too extended.
+    # Historical returns are fractions: 0.30 means a 30% gain.
+    # Convert to percentage points before applying score-point penalties.
     out["extension_penalty"] = (
-        out["price_change_7d"].clip(lower=0).fillna(0) * 0.35
+        out["price_change_7d"].clip(lower=0).fillna(0) * 100 * 0.35
     ).clip(upper=25)
 
     # Penalize extreme recent spam growth, but only modestly.
@@ -223,7 +224,7 @@ def score_candidates(df, cfg):
     def stage(row):
         s = row["breakout_score"]
         p = row.get("price_change_7d", np.nan)
-        if s >= 75 and (pd.isna(p) or p < 15):
+        if s >= 75 and pd.notna(p) and p < 0.15:
             return "PRE-BREAKOUT"
         if s >= 65:
             return "DEVELOPING"
