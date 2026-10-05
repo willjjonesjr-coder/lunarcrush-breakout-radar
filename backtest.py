@@ -70,80 +70,95 @@ def make_features(h):
 
     return x
 
+def events_for(x, threshold, horizon, coin):
+    if horizon < 1:
+        raise ValueError('Horizon must be at least 1')
+    price = x['close']
+    future = price.shift(-horizon) / price - 1
+    drawdown = (price.rolling(horizon, min_periods=horizon).min().shift(-horizon) / price - 1).clip(upper=0)
+    valid = (x['signal_score'] >= threshold) & (price > 0) & np.isfinite(future) & np.isfinite(drawdown)
+    out = pd.DataFrame({'signal_time': x['time'], 'signal_score': x['signal_score'],
+                        'entry_price': price, 'forward_return': future, 'max_forward_drawdown': drawdown})[valid].copy()
+    out['coin_file'] = coin
+    out['threshold'] = threshold
+    out['horizon'] = horizon
+    return out
+
+
+def summarize(events):
+    r = events['forward_return']
+    dd = events['max_forward_drawdown']
+    return {'signals': len(events), 'coins_with_signals': events['coin_file'].nunique(),
+            'hit_10pct': (r >= .1).mean() if len(r) else np.nan,
+            'hit_20pct': (r >= .2).mean() if len(r) else np.nan,
+            'hit_50pct': (r >= .5).mean() if len(r) else np.nan,
+            'mean_forward_return': r.mean(), 'median_forward_return': r.median(),
+            'worst_forward_return': r.min(), 'mean_max_forward_drawdown': dd.mean(),
+            'worst_max_forward_drawdown': dd.min()}
+
 
 def evaluate(h, threshold, horizon):
-    if horizon < 1:
-        raise ValueError("Horizon must be at least 1")
-    x = make_features(h)
-
-    future = x["close"].shift(-horizon) / x["close"] - 1
-    future_min = x["close"].rolling(horizon).min().shift(-horizon) / x["close"] - 1
-
-    future_min = future_min.clip(upper=0)
-
-    signals = x["signal_score"] >= threshold
-    valid = signals & future.notna()
-
-    if valid.sum() == 0:
-        return None
-
-    r = future[valid]
-    dd = future_min[valid]
-
-    return {
-        "signals": int(valid.sum()),
-        "hit_10pct": float((r >= 0.10).mean()),
-        "hit_20pct": float((r >= 0.20).mean()),
-        "hit_50pct": float((r >= 0.50).mean()),
-        "mean_forward_return": float(r.mean()),
-        "median_forward_return": float(r.median()),
-        "worst_forward_return": float(r.min()),
-        "mean_max_forward_drawdown": float(dd.mean()),
-        "worst_max_forward_drawdown": float(dd.min()),
-    }
+    events = events_for(make_features(h), threshold, horizon, 'coin')
+    return summarize(events) if len(events) else None
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data-dir", default="data")
-    parser.add_argument("--threshold", type=float, default=25)
-    parser.add_argument("--horizon", type=int, default=14)
-    parser.add_argument("--output", default="reports/backtest.csv")
+    parser.add_argument('--data-dir', default='data')
+    parser.add_argument('--threshold', type=float, default=25)
+    parser.add_argument('--horizon', type=int, default=14)
+    parser.add_argument('--output', default='reports/backtest.csv')
+    parser.add_argument('--matrix', action='store_true')
+    parser.add_argument('--thresholds', default='20,25,30,35,40')
+    parser.add_argument('--horizons', default='7,14,30')
     args = parser.parse_args()
-
-    paths = sorted(Path(args.data_dir).glob("history_*.csv"))
+    thresholds = sorted(set(float(t) for t in args.thresholds.split(','))) if args.matrix else [args.threshold]
+    horizons = sorted(set(int(t) for t in args.horizons.split(','))) if args.matrix else [args.horizon]
+    if not thresholds or not horizons or any(h < 1 for h in horizons) or not all(np.isfinite(t) for t in thresholds):
+        parser.error('Use finite thresholds and positive horizons')
+    paths = sorted(Path(args.data_dir).glob('history_*.csv'))
     if not paths:
-        raise SystemExit("No history_*.csv files found. Run scanner.py first.")
-
-    rows = []
+        raise SystemExit('No history files found. Run scanner first.')
+    histories = {}
     for path in paths:
         try:
             h = load_history(path)
-            if len(h) < max(45, args.horizon + 14):
-                continue
-            result = evaluate(h, args.threshold, args.horizon)
-            if result:
-                result["coin_file"] = path.name
-                rows.append(result)
+            histories[path.name] = make_features(h)
         except Exception as exc:
-            print(f"[WARN] {path.name}: {exc}")
-
-    if not rows:
-        raise SystemExit("No valid backtest results.")
-
-    out = pd.DataFrame(rows)
+            print(f'[WARN] Skipping {path.name}: {exc}')
+    if not histories:
+        raise SystemExit('No usable histories.')
+    all_events, per_coin, matrix = [], [], []
+    for threshold in thresholds:
+        for horizon in horizons:
+            chunks, eligible = [], 0
+            for coin, h in histories.items():
+                if len(h) < max(45, horizon + 14):
+                    continue
+                eligible += 1
+                events = events_for(h, threshold, horizon, coin)
+                chunks.append(events)
+                per_coin.append(dict(threshold=threshold, horizon=horizon, coin_file=coin, **summarize(events)))
+            if chunks:
+                events = pd.concat(chunks, ignore_index=True)
+            else:
+                events = events_for(next(iter(histories.values())).iloc[:0], threshold, horizon, '')
+            all_events.append(events)
+            matrix.append(dict(threshold=threshold, horizon=horizon, coins_loaded=len(histories),
+                               coins_eligible=eligible, **summarize(events)))
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    out.to_csv(output, index=False)
-    print(out.to_string(index=False))
+    prefix = output.with_suffix('')
+    coin_table = pd.DataFrame(per_coin)
+    coin_table.to_csv(output, index=False)
+    coin_table.to_csv(str(prefix) + '_per_coin.csv', index=False)
+    pd.concat(all_events, ignore_index=True).to_csv(str(prefix) + '_events.csv', index=False)
+    summary = pd.DataFrame(matrix)
+    summary.to_csv(str(prefix) + '_matrix.csv', index=False)
+    print('Signal-weighted results (each qualifying observation has equal weight):')
+    print(summary.to_string(index=False))
+    print('Research only: overlapping signals, current-universe selection bias, revised data; no fees/slippage. Horizons count observations, not calendar days. Drawdown is daily-close loss relative to entry.')
 
-    print("\nPortfolio-style aggregate:")
-    print(f"Coins tested: {len(out)}")
-    print(f"Mean 10% hit rate: {out.hit_10pct.mean():.1%}")
-    print(f"Mean 20% hit rate: {out.hit_20pct.mean():.1%}")
-    print(f"Mean forward return: {out.mean_forward_return.mean():.2%}")
-    print(f"Mean max forward drawdown: {out.mean_max_forward_drawdown.mean():.2%}")
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
