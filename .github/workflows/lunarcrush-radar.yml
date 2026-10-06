@@ -50,35 +50,19 @@ jobs:
           cp reports/breakout_radar.csv "reports/archive/breakout_radar_${DAY}.csv"
           cp reports/breakout_radar.json "reports/archive/breakout_radar_${DAY}.json"
 
-      - name: Commit and push updated data
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const { execSync } = require('child_process');
-            
-            // Configure git
-            execSync('git config user.name "github-actions[bot]"');
-            execSync('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"');
-            
-            // Check if there are changes
-            const status = execSync('git status --porcelain', { encoding: 'utf-8' });
-            if (!status.trim()) {
-              console.log('No changes to commit.');
-              return;
-            }
-            
-            // Add, commit, and push with retry logic
-            execSync('git add data reports');
-            execSync('git commit -m "Update LunarCrush breakout radar"');
-            
-            try {
-              execSync('git push');
-            } catch (error) {
-              console.log('Push failed, pulling and retrying...');
-              execSync('git pull --rebase origin main');
-              execSync('git push');
-            }
+      - name: Commit updated data and reports
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data reports
+          if git diff --cached --quiet; then
+            echo "No report changes to commit."
+          else
+            git commit -m "Update LunarCrush breakout radar"
+            git pull --rebase origin main
+            git push
+          fi
 
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
