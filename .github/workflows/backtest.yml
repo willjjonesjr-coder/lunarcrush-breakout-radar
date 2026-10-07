@@ -55,8 +55,8 @@ jobs:
           git add reports
           if ! git diff --cached --quiet; then
             git commit -m "Update backtest comparison reports"
-            git pull --rebase
-            git push
+            git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+            git push origin "HEAD:${GITHUB_REF_NAME:-main}"
           fi
       - uses: actions/upload-artifact@v4
         if: always()
