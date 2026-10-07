@@ -64,6 +64,10 @@ jobs:
             git push
           fi
 
+              git commit -m "Update LunarCrush breakout radar"
+              git pull --rebase origin "${GITHUB_REF_NAME:-main}"
+              git push origin "HEAD:${GITHUB_REF_NAME:-main}"
+
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
         with:
