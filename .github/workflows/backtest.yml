@@ -44,7 +44,7 @@ jobs:
           OPTIONS=()
           if [ "$MATRIX" = "true" ]; then OPTIONS+=(--matrix); fi
           python backtest.py --horizon "$HORIZON" --threshold "$THRESHOLD" "${OPTIONS[@]}"
-      - name: Archive and commit reports
+        - name: Archive and commit reports
         shell: bash
         run: |
           RUN_TAG="$(date -u +%Y-%m-%d)_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}"
@@ -60,6 +60,10 @@ jobs:
           fi
       - uses: actions/upload-artifact@v4
         if: always()
+        with:
+          name: lunarcrush-backtest
+          path: reports/backtest*.csv
+          retention-days: 30
         with:
           name: lunarcrush-backtest
           path: reports/backtest*.csv
