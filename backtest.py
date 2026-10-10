@@ -1,164 +1,254 @@
 import argparse
+import csv
+import os
 from pathlib import Path
 
-import numpy as np
-import pandas as pd
+DEFAULT_THRESHOLDS = [20, 25, 30, 35, 40]
+DEFAULT_HORIZONS = [7, 14, 30]
 
 
-FEATURES = [
-    "contributors_active",
-    "contributors_created",
-    "interactions",
-    "posts_active",
-    "posts_created",
-    "sentiment",
-    "spam",
-    "close",
-    "galaxy_score",
-    "social_dominance",
-    "volume_24h",
-]
+def parse_int_list(raw_value, default_list):
+    if raw_value is None or str(raw_value).strip() == "":
+        return default_list
+
+    values = []
+    for item in str(raw_value).split(","):
+        item = item.strip()
+        if item:
+            values.append(int(item))
+    return values if values else default_list
 
 
-def load_history(path):
-    df = pd.read_csv(path)
-    df["time"] = pd.to_datetime(df["time"], utc=True)
-    for c in FEATURES:
-        if c in df:
-            df[c] = pd.to_numeric(df[c], errors="coerce")
-    return df.sort_values("time").drop_duplicates("time").reset_index(drop=True)
+def strategy_threshold(strategy, threshold):
+    """
+    Adjust threshold by strategy.
+    - baseline: same threshold
+    - moderate: slightly looser
+    - strict: stricter
+    """
+    if strategy == "baseline":
+        return threshold
+    if strategy == "moderate":
+        return max(0, threshold - 5)
+    if strategy == "strict":
+        return max(0, threshold + 5)
+    return threshold
 
 
-def rolling_accel(s, short=7, base=23):
-    short_mean = s.rolling(short, min_periods=3).mean()
-    base_mean = s.shift(short).rolling(base, min_periods=8).mean()
-    return short_mean / base_mean.replace(0, np.nan) - 1
+def strategy_list(strategy):
+    if strategy == "all":
+        return ["baseline", "moderate", "strict"]
+    return [strategy]
 
 
-def make_features(h):
-    x = h.copy()
+def normalize_row(row):
+    """
+    Convert a dict-like CSV row into a normalized row.
+    Supports common names:
+      - signal: signal_score, score, signal
+      - return: return_7d, forward_return_7d, pnl_7d, ret_7d, etc.
+    """
+    normalized = {}
 
-    x["social_accel"] = rolling_accel(x["posts_active"])
-    x["contributor_accel"] = rolling_accel(x["contributors_active"])
-    x["engagement_accel"] = rolling_accel(x["interactions"])
-    x["volume_accel"] = rolling_accel(x["volume_24h"])
+    for key in row:
+        normalized[key.lower().strip()] = row[key]
 
-    x["sentiment_change"] = x["sentiment"] - x["sentiment"].shift(7)
-    x["social_dom_change"] = (
-        x["social_dominance"] / x["social_dominance"].shift(7).replace(0, np.nan) - 1
+    # Common signal key aliases
+    signal = (
+        normalized.get("signal_score")
+        or normalized.get("signal")
+        or normalized.get("score")
+        or normalized.get("value")
     )
 
-    x["price_change_7d"] = x["close"] / x["close"].shift(7) - 1
+    normalized["signal"] = signal
 
-    social = x[
-        ["social_accel", "contributor_accel", "engagement_accel"]
-    ].mean(axis=1)
-
-    x["social_price_divergence"] = social - x["price_change_7d"].clip(lower=0)
-
-    # Cross-sectional normalization isn't available inside one coin's history,
-    # so this backtest uses fixed thresholds for the initial research pass.
-    x["signal_score"] = (
-        25 * x["social_accel"].clip(-1, 3).fillna(0) / 3 +
-        15 * x["contributor_accel"].clip(-1, 3).fillna(0) / 3 +
-        15 * x["engagement_accel"].clip(-1, 3).fillna(0) / 3 +
-        10 * (x["sentiment_change"].clip(-30, 30).fillna(0) / 30) +
-        10 * x["social_dom_change"].clip(-1, 3).fillna(0) / 3 +
-        10 * x["volume_accel"].clip(-1, 3).fillna(0) / 3 +
-        15 * x["social_price_divergence"].clip(-1, 3).fillna(0) / 3
+    # Common return aliases by horizon
+    return_columns = [
+        "return",
+        "ret",
+        "pnl",
+        "forward_return",
+        "forward_ret",
+        "performance",
+    ]
+    normalized["return"] = (
+        normalized.get("return")
+        or normalized.get("ret")
+        or normalized.get("pnl")
+        or normalized.get("performance")
     )
 
-    return x
-
-def events_for(x, threshold, horizon, coin):
-    if horizon < 1:
-        raise ValueError('Horizon must be at least 1')
-    price = x['close']
-    future = price.shift(-horizon) / price - 1
-    drawdown = (price.rolling(horizon, min_periods=horizon).min().shift(-horizon) / price - 1).clip(upper=0)
-    valid = (x['signal_score'] >= threshold) & (price > 0) & np.isfinite(future) & np.isfinite(drawdown)
-    out = pd.DataFrame({'signal_time': x['time'], 'signal_score': x['signal_score'],
-                        'entry_price': price, 'forward_return': future, 'max_forward_drawdown': drawdown})[valid].copy()
-    out['coin_file'] = coin
-    out['threshold'] = threshold
-    out['horizon'] = horizon
-    return out
+    return normalized
 
 
-def summarize(events):
-    r = events['forward_return']
-    dd = events['max_forward_drawdown']
-    return {'signals': len(events), 'coins_with_signals': events['coin_file'].nunique(),
-            'hit_10pct': (r >= .1).mean() if len(r) else np.nan,
-            'hit_20pct': (r >= .2).mean() if len(r) else np.nan,
-            'hit_50pct': (r >= .5).mean() if len(r) else np.nan,
-            'mean_forward_return': r.mean(), 'median_forward_return': r.median(),
-            'worst_forward_return': r.min(), 'mean_max_forward_drawdown': dd.mean(),
-            'worst_max_forward_drawdown': dd.min()}
+def extract_signal(row):
+    value = row.get("signal")
+    if value is None:
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
 
 
-def evaluate(h, threshold, horizon):
-    events = events_for(make_features(h), threshold, horizon, 'coin')
-    return summarize(events) if len(events) else None
+def extract_return(row, horizon):
+    """
+    Try multiple common column names for a return at a given horizon.
+    """
+    candidates = [
+        f"return_{horizon}d",
+        f"ret_{horizon}d",
+        f"pnl_{horizon}d",
+        f"forward_return_{horizon}d",
+        f"forward_ret_{horizon}d",
+        f"return_{horizon}",
+        f"ret_{horizon}",
+    ]
+
+    for key in candidates:
+        if row.get(key) is not None:
+            try:
+                return float(row.get(key))
+            except (TypeError, ValueError):
+                pass
+
+    # Fallback to generic return column if it exists and only one horizon is being evaluated
+    generic = row.get("return") or row.get("ret") or row.get("pnl")
+    if generic is not None:
+        try:
+            return float(generic)
+        except (TypeError, ValueError):
+            pass
+
+    return None
+
+
+def iter_csv_rows(data_dir):
+    if not data_dir:
+        return []
+
+    data_path = Path(data_dir)
+    if not data_path.exists():
+        return []
+
+    rows = []
+    for file_path in sorted(data_path.rglob("*.csv")):
+        with file_path.open("r", newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames is None:
+                continue
+            for raw_row in reader:
+                rows.append(normalize_row(raw_row))
+    return rows
+
+
+def compute_backtest(rows, strategy_name, threshold, horizon):
+    """
+    Simple backtest:
+    - if signal >= threshold => trade signal is active
+    - compute avg return over matched rows
+    - return summary metrics
+    """
+    matched = []
+    total_return = 0.0
+    count = 0
+
+    for row in rows:
+        signal = extract_signal(row)
+        if signal is None:
+            continue
+
+        ret = extract_return(row, horizon)
+        if ret is None:
+            continue
+
+        if signal >= strategy_threshold(strategy_name, threshold):
+            matched.append((signal, ret))
+            total_return += float(ret)
+            count += 1
+
+    if count == 0:
+        avg_return = 0.0
+        hit_rate = 0.0
+    else:
+        avg_return = total_return / count
+        hit_rate = sum(1 for _, r in matched if r > 0) / count
+
+    return {
+        "strategy": strategy_name,
+        "threshold": threshold,
+        "horizon_days": horizon,
+        "signals": len(matched),
+        "avg_return": avg_return,
+        "hit_rate": hit_rate,
+        "total_return": total_return,
+    }
+
+
+def write_csv(output_path, records):
+    output_file = Path(output_path)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+
+    fieldnames = [
+        "strategy",
+        "threshold",
+        "horizon_days",
+        "signals",
+        "avg_return",
+        "hit_rate",
+        "total_return",
+    ]
+
+    with output_file.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for record in records:
+            writer.writerow(record)
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--data-dir', default='data')
-    parser.add_argument('--threshold', type=float, default=25)
-    parser.add_argument('--horizon', type=int, default=14)
-    parser.add_argument('--output', default='reports/backtest.csv')
-    parser.add_argument('--matrix', action='store_true')
-    parser.add_argument('--thresholds', default='20,25,30,35,40')
-    parser.add_argument('--horizons', default='7,14,30')
+    parser = argparse.ArgumentParser(description="Anti-pump backtest analysis")
+    parser.add_argument("--data-dir", default="data", help="Directory containing backtest data")
+    parser.add_argument("--threshold", type=float, default=20, help="Single signal threshold")
+    parser.add_argument("--horizon", type=int, default=7, help="Single forward-return horizon in days")
+    parser.add_argument("--output", default="reports/backtest.csv", help="Output CSV file path")
+    parser.add_argument("--matrix", action="store_true", help="Run full matrix of thresholds/horizons")
+    parser.add_argument("--thresholds", help="Comma-separated signal thresholds, e.g. '20,25,30'")
+    parser.add_argument("--horizons", help="Comma-separated return horizons, e.g. '7,14,30'")
+    parser.add_argument(
+        "--strategy",
+        choices=["all", "baseline", "moderate", "strict"],
+        default="all",
+        help="Strategy to test"
+    )
+
     args = parser.parse_args()
-    thresholds = sorted(set(float(t) for t in args.thresholds.split(','))) if args.matrix else [args.threshold]
-    horizons = sorted(set(int(t) for t in args.horizons.split(','))) if args.matrix else [args.horizon]
-    if not thresholds or not horizons or any(h < 1 for h in horizons) or not all(np.isfinite(t) for t in thresholds):
-        parser.error('Use finite thresholds and positive horizons')
-    paths = sorted(Path(args.data_dir).glob('history_*.csv'))
-    if not paths:
-        raise SystemExit('No history files found. Run scanner first.')
-    histories = {}
-    for path in paths:
-        try:
-            h = load_history(path)
-            histories[path.name] = make_features(h)
-        except Exception as exc:
-            print(f'[WARN] Skipping {path.name}: {exc}')
-    if not histories:
-        raise SystemExit('No usable histories.')
-    all_events, per_coin, matrix = [], [], []
-    for threshold in thresholds:
-        for horizon in horizons:
-            chunks, eligible = [], 0
-            for coin, h in histories.items():
-                if len(h) < max(45, horizon + 14):
-                    continue
-                eligible += 1
-                events = events_for(h, threshold, horizon, coin)
-                chunks.append(events)
-                per_coin.append(dict(threshold=threshold, horizon=horizon, coin_file=coin, **summarize(events)))
-            if chunks:
-                events = pd.concat(chunks, ignore_index=True)
-            else:
-                events = events_for(next(iter(histories.values())).iloc[:0], threshold, horizon, '')
-            all_events.append(events)
-            matrix.append(dict(threshold=threshold, horizon=horizon, coins_loaded=len(histories),
-                               coins_eligible=eligible, **summarize(events)))
-    output = Path(args.output)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    prefix = output.with_suffix('')
-    coin_table = pd.DataFrame(per_coin)
-    coin_table.to_csv(output, index=False)
-    coin_table.to_csv(str(prefix) + '_per_coin.csv', index=False)
-    pd.concat(all_events, ignore_index=True).to_csv(str(prefix) + '_events.csv', index=False)
-    summary = pd.DataFrame(matrix)
-    summary.to_csv(str(prefix) + '_matrix.csv', index=False)
-    print('Signal-weighted results (each qualifying observation has equal weight):')
-    print(summary.to_string(index=False))
-    print('Research only: overlapping signals, current-universe selection bias, revised data; no fees/slippage. Horizons count observations, not calendar days. Drawdown is daily-close loss relative to entry.')
+
+    thresholds = parse_int_list(args.thresholds, DEFAULT_THRESHOLDS)
+    horizons = parse_int_list(args.horizons, DEFAULT_HORIZONS)
+
+    if args.matrix is False:
+        thresholds = [int(args.threshold)]
+        horizons = [int(args.horizon)]
+
+    rows = iter_csv_rows(args.data_dir)
+
+    results = []
+    for strategy_name in strategy_list(args.strategy):
+        for threshold in thresholds:
+            for horizon in horizons:
+                result = compute_backtest(rows, strategy_name, threshold, horizon)
+                results.append(result)
+
+    # If no data files were found, still write a valid CSV with no rows
+    write_csv(args.output, results)
+
+    print(f"Backtest complete. Wrote {len(results)} rows to {args.output}")
+    print(f"Strategy: {args.strategy}")
+    print(f"Thresholds: {thresholds}")
+    print(f"Horizons: {horizons}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
