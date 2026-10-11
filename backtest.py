@@ -228,9 +228,19 @@ def main():
     thresholds = parse_int_list(args.thresholds, DEFAULT_THRESHOLDS)
     horizons = parse_int_list(args.horizons, DEFAULT_HORIZONS)
 
-    if args.matrix is False:
-        thresholds = [int(args.threshold)]
-        horizons = [int(args.horizon)]
+    if args.matrix or args.thresholds is not None:
+    thresholds = parse_int_list(
+    args.thresholds, DEFAULT_THRESHOLDS
+    )
+    else:
+    thresholds = [args.threshold]
+
+    if args.matrix or args.horizons is not None:
+    horizons = parse_int_list(
+    args.horizons, DEFAULT_HORIZONS
+    )
+    else:
+    horizons = [args.horizon]
 
     rows = iter_csv_rows(args.data_dir)
 
