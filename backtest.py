@@ -19,20 +19,28 @@ def parse_int_list(raw_value, default_list):
     return values if values else default_list
 
 
-def strategy_threshold(strategy, threshold):
-    """
-    Adjust threshold by strategy.
-    - baseline: same threshold
-    - moderate: slightly looser
-    - strict: stricter
-    """
+def passes_anti_pump(row, strategy):
     if strategy == "baseline":
-        return threshold
+    return True
+
+    gain7 = row.get("prior_return_7")
+    gain30 = row.get("prior_return_30")
+
+    # Reject rows without sufficient historical data.
+    if gain7 is None:
+    return False
+
+    gain7 = float(gain7)
+
     if strategy == "moderate":
-        return max(0, threshold - 5)
+    return gain7 <= 0.20
+
     if strategy == "strict":
-        return max(0, threshold + 5)
-    return threshold
+    if gain30 is None:
+    return False
+    return gain7 <= 0.12 and float(gain30) <= 0.40
+
+    raise ValueError(f"Unknown strategy: {strategy}")
 
 
 def strategy_list(strategy):
