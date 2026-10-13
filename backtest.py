@@ -225,22 +225,19 @@ def main():
 
     args = parser.parse_args()
 
-    thresholds = parse_int_list(args.thresholds, DEFAULT_THRESHOLDS)
-    horizons = parse_int_list(args.horizons, DEFAULT_HORIZONS)
-
     if args.matrix or args.thresholds is not None:
-    thresholds = parse_int_list(
-    args.thresholds, DEFAULT_THRESHOLDS
-    )
+        thresholds = parse_int_list(
+            args.thresholds, DEFAULT_THRESHOLDS
+        )
     else:
-    thresholds = [args.threshold]
+        thresholds = [args.threshold]
 
     if args.matrix or args.horizons is not None:
-    horizons = parse_int_list(
-    args.horizons, DEFAULT_HORIZONS
-    )
+        horizons = parse_int_list(
+            args.horizons, DEFAULT_HORIZONS
+        )
     else:
-    horizons = [args.horizon]
+        horizons = [args.horizon]
 
     rows = iter_csv_rows(args.data_dir)
 
