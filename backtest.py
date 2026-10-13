@@ -310,14 +310,18 @@ def main():
 
     args = parser.parse_args()
 
-    thresholds, horizons = validate_matrix_inputs(
-        args.thresholds,
-        args.horizons,
-        args.matrix,
-        args.threshold,
-        args.horizon,
-        expected_min_combinations=args.min_combinations,
-    )
+    if args.matrix or args.thresholds is not None:
+        thresholds = parse_int_list(
+            args.thresholds, DEFAULT_THRESHOLDS
+        )
+    else:
+        thresholds = [args.threshold]
+    if args.matrix or args.horizons is not None:
+        horizons = parse_int_list(
+            args.horizons, DEFAULT_HORIZONS
+        )
+    else:
+        horizons = [args.horizon]
 
     rows = iter_csv_rows(args.data_dir)
 
