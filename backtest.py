@@ -1,6 +1,8 @@
 import argparse
 import csv
+import json
 import os
+import subprocess
 from pathlib import Path
 
 DEFAULT_THRESHOLDS = [20, 25, 30, 35, 40]
@@ -8,15 +10,97 @@ DEFAULT_HORIZONS = [7, 14, 30]
 
 
 def parse_int_list(raw_value, default_list):
+    """Parse threshold/horizon input values from JSON, CSV, or a plain scalar."""
     if raw_value is None or str(raw_value).strip() == "":
-        return default_list
+        return list(default_list)
+
+    value = raw_value
+    if isinstance(value, list):
+        parsed = value
+    else:
+        value_text = str(value).strip()
+        if value_text == "":
+            return list(default_list)
+
+        # JSON array takes precedence (e.g. '[20, 35]' or '[]')
+        try:
+            parsed = json.loads(value_text)
+        except Exception:
+            parsed = [part.strip() for part in value_text.strip("[]").split(",") if part.strip()]
+
+    if parsed is None:
+        return list(default_list)
+
+    if isinstance(parsed, (int, float)):
+        parsed = [parsed]
 
     values = []
-    for item in str(raw_value).split(","):
-        item = item.strip()
-        if item:
+    try:
+        for item in parsed:
             values.append(int(item))
-    return values if values else default_list
+    except (TypeError, ValueError):
+        return list(default_list)
+
+    return values if values else list(default_list)
+
+
+def get_commit_sha():
+    try:
+        return subprocess.check_output(["git", "rev-parse", "HEAD"], stderr=subprocess.DEVNULL).decode().strip()
+    except Exception:
+        return os.environ.get("GITHUB_SHA", "unknown")
+
+
+def print_matrix_debug(thresholds, horizons):
+    print(f"commit: {get_commit_sha()}")
+    print(f"parsed thresholds: {thresholds}")
+    print(f"parsed horizons: {horizons}")
+    print(f"expanded combinations: {len(thresholds) * len(horizons)}")
+
+
+def validate_matrix_inputs(thresholds_raw, horizons_raw, matrix_flag, single_threshold, single_horizon, expected_min_combinations=45):
+    """Resolve thresholds/horizons while preserving explicit CLI inputs."""
+    thresholds = parse_int_list(thresholds_raw, DEFAULT_THRESHOLDS)
+    horizons = parse_int_list(horizons_raw, DEFAULT_HORIZONS)
+
+    if thresholds_raw is None and not matrix_flag:
+        thresholds = [int(single_threshold)]
+    if horizons_raw is None and not matrix_flag:
+        horizons = [int(single_horizon)]
+
+    if thresholds_raw is None and matrix_flag:
+        thresholds = list(DEFAULT_THRESHOLDS)
+    if horizons_raw is None and matrix_flag:
+        horizons = list(DEFAULT_HORIZONS)
+
+    if not thresholds or not horizons:
+        raise SystemExit("ERROR: thresholds and horizons must be non-empty lists.")
+
+    try:
+        thresholds = [int(x) for x in thresholds]
+        horizons = [int(x) for x in horizons]
+    except (TypeError, ValueError):
+        raise SystemExit("ERROR: thresholds and horizons must contain integers only.")
+
+    if any(t <= 0 for t in thresholds) or any(h <= 0 for h in horizons):
+        raise SystemExit("ERROR: thresholds and horizons must be positive integers.")
+
+    combos = len(thresholds) * len(horizons)
+    print_matrix_debug(thresholds, horizons)
+
+    if combos < expected_min_combinations:
+        raise SystemExit(
+            f"ERROR: expected at least {expected_min_combinations} matrix combinations, but got {combos}. "
+            "This usually means the requested thresholds/horizons were reduced or parsed incorrectly."
+        )
+
+    return thresholds, horizons
+
+
+def assert_baseline_signals(baseline_signal_count):
+    print(f"baseline signals found: {baseline_signal_count}")
+    if baseline_signal_count == 0:
+        raise SystemExit("ERROR: baseline produced 0 historical signals — aborting backtest run.")
 
 
 def strategy_threshold(strategy, threshold):
@@ -214,8 +298,9 @@ def main():
     parser.add_argument("--horizon", type=int, default=7, help="Single forward-return horizon in days")
     parser.add_argument("--output", default="reports/backtest.csv", help="Output CSV file path")
     parser.add_argument("--matrix", action="store_true", help="Run full matrix of thresholds/horizons")
-    parser.add_argument("--thresholds", help="Comma-separated signal thresholds, e.g. '20,25,30'")
-    parser.add_argument("--horizons", help="Comma-separated return horizons, e.g. '7,14,30'")
+    parser.add_argument("--thresholds", default=None, help="Comma-separated or JSON signal thresholds, e.g. '20,25,30' or '[20,25,30]'")
+    parser.add_argument("--horizons", default=None, help="Comma-separated or JSON return horizons, e.g. '7,14,30' or '[7,14,30]'")
+    parser.add_argument("--min-combinations", type=int, default=45, help="Abort if expanded matrix is smaller than this")
     parser.add_argument(
         "--strategy",
         choices=["all", "baseline", "moderate", "strict"],
@@ -225,21 +310,29 @@ def main():
 
     args = parser.parse_args()
 
-    thresholds = parse_int_list(args.thresholds, DEFAULT_THRESHOLDS)
-    horizons = parse_int_list(args.horizons, DEFAULT_HORIZONS)
-
-    if args.matrix is False:
-        thresholds = [int(args.threshold)]
-        horizons = [int(args.horizon)]
+    thresholds, horizons = validate_matrix_inputs(
+        args.thresholds,
+        args.horizons,
+        args.matrix,
+        args.threshold,
+        args.horizon,
+        expected_min_combinations=args.min_combinations,
+    )
 
     rows = iter_csv_rows(args.data_dir)
 
     results = []
+    baseline_signal_count = 0
     for strategy_name in strategy_list(args.strategy):
         for threshold in thresholds:
             for horizon in horizons:
                 result = compute_backtest(rows, strategy_name, threshold, horizon)
                 results.append(result)
+                if strategy_name == "baseline":
+                    baseline_signal_count += result["signals"]
+
+    if args.strategy in {"all", "baseline"}:
+        assert_baseline_signals(baseline_signal_count)
 
     # If no data files were found, still write a valid CSV with no rows
     write_csv(args.output, results)
