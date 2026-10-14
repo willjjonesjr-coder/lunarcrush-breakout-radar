@@ -2,6 +2,7 @@ import argparse
 import csv
 from pathlib import Path
 
+import math
 import numpy as np
 import pandas as pd
 
@@ -187,12 +188,122 @@ def filter_for_strategy(strategy, prior_7d, prior_30d):
     return True
 
 
+def summarize_results(events, strategy, threshold, horizon):
+    hits = []
+    for _, row in events.iterrows():
+        if row["breakout_score"] < threshold:
+            continue
+        if not filter_for_strategy(strategy, row.get("prior_7d_return"), row.get("prior_30d_return")):
+            continue
+        hits.append(row)
+
+    if not hits:
+        return {
+            "strategy": strategy,
+            "threshold": threshold,
+            "horizon_days": horizon,
+            "signals": 0,
+            "avg_return": 0.0,
+            "hit_rate": 0.0,
+            "total_return": 0.0,
+        }
+
+    forward_returns = [float(r["forward_return"]) for r in hits if pd.notna(r.get("forward_return"))]
+    positive = [r for r in hits if pd.notna(r.get("forward_return")) and r["forward_return"] > 0]
+
+    avg_return = np.mean(forward_returns) if forward_returns else 0.0
+    hit_rate = len(positive) / len(forward_returns) if forward_returns else 0.0
+    total_return = float(np.sum(forward_returns)) if forward_returns else 0.0
+
+    return {
+        "strategy": strategy,
+        "threshold": threshold,
+        "horizon_days": horizon,
+        "signals": len(hits),
+        "avg_return": avg_return,
+        "hit_rate": hit_rate,
+        "total_return": total_return,
+    }
+
+
+def compute_tech_summary(hits, proximity_pct=0.05, conv_pct=0.05, extension_pct=0.15):
+    """Compute experiment A..F over a list of hit dicts. Returns list of summary rows."""
+    if not hits:
+        return []
+
+    # hits is list of dict-like rows with keys including forward_return and EMA fields
+    df = pd.DataFrame(hits)
+    if df.empty or "forward_return" not in df.columns:
+        return []
+
+    def metrics(mask):
+        sub = df[mask]
+        if sub.empty:
+            return {"signals": 0, "avg_return": 0.0, "median_return": 0.0, "hit_rate": 0.0, "total_return": 0.0}
+        fr = sub["forward_return"].dropna().astype(float)
+        if fr.empty:
+            return {"signals": len(sub), "avg_return": 0.0, "median_return": 0.0, "hit_rate": 0.0, "total_return": 0.0}
+        return {
+            "signals": len(sub),
+            "avg_return": float(fr.mean()),
+            "median_return": float(fr.median()),
+            "hit_rate": float((fr > 0).sum() / len(fr)),
+            "total_return": float(fr.sum()),
+        }
+
+    # Conditions
+    conds = {}
+    conds["A_baseline"] = df.index.to_series().apply(lambda _: True)
+    conds["B_proximity_5pct"] = (df.get("distance_ema50").abs() <= proximity_pct) | (df.get("distance_ema100").abs() <= proximity_pct)
+    conds["C_convergence_5pct"] = df.get("ema_convergence") <= conv_pct
+    conds["D_bullish_alignment"] = df.get("bullish_alignment") == True
+    conds["E_combined"] = conds["C_convergence_5pct"] & conds["D_bullish_alignment"] & conds["B_proximity_5pct"]
+    conds["F_anti_extension"] = ~(df.get("distance_ema50") > extension_pct)
+
+    rows = []
+    for name, mask in conds.items():
+        m = mask.fillna(False) if isinstance(mask, pd.Series) else mask
+        met = metrics(m)
+        rows.append({
+            "condition": name,
+            **met
+        })
+
+    return rows
+
+
+def write_per_signal_csv(path, hits):
+    output_file = Path(path)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+
+    if not hits:
+        with output_file.open("w", newline="", encoding="utf-8") as f:
+            f.write("")
+        return
+
+    # Normalize keys across hits
+    all_keys = set()
+    for h in hits:
+        all_keys.update(h.keys())
+    fieldnames = ["coin_id", "time"] + sorted(k for k in all_keys if k not in ("coin_id", "time"))
+
+    with output_file.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for h in hits:
+            row = {k: h.get(k, "") for k in fieldnames}
+            # Serialize timestamps
+            if isinstance(row.get("time"), (pd.Timestamp,)):
+                row["time"] = row["time"].isoformat()
+            writer.writerow(row)
+
+
 def build_backtest_records(data_dir, thresholds, horizons, strategies, top_n=None):
     history_map = load_history_map(data_dir, top_n=top_n)
     signal_events = generate_daily_signal_rows(history_map)
 
     if signal_events.empty:
-        return []
+        return [], [], []
 
     enriched = []
     for _, row in signal_events.iterrows():
@@ -209,9 +320,11 @@ def build_backtest_records(data_dir, thresholds, horizons, strategies, top_n=Non
 
     enriched_df = pd.DataFrame(enriched)
     if enriched_df.empty:
-        return []
+        return [], [], []
 
     records = []
+    all_hits = []
+
     for strategy in strategies:
         for threshold in thresholds:
             for horizon in horizons:
@@ -235,6 +348,7 @@ def build_backtest_records(data_dir, thresholds, horizons, strategies, top_n=Non
                     hit["horizon_days"] = horizon
                     hit["strategy"] = strategy
                     hits.append(hit)
+                    all_hits.append(hit)
 
                 if not hits:
                     records.append({
@@ -260,7 +374,10 @@ def build_backtest_records(data_dir, thresholds, horizons, strategies, top_n=Non
                     "total_return": float(np.sum(forward_returns)),
                 })
 
-    return records
+    # Compute technical summary over all_hits
+    tech_summary = compute_tech_summary(all_hits)
+
+    return records, all_hits, tech_summary
 
 
 def write_csv(output_path, records):
@@ -284,10 +401,23 @@ def write_csv(output_path, records):
             writer.writerow(record)
 
 
+def write_tech_summary(path, rows):
+    output_file = Path(path)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = ["condition", "signals", "avg_return", "median_return", "hit_rate", "total_return"]
+    with output_file.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for r in rows:
+            writer.writerow(r)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Historical anti-pump backtest")
     parser.add_argument("--data-dir", default="data", help="Directory containing historical price files")
     parser.add_argument("--output", default="reports/backtest.csv", help="Output CSV path")
+    parser.add_argument("--per-signal", default="reports/backtest_per_coin.csv", help="Per-signal CSV output path")
+    parser.add_argument("--tech-summary", default="reports/backtest_tech_summary.csv", help="Technical summary CSV path")
     parser.add_argument("--threshold", type=float, default=20, help="Single threshold")
     parser.add_argument("--horizon", type=int, default=7, help="Single horizon days")
     parser.add_argument("--thresholds", default=None, help="Comma-separated thresholds")
@@ -309,8 +439,10 @@ def main():
         horizons = [int(args.horizon)]
 
     strategies = strategy_list(args.strategy)
-    records = build_backtest_records(args.data_dir, thresholds, horizons, strategies, top_n=args.top)
+    records, all_hits, tech_summary = build_backtest_records(args.data_dir, thresholds, horizons, strategies, top_n=args.top)
     write_csv(args.output, records)
+    write_per_signal_csv(args.per_signal, all_hits)
+    write_tech_summary(args.tech_summary, tech_summary)
 
     print(f"Backtest complete. Wrote {len(records)} rows to {args.output}")
     print(f"Strategy: {args.strategy}")
