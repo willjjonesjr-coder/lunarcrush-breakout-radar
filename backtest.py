@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from signals import feature_row, score_candidates
+from signals import feature_row, score_candidates, ema_features
 
 DEFAULT_THRESHOLDS = [20, 25, 30, 35, 40]
 DEFAULT_HORIZONS = [7, 14, 30]
@@ -85,6 +85,9 @@ def generate_daily_signal_rows(history_map):
             if features is None:
                 continue
 
+            # EMA features (partial when history is limited)
+            ema = ema_features(window, require_200=False)
+
             row = {
                 "coin_id": coin_id,
                 "time": window["time"].iloc[-1],
@@ -93,6 +96,8 @@ def generate_daily_signal_rows(history_map):
                 "stage": None,
             }
             row.update(features)
+            if ema:
+                row.update(ema)
             signal_rows.append(row)
 
     if not signal_rows:
@@ -116,6 +121,19 @@ def generate_daily_signal_rows(history_map):
                 "social_accel": float(row.get("social_accel", np.nan)),
                 "contributor_accel": float(row.get("contributor_accel", np.nan)),
                 "engagement_accel": float(row.get("engagement_accel", np.nan)),
+                "has_ema50": bool(row.get("has_ema50", False)),
+                "has_ema100": bool(row.get("has_ema100", False)),
+                "has_ema200": bool(row.get("has_ema200", False)),
+                "distance_ema50": float(row.get("distance_ema50", np.nan)),
+                "distance_ema100": float(row.get("distance_ema100", np.nan)),
+                "distance_ema200": float(row.get("distance_ema200", np.nan)),
+                "ema_convergence": float(row.get("ema_convergence", np.nan)),
+                "ema50_slope_5d": float(row.get("ema50_slope_5d", np.nan)),
+                "bullish_alignment": bool(row.get("bullish_alignment", False)),
+                "near_ema50": bool(row.get("near_ema50", False)),
+                "near_ema100": bool(row.get("near_ema100", False)),
+                "near_ema200": bool(row.get("near_ema200", False)),
+                "ema50_cross_recent": bool(row.get("ema50_cross_recent", False)),
             })
 
     return pd.DataFrame(scored)
