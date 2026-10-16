@@ -1,0 +1,43 @@
+name: Historical Signals Smoke Test
+on:
+  push:
+    branches: [feat/historical-signals]
+    paths:
+      - 'tools/ccxt_backfill.py'
+      - 'tools/ema_eligibility_diagnostics.py'
+      - '.github/workflows/historical-smoke.yml'
+  workflow_dispatch:
+    inputs:
+      top:
+        description: Number of coins (20 smoke test, 80 full)
+        required: true
+        default: '20'
+permissions:
+  contents: read
+jobs:
+  historical-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas numpy ccxt
+      - name: Diagnose existing EMA eligibility
+        run: python tools/ema_eligibility_diagnostics.py
+      - name: Backfill historical OHLCV
+        env:
+          TOP: ${{ github.event.inputs.top || '20' }}
+        run: python tools/ccxt_backfill.py --top "$TOP" --bars 500
+      - name: Upload reports and prices
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-smoke-results
+          path: |
+            reports/ema_eligibility_diagnostics.csv.gz
+            reports/backfill_inventory.csv
+            data_price/
+            logs/backfill.log
+          if-no-files-found: warn
