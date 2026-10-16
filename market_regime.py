@@ -86,15 +86,15 @@ def regime(prices, social=None, min_breadth=10):
         bench = [b, e]
         trend_parts = []
         for x in bench:
-            alignment = ((x.close > x.ema50) + (x.ema50 > x.ema100) + (x.ema100 > x.ema200)) / 3
+            alignment = (int(x.close > x.ema50) + int(x.ema50 > x.ema100) + int(x.ema100 > x.ema200)) / 3
             trend_parts.append(100 * alignment)
         trend = float(np.mean(trend_parts))
         eligible = [f.loc[date] for f in all_features.values()
                     if date in f.index and pd.notna(f.loc[date, "ema200"])]
         if len(eligible) < min_breadth:
             continue
-        breadth = 100 * np.mean([.5 * (x.close > x.ema50) +
-                                 .5 * (x.close > x.ema200) for x in eligible])
+        breadth = 100 * np.mean([.5 * int(x.close > x.ema50) +
+                                 .5 * int(x.close > x.ema200) for x in eligible])
         # Market-relative directional momentum; not a forecast or return proxy.
         momentum = np.mean([score_centered(.35*x.ret7 + .40*x.ret30 + .25*x.ret90,
                                            .15) for x in bench])
