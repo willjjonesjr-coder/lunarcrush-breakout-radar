@@ -15,7 +15,7 @@ import pandas as pd
 
 EXCHANGES = ("kraken", "coinbase", "binance")
 QUOTE_ORDER = ("USD", "USDT")
-EXCLUDED = {"USDT", "USDC", "DAI", "TUSD", "FDUSD", "USDE", "WBTC", "WETH", "PAXG"}
+EXCLUDED = {"USDT", "USDC", "DAI", "TUSD", "FDUSD", "USDE", "USDS", "USDD", "RLUSD", "WBTC", "WETH", "PAXG"}
 FIELDS = ["coin_id", "status", "exchange", "pair", "bars_fetched", "earliest_time",
           "latest_time", "gaps_detected", "reason"]
 
@@ -28,7 +28,10 @@ def universe(data_dir, top):
             coins.append((p.stem.removeprefix("history_"), float(cap.iloc[-1]) if len(cap) else 0))
         except Exception:
             coins.append((p.stem.removeprefix("history_"), 0))
-    return [c for c, _ in sorted(coins, key=lambda x: x[1], reverse=True)[:top]]
+    radar = pd.read_csv("reports/breakout_radar.csv", usecols=["id", "symbol", "name"])
+    known = {str(int(r.id)): str(r.symbol).upper() for _, r in radar.dropna().iterrows()}
+    ranked = [c for c, _ in sorted(coins, key=lambda x: x[1], reverse=True)]
+    return [c for c in ranked if c in known and known[c] not in EXCLUDED][:top]
 
 def main():
     ap = argparse.ArgumentParser()
@@ -57,6 +60,8 @@ def main():
             clients[name] = ex
         except Exception as exc:
             logging.warning("Exchange %s unavailable: %s", name, exc)
+    radar = pd.read_csv("reports/breakout_radar.csv", usecols=["id", "symbol", "name"])
+    identities = {str(int(r.id)): (str(r.symbol).upper(), str(r["name"])) for _, r in radar.dropna().iterrows()}
     rows = []
     now = int(time.time() // 86400 * 86400 * 1000)  # only completed UTC candles
     for coin in universe(args.data_dir, args.top):
@@ -68,12 +73,13 @@ def main():
             continue
         # Explicit map format: {"coin-id":{"exchange":"kraken","pair":"FIL/USD"}}
         configured = mapping.get(coin)
+        symbol, asset_name = identities[coin]
         attempts = []
         if configured:
             attempts.append((configured["exchange"], configured["pair"]))
         else:
             # These are provisional ticker guesses; verify mapping before research use.
-            ticker = coin.upper()
+            ticker = symbol
             for exchange in clients:
                 for quote in QUOTE_ORDER:
                     attempts.append((exchange, f"{ticker}/{quote}"))
@@ -105,12 +111,15 @@ def main():
                 df["exchange"], df["pair"] = exchange, pair
                 df = df[["time", "open", "high", "low", "close", "volume", "exchange", "pair"]]
                 gaps = int((pd.to_datetime(df.time).diff().dt.total_seconds().dropna() > 86400).sum())
+                if str(ex.markets[pair].get("base", "")).upper() != symbol:
+                    error = f"exchange base symbol mismatch: {pair} vs {symbol}"
+                    continue
                 df.to_csv(Path(args.output_dir) / f"{coin}.csv", index=False)
                 record.update(status="ok" if len(df) >= args.bars else "partial",
                               exchange=exchange, pair=pair, bars_fetched=len(df),
                               earliest_time=df.time.iloc[0], latest_time=df.time.iloc[-1],
                               gaps_detected=gaps,
-                              reason="ticker heuristic: review identity" if not configured else "")
+                              reason=f"LunarCrush symbol {symbol} ({asset_name}); token identity review required" if not configured else "")
                 if not configured:
                     logging.warning("%s mapped heuristically to %s %s; identity review required", coin, exchange, pair)
                 break
