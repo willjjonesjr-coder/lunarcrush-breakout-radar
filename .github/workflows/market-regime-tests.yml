@@ -1,0 +1,19 @@
+name: Market Regime Tests
+on:
+  push:
+    branches: [feat/historical-signals]
+    paths:
+      - market_regime.py
+      - tests/test_market_regime.py
+      - .github/workflows/market-regime-tests.yml
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install numpy pandas
+      - run: python -m unittest discover -s tests -p 'test_market_regime.py' -v
