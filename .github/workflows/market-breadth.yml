@@ -1,0 +1,40 @@
+name: Provisional Crypto Market Breadth
+on:
+  push:
+    branches: [feat/historical-signals]
+    paths:
+      - tools/build_regime_universe.py
+      - .github/workflows/market-breadth.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  breadth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install numpy pandas ccxt
+      - name: Fetch BTC and ETH daily candles
+        run: python tools/btc_eth_backfill.py --bars 500
+      - name: Fetch candidate altcoin histories
+        run: python tools/ccxt_backfill.py --top 80 --bars 500
+      - name: Construct provisional breadth universe
+        run: python tools/build_regime_universe.py
+      - name: Calculate broad regime preview
+        run: python market_regime.py --mapping config/market_regime_runtime_symbols.json --min-breadth 10 --output reports/market_breadth_provisional.csv
+      - name: Upload inventories and regime report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: provisional-market-breadth
+          path: |
+            reports/btc_eth_inventory.csv
+            reports/backfill_inventory.csv
+            reports/market_breadth_provisional.csv
+            config/market_regime_runtime_symbols.json
+            logs/backfill.log
+          if-no-files-found: warn
