@@ -4,6 +4,7 @@ on:
     branches: [feat/historical-signals]
     paths:
       - tools/regime_backtest.py
+      - tools/regime_deduplicate.py
       - .github/workflows/regime-backtest.yml
   workflow_dispatch:
 permissions:
@@ -30,6 +31,8 @@ jobs:
         run: python backtest.py --matrix --strategy all --per-signal reports/backtest_per_coin.csv
       - name: Join signal regime and benchmark excess returns
         run: python tools/regime_backtest.py
+      - name: Deduplicate and test robustness
+        run: python tools/regime_deduplicate.py
       - name: Upload experimental results
         if: always()
         uses: actions/upload-artifact@v4
@@ -39,6 +42,8 @@ jobs:
             reports/market_breadth_provisional.csv
             reports/backtest_regime_signals.csv
             reports/backtest_regime_summary.csv
+            reports/backtest_regime_deduplicated.csv
+            reports/backtest_regime_robustness.csv
             reports/backfill_inventory.csv
             config/market_regime_runtime_symbols.json
           if-no-files-found: warn
