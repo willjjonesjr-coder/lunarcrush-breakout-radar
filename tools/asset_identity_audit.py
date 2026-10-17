@@ -33,7 +33,7 @@ def audit(data_dir,radar_path,registry_path):
             history[cid]=0.
     registry=json.loads(Path(registry_path).read_text()) if Path(registry_path).exists() else {}
     rows=[]
-    for cid in sorted(set(lookup)|set(history)):
+    for cid in sorted(history):
         entry=registry.get(cid,{})
         identity=lookup.get(cid)
         symbol=str(identity["symbol"]).upper() if identity is not None else ""
