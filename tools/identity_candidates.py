@@ -23,7 +23,7 @@ def main():
             known[str(row.coin_id)]={"symbol":str(row.symbol),"name":str(row.name)}
 
     history={p.stem.removeprefix("history_") for p in Path("data").glob("history_*.csv")}
-    ids=sorted(set(known)|history)
+    ids=sorted(history)
     if args.limit>0: ids=ids[:args.limit]
     response=requests.get("https://api.coingecko.com/api/v3/coins/list",params={"include_platform":"true"},timeout=45)
     response.raise_for_status()
