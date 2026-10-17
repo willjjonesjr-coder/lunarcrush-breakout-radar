@@ -14,7 +14,7 @@ def main():
     parser.add_argument("--output",default="reports/lunarcrush_catalog.csv")
     args=parser.parse_args()
     client=LunarCrushClient()
-    payload=client.get("/coins/list/v1")
+    payload=client.get("/public/coins/list/v1")
     if isinstance(payload,dict):
         records=payload.get("data")
     else:
@@ -31,7 +31,7 @@ def main():
         name=item.get("name")
         if cid is None or not symbol or not name: continue
         rows.append({"coin_id":str(cid),"symbol":str(symbol),"name":str(name),
-            "market_cap":item.get("market_cap"),"source":"LunarCrush /coins/list/v1"})
+            "market_cap":item.get("market_cap"),"source":"LunarCrush /public/coins/list/v1"})
     if not rows: raise ValueError("Catalog contained no usable coin IDs")
     Path(args.output).parent.mkdir(parents=True,exist_ok=True)
     pd.DataFrame(rows).drop_duplicates("coin_id").to_csv(args.output,index=False)
