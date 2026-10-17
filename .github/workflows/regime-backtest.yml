@@ -1,0 +1,49 @@
+name: Experimental Regime Backtest
+on:
+  push:
+    branches: [feat/historical-signals]
+    paths:
+      - tools/regime_backtest.py
+      - tools/regime_deduplicate.py
+      - .github/workflows/regime-backtest.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas numpy ccxt
+      - name: Fetch benchmark prices
+        run: python tools/btc_eth_backfill.py --bars 500
+      - name: Fetch candidate price histories
+        run: python tools/ccxt_backfill.py --top 80 --bars 500
+      - name: Build provisional universe
+        run: python tools/build_regime_universe.py
+      - name: Compute point-in-time regime series
+        run: python market_regime.py --mapping config/market_regime_runtime_symbols.json --min-breadth 10 --output reports/market_breadth_provisional.csv
+      - name: Run existing signal backtest
+        run: python backtest.py --matrix --strategy all --per-signal reports/backtest_per_coin.csv
+      - name: Join signal regime and benchmark excess returns
+        run: python tools/regime_backtest.py
+      - name: Deduplicate and test robustness
+        run: python tools/regime_deduplicate.py
+      - name: Upload experimental results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regime-backtest-results
+          path: |
+            reports/market_breadth_provisional.csv
+            reports/backtest_regime_signals.csv
+            reports/backtest_regime_summary.csv
+            reports/backtest_regime_deduplicated.csv
+            reports/backtest_regime_robustness.csv
+            reports/backfill_inventory.csv
+            config/market_regime_runtime_symbols.json
+          if-no-files-found: warn

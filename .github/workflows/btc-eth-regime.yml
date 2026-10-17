@@ -1,0 +1,37 @@
+name: BTC ETH Regime Data Validation
+on:
+  push:
+    branches: [feat/historical-signals]
+    paths:
+      - tools/btc_eth_backfill.py
+      - market_regime.py
+      - config/market_regime_symbols.json
+      - .github/workflows/btc-eth-regime.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas numpy ccxt
+      - name: Fetch verified BTC and ETH
+        run: python tools/btc_eth_backfill.py --bars 500
+      - name: Calculate BTC ETH trend and momentum regime
+        run: python market_regime.py --min-breadth 2 --output reports/btc_eth_regime_preview.csv
+      - name: Upload validation data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: btc-eth-regime-preview
+          path: |
+            data_price/btc.csv
+            data_price/eth.csv
+            reports/btc_eth_inventory.csv
+            reports/btc_eth_regime_preview.csv
+          if-no-files-found: warn
