@@ -258,8 +258,20 @@ def main():
     universe.to_csv(data_dir / "universe_latest.csv", index=False)
 
     candidates = snapshot_filter(universe, cfg)
+    n_snapshot = int(cfg["funnel"].get("snapshot_candidates", 250))
     n_hist = int(cfg["funnel"]["historical_candidates"])
-    candidates = candidates.head(n_hist).copy()  # API budget bounds deep history, not snapshot discovery
+    shortlist = candidates.head(n_snapshot).copy()
+    leader_count = min(len(shortlist), max(1, int(n_hist * 0.75)))
+    leaders = shortlist.head(leader_count)
+    remainder = shortlist.iloc[leader_count:]
+    rotation_count = min(max(0, n_hist - len(leaders)), len(remainder))
+    if rotation_count:
+        day_seed = int(pd.Timestamp.utcnow().strftime("%Y%m%d"))
+        rotating = remainder.sample(n=rotation_count, random_state=day_seed)
+        candidates = pd.concat([leaders, rotating]).copy()
+    else:
+        candidates = leaders.copy()
+    print(f"Snapshot shortlist: {len(shortlist)}; history candidates: {len(candidates)}")
 
     feature_rows = []
     for _, row in candidates.iterrows():
