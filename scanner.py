@@ -52,14 +52,10 @@ def snapshot_filter(df, cfg):
         if c in out:
             out[c] = pd.to_numeric(out[c], errors="coerce")
 
-    out = out[
-        (out["market_cap"] >= u["min_market_cap"]) &
-        (out["market_cap"] <= u["max_market_cap"]) &
-        (out["volume_24h"] >= u["min_volume_24h"])
-    ]
+    # Inclusive discovery: do not impose market-cap or volume floors here.\n    # Preserve liquidity and missing-data flags for downstream risk review.\n    out["low_liquidity_flag"] = out["volume_24h"].fillna(0) < u["min_volume_24h"]\n    out["market_cap_missing_flag"] = out["market_cap"].isna()
 
     if "percent_change_7d" in out:
-        out = out[out["percent_change_7d"] <= u["max_7d_price_change"]]
+        out["recent_pump_flag"] = out["percent_change_7d"] > u["max_7d_price_change"]
 
     if "symbol" in out:
         out = out[~out["symbol"].isin(set(u["exclude_symbols"]))]
@@ -263,7 +259,7 @@ def main():
 
     candidates = snapshot_filter(universe, cfg)
     n_hist = int(cfg["funnel"]["historical_candidates"])
-    candidates = candidates.head(n_hist).copy()
+    candidates = candidates.head(n_hist).copy()  # API budget bounds deep history, not snapshot discovery
 
     feature_rows = []
     for _, row in candidates.iterrows():
@@ -288,7 +284,7 @@ def main():
                     "name": row.get("name"),
                     "market_cap": row.get("market_cap"),
                     "snapshot_score": row.get("snapshot_score"),
-                    "volume_24h_snapshot": row.get("volume_24h"),
+                    "volume_24h_snapshot": row.get("volume_24h"),\n                    "low_liquidity_flag": row.get("low_liquidity_flag"),\n                    "market_cap_missing_flag": row.get("market_cap_missing_flag"),\n                    "recent_pump_flag": row.get("recent_pump_flag"),
                 })
                 feature_rows.append(features)
         except Exception as exc:
@@ -299,7 +295,7 @@ def main():
 
     result = score_candidates(pd.DataFrame(feature_rows), cfg)
     top_n = args.top or int(cfg["funnel"]["finalists"])
-    result = result.head(top_n)
+    # Experimental inclusive report: retain every scored WATCH-or-better signal.\n    # The --top option is intentionally ignored here to prevent silent suppression.\n    result = result[result["breakout_score"] >= 45].copy()
 
     result.to_csv(report_dir / "breakout_radar.csv", index=False)
     result.to_json(report_dir / "breakout_radar.json", orient="records", date_format="iso")
