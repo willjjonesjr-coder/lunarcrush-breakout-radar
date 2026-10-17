@@ -6,6 +6,7 @@ on:
     paths:
       - tools/asset_identity_audit.py
       - tools/identity_candidates.py
+      - tools/lunarcrush_catalog.py
       - config/asset_identity_registry.json
       - .github/workflows/asset-identity-audit.yml
 permissions:
@@ -13,13 +14,17 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - run: pip install pandas requests
+      - name: Export LunarCrush catalog
+        env:
+          LUNARCRUSH_API_KEY: ${{ secrets.LUNARCRUSH_API_KEY }}
+        run: python -m tools.lunarcrush_catalog
       - name: Audit existing verified registry
         run: python tools/asset_identity_audit.py
       - name: Discover CoinGecko identity candidates
@@ -30,6 +35,7 @@ jobs:
         with:
           name: asset-identity-audit
           path: |
+            reports/lunarcrush_catalog.csv
             reports/asset_identity_audit.csv
             reports/identity_candidates.csv
           if-no-files-found: warn
