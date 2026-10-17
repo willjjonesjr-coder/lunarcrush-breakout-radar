@@ -5,6 +5,7 @@ on:
     branches: [feat/historical-signals]
     paths:
       - tools/asset_identity_audit.py
+      - tools/identity_candidates.py
       - config/asset_identity_registry.json
       - .github/workflows/asset-identity-audit.yml
 permissions:
@@ -12,14 +13,23 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install pandas
-      - run: python tools/asset_identity_audit.py
-      - uses: actions/upload-artifact@v4
+      - run: pip install pandas requests
+      - name: Audit existing verified registry
+        run: python tools/asset_identity_audit.py
+      - name: Discover CoinGecko identity candidates
+        run: python tools/identity_candidates.py
+      - name: Upload identity reports
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: asset-identity-audit
-          path: reports/asset_identity_audit.csv
+          path: |
+            reports/asset_identity_audit.csv
+            reports/identity_candidates.csv
+          if-no-files-found: warn
