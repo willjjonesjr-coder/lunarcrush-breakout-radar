@@ -16,7 +16,12 @@ REQUIRED=("exchange","pair","canonical_id","evidence_url","verified_at")
 def audit(data_dir,radar_path,registry_path):
     radar=pd.read_csv(radar_path,dtype={"id":str})
     radar=radar.dropna(subset=["id","symbol"]).drop_duplicates("id",keep="last")
-    lookup={str(r.id):r for r in radar.itertuples()}
+    lookup={str(r.id):{"symbol":str(r.symbol),"name":str(r.name)} for r in radar.itertuples()}
+    catalog_path=Path("reports/lunarcrush_catalog.csv")
+    if catalog_path.exists():
+        catalog=pd.read_csv(catalog_path,dtype={"coin_id":str}).dropna(subset=["coin_id","symbol","name"])
+        for r in catalog.drop_duplicates("coin_id").itertuples():
+            lookup[str(r.coin_id)]={"symbol":str(r.symbol),"name":str(r.name)}
     history={}
     for path in sorted(Path(data_dir).glob("history_*.csv")):
         cid=path.stem.removeprefix("history_")
@@ -31,8 +36,8 @@ def audit(data_dir,radar_path,registry_path):
     for cid in sorted(set(lookup)|set(history)):
         entry=registry.get(cid,{})
         identity=lookup.get(cid)
-        symbol=str(identity.symbol).upper() if identity is not None else ""
-        name=str(identity.name) if identity is not None else ""
+        symbol=str(identity["symbol"]).upper() if identity is not None else ""
+        name=str(identity["name"]) if identity is not None else ""
         reason=""
         if symbol in EXCLUDED:
             status="excluded";reason="excluded asset type"
