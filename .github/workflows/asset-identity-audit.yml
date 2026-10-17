@@ -21,10 +21,15 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install pandas requests
-      - name: Export LunarCrush catalog
+      - name: Export LunarCrush catalog (non-blocking; endpoint currently returns 404)
+        id: lunarcrush_catalog
+        continue-on-error: true
         env:
           LUNARCRUSH_API_KEY: ${{ secrets.LUNARCRUSH_API_KEY }}
         run: python -m tools.lunarcrush_catalog
+      - name: Report catalog availability
+        if: steps.lunarcrush_catalog.outcome == 'failure'
+        run: echo 'LunarCrush catalog unavailable; continuing independent identity audit without it.' >> "$GITHUB_STEP_SUMMARY"
       - name: Audit existing verified registry
         run: python tools/asset_identity_audit.py
       - name: Discover CoinGecko identity candidates
