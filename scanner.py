@@ -52,7 +52,10 @@ def snapshot_filter(df, cfg):
         if c in out:
             out[c] = pd.to_numeric(out[c], errors="coerce")
 
-    # Inclusive discovery: do not impose market-cap or volume floors here.\n    # Preserve liquidity and missing-data flags for downstream risk review.\n    out["low_liquidity_flag"] = out["volume_24h"].fillna(0) < u["min_volume_24h"]\n    out["market_cap_missing_flag"] = out["market_cap"].isna()
+    # Inclusive discovery: do not impose market-cap or volume floors here.
+    # Preserve liquidity and missing-data flags for downstream risk review.
+    out["low_liquidity_flag"] = out["volume_24h"].fillna(0) < u["min_volume_24h"]
+    out["market_cap_missing_flag"] = out["market_cap"].isna()
 
     if "percent_change_7d" in out:
         out["recent_pump_flag"] = out["percent_change_7d"] > u["max_7d_price_change"]
@@ -296,7 +299,10 @@ def main():
                     "name": row.get("name"),
                     "market_cap": row.get("market_cap"),
                     "snapshot_score": row.get("snapshot_score"),
-                    "volume_24h_snapshot": row.get("volume_24h"),\n                    "low_liquidity_flag": row.get("low_liquidity_flag"),\n                    "market_cap_missing_flag": row.get("market_cap_missing_flag"),\n                    "recent_pump_flag": row.get("recent_pump_flag"),
+                    "volume_24h_snapshot": row.get("volume_24h"),
+                    "low_liquidity_flag": row.get("low_liquidity_flag"),
+                    "market_cap_missing_flag": row.get("market_cap_missing_flag"),
+                    "recent_pump_flag": row.get("recent_pump_flag"),
                 })
                 feature_rows.append(features)
         except Exception as exc:
@@ -307,7 +313,9 @@ def main():
 
     result = score_candidates(pd.DataFrame(feature_rows), cfg)
     top_n = args.top or int(cfg["funnel"]["finalists"])
-    # Experimental inclusive report: retain every scored WATCH-or-better signal.\n    # The --top option is intentionally ignored here to prevent silent suppression.\n    result = result[result["breakout_score"] >= 45].copy()
+    # Experimental inclusive report: retain every scored WATCH-or-better signal.
+    # The --top option is intentionally ignored here to prevent silent suppression.
+    result = result[result["breakout_score"] >= 45].copy()
 
     result.to_csv(report_dir / "breakout_radar.csv", index=False)
     result.to_json(report_dir / "breakout_radar.json", orient="records", date_format="iso")
