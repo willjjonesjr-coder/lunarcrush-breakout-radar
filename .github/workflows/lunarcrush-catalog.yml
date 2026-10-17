@@ -1,0 +1,26 @@
+name: Experimental LunarCrush Catalog
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas requests
+      - name: Export cached LunarCrush coin list
+        env:
+          LUNARCRUSH_API_KEY: ${{ secrets.LUNARCRUSH_API_KEY }}
+        run: python -m tools.lunarcrush_catalog
+      - name: Upload catalog
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lunarcrush-identity-catalog
+          path: reports/lunarcrush_catalog.csv
+          if-no-files-found: warn
