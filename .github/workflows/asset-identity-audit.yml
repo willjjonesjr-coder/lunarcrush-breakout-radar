@@ -1,0 +1,25 @@
+name: Experimental Asset Identity Audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [feat/historical-signals]
+    paths:
+      - tools/asset_identity_audit.py
+      - config/asset_identity_registry.json
+      - .github/workflows/asset-identity-audit.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas
+      - run: python tools/asset_identity_audit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: asset-identity-audit
+          path: reports/asset_identity_audit.csv
