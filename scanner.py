@@ -83,8 +83,9 @@ def pct_rank(s):
 def fetch_history(client, coin_id, cfg):
     hist = cfg["history"]
     days = int(hist["lookback_days"])
-    end = int(pd.Timestamp.utcnow().timestamp())
-    start = int((pd.Timestamp.utcnow() - pd.Timedelta(days=days)).timestamp())
+    now = pd.Timestamp.now("UTC")
+    end = int(now.timestamp())
+    start = int((now - pd.Timedelta(days=days + 2)).timestamp())
 
     payload = client.get(
         f"/public/coins/{coin_id}/time-series/v2",
@@ -119,6 +120,10 @@ def feature_row(hist):
         return None
 
     h = hist.copy()
+    # Exclude the current incomplete UTC daily bucket.
+    h = h[pd.to_datetime(h["time"], utc=True) < pd.Timestamp.now("UTC").normalize()].copy()
+    if len(h) < 10:
+        return None
 
     # Normalize names and numeric types.
     metrics = [
@@ -197,9 +202,16 @@ def score_candidates(df, cfg):
         "galaxy_score_change": 0.05,
     }
 
+    # Provisional fixed anchors (center, scale); version before recalibration.
+    anchors = {"social_accel": (0, .5), "contributor_accel": (0, .5),
+               "engagement_accel": (0, .75), "sentiment_change": (0, .2),
+               "social_dominance_change": (0, .5), "volume_accel": (0, .75),
+               "social_price_divergence": (0, .5), "galaxy_score_change": (0, .3)}
+    out["normalization_version"] = "fixed-provisional-v1"
     score = 0
     for col, weight in feature_weights.items():
-        z = zscore_series(out[col])
+        center, scale = anchors[col]
+        z = (pd.to_numeric(out[col], errors="coerce").fillna(center) - center) / scale
         # Logistic-like normalization: 0..100, robust to outliers.
         component = 50 + 15 * z.clip(-3, 3)
         out[f"{col}_score"] = component
@@ -234,6 +246,27 @@ def score_candidates(df, cfg):
         return "WEAK"
 
     out["stage"] = out.apply(stage, axis=1)
+    # Additive classifications: never filter a discovery candidate.
+    pegged = {"RLUSD", "USDT", "USDC", "DAI", "FDUSD", "USDE", "USDS",
+              "TUSD", "USDD", "USD1", "PAXG", "WBTC", "WETH"}
+    out["pegged_asset_flag"] = out["symbol"].fillna("").str.upper().isin(pegged)
+    p = pd.to_numeric(out["price_change_7d"], errors="coerce")
+    out["recovery_flag"] = p <= -.10
+    out["overextended_flag"] = p >= .35
+    out["early_breakout_flag"] = (out["breakout_score"] >= 65) & p.between(-.10, .15) & (out["volume_accel"] > 0) & (out["social_accel"] > 0) & ~out["pegged_asset_flag"]
+    out["confirmed_momentum_flag"] = (out["breakout_score"] >= 55) & (p > 0) & (out["volume_accel"] > 0) & (out["social_accel"] > 0) & ~out["pegged_asset_flag"] & ~out["overextended_flag"]
+    def classify(r):
+        labels = []
+        for flag, label in [("pegged_asset_flag", "PEGGED / WRAPPED"),
+                            ("recovery_flag", "RECOVERY / REVERSAL"),
+                            ("overextended_flag", "OVEREXTENDED"),
+                            ("early_breakout_flag", "EARLY BREAKOUT"),
+                            ("confirmed_momentum_flag", "CONFIRMED MOMENTUM"),
+                            ("low_liquidity_flag", "LOW LIQUIDITY / HIGH RISK")]:
+            if r.get(flag, False) is True or r.get(flag, False) == True:
+                labels.append(label)
+        return " | ".join(labels) if labels else "UNCONFIRMED / WATCH"
+    out["signal_classification"] = out.apply(classify, axis=1)
     return out.sort_values("breakout_score", ascending=False)
 
 
@@ -269,7 +302,7 @@ def main():
     remainder = shortlist.iloc[leader_count:]
     rotation_count = min(max(0, n_hist - len(leaders)), len(remainder))
     if rotation_count:
-        day_seed = int(pd.Timestamp.utcnow().strftime("%Y%m%d"))
+        day_seed = int(pd.Timestamp.now("UTC").strftime("%Y%m%d"))
         rotating = remainder.sample(n=rotation_count, random_state=day_seed)
         candidates = pd.concat([leaders, rotating]).copy()
     else:
@@ -277,11 +310,13 @@ def main():
     print(f"Snapshot shortlist: {len(shortlist)}; history candidates: {len(candidates)}")
 
     feature_rows = []
+    stats = {"requested": len(candidates), "empty": 0, "insufficient": 0, "failed": 0, "usable": 0}
     for _, row in candidates.iterrows():
         coin_id = row["id"]
         try:
             hist = fetch_history(client, coin_id, cfg)
             if hist.empty:
+                stats["empty"] += 1
                 continue
             history_path = data_dir / f"history_{coin_id}.csv"
             if history_path.exists():
@@ -293,6 +328,7 @@ def main():
 
             features = feature_row(hist)
             if features:
+                stats["usable"] += 1
                 features.update({
                     "id": coin_id,
                     "symbol": row.get("symbol"),
@@ -305,7 +341,10 @@ def main():
                     "recent_pump_flag": row.get("recent_pump_flag"),
                 })
                 feature_rows.append(features)
+            else:
+                stats["insufficient"] += 1
         except Exception as exc:
+            stats["failed"] += 1
             print(f"[WARN] {row.get('symbol')} failed: {exc}")
 
     if not feature_rows:
@@ -317,6 +356,8 @@ def main():
     # The --top option is intentionally ignored here to prevent silent suppression.
     result = result[result["breakout_score"] >= 45].copy()
 
+    print(f"History diagnostics: {json.dumps(stats)}")
+    (report_dir / "scan_diagnostics.json").write_text(json.dumps({"normalization_version": "fixed-provisional-v1", "history": stats, "qualified_signals": len(result), "qualified_coin_ids": result["id"].astype(str).tolist(), "as_of_utc": pd.Timestamp.now("UTC").isoformat()}, indent=2))
     result.to_csv(report_dir / "breakout_radar.csv", index=False)
     result.to_json(report_dir / "breakout_radar.json", orient="records", date_format="iso")
 
