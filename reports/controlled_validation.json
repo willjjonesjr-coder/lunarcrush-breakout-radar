@@ -2,7 +2,7 @@
   "normalization_version": "fixed-provisional-v1",
   "order_invariance_max_delta": 0.0,
   "population_invariance_max_delta": 0.0,
-  "historical_observations": 1117,
+  "historical_observations": 955,
   "limitations": [
     "Survivorship bias: current candidates only",
     "Overlapping windows; observations are not independent",
@@ -13,82 +13,82 @@
     {
       "horizon_days": 7,
       "score_band": "<45",
-      "n": 246,
-      "mean_return": 0.008595399194112978,
-      "median_return": -0.027367645657338013,
-      "positive_rate": 0.3699186991869919
+      "n": 208,
+      "mean_return": -0.0037107430344734352,
+      "median_return": -0.02149472947810538,
+      "positive_rate": 0.3894230769230769
     },
     {
       "horizon_days": 7,
       "score_band": "45-54",
-      "n": 229,
-      "mean_return": -0.006090607274807913,
-      "median_return": -0.016459056225400892,
-      "positive_rate": 0.3930131004366812
+      "n": 215,
+      "mean_return": 0.010838301276264117,
+      "median_return": -0.027836840746746083,
+      "positive_rate": 0.3581395348837209
     },
     {
       "horizon_days": 7,
       "score_band": "55-64",
-      "n": 77,
-      "mean_return": 0.015517481227243465,
-      "median_return": -0.020826592593945037,
-      "positive_rate": 0.3116883116883117
+      "n": 61,
+      "mean_return": -0.014682813792299947,
+      "median_return": -0.02931027459834401,
+      "positive_rate": 0.29508196721311475
     },
     {
       "horizon_days": 7,
       "score_band": "65-74",
-      "n": 31,
-      "mean_return": 0.2948171636032468,
-      "median_return": 0.0,
-      "positive_rate": 0.4838709677419355
+      "n": 18,
+      "mean_return": 0.052042980704746805,
+      "median_return": 0.035196686530954424,
+      "positive_rate": 0.6666666666666666
     },
     {
       "horizon_days": 7,
       "score_band": "75+",
-      "n": 9,
-      "mean_return": 0.03126083389044454,
-      "median_return": -0.0003013583150365262,
-      "positive_rate": 0.2222222222222222
+      "n": 8,
+      "mean_return": 0.0004423159657177267,
+      "median_return": -0.04080271320122203,
+      "positive_rate": 0.125
     },
     {
       "horizon_days": 14,
       "score_band": "<45",
-      "n": 228,
-      "mean_return": 0.07492752151957024,
-      "median_return": 0.03451083262397925,
-      "positive_rate": 0.6140350877192983
+      "n": 192,
+      "mean_return": 0.09243433869867612,
+      "median_return": 0.06634895645211292,
+      "positive_rate": 0.6875
     },
     {
       "horizon_days": 14,
       "score_band": "45-54",
-      "n": 200,
-      "mean_return": 0.07255305975135232,
-      "median_return": 0.02063962661666574,
-      "positive_rate": 0.615
+      "n": 185,
+      "mean_return": 0.061195890091622004,
+      "median_return": 0.0317982456140351,
+      "positive_rate": 0.6378378378378379
     },
     {
       "horizon_days": 14,
       "score_band": "55-64",
-      "n": 63,
-      "mean_return": 0.24848353957315636,
-      "median_return": 0.02485249860566241,
-      "positive_rate": 0.5714285714285714
+      "n": 45,
+      "mean_return": 0.06612629107183081,
+      "median_return": 0.012131371752594822,
+      "positive_rate": 0.5555555555555556
     },
     {
       "horizon_days": 14,
       "score_band": "65-74",
-      "n": 25,
-      "mean_return": 0.3661173744461707,
-      "median_return": 0.014825560505855151,
-      "positive_rate": 0.6
+      "n": 15,
+      "mean_return": 0.09436671363011606,
+      "median_return": 0.08246705557942002,
+      "positive_rate": 0.6666666666666666
     },
     {
       "horizon_days": 14,
       "score_band": "75+",
-      "n": 9,
-      "mean_return": 0.145735035734465,
-      "median_return": -0.00029926634704890986,
-      "positive_rate": 0.3333333333333333
+      "n": 8,
+      "mean_return": 0.1395432971406338,
+      "median_return": -0.022057355336247975,
+      "positive_rate": 0.25
     }
   ]
 }
