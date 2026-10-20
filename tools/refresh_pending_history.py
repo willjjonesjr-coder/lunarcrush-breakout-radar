@@ -4,7 +4,9 @@ No universe rescoring. Never retry a 429. Daily API usage state is shared
 with the scanner; reserve quota for other runs. Only request matured horizons.
 """
 import json
+import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pandas as pd
 from lunarcrush_client import LunarCrushClient
 
