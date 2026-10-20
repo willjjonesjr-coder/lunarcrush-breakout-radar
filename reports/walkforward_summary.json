@@ -63,13 +63,13 @@
     },
     {
       "date": "2026-10-20",
-      "archived_candidates": 152,
+      "archived_candidates": 151,
       "normalization": "fixed-provisional-v1"
     }
   ],
-  "observations": 902,
-  "eligible": 161,
-  "missing_outcomes": 741,
+  "observations": 900,
+  "eligible": 165,
+  "missing_outcomes": 735,
   "benchmark_ids": {
     "BTC": "1",
     "ETH": "2"
@@ -78,13 +78,13 @@
     {
       "horizon_days": 7,
       "stage": "BREAKOUT / MOMENTUM",
-      "n": 54,
+      "n": 56,
       "days": 9,
-      "assets": 24,
-      "median_return": -0.047622161203110414,
-      "win_rate": 0.2962962962962963,
-      "median_excess_btc": -0.02321656099455166,
-      "median_excess_eth": 0.011571338717480506
+      "assets": 25,
+      "median_return": -0.05019529592869987,
+      "win_rate": 0.2857142857142857,
+      "median_excess_btc": -0.025675345731554333,
+      "median_excess_eth": 0.009237484948803831
     },
     {
       "horizon_days": 7,
@@ -111,23 +111,23 @@
     {
       "horizon_days": 7,
       "stage": "WATCH",
-      "n": 54,
+      "n": 55,
       "days": 10,
-      "assets": 27,
-      "median_return": -0.0956295309269336,
-      "win_rate": 0.16666666666666666,
-      "median_excess_btc": -0.07513506729851188,
-      "median_excess_eth": -0.0395695376076845
+      "assets": 28,
+      "median_return": -0.09514073262583078,
+      "win_rate": 0.16363636363636364,
+      "median_excess_btc": -0.07318034363231873,
+      "median_excess_eth": -0.03970215295379276
     },
     {
       "horizon_days": 14,
       "stage": "BREAKOUT / MOMENTUM",
-      "n": 13,
+      "n": 14,
       "days": 3,
-      "assets": 10,
-      "median_return": -0.1526591079929842,
-      "win_rate": 0.0,
-      "median_excess_btc": -0.10583588072634509,
+      "assets": 11,
+      "median_return": -0.14063729651140378,
+      "win_rate": 0.07142857142857142,
+      "median_excess_btc": -0.0934249686914228,
       "median_excess_eth": -0.011471585277237462
     },
     {
@@ -136,10 +136,10 @@
       "n": 3,
       "days": 2,
       "assets": 2,
-      "median_return": -0.23338802155885519,
+      "median_return": -0.225549375900722,
       "win_rate": 0.0,
-      "median_excess_btc": -0.18656479429221606,
-      "median_excess_eth": -0.117022322912953
+      "median_excess_btc": -0.17872614863408287,
+      "median_excess_eth": -0.10918367725481981
     },
     {
       "horizon_days": 14,
@@ -168,23 +168,23 @@
     {
       "horizon_days": 7,
       "normalization": "legacy_run_relative",
-      "n": 132,
+      "n": 135,
       "days": 10,
-      "assets": 39,
-      "median_return": -0.06492968279066097,
-      "win_rate": 0.23484848484848486,
-      "median_excess_btc": -0.04522658541917668,
-      "median_excess_eth": -0.020732970918873328
+      "assets": 40,
+      "median_return": -0.06451200690954195,
+      "win_rate": 0.22962962962962963,
+      "median_excess_btc": -0.04761179343004096,
+      "median_excess_eth": -0.024439349702674584
     },
     {
       "horizon_days": 14,
       "normalization": "legacy_run_relative",
-      "n": 29,
+      "n": 30,
       "days": 3,
-      "assets": 18,
-      "median_return": -0.17667338744277017,
-      "win_rate": 0.0,
-      "median_excess_btc": -0.1205491812029088,
+      "assets": 19,
+      "median_return": -0.1736087497250119,
+      "win_rate": 0.03333333333333333,
+      "median_excess_btc": -0.11846491038055418,
       "median_excess_eth": -0.04237061995807068
     }
   ],
@@ -236,24 +236,24 @@
     {
       "horizon_days": 7,
       "signal_date": "2026-10-08",
-      "n": 14,
+      "n": 15,
       "days": 1,
-      "assets": 14,
-      "median_return": 0.00011003779718155027,
-      "win_rate": 0.5714285714285714,
-      "median_excess_btc": -0.008460130748568884,
-      "median_excess_eth": 0.0075253563160596615
+      "assets": 15,
+      "median_return": 7.597255378888335e-05,
+      "win_rate": 0.5333333333333333,
+      "median_excess_btc": -0.00849419599196155,
+      "median_excess_eth": 0.0074912910726669946
     },
     {
       "horizon_days": 7,
       "signal_date": "2026-10-09",
-      "n": 14,
+      "n": 15,
       "days": 1,
-      "assets": 14,
-      "median_return": -0.012260542643846128,
-      "win_rate": 0.35714285714285715,
-      "median_excess_btc": 0.0004051946052524569,
-      "median_excess_eth": 0.014211790140435276
+      "assets": 15,
+      "median_return": -0.014245203687475727,
+      "win_rate": 0.3333333333333333,
+      "median_excess_btc": -0.0015794664383771417,
+      "median_excess_eth": 0.012227129096805678
     },
     {
       "horizon_days": 7,
@@ -280,13 +280,13 @@
     {
       "horizon_days": 7,
       "signal_date": "2026-10-12",
-      "n": 13,
+      "n": 14,
       "days": 1,
-      "assets": 13,
-      "median_return": -0.043520179532051895,
-      "win_rate": 0.15384615384615385,
-      "median_excess_btc": -0.039079840278712585,
-      "median_excess_eth": -0.013963643631998424
+      "assets": 14,
+      "median_return": -0.05952002649542243,
+      "win_rate": 0.14285714285714285,
+      "median_excess_btc": -0.05507968724208312,
+      "median_excess_eth": -0.029963490595368958
     },
     {
       "horizon_days": 7,
@@ -324,12 +324,12 @@
     {
       "horizon_days": 14,
       "signal_date": "2026-10-06",
-      "n": 2,
+      "n": 3,
       "days": 1,
-      "assets": 2,
-      "median_return": -0.18933900638625073,
-      "win_rate": 0.0,
-      "median_excess_btc": -0.141874095044693,
+      "assets": 3,
+      "median_return": -0.16801409254446653,
+      "win_rate": 0.3333333333333333,
+      "median_excess_btc": -0.1205491812029088,
       "median_excess_eth": null
     }
   ],

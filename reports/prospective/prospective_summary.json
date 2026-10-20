@@ -1,0 +1,20 @@
+{
+  "snapshot": "reports/prospective/snapshots/full_scored_20261020T041502Z.csv",
+  "scored_candidates": 291,
+  "ledger_rows": 1455,
+  "matured": 0,
+  "pending": 1455,
+  "flagged": 0,
+  "benchmark_ids": {
+    "BTC": "1",
+    "ETH": "2"
+  },
+  "by_horizon_and_version": [],
+  "limitations": [
+    "First fully closed post-scan UTC candle used as entry proxy; not a tradable execution price.",
+    "Historical daily close data cannot establish intraday drawdown or slippage.",
+    "Coin history may not be refreshed once an asset rotates out; outcomes remain pending.",
+    "Only historically scanned assets are included, not the entire coin market.",
+    "No fees, liquidity-based sizing, or survivorship corrections."
+  ]
+}
