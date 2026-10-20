@@ -374,6 +374,8 @@ def main():
         raise RuntimeError("No historical candidate data was returned.")
 
     result = score_candidates(pd.DataFrame(feature_rows), cfg)
+    # Persist all scored candidates before the reporting threshold.
+    result.to_csv(report_dir / "full_scored_candidates.csv", index=False)
     # Compare overlapping IDs with previous report, not population-dependent ranks.
     previous_path = report_dir / "breakout_radar.csv"
     stability = {"overlap": 0, "mean_absolute_score_change": None,
