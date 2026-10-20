@@ -270,6 +270,7 @@ def score_candidates(df, cfg):
         return "unverified"
     out["asset_type"] = out.apply(asset_type, axis=1)
     out["pegged_asset_flag"] = out["asset_type"].ne("unverified")
+    out.loc[out["pegged_asset_flag"], "stage"] = "PEGGED / WRAPPED ASSET"
     p = pd.to_numeric(out["price_change_7d"], errors="coerce")
     out["recovery_flag"] = p <= -.10
     out["overextended_flag"] = (p >= .35) | out.get("recent_pump_flag", pd.Series(False, index=out.index)).fillna(False).astype(bool)
