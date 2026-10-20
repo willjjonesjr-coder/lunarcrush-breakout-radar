@@ -42,6 +42,11 @@ jobs:
           RADAR_TOP: ${{ inputs.top || '15' }}
         run: python scanner.py --top "$RADAR_TOP"
 
+      - name: Refresh pending prospective price histories within API budget
+        env:
+          LUNARCRUSH_API_KEY: ${{ secrets.LUNARCRUSH_API_KEY }}
+        run: python tools/refresh_pending_history.py
+
       - name: Capture full scored universe and update prospective outcomes
         run: python tools/prospective_tracker.py
 
@@ -83,6 +88,7 @@ jobs:
           path: |
             reports/breakout_radar.csv
             reports/full_scored_candidates.csv
+            reports/prospective/refresh_diagnostics.json
             reports/prospective/prospective_summary.json
             reports/prospective/signal_ledger.csv
             reports/breakout_radar.json
