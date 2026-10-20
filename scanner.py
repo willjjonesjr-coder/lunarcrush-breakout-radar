@@ -333,7 +333,7 @@ def main():
     print(f"Snapshot shortlist: {len(shortlist)}; history candidates: {len(candidates)}")
 
     feature_rows = []
-    stats = {"requested": len(candidates), "empty": 0, "insufficient": 0, "failed": 0, "usable": 0}
+    stats = {"requested": len(candidates), "empty": 0, "insufficient": 0, "failed": 0, "usable": 0, "rate_limited": False, "skipped_after_rate_limit": 0}
     for _, row in candidates.iterrows():
         coin_id = row["id"]
         try:
@@ -369,6 +369,11 @@ def main():
         except Exception as exc:
             stats["failed"] += 1
             print(f"[WARN] {row.get('symbol')} failed: {exc}")
+            if "rate limit (429)" in str(exc).lower():
+                stats["rate_limited"] = True
+                stats["skipped_after_rate_limit"] = len(candidates) - sum(stats[k] for k in ("empty", "insufficient", "failed", "usable"))
+                print("[WARN] Circuit breaker activated; stopping further requests after 429.")
+                break
 
     if not feature_rows:
         raise RuntimeError("No historical candidate data was returned.")
