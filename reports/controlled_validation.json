@@ -1,0 +1,94 @@
+{
+  "normalization_version": "fixed-provisional-v1",
+  "order_invariance_max_delta": 0.0,
+  "population_invariance_max_delta": 0.0,
+  "historical_observations": 1100,
+  "limitations": [
+    "Survivorship bias: current candidates only",
+    "Overlapping windows; observations are not independent",
+    "No fees, slippage or tradability screen",
+    "No matched market benchmark or independent identity verification"
+  ],
+  "by_horizon_and_score": [
+    {
+      "horizon_days": 7,
+      "score_band": "<45",
+      "n": 244,
+      "mean_return": 0.017020785719729682,
+      "median_return": -0.01770871218570863,
+      "positive_rate": 0.39344262295081966
+    },
+    {
+      "horizon_days": 7,
+      "score_band": "45-54",
+      "n": 232,
+      "mean_return": 1217721.2839088843,
+      "median_return": -0.0200252624111672,
+      "positive_rate": 0.3706896551724138
+    },
+    {
+      "horizon_days": 7,
+      "score_band": "55-64",
+      "n": 75,
+      "mean_return": 0.02430183669886164,
+      "median_return": -0.010601320820298965,
+      "positive_rate": 0.3333333333333333
+    },
+    {
+      "horizon_days": 7,
+      "score_band": "65-74",
+      "n": 24,
+      "mean_return": -0.009131974024944362,
+      "median_return": -9.798596152138517e-05,
+      "positive_rate": 0.4583333333333333
+    },
+    {
+      "horizon_days": 7,
+      "score_band": "75+",
+      "n": 7,
+      "mean_return": 0.04021272874276332,
+      "median_return": -0.004324012619042583,
+      "positive_rate": 0.2857142857142857
+    },
+    {
+      "horizon_days": 14,
+      "score_band": "<45",
+      "n": 226,
+      "mean_return": 0.07638701419758137,
+      "median_return": 0.029700640542099643,
+      "positive_rate": 0.6283185840707964
+    },
+    {
+      "horizon_days": 14,
+      "score_band": "45-54",
+      "n": 201,
+      "mean_return": 0.05638996177119251,
+      "median_return": 0.009509838636248658,
+      "positive_rate": 0.5870646766169154
+    },
+    {
+      "horizon_days": 14,
+      "score_band": "55-64",
+      "n": 63,
+      "mean_return": 0.24816720550203347,
+      "median_return": 0.019060123020598896,
+      "positive_rate": 0.5873015873015873
+    },
+    {
+      "horizon_days": 14,
+      "score_band": "65-74",
+      "n": 21,
+      "mean_return": 0.03759355595845154,
+      "median_return": 0.013326503837098658,
+      "positive_rate": 0.5238095238095238
+    },
+    {
+      "horizon_days": 14,
+      "score_band": "75+",
+      "n": 7,
+      "mean_return": 0.18749746278778107,
+      "median_return": 2.000040000793568e-05,
+      "positive_rate": 0.5714285714285714
+    }
+  ]
+}
