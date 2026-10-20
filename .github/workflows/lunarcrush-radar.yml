@@ -45,6 +45,9 @@ jobs:
       - name: Controlled scoring and historical replay validation
         run: python tools/validate_scoring.py
 
+      - name: Audit historical returns and compare benchmarks
+        run: python tools/audit_backtest.py
+
       - name: Archive today's radar
         shell: bash
         run: |
@@ -77,4 +80,7 @@ jobs:
             reports/controlled_validation.json
             reports/historical_forward_returns.csv
             reports/scan_diagnostics.json
+            reports/audited_backtest_summary.json
+            reports/historical_forward_returns_audited.csv
+            reports/historical_quality_flags.csv
           retention-days: 30
