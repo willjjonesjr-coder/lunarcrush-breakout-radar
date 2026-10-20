@@ -48,6 +48,9 @@ jobs:
       - name: Audit historical returns and compare benchmarks
         run: python tools/audit_backtest.py
 
+      - name: Evaluate archived signals without historical universe leakage
+        run: python tools/walkforward_archives.py
+
       - name: Archive today's radar
         shell: bash
         run: |
@@ -83,4 +86,6 @@ jobs:
             reports/audited_backtest_summary.json
             reports/historical_forward_returns_audited.csv
             reports/historical_quality_flags.csv
+            reports/walkforward_observations.csv
+            reports/walkforward_summary.json
           retention-days: 30
