@@ -42,6 +42,9 @@ jobs:
           RADAR_TOP: ${{ inputs.top || '15' }}
         run: python scanner.py --top "$RADAR_TOP"
 
+      - name: Capture full scored universe and update prospective outcomes
+        run: python tools/prospective_tracker.py
+
       - name: Controlled scoring and historical replay validation
         run: python tools/validate_scoring.py
 
@@ -79,6 +82,9 @@ jobs:
           name: lunarcrush-breakout-radar
           path: |
             reports/breakout_radar.csv
+            reports/full_scored_candidates.csv
+            reports/prospective/prospective_summary.json
+            reports/prospective/signal_ledger.csv
             reports/breakout_radar.json
             reports/controlled_validation.json
             reports/historical_forward_returns.csv
