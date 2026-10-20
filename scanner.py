@@ -235,7 +235,11 @@ def score_candidates(df, cfg):
     def stage(row):
         s = row["breakout_score"]
         p = row.get("price_change_7d", np.nan)
-        if s >= 75 and pd.notna(p) and p < 0.15:
+        if pd.notna(p) and p <= -0.10:
+            return "RECOVERY / REVERSAL"
+        if pd.notna(p) and p >= 0.35:
+            return "OVEREXTENDED"
+        if s >= 75 and pd.notna(p) and -0.10 < p < 0.15:
             return "PRE-BREAKOUT"
         if s >= 65:
             return "DEVELOPING"
@@ -247,13 +251,29 @@ def score_candidates(df, cfg):
 
     out["stage"] = out.apply(stage, axis=1)
     # Additive classifications: never filter a discovery candidate.
-    pegged = {"RLUSD", "USDT", "USDC", "DAI", "FDUSD", "USDE", "USDS",
-              "TUSD", "USDD", "USD1", "PAXG", "WBTC", "WETH"}
-    out["pegged_asset_flag"] = out["symbol"].fillna("").str.upper().isin(pegged)
+    # Conservative ID/name-based classification; ticker-only matches are unverified.
+    # Known IDs are checked first, then explicit names. Unknowns stay visible.
+    known_ids = {"159260": "stablecoin", "160590": "stablecoin"}
+    stable_names = {"ripple usd", "world liberty financial usd", "dola",
+                    "apyusd", "apxusd", "tether", "usd coin", "dai",
+                    "first digital usd", "ethena usde", "paypal usd"}
+    wrapped_names = {"wrapped bitcoin", "wrapped ether", "pax gold", "paxos gold"}
+    def asset_type(r):
+        coin_id = str(r.get("id", ""))
+        name = str(r.get("name", "")).strip().lower()
+        if coin_id in known_ids:
+            return known_ids[coin_id]
+        if name in stable_names:
+            return "stablecoin"
+        if name in wrapped_names:
+            return "wrapped_or_asset_backed"
+        return "unverified"
+    out["asset_type"] = out.apply(asset_type, axis=1)
+    out["pegged_asset_flag"] = out["asset_type"].ne("unverified")
     p = pd.to_numeric(out["price_change_7d"], errors="coerce")
     out["recovery_flag"] = p <= -.10
-    out["overextended_flag"] = p >= .35
-    out["early_breakout_flag"] = (out["breakout_score"] >= 65) & p.between(-.10, .15) & (out["volume_accel"] > 0) & (out["social_accel"] > 0) & ~out["pegged_asset_flag"]
+    out["overextended_flag"] = (p >= .35) | out.get("recent_pump_flag", pd.Series(False, index=out.index)).fillna(False).astype(bool)
+    out["early_breakout_flag"] = (out["breakout_score"] >= 65) & p.between(-.10, .15) & (out["volume_accel"] > 0) & (out["social_accel"] > 0) & ~out["pegged_asset_flag"] & ~out["overextended_flag"]
     out["confirmed_momentum_flag"] = (out["breakout_score"] >= 55) & (p > 0) & (out["volume_accel"] > 0) & (out["social_accel"] > 0) & ~out["pegged_asset_flag"] & ~out["overextended_flag"]
     def classify(r):
         labels = []
@@ -351,13 +371,29 @@ def main():
         raise RuntimeError("No historical candidate data was returned.")
 
     result = score_candidates(pd.DataFrame(feature_rows), cfg)
+    # Compare overlapping IDs with previous report, not population-dependent ranks.
+    previous_path = report_dir / "breakout_radar.csv"
+    stability = {"overlap": 0, "mean_absolute_score_change": None,
+                 "max_absolute_score_change": None, "note": "Previous report unavailable"}
+    if previous_path.exists():
+        previous = pd.read_csv(previous_path, dtype={"id": str})
+        current = result.copy()
+        current["id"] = current["id"].astype(str)
+        if {"id", "breakout_score"}.issubset(previous.columns):
+            overlap = current[["id", "breakout_score"]].merge(
+                previous[["id", "breakout_score"]], on="id", suffixes=("_new", "_previous"))
+            delta = (overlap["breakout_score_new"] - overlap["breakout_score_previous"]).abs()
+            stability = {"overlap": len(overlap),
+                         "mean_absolute_score_change": float(delta.mean()) if len(delta) else None,
+                         "max_absolute_score_change": float(delta.max()) if len(delta) else None,
+                         "note": "Changes reflect market evolution as well as scoring; not a controlled same-data test"}
     top_n = args.top or int(cfg["funnel"]["finalists"])
     # Experimental inclusive report: retain every scored WATCH-or-better signal.
     # The --top option is intentionally ignored here to prevent silent suppression.
     result = result[result["breakout_score"] >= 45].copy()
 
     print(f"History diagnostics: {json.dumps(stats)}")
-    (report_dir / "scan_diagnostics.json").write_text(json.dumps({"normalization_version": "fixed-provisional-v1", "history": stats, "qualified_signals": len(result), "qualified_coin_ids": result["id"].astype(str).tolist(), "as_of_utc": pd.Timestamp.now("UTC").isoformat()}, indent=2))
+    (report_dir / "scan_diagnostics.json").write_text(json.dumps({"normalization_version": "fixed-provisional-v1", "history": stats, "score_stability": stability, "api_requests_this_run": client.run_requests, "api_requests_by_utc_day": client.run_requests_by_day, "qualified_signals": len(result), "qualified_coin_ids": result["id"].astype(str).tolist(), "as_of_utc": pd.Timestamp.now("UTC").isoformat()}, indent=2))
     result.to_csv(report_dir / "breakout_radar.csv", index=False)
     result.to_json(report_dir / "breakout_radar.json", orient="records", date_format="iso")
 
