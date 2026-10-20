@@ -267,10 +267,12 @@ def score_candidates(df, cfg):
             return "stablecoin"
         if name in wrapped_names:
             return "wrapped_or_asset_backed"
+        if "tokenized stock" in name or "tokenised stock" in name:
+            return "tokenized_equity"
         return "unverified"
     out["asset_type"] = out.apply(asset_type, axis=1)
     out["pegged_asset_flag"] = out["asset_type"].ne("unverified")
-    out.loc[out["pegged_asset_flag"], "stage"] = "PEGGED / WRAPPED ASSET"
+    out.loc[out["pegged_asset_flag"], "stage"] = "PEGGED / WRAPPED / TOKENIZED ASSET"
     p = pd.to_numeric(out["price_change_7d"], errors="coerce")
     out["recovery_flag"] = p <= -.10
     out["overextended_flag"] = (p >= .35) | out.get("recent_pump_flag", pd.Series(False, index=out.index)).fillna(False).astype(bool)
@@ -278,7 +280,7 @@ def score_candidates(df, cfg):
     out["confirmed_momentum_flag"] = (out["breakout_score"] >= 55) & (p > 0) & (out["volume_accel"] > 0) & (out["social_accel"] > 0) & ~out["pegged_asset_flag"] & ~out["overextended_flag"]
     def classify(r):
         labels = []
-        for flag, label in [("pegged_asset_flag", "PEGGED / WRAPPED"),
+        for flag, label in [("pegged_asset_flag", "PEGGED / WRAPPED / TOKENIZED"),
                             ("recovery_flag", "RECOVERY / REVERSAL"),
                             ("overextended_flag", "OVEREXTENDED"),
                             ("early_breakout_flag", "EARLY BREAKOUT"),
