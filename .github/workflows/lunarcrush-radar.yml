@@ -42,6 +42,9 @@ jobs:
           RADAR_TOP: ${{ inputs.top || '15' }}
         run: python scanner.py --top "$RADAR_TOP"
 
+      - name: Controlled scoring and historical replay validation
+        run: python tools/validate_scoring.py
+
       - name: Archive today's radar
         shell: bash
         run: |
@@ -71,4 +74,7 @@ jobs:
           path: |
             reports/breakout_radar.csv
             reports/breakout_radar.json
+            reports/controlled_validation.json
+            reports/historical_forward_returns.csv
+            reports/scan_diagnostics.json
           retention-days: 30
