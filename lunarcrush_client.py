@@ -26,6 +26,8 @@ class LunarCrushClient:
         self.state_file = Path(state_file)
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
         self._last_request = 0.0
+        self.run_requests = 0
+        self.run_requests_by_day = {}
 
     def _load_state(self):
         if not self.state_file.exists():
@@ -62,6 +64,9 @@ class LunarCrushClient:
             "Accept": "application/json",
         }
 
+        request_day = time.strftime('%Y-%m-%d', time.gmtime())
+        self.run_requests += 1
+        self.run_requests_by_day[request_day] = self.run_requests_by_day.get(request_day, 0) + 1
         response = requests.get(url, headers=headers, params=params, timeout=45)
         self._last_request = time.monotonic()
 
