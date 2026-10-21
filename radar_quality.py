@@ -129,6 +129,8 @@ def write_coverage(report_dir, all_rows, finalists, separated, as_of):
                 summary['missing_feature_counts'][key] = summary['missing_feature_counts'].get(key, 0)+1
         for key in json.loads(row.get('history_missing_fields', '{}')):
             summary['history_missing_field_counts'][key] = summary['history_missing_field_counts'].get(key, 0)+1
+    if 'daily_spike_flag' in all_rows:
+        summary['daily_spike_counts'] = {k:int(v) for k,v in all_rows['daily_spike_flag'].value_counts().items()}
     Path(report_dir, 'radar_coverage.json').write_text(json.dumps(summary, indent=2))
     print('Radar coverage: ' + json.dumps(summary, sort_keys=True))
     return summary
