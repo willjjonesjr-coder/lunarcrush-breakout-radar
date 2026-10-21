@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');
+const {sortRows}=require('../sort_rows.js');
+const rows=[{id:'a',v:0.5},{id:'b',v:3},{id:'null',v:null},{id:'zero',v:0},{id:'negative',v:-0.5},{id:'absent'}];
+assert.deepEqual(sortRows(rows,'v').map(r=>r.id),['b','a','zero','negative','null','absent']);
+assert.deepEqual(sortRows(rows,'v','asc').map(r=>r.id),['negative','zero','a','b','null','absent']);
+assert.deepEqual(sortRows([{v:10},{v:2}],'v').map(r=>r.v),[10,2]);
+assert.deepEqual(sortRows([{id:1,v:2},{id:2,v:2}],'v').map(r=>r.id),[1,2]);
+assert.deepEqual(sortRows([{v:'BAT'},{v:'ADA'},{v:null}],'v','asc','text').map(r=>r.v),['ADA','BAT',null]);
+assert.deepEqual(sortRows([{v:Infinity},{v:1},{v:NaN}],'v').map(r=>r.v),[1,Infinity,NaN]);
+assert.equal(rows[0].id,'a');
+console.log('7 sorting assertions passed');
