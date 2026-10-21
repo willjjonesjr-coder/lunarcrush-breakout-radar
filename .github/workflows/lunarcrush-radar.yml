@@ -64,6 +64,11 @@ jobs:
           COINGECKO_DEMO_API_KEY: ${{ secrets.COINGECKO_DEMO_API_KEY }}
         run: python fundamentals.py
 
+      - name: Refresh market regime context
+        if: steps.start_date.outputs.run_scan == 'true'
+        timeout-minutes: 8
+        run: python production_regime.py
+
       - name: Build sortable results view
         if: steps.start_date.outputs.run_scan == 'true'
         run: python sortable_report.py
@@ -76,7 +81,7 @@ jobs:
           DAY=$(date -u +%Y-%m-%d)
           cp reports/breakout_radar.csv "reports/archive/breakout_radar_${DAY}.csv"
           cp reports/breakout_radar.json "reports/archive/breakout_radar_${DAY}.json"
-          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json daily_spike_history.csv daily_spike_history.json radar_sortable.html; do
+          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json daily_spike_history.csv daily_spike_history.json radar_sortable.html market_regime.csv market_regime_latest.json market_regime_inventory.csv; do
             cp "reports/$REPORT" "reports/archive/${DAY}_${REPORT}"
           done
 
@@ -92,6 +97,16 @@ jobs:
               report.write(f"Scored {summary['scored_candidates']} of {summary['history_candidates']} historical candidates; "
                            f"{summary['finalists']} finalists; {summary['separated_assets']} assets separated by type.\n\n")
               report.write("```json\n" + json.dumps(summary, indent=2) + "\n```\n")
+          PYTHON
+          python - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          regime = json.loads(Path("reports/market_regime_latest.json").read_text())
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as report:
+              report.write("\n## Crypto market regime\n\n")
+              report.write(f"{regime['classification']} | Score: {regime['score']} / 100 | "
+                           f"Coverage: {regime['available_assets']}/{regime['expected_assets']} | "
+                           f"As of: {regime['as_of'] or 'unavailable'}\n")
           PYTHON
 
       - name: Commit updated data and reports
@@ -125,4 +140,7 @@ jobs:
             reports/daily_spike_history.csv
             reports/daily_spike_history.json
             reports/radar_sortable.html
+            reports/market_regime.csv
+            reports/market_regime_latest.json
+            reports/market_regime_inventory.csv
           retention-days: 30

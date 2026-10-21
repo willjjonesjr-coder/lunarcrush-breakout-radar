@@ -1,0 +1,16 @@
+{
+  "exchange": "kraken",
+  "bars": 500,
+  "minimum_contiguous_days": 230,
+  "minimum_assets": 12,
+  "minimum_coverage": 0.7,
+  "pairs": {
+    "BTC": "BTC/USD", "ETH": "ETH/USD", "SOL": "SOL/USD",
+    "XRP": "XRP/USD", "ADA": "ADA/USD", "DOGE": "DOGE/USD",
+    "AVAX": "AVAX/USD", "LINK": "LINK/USD", "DOT": "DOT/USD",
+    "LTC": "LTC/USD", "BCH": "BCH/USD", "ATOM": "ATOM/USD",
+    "UNI": "UNI/USD", "AAVE": "AAVE/USD", "FIL": "FIL/USD",
+    "NEAR": "NEAR/USD", "XLM": "XLM/USD", "ETC": "ETC/USD",
+    "ALGO": "ALGO/USD", "ICP": "ICP/USD"
+  }
+}
