@@ -6,6 +6,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 LABELS = {
+ 'market_regime_score':'Market regime score', 'market_regime_classification':'Market regime',
+ 'market_regime_coverage':'Regime data coverage', 'market_regime_change_7d':'Regime score change: 7 days',
+ 'market_regime_status':'Regime availability',
  'symbol':'Coin', 'name':'Name', 'breakout_score':'Breakout score', 'stage':'Stage',
  'volume_daily_accel':'Volume: day vs prior 7 days',
  'engagement_daily_accel':'Engagement: day vs prior 7 days',
@@ -23,13 +26,13 @@ LABELS = {
  'last_price':'Last price ($)', 'market_cap':'Market cap ($)',
  'volume_24h_snapshot':'Snapshot volume ($)',
 }
-PERCENT = {'volume_daily_accel','engagement_daily_accel','volume_accel','engagement_accel',
+PERCENT = {'market_regime_coverage','volume_daily_accel','engagement_daily_accel','volume_accel','engagement_accel',
  'social_accel','contributor_accel','sentiment_change','social_dominance_change',
  'price_change_7d','price_change_30d','galaxy_score_change','spam_change','social_price_divergence',
  'fundamentals_fees_growth_30d','fundamentals_revenue_growth_30d',
  'fundamentals_holder_revenue_growth_30d','fundamentals_holder_capture_30d',
  'fundamentals_circulating_to_total'}
-TEXT = {'symbol','name','stage','fundamentals_status','fundamentals_confidence',
+TEXT = {'market_regime_classification','market_regime_status','symbol','name','stage','fundamentals_status','fundamentals_confidence',
         'daily_spike_flag','data_status','asset_type'}
 DEFAULT = ['symbol','name','breakout_score','volume_daily_accel','engagement_daily_accel',
            'volume_accel','engagement_accel','price_change_7d','fundamentals_status']
@@ -63,7 +66,9 @@ def payload(reports):
     for r in rows:
         if r.get('breakout_score') is None and r.get('stage') == 'WEAK':
             r['stage']='INSUFFICIENT DATA'
-    return {'generated_at':datetime.now(timezone.utc).isoformat(), 'groups':groups,
+    regime_path=reports/'market_regime_latest.json'
+    market_regime=json.loads(regime_path.read_text()) if regime_path.exists() else None
+    return {'market_regime':market_regime, 'generated_at':datetime.now(timezone.utc).isoformat(), 'groups':groups,
             'metrics':metrics, 'default_columns':DEFAULT,
             'observation_days':sorted({str(r['last_time']) for r in rows if r.get('last_time')})}
 

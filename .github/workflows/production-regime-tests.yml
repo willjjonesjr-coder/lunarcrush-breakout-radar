@@ -1,0 +1,52 @@
+name: Production market regime tests
+on:
+  pull_request:
+    paths:
+      - 'production_regime.py'
+      - 'market_regime.py'
+      - 'config/production_regime.json'
+      - 'tests/test_production_regime.py'
+      - '.github/workflows/production-regime-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy pandas
+      - run: python -m unittest discover -s tests -p 'test_production_regime.py' -v
+      - run: python -m unittest discover -s tests -p 'test_market_regime.py' -v
+
+  live-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python production_regime.py
+      - name: Verify live data coverage
+        run: |
+          python - <<'PYTHON'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('reports/market_regime_latest.json').read_text())
+          assert data['status'] == 'AVAILABLE', data
+          print(data)
+          PYTHON
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: production-market-regime-validation
+          path: |
+            reports/market_regime_latest.json
+            reports/market_regime.csv
+            reports/market_regime_inventory.csv
+          retention-days: 14
