@@ -56,6 +56,14 @@ jobs:
           RADAR_TOP: ${{ inputs.top || '15' }}
         run: python scanner.py --top "$RADAR_TOP"
 
+      - name: Add observational fundamentals
+        if: steps.start_date.outputs.run_scan == 'true'
+        continue-on-error: true
+        timeout-minutes: 10
+        env:
+          COINGECKO_DEMO_API_KEY: ${{ secrets.COINGECKO_DEMO_API_KEY }}
+        run: python fundamentals.py
+
       - name: Archive today's radar
         if: steps.start_date.outputs.run_scan == 'true'
         shell: bash
@@ -89,3 +97,4 @@ jobs:
             reports/breakout_radar.csv
             reports/breakout_radar.json
           retention-days: 30
+
