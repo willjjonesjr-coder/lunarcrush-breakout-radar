@@ -72,6 +72,23 @@ jobs:
           DAY=$(date -u +%Y-%m-%d)
           cp reports/breakout_radar.csv "reports/archive/breakout_radar_${DAY}.csv"
           cp reports/breakout_radar.json "reports/archive/breakout_radar_${DAY}.json"
+          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json; do
+            cp "reports/$REPORT" "reports/archive/${DAY}_${REPORT}"
+          done
+
+      - name: Publish data coverage summary
+        if: steps.start_date.outputs.run_scan == 'true'
+        run: |
+          python - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          summary = json.loads(Path("reports/radar_coverage.json").read_text())
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as report:
+              report.write("## Radar data coverage\n\n")
+              report.write(f"Scored {summary['scored_candidates']} of {summary['history_candidates']} historical candidates; "
+                           f"{summary['finalists']} finalists; {summary['separated_assets']} assets separated by type.\n\n")
+              report.write("```json\n" + json.dumps(summary, indent=2) + "\n```\n")
+          PYTHON
 
       - name: Commit updated data and reports
         if: steps.start_date.outputs.run_scan == 'true'
@@ -96,5 +113,9 @@ jobs:
           path: |
             reports/breakout_radar.csv
             reports/breakout_radar.json
+            reports/radar_candidates.csv
+            reports/radar_candidates.json
+            reports/separated_assets.csv
+            reports/separated_assets.json
+            reports/radar_coverage.json
           retention-days: 30
-

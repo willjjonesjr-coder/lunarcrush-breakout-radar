@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 
 from lunarcrush_client import LunarCrushClient
+from radar_quality import (REQUIRED_FEATURES, annotate_assets, coverage, daily_history,
+                           merge_history, write_coverage)
 
 
 def load_config(path="config.json"):
@@ -42,7 +44,7 @@ def fetch_universe(client, cfg):
     return pd.DataFrame(rows)
 
 
-def snapshot_filter(df, cfg):
+def snapshot_filter(df, cfg, include_excluded=False):
     u = cfg["universe"]
     out = df.copy()
 
@@ -50,7 +52,7 @@ def snapshot_filter(df, cfg):
               "interactions_24h", "social_dominance", "sentiment", "galaxy_score",
               "alt_rank"]:
         if c in out:
-            out[c] = pd.to_numeric(out[c], errors="coerce")
+            out[c] = pd.to_numeric(out[c], errors="coerce").replace([np.inf, -np.inf], np.nan)
 
     out = out[
         (out["market_cap"] >= u["min_market_cap"]) &
@@ -61,8 +63,8 @@ def snapshot_filter(df, cfg):
     if "percent_change_7d" in out:
         out = out[out["percent_change_7d"] <= u["max_7d_price_change"]]
 
-    if "symbol" in out:
-        out = out[~out["symbol"].isin(set(u["exclude_symbols"]))]
+    if "symbol" in out and not include_excluded:
+        out = out[~out["symbol"].str.upper().isin(set(u["exclude_symbols"]))]
 
     # Cheap snapshot score. This is only the funnel, not the final model.
     out["snapshot_score"] = (
@@ -102,7 +104,7 @@ def fetch_history(client, coin_id, cfg):
     df = pd.DataFrame(data)
     df["time"] = pd.to_datetime(df["time"], unit="s", utc=True)
     df["coin_id"] = str(coin_id)
-    return df.sort_values("time").drop_duplicates("time")
+    return merge_history(df.iloc[:0], df)
 
 
 def acceleration_ratio(series, short=7, long=30):
@@ -115,11 +117,11 @@ def pct_change_window(series, periods):
     return series.pct_change(periods=periods).replace([np.inf, -np.inf], np.nan)
 
 
-def feature_row(hist):
-    if len(hist) < 10:
+def feature_row(hist, as_of=None):
+    as_of = as_of if as_of is not None else pd.Timestamp.now(tz="UTC")
+    h = daily_history(hist, as_of)
+    if len(h) < 10:
         return None
-
-    h = hist.copy()
 
     # Normalize names and numeric types.
     metrics = [
@@ -130,7 +132,18 @@ def feature_row(hist):
     ]
     for c in metrics:
         if c in h:
-            h[c] = pd.to_numeric(h[c], errors="coerce")
+            h[c] = pd.to_numeric(h[c], errors="coerce").replace([np.inf, -np.inf], np.nan)
+            h.loc[h[c] < 0, c] = np.nan
+
+    if "close" in h:
+        h.loc[h["close"] <= 0, "close"] = np.nan
+
+    def change(a, b):
+        if not np.isfinite(a) or not np.isfinite(b):
+            return np.nan
+        if b == 0:
+            return 0.0 if a == 0 else np.nan
+        return float(a / b - 1)
 
     # Social acceleration: current 7d average vs preceding 23d/30d context.
     def accel(c):
@@ -139,13 +152,13 @@ def feature_row(hist):
         s = h[c]
         short = s.rolling(7, min_periods=3).mean()
         base = s.shift(7).rolling(23, min_periods=8).mean()
-        return float((short.iloc[-1] / base.iloc[-1]) - 1) if base.iloc[-1] not in [0, np.nan] else np.nan
+        return change(short.iloc[-1], base.iloc[-1])
 
     def recent_change(c, n=7):
         if c not in h or len(h) <= n:
             return np.nan
         a, b = h[c].iloc[-1], h[c].iloc[-1-n]
-        return float(a / b - 1) if b not in [0, np.nan] else np.nan
+        return change(a, b)
 
     out = {
         "social_accel": accel("posts_active"),
@@ -166,13 +179,15 @@ def feature_row(hist):
     social_components = [
         out["social_accel"], out["contributor_accel"], out["engagement_accel"]
     ]
-    social_strength = np.nanmean([x for x in social_components if pd.notna(x)])
+    valid_social = [x for x in social_components if pd.notna(x)]
+    social_strength = np.mean(valid_social) if valid_social else np.nan
     out["social_price_divergence"] = (
         social_strength - max(0.0, out["price_change_7d"] or 0.0)
         if pd.notna(social_strength) and pd.notna(out["price_change_7d"])
         else np.nan
     )
 
+    out.update(coverage(h, as_of))
     return out
 
 
@@ -180,7 +195,7 @@ def zscore_series(s):
     s = pd.to_numeric(s, errors="coerce")
     std = s.std(ddof=0)
     if not np.isfinite(std) or std == 0:
-        return pd.Series(0.0, index=s.index)
+        return pd.Series(0.0, index=s.index).where(s.notna())
     return (s - s.mean()) / std
 
 
@@ -198,9 +213,20 @@ def score_candidates(df, cfg):
         "galaxy_score_change": 0.05,
     }
 
+    for col in REQUIRED_FEATURES:
+        if col not in out:
+            out[col] = np.nan
+        out[col] = pd.to_numeric(out[col], errors="coerce").replace([np.inf, -np.inf], np.nan)
+    out["missing_features"] = out.apply(
+        lambda row: ",".join(c for c in REQUIRED_FEATURES if pd.isna(row[c])), axis=1)
+    complete = out["missing_features"].eq("")
+    if "history_complete_30d" in out:
+        complete &= out["history_complete_30d"].fillna(False).astype(bool)
+    out["data_status"] = np.where(complete, "COMPLETE", "INSUFFICIENT DATA")
+    # Only complete candidates define cross-sectional normalization.
     score = 0
     for col, weight in feature_weights.items():
-        z = zscore_series(out[col])
+        z = zscore_series(out.loc[complete, col]).reindex(out.index)
         # Logistic-like normalization: 0..100, robust to outliers.
         component = 50 + 15 * z.clip(-3, 3)
         out[f"{col}_score"] = component
@@ -209,21 +235,23 @@ def score_candidates(df, cfg):
     # Historical returns are fractions: 0.30 means a 30% gain.
     # Convert to percentage points before applying score-point penalties.
     out["extension_penalty"] = (
-        out["price_change_7d"].clip(lower=0).fillna(0) * 100 * 0.35
+        out["price_change_7d"].clip(lower=0) * 100 * 0.35
     ).clip(upper=25)
 
     # Penalize extreme recent spam growth, but only modestly.
     out["spam_penalty"] = (
-        out["spam_change"].clip(lower=0).fillna(0) * 5
+        out["spam_change"].clip(lower=0) * 5
     ).clip(upper=10)
 
     out["breakout_score"] = (
         score - out["extension_penalty"] - out["spam_penalty"]
-    ).clip(0, 100)
+    ).clip(0, 100).where(complete)
 
     def stage(row):
         s = row["breakout_score"]
         p = row.get("price_change_7d", np.nan)
+        if not np.isfinite(s):
+            return "INSUFFICIENT DATA"
         if s >= 75 and pd.notna(p) and p < 0.15:
             return "PRE-BREAKOUT"
         if s >= 65:
@@ -235,7 +263,7 @@ def score_candidates(df, cfg):
         return "WEAK"
 
     out["stage"] = out.apply(stage, axis=1)
-    return out.sort_values("breakout_score", ascending=False)
+    return out.sort_values("breakout_score", ascending=False, kind="stable", na_position="last")
 
 
 def main():
@@ -252,6 +280,7 @@ def main():
     data_dir.mkdir(exist_ok=True)
     report_dir.mkdir(exist_ok=True)
 
+    as_of = pd.Timestamp.now(tz="UTC")
     client = LunarCrushClient(
         base_url=cfg["base_url"],
         rpm=cfg["requests_per_minute"],
@@ -261,45 +290,55 @@ def main():
     universe = fetch_universe(client, cfg)
     universe.to_csv(data_dir / "universe_latest.csv", index=False)
 
-    candidates = snapshot_filter(universe, cfg)
+    eligible_universe = annotate_assets(snapshot_filter(universe, cfg, include_excluded=True))
+    configured = eligible_universe["symbol"].str.upper().isin(set(cfg["universe"]["exclude_symbols"]))
+    eligible_universe.loc[configured, "ranking_eligible"] = False
+    eligible_universe.loc[configured & eligible_universe.asset_type.eq("unclassified_crypto"), "asset_type"] = "configured_exclusion"
+    separated = eligible_universe[~eligible_universe.ranking_eligible].copy()
+    separated["stage"] = "SEPARATE ASSET TYPE"
+    separated["breakout_score"] = np.nan
+    separated.to_csv(report_dir / "separated_assets.csv", index=False)
+    separated.to_json(report_dir / "separated_assets.json", orient="records", date_format="iso")
+    candidates = snapshot_filter(eligible_universe[eligible_universe.ranking_eligible], cfg)
     n_hist = int(cfg["funnel"]["historical_candidates"])
     candidates = candidates.head(n_hist).copy()
 
     feature_rows = []
     for _, row in candidates.iterrows():
         coin_id = row["id"]
+        metadata = {"id": coin_id, "symbol": row.get("symbol"), "name": row.get("name"),
+                    "asset_type": row.get("asset_type"), "ranking_eligible": True,
+                    "market_cap": row.get("market_cap"), "snapshot_score": row.get("snapshot_score"),
+                    "volume_24h_snapshot": row.get("volume_24h")}
         try:
-            hist = fetch_history(client, coin_id, cfg)
-            if hist.empty:
-                continue
+            fresh = fetch_history(client, coin_id, cfg)
+            if fresh.empty:
+                raise ValueError("empty history response")
             history_path = data_dir / f"history_{coin_id}.csv"
-            if history_path.exists():
-                previous = pd.read_csv(history_path)
-                previous["time"] = pd.to_datetime(previous["time"], utc=True)
-                hist = pd.concat([previous, hist], ignore_index=True)
-                hist = hist.sort_values("time").drop_duplicates("time", keep="last")
+            previous = pd.read_csv(history_path) if history_path.exists() else fresh.iloc[:0]
+            hist = merge_history(previous, fresh)
             hist.to_csv(history_path, index=False)
-
-            features = feature_row(hist)
-            if features:
-                features.update({
-                    "id": coin_id,
-                    "symbol": row.get("symbol"),
-                    "name": row.get("name"),
-                    "market_cap": row.get("market_cap"),
-                    "snapshot_score": row.get("snapshot_score"),
-                    "volume_24h_snapshot": row.get("volume_24h"),
-                })
-                feature_rows.append(features)
+            features = feature_row(hist, as_of=as_of)
+            if features is None:
+                features = {"history_complete_30d": False,
+                            "history_missing_fields": json.dumps({"usable_history": 30}),
+                            "history_error": "fewer than 10 completed daily bars"}
+            feature_rows.append({**features, **metadata})
         except Exception as exc:
-            print(f"[WARN] {row.get('symbol')} failed: {exc}")
+            print(f"[WARN] {row.get('symbol')} history unavailable: {type(exc).__name__}")
+            feature_rows.append({**metadata, "history_complete_30d": False,
+                                 "history_missing_fields": json.dumps({"history_unavailable": 30}),
+                                 "history_error": type(exc).__name__})
 
     if not feature_rows:
-        raise RuntimeError("No historical candidate data was returned.")
+        raise RuntimeError("No eligible historical candidates after filtering.")
 
-    result = score_candidates(pd.DataFrame(feature_rows), cfg)
+    all_results = score_candidates(pd.DataFrame(feature_rows), cfg)
     top_n = args.top or int(cfg["funnel"]["finalists"])
-    result = result.head(top_n)
+    result = all_results[all_results.data_status.eq("COMPLETE")].head(top_n).copy()
+    all_results.to_csv(report_dir / "radar_candidates.csv", index=False)
+    all_results.to_json(report_dir / "radar_candidates.json", orient="records", date_format="iso")
+    write_coverage(report_dir, all_results, result, separated, as_of)
 
     result.to_csv(report_dir / "breakout_radar.csv", index=False)
     result.to_json(report_dir / "breakout_radar.json", orient="records", date_format="iso")
