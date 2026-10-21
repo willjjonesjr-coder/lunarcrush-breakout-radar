@@ -1,0 +1,31 @@
+{
+  "as_of": "2026-10-21T23:37:00.669682+00:00",
+  "history_candidates": 91,
+  "data_status_counts": {
+    "COMPLETE": 83,
+    "INSUFFICIENT DATA": 8
+  },
+  "scored_candidates": 83,
+  "finalists": 15,
+  "separated_assets": 15,
+  "missing_feature_counts": {
+    "sentiment_change": 5,
+    "spam_change": 6,
+    "engagement_daily_accel": 1
+  },
+  "history_missing_field_counts": {
+    "sentiment": 7,
+    "spam": 8,
+    "contributors_active": 2,
+    "interactions": 2,
+    "posts_active": 2,
+    "social_dominance": 2
+  },
+  "daily_spike_counts": {
+    "NONE": 74,
+    "ENGAGEMENT": 11,
+    "VOLUME + ENGAGEMENT": 3,
+    "VOLUME": 2,
+    "INSUFFICIENT DATA": 1
+  }
+}
