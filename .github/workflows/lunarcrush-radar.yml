@@ -8,7 +8,7 @@ on:
         required: false
         default: "15"
   schedule:
-    - cron: "0 7 * * *"
+    - cron: "0 21 * * *"
       timezone: "America/New_York"
 permissions:
   contents: write
