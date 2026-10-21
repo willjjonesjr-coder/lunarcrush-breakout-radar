@@ -20,8 +20,8 @@
     ]
   },
   "funnel": {
-    "snapshot_candidates": 100,
-    "historical_candidates": 60,
+    "snapshot_candidates": 450,
+    "historical_candidates": 300,
     "finalists": 15
   },
   "history": {
@@ -45,6 +45,6 @@
   },
   "daily_spikes": {
     "score_share": 0.5,
-    "flag_multiple": 2.0
+    "flag_multiple": 2
   }
 }
