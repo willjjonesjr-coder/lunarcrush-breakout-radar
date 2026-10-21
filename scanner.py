@@ -5,6 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from daily_spikes import classify_spike, daily_comparisons, latest_spikes
 from lunarcrush_client import LunarCrushClient
 from radar_quality import (REQUIRED_FEATURES, annotate_assets, coverage, daily_history,
                            merge_history, write_coverage)
@@ -187,6 +188,7 @@ def feature_row(hist, as_of=None):
         else np.nan
     )
 
+    out.update(latest_spikes(h, as_of))
     out.update(coverage(h, as_of))
     return out
 
@@ -213,12 +215,24 @@ def score_candidates(df, cfg):
         "galaxy_score_change": 0.05,
     }
 
-    for col in REQUIRED_FEATURES:
+    spike_cfg = cfg.get("daily_spikes", {})
+    daily_share = float(spike_cfg.get("score_share", 0.5))
+    threshold = float(spike_cfg.get("flag_multiple", 2.0))
+    if not 0 <= daily_share <= 1 or not np.isfinite(threshold) or threshold <= 1:
+        raise ValueError("daily_spikes requires score_share in [0,1] and flag_multiple > 1")
+    # Preserve each signal family's total weight, splitting it between trend and spike.
+    for trend, daily in [("volume_accel", "volume_daily_accel"),
+                         ("engagement_accel", "engagement_daily_accel")]:
+        weight = feature_weights[trend]
+        feature_weights[trend] = weight * (1-daily_share)
+        feature_weights[daily] = weight * daily_share
+    required = REQUIRED_FEATURES + ("volume_daily_accel", "engagement_daily_accel")
+    for col in required:
         if col not in out:
             out[col] = np.nan
         out[col] = pd.to_numeric(out[col], errors="coerce").replace([np.inf, -np.inf], np.nan)
     out["missing_features"] = out.apply(
-        lambda row: ",".join(c for c in REQUIRED_FEATURES if pd.isna(row[c])), axis=1)
+        lambda row: ",".join(c for c in required if pd.isna(row[c])), axis=1)
     complete = out["missing_features"].eq("")
     if "history_complete_30d" in out:
         complete &= out["history_complete_30d"].fillna(False).astype(bool)
@@ -263,6 +277,9 @@ def score_candidates(df, cfg):
         return "WEAK"
 
     out["stage"] = out.apply(stage, axis=1)
+    out["daily_spike_flag"] = out.apply(lambda row: classify_spike(row, threshold), axis=1)
+    out["daily_spike_flag_multiple"] = threshold
+    out["daily_spike_score_share"] = daily_share
     return out.sort_values("breakout_score", ascending=False, kind="stable", na_position="last")
 
 
@@ -304,6 +321,7 @@ def main():
     candidates = candidates.head(n_hist).copy()
 
     feature_rows = []
+    daily_rows = []
     for _, row in candidates.iterrows():
         coin_id = row["id"]
         metadata = {"id": coin_id, "symbol": row.get("symbol"), "name": row.get("name"),
@@ -318,6 +336,10 @@ def main():
             previous = pd.read_csv(history_path) if history_path.exists() else fresh.iloc[:0]
             hist = merge_history(previous, fresh)
             hist.to_csv(history_path, index=False)
+            comparisons = daily_comparisons(hist, as_of)
+            comparisons["id"] = coin_id
+            comparisons["symbol"] = row.get("symbol")
+            daily_rows.append(comparisons)
             features = feature_row(hist, as_of=as_of)
             if features is None:
                 features = {"history_complete_30d": False,
@@ -334,6 +356,10 @@ def main():
         raise RuntimeError("No eligible historical candidates after filtering.")
 
     all_results = score_candidates(pd.DataFrame(feature_rows), cfg)
+    daily_report = pd.concat(daily_rows, ignore_index=True) if daily_rows else daily_comparisons(
+        pd.DataFrame(columns=["time"]), as_of)
+    daily_report.to_csv(report_dir / "daily_spike_history.csv", index=False)
+    daily_report.to_json(report_dir / "daily_spike_history.json", orient="records", date_format="iso")
     top_n = args.top or int(cfg["funnel"]["finalists"])
     result = all_results[all_results.data_status.eq("COMPLETE")].head(top_n).copy()
     all_results.to_csv(report_dir / "radar_candidates.csv", index=False)
@@ -347,7 +373,8 @@ def main():
         "symbol", "name", "breakout_score", "stage",
         "social_accel", "contributor_accel", "engagement_accel",
         "sentiment_change", "social_dominance_change",
-        "volume_accel", "price_change_7d", "social_price_divergence"
+        "volume_accel", "volume_daily_accel", "engagement_daily_accel",
+        "daily_spike_flag", "price_change_7d", "social_price_divergence"
     ]
     print(result[[c for c in cols if c in result]].to_string(index=False))
 

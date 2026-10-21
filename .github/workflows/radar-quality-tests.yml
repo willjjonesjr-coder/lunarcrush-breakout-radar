@@ -4,6 +4,9 @@ on:
     paths:
       - 'scanner.py'
       - 'radar_quality.py'
+      - 'daily_spikes.py'
+      - 'config.json'
+      - 'tests/test_daily_spikes.py'
       - 'tests/test_radar_quality.py'
       - '.github/workflows/lunarcrush-radar.yml'
       - '.github/workflows/radar-quality-tests.yml'
@@ -20,3 +23,4 @@ jobs:
           python-version: '3.12'
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p 'test_radar_quality.py' -v
+      - run: python -m unittest discover -s tests -p 'test_daily_spikes.py' -v
