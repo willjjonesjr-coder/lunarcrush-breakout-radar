@@ -1,4 +1,4 @@
-"""Point-in-time comparison of production spike weights; research only."""
+"""Point-in-time comparison of production spike weights; research only.\n\nThe zero-weight variant retains production data-eligibility requirements and\nis not an exact reconstruction of the historical pre-spike scanner.\n"""
 import argparse
 import json
 from pathlib import Path
@@ -61,7 +61,7 @@ def run(args):
             ranked["period"] = "holdout" if day >= split else "development"
             ranked["rank_on_day"] = ranked["breakout_score"].rank(ascending=False, method="first")
             scored.append(ranked[["coin_id", "time", "model", "period", "breakout_score", "rank_on_day", "daily_spike_flag", *[f"return_{h}d" for h in HORIZONS]]])
-    data = pd.concat(scored, ignore_index=True)
+    data = pd.concat(scored, ignore_index=True)\n    # Daily ranks are assigned before forward-return availability is considered.
     data.to_csv(out / "spike_calibration_events.csv", index=False)
     summary = []
     for (model, period), group in data.groupby(["model", "period"]):
@@ -82,7 +82,7 @@ def run(args):
     pd.DataFrame(summary).to_csv(out / "spike_calibration_summary.csv", index=False)
     manifest = {"split_date": str(pd.Timestamp(split).date()), "models": MODELS,
         "horizons": HORIZONS, "signal_days": len(dates), "coins": events.coin_id.nunique(),
-        "limitations": ["Survivorship/selection bias: only saved histories", "Overlapping signals",
+        "limitations": ["Zero-weight model retains production daily-spike data eligibility", "Survivorship/selection bias: only saved histories", "Overlapping signals",
             "No fees, slippage, or trade execution simulation", "Historical data may be revised",
             "Historical cross-sectional universe differs from live snapshot funnel",
             "Holdout is chronological, but model variants were preselected"]}
