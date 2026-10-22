@@ -9,7 +9,9 @@ LABELS = {
  'market_regime_score':'Market regime score', 'market_regime_classification':'Market regime',
  'market_regime_coverage':'Regime data coverage', 'market_regime_change_7d':'Regime score change: 7 days',
  'market_regime_status':'Regime availability',
- 'symbol':'Coin', 'name':'Name', 'breakout_score':'Breakout score', 'stage':'Stage',
+ 'market_cap_label':'Market-cap label', 'liquidity_label':'Volume label',
+ 'price_extension_label':'7-day extension label', 'history_selection':'History processing',
+ 'finalist_label':'Highlight label', 'symbol':'Coin', 'name':'Name', 'breakout_score':'Breakout score', 'stage':'Stage',
  'volume_daily_accel':'Volume: day vs prior 7 days',
  'engagement_daily_accel':'Engagement: day vs prior 7 days',
  'volume_spike_multiple':'Volume spike multiple', 'engagement_spike_multiple':'Engagement spike multiple',
@@ -32,10 +34,10 @@ PERCENT = {'market_regime_coverage','volume_daily_accel','engagement_daily_accel
  'fundamentals_fees_growth_30d','fundamentals_revenue_growth_30d',
  'fundamentals_holder_revenue_growth_30d','fundamentals_holder_capture_30d',
  'fundamentals_circulating_to_total'}
-TEXT = {'market_regime_classification','market_regime_status','symbol','name','stage','fundamentals_status','fundamentals_confidence',
+TEXT = {'market_cap_label','liquidity_label','price_extension_label','history_selection','finalist_label','market_regime_classification','market_regime_status','symbol','name','stage','fundamentals_status','fundamentals_confidence',
         'daily_spike_flag','data_status','asset_type'}
 DEFAULT = ['symbol','name','breakout_score','volume_daily_accel','engagement_daily_accel',
-           'volume_accel','engagement_accel','price_change_7d','fundamentals_status']
+           'volume_accel','engagement_accel','price_change_7d','market_cap_label','liquidity_label','data_status','fundamentals_status']
 
 
 def read_rows(path):
@@ -54,7 +56,7 @@ def payload(reports):
     # Only finalists actually have the separately fetched fundamental assessment.
     candidates = [{**r, **{k:v for k,v in lookup.get(str(r.get('id')),{}).items()
                             if k.startswith('fundamentals_')}} for r in candidates]
-    groups = {'Finalists':finalists}
+    groups = {('Analyzed candidates' if any('finalist_label' in r for r in finalists) else 'Finalists'):finalists}
     if (reports/'radar_candidates.json').exists():groups['All candidates']=candidates
     if (reports/'separated_assets.json').exists():groups['Separated assets']=read_rows(reports/'separated_assets.json')
     rows = [r for group in groups.values() for r in group]

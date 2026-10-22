@@ -110,6 +110,7 @@ class RadarQualityTests(unittest.TestCase):
         universe = pd.DataFrame([
             {'id':1,'symbol':'EX','name':'Example'},
             {'id':2,'symbol':'FAIL','name':'Failure'},
+            {'id':3,'symbol':'WAIT','name':'Waiting'},
             {'id':53664,'symbol':'USDG','name':'Global Dollar'}])
         for c in ['market_cap','volume_24h','social_volume_24h','interactions_24h',
                   'social_dominance','sentiment','galaxy_score']:
@@ -117,7 +118,7 @@ class RadarQualityTests(unittest.TestCase):
         cfg = {'base_url':'unused','requests_per_minute':10,'daily_request_budget':2000,
                'universe':{'page_size':1000,'min_market_cap':0,'max_market_cap':1000,
                            'min_volume_24h':0,'max_7d_price_change':35,'exclude_symbols':[]},
-               'funnel':{'historical_candidates':60,'finalists':15}}
+               'funnel':{'historical_candidates':2,'finalists':15}}
         def fetch(client, coin_id, config):
             if coin_id == 2: raise ValueError('unavailable')
             self.assertEqual(coin_id, 1)
@@ -132,7 +133,8 @@ class RadarQualityTests(unittest.TestCase):
                 scanner.main()
             reports = Path(tmp,'reports')
             ranked = pd.read_json(reports/'breakout_radar.json')
-            self.assertEqual(ranked.symbol.tolist(), ['EX'])
+            self.assertEqual(ranked.symbol.tolist(), ['EX', 'FAIL'])
+            self.assertEqual(ranked.iloc[1].stage, 'INSUFFICIENT DATA')
             candidates = pd.read_json(reports/'radar_candidates.json')
             self.assertEqual(candidates[candidates.symbol=='FAIL'].iloc[0].stage,'INSUFFICIENT DATA')
             separated = pd.read_json(reports/'separated_assets.json')
@@ -140,6 +142,9 @@ class RadarQualityTests(unittest.TestCase):
             summary = json.loads((reports/'radar_coverage.json').read_text())
             self.assertEqual(summary['scored_candidates'],1)
             self.assertEqual(summary['history_candidates'],2)
+            self.assertEqual(summary['outside_history_budget'],1)
+            self.assertEqual(summary['visible_candidates'],3)
+            self.assertEqual(candidates[candidates.symbol=='WAIT'].iloc[0].stage,'NOT ANALYZED')
             self.assertEqual(summary['separated_assets'],1)
 
 

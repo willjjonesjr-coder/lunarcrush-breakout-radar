@@ -104,6 +104,28 @@ class FundamentalsTests(unittest.TestCase):
         self.assertEqual(out['fundamentals_defillama_slug'], 'example')
         self.assertIsNone(out['fundamentals_tvl_usd'])
 
+    def test_main_enriches_only_highlights_and_preserves_all_rows(self):
+        from unittest.mock import patch
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            reports=Path(tmp)/'reports';reports.mkdir()
+            data=Path(tmp)/'data'
+            rows=[{'id':1,'symbol':'ONE','breakout_score':60,'finalist_label':'TOP HIGHLIGHT'},
+                  {'id':2,'symbol':'TWO','breakout_score':None,'finalist_label':'UNSCORED'}]
+            (reports/'breakout_radar.json').write_text(json.dumps(rows))
+            source=type('Source',(),{'calls':0,'errors':[],'now':NOW})()
+            def enrich(selected,unused):
+                self.assertEqual(selected.id.tolist(),[1])
+                selected=selected.copy();selected['fundamentals_status']='MIXED'
+                return selected
+            with patch('fundamentals.Source',return_value=source), patch('fundamentals.enrich',side_effect=enrich), \
+                 patch('sys.argv',['fundamentals.py','--reports-dir',str(reports),'--data-dir',str(data)]):
+                f.main()
+            result=json.loads((reports/'breakout_radar.json').read_text())
+            self.assertEqual([r['id'] for r in result],[1,2])
+            self.assertEqual(result[1]['fundamentals_status'],'NOT ASSESSED')
+            self.assertIsNone(result[1]['breakout_score'])
+
     def test_budget_prevents_network(self):
         with tempfile.TemporaryDirectory() as cache, patch('fundamentals.requests.get') as get:
             source = f.Source(cache, now=NOW, budget=0)
