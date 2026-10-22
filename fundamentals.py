@@ -231,7 +231,17 @@ def main():
     # Strip a previous overlay if this is an on-demand rerun.
     radar = radar[[c for c in radar if not c.startswith('fundamentals_')]]
     source = Source(data / 'fundamentals_cache')
-    enriched = enrich(radar, source)
+    # The full analyzed table is visible; enrich only the highlighted budget.
+    if "finalist_label" in radar:
+        selected = radar[radar.finalist_label.eq("TOP HIGHLIGHT")].copy()
+        assessed = enrich(selected, source) if not selected.empty else selected
+        extra = [c for c in assessed if c.startswith("fundamentals_")]
+        enriched = radar.merge(assessed[["id"]+extra], on="id", how="left", validate="one_to_one") if extra else radar.copy()
+        for col in ["fundamentals_status", "fundamentals_confidence"]:
+            if col not in enriched: enriched[col] = None
+            enriched[col] = enriched[col].fillna("NOT ASSESSED")
+    else:
+        enriched = enrich(radar, source)
     report_time = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     snapshots = data / 'fundamentals_snapshots'
     snapshots.mkdir(parents=True, exist_ok=True)

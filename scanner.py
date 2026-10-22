@@ -55,14 +55,19 @@ def snapshot_filter(df, cfg, include_excluded=False):
         if c in out:
             out[c] = pd.to_numeric(out[c], errors="coerce").replace([np.inf, -np.inf], np.nan)
 
-    out = out[
-        (out["market_cap"] >= u["min_market_cap"]) &
-        (out["market_cap"] <= u["max_market_cap"]) &
-        (out["volume_24h"] >= u["min_volume_24h"])
-    ]
-
-    if "percent_change_7d" in out:
-        out = out[out["percent_change_7d"] <= u["max_7d_price_change"]]
+    # Thresholds describe assets; only asset type and explicit symbol rules exclude.
+    for col in ["market_cap", "volume_24h", "percent_change_7d"]:
+        if col not in out: out[col] = np.nan
+    out["market_cap_label"] = np.select(
+        [out.market_cap.isna(), out.market_cap < u["min_market_cap"],
+         out.market_cap > u["max_market_cap"]],
+        ["UNKNOWN", "BELOW MIN MARKET-CAP REFERENCE", "ABOVE MAX MARKET-CAP REFERENCE"], default="WITHIN REFERENCE RANGE")
+    out["liquidity_label"] = np.select(
+        [out.volume_24h.isna(), out.volume_24h < u["min_volume_24h"]],
+        ["UNKNOWN", "BELOW VOLUME REFERENCE"], default="AT OR ABOVE VOLUME REFERENCE")
+    out["price_extension_label"] = np.select(
+        [out.percent_change_7d.isna(), out.percent_change_7d > u["max_7d_price_change"]],
+        ["UNKNOWN", "ABOVE 7D GAIN REFERENCE"], default="WITHIN 7D GAIN REFERENCE")
 
     if "symbol" in out and not include_excluded:
         out = out[~out["symbol"].str.upper().isin(set(u["exclude_symbols"]))]
@@ -77,7 +82,7 @@ def snapshot_filter(df, cfg, include_excluded=False):
         pct_rank(out["galaxy_score"]) * 0.15
     ) * 100
 
-    return out.sort_values("snapshot_score", ascending=False)
+    return out.sort_values("snapshot_score", ascending=False, kind="stable")
 
 
 def pct_rank(s):
@@ -234,9 +239,9 @@ def score_candidates(df, cfg):
     out["missing_features"] = out.apply(
         lambda row: ",".join(c for c in required if pd.isna(row[c])), axis=1)
     complete = out["missing_features"].eq("")
-    if "history_complete_30d" in out:
-        complete &= out["history_complete_30d"].fillna(False).astype(bool)
-    out["data_status"] = np.where(complete, "COMPLETE", "INSUFFICIENT DATA")
+    full_history = out.get("history_complete_30d", pd.Series(True, index=out.index)).fillna(False).astype(bool)
+    out["data_status"] = np.select([~complete, ~full_history],
+                                    ["INSUFFICIENT DATA", "PARTIAL HISTORY"], default="COMPLETE")
     # Only complete candidates define cross-sectional normalization.
     score = 0
     for col, weight in feature_weights.items():
@@ -310,6 +315,7 @@ def main():
     eligible_universe = annotate_assets(snapshot_filter(universe, cfg, include_excluded=True))
     configured = eligible_universe["symbol"].str.upper().isin(set(cfg["universe"]["exclude_symbols"]))
     eligible_universe.loc[configured, "ranking_eligible"] = False
+    eligible_universe.loc[configured, "asset_type_reason"] = "explicit symbol exclusion"
     eligible_universe.loc[configured & eligible_universe.asset_type.eq("unclassified_crypto"), "asset_type"] = "configured_exclusion"
     separated = eligible_universe[~eligible_universe.ranking_eligible].copy()
     separated["stage"] = "SEPARATE ASSET TYPE"
@@ -327,7 +333,12 @@ def main():
         metadata = {"id": coin_id, "symbol": row.get("symbol"), "name": row.get("name"),
                     "asset_type": row.get("asset_type"), "ranking_eligible": True,
                     "market_cap": row.get("market_cap"), "snapshot_score": row.get("snapshot_score"),
-                    "volume_24h_snapshot": row.get("volume_24h")}
+                    "volume_24h_snapshot": row.get("volume_24h"),
+                    "percent_change_7d_snapshot": row.get("percent_change_7d"),
+                    "market_cap_label": row.get("market_cap_label"),
+                    "liquidity_label": row.get("liquidity_label"),
+                    "price_extension_label": row.get("price_extension_label"),
+                    "history_selection": "ANALYZED"}
         try:
             fresh = fetch_history(client, coin_id, cfg)
             if fresh.empty:
@@ -361,10 +372,31 @@ def main():
     daily_report.to_csv(report_dir / "daily_spike_history.csv", index=False)
     daily_report.to_json(report_dir / "daily_spike_history.json", orient="records", date_format="iso")
     top_n = args.top or int(cfg["funnel"]["finalists"])
-    result = all_results[all_results.data_status.eq("COMPLETE")].head(top_n).copy()
+    # All analyzed rows remain in the main report; top_n is a highlight only.
+    highlights = set(all_results[all_results.breakout_score.notna()].head(top_n).index)
+    all_results["finalist_label"] = ["TOP HIGHLIGHT" if i in highlights else
+                                    "UNSCORED" if pd.isna(row.breakout_score) else "OTHER ANALYZED"
+                                    for i,row in all_results.iterrows()]
+    result = all_results.copy()
+    waiting = eligible_universe[eligible_universe.ranking_eligible &
+                               ~eligible_universe.id.isin(candidates.id)].copy()
+    waiting = waiting[[c for c in ["id","symbol","name","market_cap","volume_24h",
+                                  "percent_change_7d","snapshot_score","asset_type",
+                                  "ranking_eligible","market_cap_label","liquidity_label",
+                                  "price_extension_label"] if c in waiting]]
+    waiting = waiting.rename(columns={"volume_24h":"volume_24h_snapshot",
+                                      "percent_change_7d":"percent_change_7d_snapshot"})
+    waiting["history_selection"] = "OUTSIDE HISTORY BUDGET"
+    waiting["data_status"] = "NOT ANALYZED"
+    waiting["stage"] = "NOT ANALYZED"
+    waiting["finalist_label"] = "NOT ANALYZED"
+    waiting["breakout_score"] = np.nan
+    waiting["missing_features"] = ""
+    waiting["history_missing_fields"] = "{}"
+    all_results = pd.concat([all_results, waiting], ignore_index=True)
     all_results.to_csv(report_dir / "radar_candidates.csv", index=False)
     all_results.to_json(report_dir / "radar_candidates.json", orient="records", date_format="iso")
-    write_coverage(report_dir, all_results, result, separated, as_of)
+    write_coverage(report_dir, all_results, result[result.finalist_label.eq("TOP HIGHLIGHT")], separated, as_of)
 
     result.to_csv(report_dir / "breakout_radar.csv", index=False)
     result.to_json(report_dir / "breakout_radar.json", orient="records", date_format="iso")

@@ -119,7 +119,9 @@ def coverage(h, as_of):
 def write_coverage(report_dir, all_rows, finalists, separated, as_of):
     statuses = all_rows['data_status'].value_counts().to_dict()
     summary = {'as_of': pd.Timestamp(as_of).isoformat(),
-               'history_candidates': len(all_rows), 'data_status_counts': {k:int(v) for k,v in statuses.items()},
+               'history_candidates': int(all_rows['history_selection'].eq('ANALYZED').sum()) if 'history_selection' in all_rows else len(all_rows),
+               'visible_candidates': len(all_rows),
+               'outside_history_budget': int(all_rows['history_selection'].eq('OUTSIDE HISTORY BUDGET').sum()) if 'history_selection' in all_rows else 0, 'data_status_counts': {k:int(v) for k,v in statuses.items()},
                'scored_candidates': int(all_rows['breakout_score'].notna().sum()),
                'finalists': len(finalists), 'separated_assets': len(separated),
                'missing_feature_counts': {}, 'history_missing_field_counts': {}}
