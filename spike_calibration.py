@@ -1,4 +1,8 @@
-"""Point-in-time comparison of production spike weights; research only.\n\nThe zero-weight variant retains production data-eligibility requirements and\nis not an exact reconstruction of the historical pre-spike scanner.\n"""
+"""Point-in-time comparison of production spike weights; research only.
+
+The zero-weight variant retains production data-eligibility requirements and
+is not an exact reconstruction of the historical pre-spike scanner.
+"""
 import argparse
 import json
 from pathlib import Path
@@ -61,7 +65,8 @@ def run(args):
             ranked["period"] = "holdout" if day >= split else "development"
             ranked["rank_on_day"] = ranked["breakout_score"].rank(ascending=False, method="first")
             scored.append(ranked[["coin_id", "time", "model", "period", "breakout_score", "rank_on_day", "daily_spike_flag", *[f"return_{h}d" for h in HORIZONS]]])
-    data = pd.concat(scored, ignore_index=True)\n    # Daily ranks are assigned before forward-return availability is considered.
+    data = pd.concat(scored, ignore_index=True)
+    # Daily ranks are assigned before forward-return availability is considered.
     data.to_csv(out / "spike_calibration_events.csv", index=False)
     summary = []
     for (model, period), group in data.groupby(["model", "period"]):
