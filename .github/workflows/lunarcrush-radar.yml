@@ -73,6 +73,33 @@ jobs:
         if: steps.start_date.outputs.run_scan == 'true'
         run: python sortable_report.py
 
+      - name: Publish compact fixed-path radar summary
+        if: steps.start_date.outputs.run_scan == 'true'
+        run: |
+          python - <<'PYTHON'
+          import csv
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports")
+          with (reports / "breakout_radar.csv").open(newline="") as source:
+              rows = list(csv.DictReader(source))
+          coverage = json.loads((reports / "radar_coverage.json").read_text())
+          regime = json.loads((reports / "market_regime_latest.json").read_text())
+          summary = {
+              "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+              "source": "reports/breakout_radar.csv",
+              "scoring_model": "production_50",
+              "coverage": coverage,
+              "market_regime": regime,
+              "finalists": rows[:15],
+          }
+          target = reports / "latest_radar.json"
+          target.write_text(json.dumps(summary, indent=2, allow_nan=False) + "\n")
+          print(f"Published {target} with {len(summary['finalists'])} finalists")
+          PYTHON
+
       - name: Archive today's radar
         if: steps.start_date.outputs.run_scan == 'true'
         shell: bash
@@ -132,6 +159,7 @@ jobs:
           path: |
             reports/breakout_radar.csv
             reports/breakout_radar.json
+            reports/latest_radar.json
             reports/radar_candidates.csv
             reports/radar_candidates.json
             reports/separated_assets.csv
