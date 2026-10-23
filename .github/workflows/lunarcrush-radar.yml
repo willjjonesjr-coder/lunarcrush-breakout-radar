@@ -96,7 +96,7 @@ jobs:
               "finalists": rows[:15],
           }
           target = reports / "latest_radar.json"
-          target.write_text(json.dumps(summary, indent=2, allow_nan=False) + "\\n")
+          target.write_text(json.dumps(summary, indent=2, allow_nan=False) + "\n")
           print(f"Published {target} with {len(summary['finalists'])} finalists")
           PYTHON
 
