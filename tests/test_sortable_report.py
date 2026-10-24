@@ -34,6 +34,19 @@ class SortableReportTests(unittest.TestCase):
             self.assertNotIn('/*__REPORT_DATA__*/',html)
             self.assertNotIn('/*__SORT_LOGIC__*/',html)
 
+    def test_liquidity_volume_proxy_does_not_change_raw_score(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp)
+            rows=[{'id':1,'breakout_score':80,'volume_24h_snapshot':60_000_000},
+                  {'id':2,'breakout_score':80,'volume_24h_snapshot':6_000_000},
+                  {'id':3,'breakout_score':80,'volume_24h_snapshot':600_000},
+                  {'id':4,'breakout_score':80}]
+            (p/'breakout_radar.json').write_text(json.dumps(rows))
+            output=payload(p)['groups']['Finalists']
+            self.assertEqual([r.get('liquidity_adjusted_score') for r in output], [80,72,60,None])
+            self.assertEqual([r['breakout_score'] for r in output], [80]*4)
+            self.assertEqual(output[-1]['liquidity_tier'], 'UNKNOWN')
+
     def test_empty_reports_generate_valid_view(self):
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp);(p/'breakout_radar.json').write_text('[]')
