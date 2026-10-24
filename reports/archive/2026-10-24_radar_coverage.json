@@ -1,0 +1,47 @@
+{
+  "as_of": "2026-10-24T05:30:20.552756+00:00",
+  "history_candidates": 300,
+  "visible_candidates": 5433,
+  "outside_history_budget": 5133,
+  "data_status_counts": {
+    "NOT ANALYZED": 5133,
+    "COMPLETE": 239,
+    "PARTIAL HISTORY": 43,
+    "INSUFFICIENT DATA": 18
+  },
+  "scored_candidates": 282,
+  "finalists": 15,
+  "separated_assets": 117,
+  "missing_feature_counts": {
+    "spam_change": 17,
+    "social_accel": 6,
+    "contributor_accel": 6,
+    "engagement_accel": 6,
+    "sentiment_change": 9,
+    "social_dominance_change": 6,
+    "volume_accel": 6,
+    "social_price_divergence": 6,
+    "galaxy_score_change": 6,
+    "price_change_7d": 6,
+    "volume_daily_accel": 6,
+    "engagement_daily_accel": 6
+  },
+  "history_missing_field_counts": {
+    "sentiment": 28,
+    "spam": 61,
+    "close": 14,
+    "contributors_active": 14,
+    "galaxy_score": 14,
+    "interactions": 14,
+    "posts_active": 14,
+    "social_dominance": 14,
+    "volume_24h": 14
+  },
+  "daily_spike_counts": {
+    "NONE": 195,
+    "ENGAGEMENT": 47,
+    "VOLUME": 31,
+    "VOLUME + ENGAGEMENT": 21,
+    "INSUFFICIENT DATA": 6
+  }
+}
