@@ -1,0 +1,24 @@
+{
+  "status": "AVAILABLE",
+  "as_of": "2026-10-23T00:00:00+00:00",
+  "expected_day": "2026-10-23T00:00:00+00:00",
+  "observed_at": "2026-10-24T05:29:09.730197+00:00",
+  "score": 64.5,
+  "classification": "mild bullish",
+  "trend_strength": 29.0,
+  "change_7d": -1.0,
+  "expected_assets": 20,
+  "available_assets": 20,
+  "coverage": 1.0,
+  "source": "kraken",
+  "model": "market_regime.py",
+  "sentiment_available": false,
+  "usage": "context only; candidate scores and eligibility unchanged",
+  "breadth_assets": 20,
+  "components": {
+    "trend": 83.33333333333333,
+    "breadth": 32.5,
+    "momentum": 58.60801015415298,
+    "participation": 70.19765390609183
+  }
+}
