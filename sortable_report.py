@@ -27,6 +27,9 @@ LABELS = {
  'engagement_prior_7d_avg':'Prior 7-day average interactions',
  'last_price':'Last price ($)', 'market_cap':'Market cap ($)',
  'volume_24h_snapshot':'Snapshot volume ($)',
+ 'liquidity_tier':'Liquidity tier (volume proxy)',
+ 'liquidity_adjusted_score':'Liquidity-adjusted score (volume proxy)',
+ 'liquidity_volume_factor':'Liquidity volume factor',
 }
 PERCENT = {'market_regime_coverage','volume_daily_accel','engagement_daily_accel','volume_accel','engagement_accel',
  'social_accel','contributor_accel','sentiment_change','social_dominance_change',
@@ -35,8 +38,8 @@ PERCENT = {'market_regime_coverage','volume_daily_accel','engagement_daily_accel
  'fundamentals_holder_revenue_growth_30d','fundamentals_holder_capture_30d',
  'fundamentals_circulating_to_total'}
 TEXT = {'market_cap_label','liquidity_label','price_extension_label','history_selection','finalist_label','market_regime_classification','market_regime_status','symbol','name','stage','fundamentals_status','fundamentals_confidence',
-        'daily_spike_flag','data_status','asset_type'}
-DEFAULT = ['symbol','name','breakout_score','volume_daily_accel','engagement_daily_accel',
+        'daily_spike_flag','data_status','asset_type','liquidity_tier'}
+DEFAULT = ['symbol','name','breakout_score','liquidity_adjusted_score','liquidity_tier','volume_daily_accel','engagement_daily_accel',
            'volume_accel','engagement_accel','price_change_7d','market_cap_label','liquidity_label','data_status','fundamentals_status']
 
 
@@ -49,6 +52,27 @@ def read_rows(path):
     return data
 
 
+def add_liquidity_proxy(row):
+    """Add a descriptive, volume-only ranking; do not alter production breakout_score."""
+    result = dict(row)
+    volume = result.get('volume_24h_snapshot')
+    score = result.get('breakout_score')
+    if isinstance(volume, (int, float)) and math.isfinite(volume) and volume >= 0:
+        if volume >= 50_000_000:
+            tier, factor = 'HIGH (volume proxy)', 1.0
+        elif volume >= 5_000_000:
+            tier, factor = 'MODERATE (volume proxy)', 0.9
+        else:
+            tier, factor = 'LOW (volume proxy)', 0.75
+        result['liquidity_tier'] = tier
+        result['liquidity_volume_factor'] = factor
+        if isinstance(score, (int, float)) and math.isfinite(score):
+            result['liquidity_adjusted_score'] = round(score * factor, 6)
+    else:
+        result['liquidity_tier'] = 'UNKNOWN'
+    return result
+
+
 def payload(reports):
     finalists = read_rows(reports/'breakout_radar.json')
     candidates = read_rows(reports/'radar_candidates.json')
@@ -59,6 +83,7 @@ def payload(reports):
     groups = {('Analyzed candidates' if any('finalist_label' in r for r in finalists) else 'Finalists'):finalists}
     if (reports/'radar_candidates.json').exists():groups['All candidates']=candidates
     if (reports/'separated_assets.json').exists():groups['Separated assets']=read_rows(reports/'separated_assets.json')
+    groups = {name: [add_liquidity_proxy(r) for r in group] for name, group in groups.items()}
     rows = [r for group in groups.values() for r in group]
     fields = dict.fromkeys(list(LABELS) + [k for r in rows for k,v in r.items()
                                           if type(v) in (int,float) and k not in ('id','fundamentals_version')])
