@@ -1,12 +1,12 @@
 {
   "status": "AVAILABLE",
-  "as_of": "2026-10-23T00:00:00+00:00",
-  "expected_day": "2026-10-23T00:00:00+00:00",
-  "observed_at": "2026-10-24T06:05:03.849210+00:00",
-  "score": 64.5,
-  "classification": "mild bullish",
-  "trend_strength": 29.0,
-  "change_7d": -1.0,
+  "as_of": "2026-10-24T00:00:00+00:00",
+  "expected_day": "2026-10-24T00:00:00+00:00",
+  "observed_at": "2026-10-25T06:09:22.146891+00:00",
+  "score": 58.6,
+  "classification": "consolidation",
+  "trend_strength": 17.2,
+  "change_7d": -6.499999999999993,
   "expected_assets": 20,
   "available_assets": 20,
   "coverage": 1.0,
@@ -16,9 +16,9 @@
   "usage": "context only; candidate scores and eligibility unchanged",
   "breadth_assets": 20,
   "components": {
-    "trend": 83.33333333333333,
-    "breadth": 32.5,
-    "momentum": 58.60801015415298,
-    "participation": 70.19765390609183
+    "trend": 66.66666666666666,
+    "breadth": 25.0,
+    "momentum": 54.54747674014528,
+    "participation": 68.02541225916873
   }
 }
