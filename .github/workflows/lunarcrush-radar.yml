@@ -148,11 +148,11 @@ jobs:
           from pathlib import Path
           p = json.loads(Path("reports/volume_surge_latest.json").read_text())
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
-              f.write("\\n## Market and sector volume (tracked-token proxies)\\n\\n")
-              f.write("Not comprehensive market spot volume; requires 7 comparable daily snapshots.\\n\\n")
+              f.write("\n## Market and sector volume (tracked-token proxies)\n\n")
+              f.write("Not comprehensive market spot volume; requires 7 comparable daily snapshots.\n\n")
               for row in p["segments"]:
                   f.write(f"- {row['segment']}: {row['classification']} | {row['status']} | "
-                          f"multiple {row['multiple'] if row['multiple'] is not None else 'N/A'}\\n")
+                          f"multiple {row['multiple'] if row['multiple'] is not None else 'N/A'}\n")
           PYTHON
 
       - name: Commit updated data and reports
