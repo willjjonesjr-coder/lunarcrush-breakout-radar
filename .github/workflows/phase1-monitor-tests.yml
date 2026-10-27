@@ -1,0 +1,26 @@
+name: Phase 1 volume and confirmation tests
+on:
+  push:
+    paths:
+      - "phase1_monitor.py"
+      - "tests/test_phase1_monitor.py"
+      - ".github/workflows/phase1-monitor-tests.yml"
+  pull_request:
+    paths:
+      - "phase1_monitor.py"
+      - "tests/test_phase1_monitor.py"
+      - ".github/workflows/phase1-monitor-tests.yml"
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: python -m unittest discover -s tests -p test_phase1_monitor.py -v
+      - name: Syntax check
+        run: python -m py_compile phase1_monitor.py sortable_report.py
