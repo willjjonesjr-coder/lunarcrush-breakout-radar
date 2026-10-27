@@ -27,6 +27,8 @@ LABELS = {
  'engagement_prior_7d_avg':'Prior 7-day average interactions',
  'last_price':'Last price ($)', 'market_cap':'Market cap ($)',
  'volume_24h_snapshot':'Snapshot volume ($)',
+ 'confirmation_label':'Breakout confirmation',
+ 'confirmation_blockers':'Confirmation cautions',
  'liquidity_tier':'Liquidity tier (volume proxy)',
  'liquidity_adjusted_score':'Liquidity-adjusted score (volume proxy)',
  'liquidity_volume_factor':'Liquidity volume factor',
@@ -38,8 +40,8 @@ PERCENT = {'market_regime_coverage','volume_daily_accel','engagement_daily_accel
  'fundamentals_holder_revenue_growth_30d','fundamentals_holder_capture_30d',
  'fundamentals_circulating_to_total'}
 TEXT = {'market_cap_label','liquidity_label','price_extension_label','history_selection','finalist_label','market_regime_classification','market_regime_status','symbol','name','stage','fundamentals_status','fundamentals_confidence',
-        'daily_spike_flag','data_status','asset_type','liquidity_tier'}
-DEFAULT = ['symbol','name','breakout_score','liquidity_adjusted_score','liquidity_tier','volume_daily_accel','engagement_daily_accel',
+        'daily_spike_flag','data_status','asset_type','liquidity_tier','confirmation_label','confirmation_blockers'}
+DEFAULT = ['symbol','name','breakout_score','confirmation_label','liquidity_adjusted_score','liquidity_tier','volume_daily_accel','engagement_daily_accel',
            'volume_accel','engagement_accel','price_change_7d','market_cap_label','liquidity_label','data_status','fundamentals_status']
 
 
