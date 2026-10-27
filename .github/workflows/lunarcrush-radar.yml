@@ -69,6 +69,10 @@ jobs:
         timeout-minutes: 8
         run: python production_regime.py
 
+      - name: Evaluate sector volume proxies and breakout confirmations
+        if: steps.start_date.outputs.run_scan == 'true'
+        run: python phase1_monitor.py
+
       - name: Build sortable results view
         if: steps.start_date.outputs.run_scan == 'true'
         run: python sortable_report.py
@@ -108,7 +112,7 @@ jobs:
           DAY=$(date -u +%Y-%m-%d)
           cp reports/breakout_radar.csv "reports/archive/breakout_radar_${DAY}.csv"
           cp reports/breakout_radar.json "reports/archive/breakout_radar_${DAY}.json"
-          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json daily_spike_history.csv daily_spike_history.json radar_sortable.html market_regime.csv market_regime_latest.json market_regime_inventory.csv; do
+          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json daily_spike_history.csv daily_spike_history.json volume_surge_latest.json radar_sortable.html market_regime.csv market_regime_latest.json market_regime_inventory.csv; do
             cp "reports/$REPORT" "reports/archive/${DAY}_${REPORT}"
           done
 
@@ -134,6 +138,21 @@ jobs:
               report.write(f"{regime['classification']} | Score: {regime['score']} / 100 | "
                            f"Coverage: {regime['available_assets']}/{regime['expected_assets']} | "
                            f"As of: {regime['as_of'] or 'unavailable'}\n")
+          PYTHON
+
+      - name: Summarize market and sector volume snapshots
+        if: steps.start_date.outputs.run_scan == 'true'
+        run: |
+          python - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          p = json.loads(Path("reports/volume_surge_latest.json").read_text())
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+              f.write("\\n## Market and sector volume (tracked-token proxies)\\n\\n")
+              f.write("Not comprehensive market spot volume; requires 7 comparable daily snapshots.\\n\\n")
+              for row in p["segments"]:
+                  f.write(f"- {row['segment']}: {row['classification']} | {row['status']} | "
+                          f"multiple {row['multiple'] if row['multiple'] is not None else 'N/A'}\\n")
           PYTHON
 
       - name: Commit updated data and reports
@@ -167,6 +186,7 @@ jobs:
             reports/radar_coverage.json
             reports/daily_spike_history.csv
             reports/daily_spike_history.json
+            reports/volume_surge_latest.json
             reports/radar_sortable.html
             reports/market_regime.csv
             reports/market_regime_latest.json
