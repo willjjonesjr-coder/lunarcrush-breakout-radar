@@ -1,0 +1,127 @@
+{
+  "as_of": "2026-10-27",
+  "baseline_days": [
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23",
+    "2026-10-24",
+    "2026-10-25",
+    "2026-10-26"
+  ],
+  "data_source": "LunarCrush coin-list snapshots (reported 24h volume)",
+  "scope_warning": "Tracked-universe and named-sector baskets are NOT comprehensive market spot volume, nor deduplicated exchange trade volume.",
+  "alert_policy": "Review-only. Notify only after independent verification; no automated notifications.",
+  "segments": [
+    {
+      "segment": "Tracked universe proxy",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    },
+    {
+      "segment": "BTC",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    },
+    {
+      "segment": "ETH",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    },
+    {
+      "segment": "DeFi basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    },
+    {
+      "segment": "AI basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    },
+    {
+      "segment": "NFT/Gaming basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    },
+    {
+      "segment": "Layer 1 basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    },
+    {
+      "segment": "Layer 2 basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    },
+    {
+      "segment": "Memecoin basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    },
+    {
+      "segment": "RWA basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT"
+    }
+  ]
+}
