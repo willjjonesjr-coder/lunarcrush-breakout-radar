@@ -10,6 +10,7 @@ import json
 import math
 from datetime import datetime, timezone
 from pathlib import Path
+from phase2_safeguards import by_id, vetted_sector_segments, technical_confirmation, notification_readiness
 
 SECTORS = {
     "DeFi basket": ["UNI", "AAVE", "MKR", "COMP", "CRV", "SNX", "SUSHI", "JST", "DYDX", "LDO"],
@@ -134,10 +135,32 @@ def run(reports, data, as_of=None):
     today = date.fromisoformat(as_of)
     days = [(today - timedelta(days=d)).isoformat() for d in range(7, 0, -1)]
     segments = segment_snapshot(latest)
+    # Existing symbol baskets remain visible as research-only, not validated alerts.
+    # New explicitly approved coin-ID baskets are tracked independently.
+    registry = Path("config/sector_coin_ids.json")
+    memberships = json.loads(registry.read_text()) if registry.exists() else {}
+    id_history_path = data / "volume_snapshot_history_by_id.json"
+    id_history = json.loads(id_history_path.read_text()) if id_history_path.exists() else {}
+    with (data / "universe_latest.csv").open(newline="") as f:
+        id_latest = by_id(csv.DictReader(f))
+    id_history[as_of] = id_latest
+    id_history = dict(sorted(id_history.items())[-40:])
+    id_history_path.write_text(json.dumps(id_history, sort_keys=True, indent=2) + "\\n")
+    id_segments = vetted_sector_segments(id_latest, memberships)
     observations = []
     for name, current in segments.items():
         past = [segment_snapshot(history[d])[name] for d in days] if all(d in history for d in days) else []
         observations.append(evaluate_segment(name, current, past))
+    for name, current in id_segments.items():
+        prior = [vetted_sector_segments(id_history[d], memberships)[name]
+                 for d in days] if all(d in id_history for d in days) else []
+        observation = evaluate_segment(name + " (vetted IDs)", current, prior)
+        observation["membership_source"] = "config/sector_coin_ids.json"
+        observations.append(observation)
+    for observation in observations:
+        observation["notification_readiness"] = notification_readiness(observation)
+        if "(vetted IDs)" not in observation["segment"]:
+            observation["coverage_note"] = "Unverified symbol basket or non-spot market proxy"
     volume_report = {"as_of": as_of, "baseline_days": days,
                      "data_source": "LunarCrush coin-list snapshots (reported 24h volume)",
                      "scope_warning": "Tracked-universe and named-sector baskets are NOT comprehensive market spot volume, nor deduplicated exchange trade volume.",
@@ -156,8 +179,13 @@ def run(reports, data, as_of=None):
         fields = list(reader.fieldnames)
     for col in ("confirmation_label", "confirmation_blockers"):
         if col not in fields: fields.append(col)
+    for col in ("technical_status", "technical_reasons", "ema50", "ema100", "ema200"):
+        if col not in fields: fields.append(col)
     for row in old:
         row["confirmation_label"], row["confirmation_blockers"] = confirmation(row)
+        info = technical_confirmation(data / f"history_{row.get('id')}.csv", today)
+        row.update(info)
+        row["confirmation_label"] += " / " + info["technical_status"]
     with c.open("w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
