@@ -4,11 +4,17 @@ on:
     paths:
       - "phase1_monitor.py"
       - "tests/test_phase1_monitor.py"
+      - "phase2_safeguards.py"
+      - "tests/test_phase2_safeguards.py"
+      - "config/sector_coin_ids.json"
       - ".github/workflows/phase1-monitor-tests.yml"
   pull_request:
     paths:
       - "phase1_monitor.py"
       - "tests/test_phase1_monitor.py"
+      - "phase2_safeguards.py"
+      - "tests/test_phase2_safeguards.py"
+      - "config/sector_coin_ids.json"
       - ".github/workflows/phase1-monitor-tests.yml"
 permissions:
   contents: read
@@ -21,6 +27,8 @@ jobs:
         with:
           python-version: "3.12"
       - name: Unit tests
-        run: python -m unittest discover -s tests -p test_phase1_monitor.py -v
+        run: |
+          python -m unittest discover -s tests -p test_phase1_monitor.py -v
+          python -m unittest discover -s tests -p test_phase2_safeguards.py -v
       - name: Syntax check
-        run: python -m py_compile phase1_monitor.py sortable_report.py
+        run: python -m py_compile phase1_monitor.py phase2_safeguards.py sortable_report.py
