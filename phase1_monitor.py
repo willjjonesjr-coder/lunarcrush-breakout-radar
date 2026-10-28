@@ -145,7 +145,7 @@ def run(reports, data, as_of=None):
         id_latest = by_id(csv.DictReader(f))
     id_history[as_of] = id_latest
     id_history = dict(sorted(id_history.items())[-40:])
-    id_history_path.write_text(json.dumps(id_history, sort_keys=True, indent=2) + "\\n")
+    id_history_path.write_text(json.dumps(id_history, sort_keys=True, indent=2) + "\n")
     id_segments = vetted_sector_segments(id_latest, memberships)
     observations = []
     for name, current in segments.items():
@@ -171,6 +171,9 @@ def run(reports, data, as_of=None):
     rows = json.loads(p.read_text())
     for row in rows:
         row["confirmation_label"], row["confirmation_blockers"] = confirmation(row)
+        info = technical_confirmation(data / f"history_{row.get('id')}.csv", today)
+        row.update(info)
+        row["confirmation_label"] += " / " + info["technical_status"]
     p.write_text(json.dumps(rows, allow_nan=False) + "\n")
     c = reports / "breakout_radar.csv"
     with c.open(newline="") as f:
