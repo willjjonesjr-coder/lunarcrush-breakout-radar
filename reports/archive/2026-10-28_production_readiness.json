@@ -1,0 +1,71 @@
+{
+  "as_of": "2026-10-28",
+  "baseline": {
+    "required_dates": [
+      "2026-10-21",
+      "2026-10-22",
+      "2026-10-23",
+      "2026-10-24",
+      "2026-10-25",
+      "2026-10-26",
+      "2026-10-27"
+    ],
+    "present_dates": [
+      "2026-10-27"
+    ],
+    "missing_dates": [
+      "2026-10-21",
+      "2026-10-22",
+      "2026-10-23",
+      "2026-10-24",
+      "2026-10-25",
+      "2026-10-26"
+    ],
+    "ready": false,
+    "ready_segments": [],
+    "blocked_segments": {
+      "Tracked universe proxy": "INSUFFICIENT BASELINE",
+      "BTC": "INSUFFICIENT BASELINE",
+      "ETH": "INSUFFICIENT BASELINE",
+      "DeFi basket": "INSUFFICIENT BASELINE",
+      "AI basket": "INSUFFICIENT BASELINE",
+      "NFT/Gaming basket": "INSUFFICIENT BASELINE",
+      "Layer 1 basket": "INSUFFICIENT BASELINE",
+      "Layer 2 basket": "INSUFFICIENT BASELINE",
+      "Memecoin basket": "INSUFFICIENT BASELINE",
+      "RWA basket": "INSUFFICIENT BASELINE",
+      "DeFi basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "AI basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "NFT/Gaming basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "Layer 1 basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "Layer 2 basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "Memecoin basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "RWA basket (vetted IDs)": "INSUFFICIENT BASELINE"
+    },
+    "note": "Do not synthesize missing snapshots from 24h rolling volumes or historical coin candles."
+  },
+  "history": {
+    "attempted": 300,
+    "complete": 216,
+    "partial": 55,
+    "insufficient": 29,
+    "complete_pct": 72.0,
+    "missing_fields": {
+      "spam": 82,
+      "sentiment": 45,
+      "close": 18,
+      "contributors_active": 22,
+      "galaxy_score": 20,
+      "interactions": 22,
+      "posts_active": 22,
+      "social_dominance": 22,
+      "volume_24h": 18
+    }
+  },
+  "next_actions": [
+    "Collect one UTC-dated snapshot daily until seven preceding dates are present.",
+    "Audit missing spam, sentiment, and social-history fields before increasing the API budget.",
+    "Validate coin IDs and reported-volume provenance before enabling automated alerts.",
+    "Do not interpret a successful workflow as a confirmed breakout."
+  ]
+}
