@@ -1,0 +1,1757 @@
+{
+  "total_incomplete": 62,
+  "suggested_review_limit": 50,
+  "review_first": [
+    {
+      "id": "159239",
+      "symbol": "BLESS",
+      "name": "Bless Token",
+      "snapshot_score": 91.605,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "162052",
+      "symbol": "PIEVERSE",
+      "name": "Pieverse",
+      "snapshot_score": 91.419,
+      "gap_count": 6,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 6
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163834",
+      "symbol": "REBATE",
+      "name": "REBATE",
+      "snapshot_score": 91.187,
+      "gap_count": 247,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 28,
+        "contributors_active": 27,
+        "galaxy_score": 29,
+        "interactions": 27,
+        "posts_active": 27,
+        "sentiment": 27,
+        "social_dominance": 27,
+        "spam": 27,
+        "volume_24h": 28
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163841",
+      "symbol": "DUBBLE",
+      "name": "Dubble",
+      "snapshot_score": 90.866,
+      "gap_count": 265,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 30,
+        "contributors_active": 29,
+        "galaxy_score": 30,
+        "interactions": 29,
+        "posts_active": 29,
+        "sentiment": 29,
+        "social_dominance": 30,
+        "spam": 29,
+        "volume_24h": 30
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161700",
+      "symbol": "EVAA",
+      "name": "EVAA",
+      "snapshot_score": 90.088,
+      "gap_count": 7,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 6
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163287",
+      "symbol": "MICRODUCK",
+      "name": "MICRODUCK",
+      "snapshot_score": 89.899,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163755",
+      "symbol": "DACITY",
+      "name": "Dacity Coin",
+      "snapshot_score": 89.888,
+      "gap_count": 180,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 30,
+        "contributors_active": 12,
+        "galaxy_score": 30,
+        "interactions": 12,
+        "posts_active": 12,
+        "sentiment": 12,
+        "social_dominance": 30,
+        "spam": 12,
+        "volume_24h": 30
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163840",
+      "symbol": "RAPPORT",
+      "name": "Rapport",
+      "snapshot_score": 89.617,
+      "gap_count": 261,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 29,
+        "contributors_active": 29,
+        "galaxy_score": 29,
+        "interactions": 29,
+        "posts_active": 29,
+        "sentiment": 29,
+        "social_dominance": 29,
+        "spam": 29,
+        "volume_24h": 29
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "143",
+      "symbol": "BNT",
+      "name": "Bancor",
+      "snapshot_score": 89.285,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163742",
+      "symbol": "GROVE",
+      "name": "Grove",
+      "snapshot_score": 88.984,
+      "gap_count": 123,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 11,
+        "contributors_active": 12,
+        "galaxy_score": 14,
+        "interactions": 12,
+        "posts_active": 12,
+        "sentiment": 16,
+        "social_dominance": 12,
+        "spam": 23,
+        "volume_24h": 11
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163837",
+      "symbol": "RITUAL",
+      "name": "Ritual",
+      "snapshot_score": 88.429,
+      "gap_count": 249,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 29,
+        "contributors_active": 27,
+        "galaxy_score": 29,
+        "interactions": 27,
+        "posts_active": 27,
+        "sentiment": 27,
+        "social_dominance": 27,
+        "spam": 27,
+        "volume_24h": 29
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163803",
+      "symbol": "PANGEA",
+      "name": "Pangea",
+      "snapshot_score": 88.173,
+      "gap_count": 201,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 23,
+        "contributors_active": 22,
+        "galaxy_score": 23,
+        "interactions": 22,
+        "posts_active": 22,
+        "sentiment": 22,
+        "social_dominance": 22,
+        "spam": 22,
+        "volume_24h": 23
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163835",
+      "symbol": "MOGZ",
+      "name": "Mogz.fun",
+      "snapshot_score": 88.16,
+      "gap_count": 253,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 28,
+        "contributors_active": 28,
+        "galaxy_score": 29,
+        "interactions": 28,
+        "posts_active": 28,
+        "sentiment": 28,
+        "social_dominance": 28,
+        "spam": 28,
+        "volume_24h": 28
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "52554",
+      "symbol": "SHELL",
+      "name": "MyShell Token",
+      "snapshot_score": 88.075,
+      "gap_count": 5,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 5
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161592",
+      "symbol": "UB",
+      "name": "Unibase",
+      "snapshot_score": 87.819,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "74520",
+      "symbol": "DEOD",
+      "name": "Decentrawood",
+      "snapshot_score": 87.753,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163438",
+      "symbol": "SAPLING",
+      "name": "Sapling",
+      "snapshot_score": 87.656,
+      "gap_count": 9,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "contributors_active": 1,
+        "galaxy_score": 3,
+        "interactions": 1,
+        "posts_active": 1,
+        "sentiment": 1,
+        "social_dominance": 1,
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163329",
+      "symbol": "GAGE",
+      "name": "GAGE",
+      "snapshot_score": 87.206,
+      "gap_count": 12,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 12
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "141197",
+      "symbol": "APEPE",
+      "name": "Ape and Pepe",
+      "snapshot_score": 87.15,
+      "gap_count": 8,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 5,
+        "spam": 3
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "75253",
+      "symbol": "BLUR",
+      "name": "Blur",
+      "snapshot_score": 87.058,
+      "gap_count": 3,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "158194",
+      "symbol": "EVA",
+      "name": "EverValue Coin",
+      "snapshot_score": 86.899,
+      "gap_count": 14,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 14
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "159308",
+      "symbol": "WOD",
+      "name": "World of Dypians",
+      "snapshot_score": 86.884,
+      "gap_count": 3,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 3
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "139356",
+      "symbol": "CRVUSD",
+      "name": "crvUSD",
+      "snapshot_score": 86.766,
+      "gap_count": 8,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 8
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161572",
+      "symbol": "XPIN",
+      "name": "XPIN Token",
+      "snapshot_score": 86.322,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161098",
+      "symbol": "ICNT",
+      "name": "Impossible Cloud Network Token",
+      "snapshot_score": 86.266,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "12563",
+      "symbol": "FLUID",
+      "name": "Fluid",
+      "snapshot_score": 85.8,
+      "gap_count": 4,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163645",
+      "symbol": "WTH",
+      "name": "what the hook?",
+      "snapshot_score": 85.697,
+      "gap_count": 24,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 4,
+        "contributors_active": 2,
+        "galaxy_score": 4,
+        "interactions": 2,
+        "posts_active": 2,
+        "sentiment": 2,
+        "social_dominance": 2,
+        "spam": 2,
+        "volume_24h": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163713",
+      "symbol": "GIGATENEV",
+      "name": "GIGATENEV",
+      "snapshot_score": 85.585,
+      "gap_count": 94,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 10,
+        "contributors_active": 10,
+        "galaxy_score": 11,
+        "interactions": 10,
+        "posts_active": 10,
+        "sentiment": 10,
+        "social_dominance": 10,
+        "spam": 13,
+        "volume_24h": 10
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "160535",
+      "symbol": "HOUSE",
+      "name": "Housecoin",
+      "snapshot_score": 85.58,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "162247",
+      "symbol": "CLAWD",
+      "name": "clawd.atg.eth",
+      "snapshot_score": 85.522,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161871",
+      "symbol": "C",
+      "name": "Chainbase",
+      "snapshot_score": 85.417,
+      "gap_count": 9,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 8
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "151245",
+      "symbol": "HOPPY",
+      "name": "Hoppy",
+      "snapshot_score": 85.365,
+      "gap_count": 10,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 6,
+        "spam": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "160816",
+      "symbol": "AGT",
+      "name": "Alaya Governance Token",
+      "snapshot_score": 85.361,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "159917",
+      "symbol": "FRXUSD",
+      "name": "Frax USD",
+      "snapshot_score": 85.345,
+      "gap_count": 5,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 5
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163439",
+      "symbol": "4STOCK",
+      "name": "4Stock",
+      "snapshot_score": 85.286,
+      "gap_count": 120,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 30,
+        "galaxy_score": 30,
+        "social_dominance": 30,
+        "volume_24h": 30
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163836",
+      "symbol": "MOONX",
+      "name": "SOON MOON",
+      "snapshot_score": 85.268,
+      "gap_count": 255,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 29,
+        "contributors_active": 28,
+        "galaxy_score": 29,
+        "interactions": 28,
+        "posts_active": 28,
+        "sentiment": 28,
+        "social_dominance": 28,
+        "spam": 28,
+        "volume_24h": 29
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163833",
+      "symbol": "FRONGUS",
+      "name": "Frongus",
+      "snapshot_score": 85.253,
+      "gap_count": 252,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 28,
+        "contributors_active": 28,
+        "galaxy_score": 28,
+        "interactions": 28,
+        "posts_active": 28,
+        "sentiment": 28,
+        "social_dominance": 28,
+        "spam": 28,
+        "volume_24h": 28
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161738",
+      "symbol": "TRUTH",
+      "name": "Swarm Network",
+      "snapshot_score": 85.249,
+      "gap_count": 3,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "30504",
+      "symbol": "POLYX",
+      "name": "Polymesh",
+      "snapshot_score": 85.246,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "90",
+      "symbol": "NEXO",
+      "name": "NEXO",
+      "snapshot_score": 85.223,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "162739",
+      "symbol": "BSB",
+      "name": "Block Street",
+      "snapshot_score": 85.219,
+      "gap_count": 9,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 3,
+        "spam": 6
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163611",
+      "symbol": "US",
+      "name": "Talus",
+      "snapshot_score": 85.08,
+      "gap_count": 24,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 4,
+        "contributors_active": 2,
+        "galaxy_score": 4,
+        "interactions": 2,
+        "posts_active": 2,
+        "sentiment": 2,
+        "social_dominance": 2,
+        "spam": 2,
+        "volume_24h": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "159751",
+      "symbol": "JELLYJELLY",
+      "name": "jelly-my-jelly",
+      "snapshot_score": 85.065,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161735",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "snapshot_score": 84.872,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163792",
+      "symbol": "FABLES",
+      "name": "FABLES",
+      "snapshot_score": 84.86,
+      "gap_count": 122,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 30,
+        "galaxy_score": 30,
+        "social_dominance": 30,
+        "spam": 2,
+        "volume_24h": 30
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "12040",
+      "symbol": "GAL",
+      "name": "Galatasaray Fan Token",
+      "snapshot_score": 84.812,
+      "gap_count": 15,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 14
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "72602",
+      "symbol": "ETHW",
+      "name": "ETHPoW",
+      "snapshot_score": 84.803,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163485",
+      "symbol": "XDP",
+      "name": "Doppler Finance",
+      "snapshot_score": 84.745,
+      "gap_count": 24,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 4,
+        "contributors_active": 2,
+        "galaxy_score": 4,
+        "interactions": 2,
+        "posts_active": 2,
+        "sentiment": 2,
+        "social_dominance": 2,
+        "spam": 2,
+        "volume_24h": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "2847",
+      "symbol": "SUSHI",
+      "name": "SUSHI",
+      "snapshot_score": 84.534,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "7458",
+      "symbol": "OUSD",
+      "name": "Origin Dollar",
+      "snapshot_score": 84.392,
+      "gap_count": 6,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 5
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    }
+  ],
+  "all_incomplete": [
+    {
+      "id": "159239",
+      "symbol": "BLESS",
+      "name": "Bless Token",
+      "snapshot_score": 91.605,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "162052",
+      "symbol": "PIEVERSE",
+      "name": "Pieverse",
+      "snapshot_score": 91.419,
+      "gap_count": 6,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 6
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163834",
+      "symbol": "REBATE",
+      "name": "REBATE",
+      "snapshot_score": 91.187,
+      "gap_count": 247,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 28,
+        "contributors_active": 27,
+        "galaxy_score": 29,
+        "interactions": 27,
+        "posts_active": 27,
+        "sentiment": 27,
+        "social_dominance": 27,
+        "spam": 27,
+        "volume_24h": 28
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163841",
+      "symbol": "DUBBLE",
+      "name": "Dubble",
+      "snapshot_score": 90.866,
+      "gap_count": 265,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 30,
+        "contributors_active": 29,
+        "galaxy_score": 30,
+        "interactions": 29,
+        "posts_active": 29,
+        "sentiment": 29,
+        "social_dominance": 30,
+        "spam": 29,
+        "volume_24h": 30
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161700",
+      "symbol": "EVAA",
+      "name": "EVAA",
+      "snapshot_score": 90.088,
+      "gap_count": 7,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 6
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163287",
+      "symbol": "MICRODUCK",
+      "name": "MICRODUCK",
+      "snapshot_score": 89.899,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163755",
+      "symbol": "DACITY",
+      "name": "Dacity Coin",
+      "snapshot_score": 89.888,
+      "gap_count": 180,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 30,
+        "contributors_active": 12,
+        "galaxy_score": 30,
+        "interactions": 12,
+        "posts_active": 12,
+        "sentiment": 12,
+        "social_dominance": 30,
+        "spam": 12,
+        "volume_24h": 30
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163840",
+      "symbol": "RAPPORT",
+      "name": "Rapport",
+      "snapshot_score": 89.617,
+      "gap_count": 261,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 29,
+        "contributors_active": 29,
+        "galaxy_score": 29,
+        "interactions": 29,
+        "posts_active": 29,
+        "sentiment": 29,
+        "social_dominance": 29,
+        "spam": 29,
+        "volume_24h": 29
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "143",
+      "symbol": "BNT",
+      "name": "Bancor",
+      "snapshot_score": 89.285,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163742",
+      "symbol": "GROVE",
+      "name": "Grove",
+      "snapshot_score": 88.984,
+      "gap_count": 123,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 11,
+        "contributors_active": 12,
+        "galaxy_score": 14,
+        "interactions": 12,
+        "posts_active": 12,
+        "sentiment": 16,
+        "social_dominance": 12,
+        "spam": 23,
+        "volume_24h": 11
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163837",
+      "symbol": "RITUAL",
+      "name": "Ritual",
+      "snapshot_score": 88.429,
+      "gap_count": 249,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 29,
+        "contributors_active": 27,
+        "galaxy_score": 29,
+        "interactions": 27,
+        "posts_active": 27,
+        "sentiment": 27,
+        "social_dominance": 27,
+        "spam": 27,
+        "volume_24h": 29
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163803",
+      "symbol": "PANGEA",
+      "name": "Pangea",
+      "snapshot_score": 88.173,
+      "gap_count": 201,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 23,
+        "contributors_active": 22,
+        "galaxy_score": 23,
+        "interactions": 22,
+        "posts_active": 22,
+        "sentiment": 22,
+        "social_dominance": 22,
+        "spam": 22,
+        "volume_24h": 23
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163835",
+      "symbol": "MOGZ",
+      "name": "Mogz.fun",
+      "snapshot_score": 88.16,
+      "gap_count": 253,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 28,
+        "contributors_active": 28,
+        "galaxy_score": 29,
+        "interactions": 28,
+        "posts_active": 28,
+        "sentiment": 28,
+        "social_dominance": 28,
+        "spam": 28,
+        "volume_24h": 28
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "52554",
+      "symbol": "SHELL",
+      "name": "MyShell Token",
+      "snapshot_score": 88.075,
+      "gap_count": 5,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 5
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161592",
+      "symbol": "UB",
+      "name": "Unibase",
+      "snapshot_score": 87.819,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "74520",
+      "symbol": "DEOD",
+      "name": "Decentrawood",
+      "snapshot_score": 87.753,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163438",
+      "symbol": "SAPLING",
+      "name": "Sapling",
+      "snapshot_score": 87.656,
+      "gap_count": 9,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "contributors_active": 1,
+        "galaxy_score": 3,
+        "interactions": 1,
+        "posts_active": 1,
+        "sentiment": 1,
+        "social_dominance": 1,
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163329",
+      "symbol": "GAGE",
+      "name": "GAGE",
+      "snapshot_score": 87.206,
+      "gap_count": 12,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 12
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "141197",
+      "symbol": "APEPE",
+      "name": "Ape and Pepe",
+      "snapshot_score": 87.15,
+      "gap_count": 8,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 5,
+        "spam": 3
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "75253",
+      "symbol": "BLUR",
+      "name": "Blur",
+      "snapshot_score": 87.058,
+      "gap_count": 3,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "158194",
+      "symbol": "EVA",
+      "name": "EverValue Coin",
+      "snapshot_score": 86.899,
+      "gap_count": 14,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 14
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "159308",
+      "symbol": "WOD",
+      "name": "World of Dypians",
+      "snapshot_score": 86.884,
+      "gap_count": 3,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 3
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "139356",
+      "symbol": "CRVUSD",
+      "name": "crvUSD",
+      "snapshot_score": 86.766,
+      "gap_count": 8,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 8
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161572",
+      "symbol": "XPIN",
+      "name": "XPIN Token",
+      "snapshot_score": 86.322,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161098",
+      "symbol": "ICNT",
+      "name": "Impossible Cloud Network Token",
+      "snapshot_score": 86.266,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "12563",
+      "symbol": "FLUID",
+      "name": "Fluid",
+      "snapshot_score": 85.8,
+      "gap_count": 4,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163645",
+      "symbol": "WTH",
+      "name": "what the hook?",
+      "snapshot_score": 85.697,
+      "gap_count": 24,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 4,
+        "contributors_active": 2,
+        "galaxy_score": 4,
+        "interactions": 2,
+        "posts_active": 2,
+        "sentiment": 2,
+        "social_dominance": 2,
+        "spam": 2,
+        "volume_24h": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163713",
+      "symbol": "GIGATENEV",
+      "name": "GIGATENEV",
+      "snapshot_score": 85.585,
+      "gap_count": 94,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 10,
+        "contributors_active": 10,
+        "galaxy_score": 11,
+        "interactions": 10,
+        "posts_active": 10,
+        "sentiment": 10,
+        "social_dominance": 10,
+        "spam": 13,
+        "volume_24h": 10
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "160535",
+      "symbol": "HOUSE",
+      "name": "Housecoin",
+      "snapshot_score": 85.58,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "162247",
+      "symbol": "CLAWD",
+      "name": "clawd.atg.eth",
+      "snapshot_score": 85.522,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161871",
+      "symbol": "C",
+      "name": "Chainbase",
+      "snapshot_score": 85.417,
+      "gap_count": 9,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 8
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "151245",
+      "symbol": "HOPPY",
+      "name": "Hoppy",
+      "snapshot_score": 85.365,
+      "gap_count": 10,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 6,
+        "spam": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "160816",
+      "symbol": "AGT",
+      "name": "Alaya Governance Token",
+      "snapshot_score": 85.361,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "159917",
+      "symbol": "FRXUSD",
+      "name": "Frax USD",
+      "snapshot_score": 85.345,
+      "gap_count": 5,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 5
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163439",
+      "symbol": "4STOCK",
+      "name": "4Stock",
+      "snapshot_score": 85.286,
+      "gap_count": 120,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 30,
+        "galaxy_score": 30,
+        "social_dominance": 30,
+        "volume_24h": 30
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163836",
+      "symbol": "MOONX",
+      "name": "SOON MOON",
+      "snapshot_score": 85.268,
+      "gap_count": 255,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 29,
+        "contributors_active": 28,
+        "galaxy_score": 29,
+        "interactions": 28,
+        "posts_active": 28,
+        "sentiment": 28,
+        "social_dominance": 28,
+        "spam": 28,
+        "volume_24h": 29
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163833",
+      "symbol": "FRONGUS",
+      "name": "Frongus",
+      "snapshot_score": 85.253,
+      "gap_count": 252,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 28,
+        "contributors_active": 28,
+        "galaxy_score": 28,
+        "interactions": 28,
+        "posts_active": 28,
+        "sentiment": 28,
+        "social_dominance": 28,
+        "spam": 28,
+        "volume_24h": 28
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161738",
+      "symbol": "TRUTH",
+      "name": "Swarm Network",
+      "snapshot_score": 85.249,
+      "gap_count": 3,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "30504",
+      "symbol": "POLYX",
+      "name": "Polymesh",
+      "snapshot_score": 85.246,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "90",
+      "symbol": "NEXO",
+      "name": "NEXO",
+      "snapshot_score": 85.223,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "162739",
+      "symbol": "BSB",
+      "name": "Block Street",
+      "snapshot_score": 85.219,
+      "gap_count": 9,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 3,
+        "spam": 6
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163611",
+      "symbol": "US",
+      "name": "Talus",
+      "snapshot_score": 85.08,
+      "gap_count": 24,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 4,
+        "contributors_active": 2,
+        "galaxy_score": 4,
+        "interactions": 2,
+        "posts_active": 2,
+        "sentiment": 2,
+        "social_dominance": 2,
+        "spam": 2,
+        "volume_24h": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "159751",
+      "symbol": "JELLYJELLY",
+      "name": "jelly-my-jelly",
+      "snapshot_score": 85.065,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161735",
+      "symbol": "CTM",
+      "name": "c8ntinuum",
+      "snapshot_score": 84.872,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163792",
+      "symbol": "FABLES",
+      "name": "FABLES",
+      "snapshot_score": 84.86,
+      "gap_count": 122,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 30,
+        "galaxy_score": 30,
+        "social_dominance": 30,
+        "spam": 2,
+        "volume_24h": 30
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "12040",
+      "symbol": "GAL",
+      "name": "Galatasaray Fan Token",
+      "snapshot_score": 84.812,
+      "gap_count": 15,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 14
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "72602",
+      "symbol": "ETHW",
+      "name": "ETHPoW",
+      "snapshot_score": 84.803,
+      "gap_count": 1,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163485",
+      "symbol": "XDP",
+      "name": "Doppler Finance",
+      "snapshot_score": 84.745,
+      "gap_count": 24,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 4,
+        "contributors_active": 2,
+        "galaxy_score": 4,
+        "interactions": 2,
+        "posts_active": 2,
+        "sentiment": 2,
+        "social_dominance": 2,
+        "spam": 2,
+        "volume_24h": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "2847",
+      "symbol": "SUSHI",
+      "name": "SUSHI",
+      "snapshot_score": 84.534,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "7458",
+      "symbol": "OUSD",
+      "name": "Origin Dollar",
+      "snapshot_score": 84.392,
+      "gap_count": 6,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 5
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "74333",
+      "symbol": "SAUCE",
+      "name": "SaucerSwap",
+      "snapshot_score": 84.324,
+      "gap_count": 4,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163793",
+      "symbol": "GTA6",
+      "name": "GTA VI",
+      "snapshot_score": 84.241,
+      "gap_count": 142,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "contributors_active": 20,
+        "galaxy_score": 22,
+        "interactions": 20,
+        "posts_active": 20,
+        "sentiment": 20,
+        "social_dominance": 20,
+        "spam": 20
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "1775",
+      "symbol": "VLT",
+      "name": "Veltor",
+      "snapshot_score": 84.212,
+      "gap_count": 7,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 7
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161171",
+      "symbol": "TAC",
+      "name": "TAC Protocol",
+      "snapshot_score": 84.19,
+      "gap_count": 4,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 4
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "3049",
+      "symbol": "SUN",
+      "name": "Sun Token",
+      "snapshot_score": 83.93,
+      "gap_count": 17,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 9,
+        "spam": 8
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "163828",
+      "symbol": "WORTH",
+      "name": "one life, its worth an attempt",
+      "snapshot_score": 83.806,
+      "gap_count": 240,
+      "reason": "MISSING PRICE BARS",
+      "missing_fields": {
+        "close": 28,
+        "contributors_active": 26,
+        "galaxy_score": 28,
+        "interactions": 26,
+        "posts_active": 26,
+        "sentiment": 26,
+        "social_dominance": 26,
+        "spam": 26,
+        "volume_24h": 28
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "162049",
+      "symbol": "BEAT",
+      "name": "Audiera",
+      "snapshot_score": 83.774,
+      "gap_count": 28,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 6,
+        "spam": 22
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "73716",
+      "symbol": "GRND",
+      "name": "SuperWalk",
+      "snapshot_score": 83.772,
+      "gap_count": 18,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 6,
+        "spam": 12
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "148678",
+      "symbol": "OBI",
+      "name": "Orbofi AI",
+      "snapshot_score": 83.58,
+      "gap_count": 11,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 5,
+        "spam": 6
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "158895",
+      "symbol": "TIG",
+      "name": "The Innovation Game",
+      "snapshot_score": 83.555,
+      "gap_count": 2,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "spam": 2
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "161418",
+      "symbol": "M",
+      "name": "MemeCore",
+      "snapshot_score": 83.459,
+      "gap_count": 11,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 5,
+        "spam": 6
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    },
+    {
+      "id": "51846",
+      "symbol": "FORT",
+      "name": "Forta",
+      "snapshot_score": 83.304,
+      "gap_count": 9,
+      "reason": "MISSING PROVIDER FIELDS",
+      "missing_fields": {
+        "sentiment": 4,
+        "spam": 5
+      },
+      "history_error": "",
+      "action": "VERIFY PROVIDER AVAILABILITY; NO IMPUTATION"
+    }
+  ],
+  "policy": "Do not request retries automatically. Review API budget, source history, coin ID and missing-field availability first."
+}
