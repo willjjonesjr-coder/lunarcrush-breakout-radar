@@ -188,7 +188,9 @@ def run(reports, data, as_of=None):
         if col not in fields: fields.append(col)
     for row in old:
         row["confirmation_label"], row["confirmation_blockers"] = confirmation(row)
-        info = technical_confirmation(data / f"history_{row.get('id')}.csv", today)
+        source_path, source_label = resolve_ema_source(row.get("id"), data)
+        info = technical_confirmation(source_path, today)
+        info["ema_history_source"] = source_label
         row.update(info)
         row["confirmation_label"] += " / " + info["technical_status"]
     with c.open("w", newline="") as f:
