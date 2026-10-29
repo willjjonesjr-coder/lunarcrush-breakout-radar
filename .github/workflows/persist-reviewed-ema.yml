@@ -5,6 +5,10 @@ on:
     paths:
       - tools/import_reviewed_backfill.py
       - .github/workflows/persist-reviewed-ema.yml
+  pull_request:
+    paths:
+      - tools/import_reviewed_backfill.py
+      - .github/workflows/persist-reviewed-ema.yml
   workflow_dispatch:
 permissions:
   actions: read
@@ -34,6 +38,7 @@ jobs:
       - name: Verify identities and persist approved price files
         run: python tools/import_reviewed_backfill.py
       - name: Publish approved backfill prices into main
+        if: github.event_name != 'pull_request'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
