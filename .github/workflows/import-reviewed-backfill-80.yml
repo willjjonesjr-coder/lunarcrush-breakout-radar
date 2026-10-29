@@ -1,0 +1,50 @@
+name: Expand reviewed EMA histories (80-coin batch)
+on:
+  pull_request:
+    paths:
+      - tools/import_reviewed_backfill_80.py
+      - .github/workflows/import-reviewed-backfill-80.yml
+  push:
+    branches: [main]
+    paths:
+      - tools/import_reviewed_backfill_80.py
+      - .github/workflows/import-reviewed-backfill-80.yml
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: reviewed-ema-backfill-80
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve 80-coin smoke artifact from fixed run
+        uses: actions/download-artifact@v4
+        with:
+          name: historical-smoke-results
+          path: artifact-backfill
+          run-id: 40804299146
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate approved IDs and candle histories
+        run: python tools/import_reviewed_backfill_80.py
+      - name: Publish vetted history batch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data_price config/symbol_map.json reports/backfill_inventory.csv
+          if git diff --cached --quiet; then
+            echo "No verified history changes"
+          else
+            git commit -m "Persist reviewed 80-coin-batch exchange histories"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
