@@ -1,0 +1,4 @@
+coin_id,status,exchange,pair,bars_fetched,earliest_time,latest_time,gaps_detected,reason
+1,ok,kraken,BTC/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol BTC (Bitcoin); token identity review required
+2,ok,kraken,ETH/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol ETH (Ethereum); token identity review required
+3079,ok,kraken,SOL/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol SOL (Solana); token identity review required
