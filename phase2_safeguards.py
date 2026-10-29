@@ -4,6 +4,7 @@ This module never sends notifications or changes the production breakout score.
 """
 import csv
 import math
+import json
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
@@ -98,6 +99,39 @@ def technical_confirmation(path, as_of_date):
         (unextended, "Price >10% above EMA50"), (above_support, "Price below EMA50 support")]
         if not flag)
     return result
+
+
+def resolve_ema_source(coin_id, data_dir, price_dir=Path("data_price"),
+                       mapping_path=Path("config/symbol_map.json"),
+                       inventory_path=Path("reports/backfill_inventory.csv")):
+    """Select exchange candles only when an explicit coin ID/pair mapping is verified.
+
+    Never use heuristic ticker matches as technical confirmation inputs.
+    """
+    native = Path(data_dir) / f"history_{coin_id}.csv"
+    mapping_path, inventory_path, price_dir = map(Path, (mapping_path, inventory_path, price_dir))
+    if not mapping_path.exists() or not inventory_path.exists():
+        return native, "LUNARCRUSH HISTORY"
+    try:
+        config = json.loads(mapping_path.read_text()).get(str(coin_id))
+        if not isinstance(config, dict) or not config.get("exchange") or not config.get("pair"):
+            return native, "LUNARCRUSH HISTORY"
+        with inventory_path.open(newline="") as fh:
+            matches = [r for r in csv.DictReader(fh) if r.get("coin_id") == str(coin_id)
+                       and r.get("exchange") == config["exchange"]
+                       and r.get("pair") == config["pair"]
+                       and r.get("status") in ("ok", "partial")
+                       and r.get("gaps_detected") in ("0", "")]
+        candidate = price_dir / f"{coin_id}.csv"
+        if len(matches) != 1 or not candidate.is_file():
+            return native, "LUNARCRUSH HISTORY"
+        with candidate.open(newline="") as fh:
+            first = next(csv.DictReader(fh), {})
+        if first.get("exchange") != config["exchange"] or first.get("pair") != config["pair"]:
+            return native, "LUNARCRUSH HISTORY"
+        return candidate, "VERIFIED EXCHANGE MAPPING"
+    except (OSError, ValueError, KeyError, csv.Error):
+        return native, "LUNARCRUSH HISTORY"
 
 
 def notification_readiness(segment, approved_source=False, technical_verified=False):

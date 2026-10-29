@@ -199,6 +199,7 @@ jobs:
             reports/daily_spike_history.csv
             reports/daily_spike_history.json
             reports/volume_surge_latest.json
+            reports/ema_coverage_latest.json
             reports/production_readiness.json
             reports/history_gap_triage.json
             reports/history_recovery_queue.json
