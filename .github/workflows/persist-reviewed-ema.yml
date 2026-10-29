@@ -38,7 +38,7 @@ jobs:
       - name: Verify identities and persist approved price files
         run: python tools/import_reviewed_backfill.py
       - name: Publish approved backfill prices into main
-        if: github.event_name != 'pull_request'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
