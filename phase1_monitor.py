@@ -202,7 +202,7 @@ def run(reports, data, as_of=None):
         "as_of": as_of, "analyzed": len(rows), "technical_status_counts": dict(counts),
         "ema_history_source_counts": dict(sources),
         "note": "Exchange candles require verified coin-ID mapping and matching backfill inventory; no symbols inferred."},
-        indent=2) + "\\n")
+        indent=2) + "\n")
     print("EMA coverage:", dict(counts), "sources:", dict(sources))
     print("Phase 1: confirmation labels added; segment volume snapshots evaluated (no notifications)")
 
