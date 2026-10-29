@@ -10,7 +10,7 @@ import json
 import math
 from datetime import datetime, timezone
 from pathlib import Path
-from phase2_safeguards import by_id, vetted_sector_segments, technical_confirmation, notification_readiness
+from phase2_safeguards import by_id, vetted_sector_segments, technical_confirmation, notification_readiness, resolve_ema_source
 
 SECTORS = {
     "DeFi basket": ["UNI", "AAVE", "MKR", "COMP", "CRV", "SNX", "SUSHI", "JST", "DYDX", "LDO"],
@@ -171,7 +171,9 @@ def run(reports, data, as_of=None):
     rows = json.loads(p.read_text())
     for row in rows:
         row["confirmation_label"], row["confirmation_blockers"] = confirmation(row)
-        info = technical_confirmation(data / f"history_{row.get('id')}.csv", today)
+        source_path, source_label = resolve_ema_source(row.get("id"), data)
+        info = technical_confirmation(source_path, today)
+        info["ema_history_source"] = source_label
         row.update(info)
         row["confirmation_label"] += " / " + info["technical_status"]
     p.write_text(json.dumps(rows, allow_nan=False) + "\n")
@@ -182,7 +184,7 @@ def run(reports, data, as_of=None):
         fields = list(reader.fieldnames)
     for col in ("confirmation_label", "confirmation_blockers"):
         if col not in fields: fields.append(col)
-    for col in ("technical_status", "technical_reasons", "ema50", "ema100", "ema200"):
+    for col in ("technical_status", "technical_reasons", "ema50", "ema100", "ema200", "ema_history_source"):
         if col not in fields: fields.append(col)
     for row in old:
         row["confirmation_label"], row["confirmation_blockers"] = confirmation(row)
@@ -193,6 +195,15 @@ def run(reports, data, as_of=None):
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
         writer.writerows(old)
+    from collections import Counter
+    counts = Counter(r.get("technical_status", "UNKNOWN") for r in rows)
+    sources = Counter(r.get("ema_history_source", "UNKNOWN") for r in rows)
+    (reports / "ema_coverage_latest.json").write_text(json.dumps({
+        "as_of": as_of, "analyzed": len(rows), "technical_status_counts": dict(counts),
+        "ema_history_source_counts": dict(sources),
+        "note": "Exchange candles require verified coin-ID mapping and matching backfill inventory; no symbols inferred."},
+        indent=2) + "\\n")
+    print("EMA coverage:", dict(counts), "sources:", dict(sources))
     print("Phase 1: confirmation labels added; segment volume snapshots evaluated (no notifications)")
 
 
