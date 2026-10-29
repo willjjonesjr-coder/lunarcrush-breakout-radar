@@ -1,0 +1,59 @@
+name: Persist reviewed EMA histories (pilot)
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/import_reviewed_backfill.py
+      - .github/workflows/persist-reviewed-ema.yml
+  pull_request:
+    paths:
+      - tools/import_reviewed_backfill.py
+      - .github/workflows/persist-reviewed-ema.yml
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: reviewed-ema-backfill-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download fixed historical smoke artifact (run 40803237369)
+        uses: actions/download-artifact@v4
+        with:
+          name: historical-smoke-results
+          path: artifact-backfill
+          run-id: 40803237369
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify identities and persist approved price files
+        run: python tools/import_reviewed_backfill.py
+      - name: Publish approved backfill prices into main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data_price/1.csv data_price/2.csv data_price/3079.csv config/symbol_map.json reports/backfill_inventory.csv
+          if git diff --cached --quiet; then
+            echo "Reviewed backfill prices unchanged."
+          else
+            git commit -m "Persist reviewed Bitcoin Ethereum Solana daily exchange histories"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Verify tracked price files
+        run: |
+          test -s data_price/1.csv
+          test -s data_price/2.csv
+          test -s data_price/3079.csv
+          test -s reports/backfill_inventory.csv
