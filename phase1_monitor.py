@@ -176,6 +176,7 @@ def run(reports, data, as_of=None):
         info["ema_history_source"] = source_label
         row.update(info)
         row["confirmation_label"] += " / " + info["technical_status"]
+    technical_by_id = {str(r.get("id")): {k: r.get(k) for k in ("technical_status", "technical_reasons", "ema50", "ema100", "ema200", "ema_history_source")} for r in rows}
     p.write_text(json.dumps(rows, allow_nan=False) + "\n")
     c = reports / "breakout_radar.csv"
     with c.open(newline="") as f:
@@ -188,9 +189,9 @@ def run(reports, data, as_of=None):
         if col not in fields: fields.append(col)
     for row in old:
         row["confirmation_label"], row["confirmation_blockers"] = confirmation(row)
-        source_path, source_label = resolve_ema_source(row.get("id"), data)
-        info = technical_confirmation(source_path, today)
-        info["ema_history_source"] = source_label
+        info = technical_by_id.get(str(row.get("id")))
+        if info is None:
+            raise ValueError("Missing JSON technical evaluation for radar CSV coin ID")
         row.update(info)
         row["confirmation_label"] += " / " + info["technical_status"]
     with c.open("w", newline="") as f:
