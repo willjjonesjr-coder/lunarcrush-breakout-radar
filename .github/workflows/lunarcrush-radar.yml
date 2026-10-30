@@ -85,6 +85,10 @@ jobs:
         if: steps.start_date.outputs.run_scan == 'true'
         run: python production_readiness.py
 
+      - name: Audit exchange EMA freshness and reasons
+        if: steps.start_date.outputs.run_scan == 'true'
+        run: python ema_freshness_audit.py
+
       - name: Build sortable results view
         if: steps.start_date.outputs.run_scan == 'true'
         run: python sortable_report.py
@@ -200,6 +204,7 @@ jobs:
             reports/daily_spike_history.json
             reports/volume_surge_latest.json
             reports/ema_coverage_latest.json
+            reports/ema_freshness_audit.json
             reports/production_readiness.json
             reports/history_gap_triage.json
             reports/history_recovery_queue.json
