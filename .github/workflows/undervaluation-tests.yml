@@ -1,0 +1,27 @@
+name: Undervaluation research tests
+on:
+  pull_request:
+    paths:
+      - undervaluation_radar.py
+      - tests/test_undervaluation_radar.py
+      - sortable_report.py
+      - .github/workflows/undervaluation-tests.yml
+  push:
+    paths:
+      - undervaluation_radar.py
+      - tests/test_undervaluation_radar.py
+      - .github/workflows/undervaluation-tests.yml
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Tests and syntax
+        run: |
+          python -m unittest discover -s tests -p test_undervaluation_radar.py -v
+          python -m py_compile undervaluation_radar.py sortable_report.py
