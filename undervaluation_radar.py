@@ -178,6 +178,7 @@ def run(reports):
         writer = csv.DictWriter(handle, fieldnames=oldfields)
         writer.writeheader()
         writer.writerows(csvrows)
+    (reports / "undervaluation_radar.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
     print(f"Undervaluation research radar: {report['rated']} rated, {report['unrated']} unrated")
 
 
