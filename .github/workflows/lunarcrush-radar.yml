@@ -69,6 +69,11 @@ jobs:
         timeout-minutes: 8
         run: python production_regime.py
 
+      - name: Refresh verified exchange daily price histories
+        if: steps.start_date.outputs.run_scan == 'true'
+        timeout-minutes: 8
+        run: python refresh_ema_prices.py
+
       - name: Evaluate sector volume proxies and breakout confirmations
         if: steps.start_date.outputs.run_scan == 'true'
         run: python phase1_monitor.py
@@ -128,7 +133,7 @@ jobs:
           DAY=$(date -u +%Y-%m-%d)
           cp reports/breakout_radar.csv "reports/archive/breakout_radar_${DAY}.csv"
           cp reports/breakout_radar.json "reports/archive/breakout_radar_${DAY}.json"
-          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json daily_spike_history.csv daily_spike_history.json volume_surge_latest.json production_readiness.json history_gap_triage.json history_recovery_queue.json radar_sortable.html market_regime.csv market_regime_latest.json market_regime_inventory.csv; do
+          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json daily_spike_history.csv daily_spike_history.json volume_surge_latest.json ema_refresh_latest.json production_readiness.json history_gap_triage.json history_recovery_queue.json radar_sortable.html market_regime.csv market_regime_latest.json market_regime_inventory.csv; do
             cp "reports/$REPORT" "reports/archive/${DAY}_${REPORT}"
           done
 
@@ -177,7 +182,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data reports
+          git add data data_price reports
           if git diff --cached --quiet; then
             echo "No report changes to commit."
           else
@@ -204,6 +209,7 @@ jobs:
             reports/daily_spike_history.json
             reports/volume_surge_latest.json
             reports/ema_coverage_latest.json
+            reports/ema_refresh_latest.json
             reports/ema_freshness_audit.json
             reports/production_readiness.json
             reports/history_gap_triage.json
