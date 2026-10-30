@@ -1,12 +1,12 @@
 {
   "status": "AVAILABLE",
-  "as_of": "2026-10-28T00:00:00+00:00",
-  "expected_day": "2026-10-28T00:00:00+00:00",
-  "observed_at": "2026-10-29T22:57:02.307408+00:00",
-  "score": 56.7,
+  "as_of": "2026-10-29T00:00:00+00:00",
+  "expected_day": "2026-10-29T00:00:00+00:00",
+  "observed_at": "2026-10-30T07:15:04.407745+00:00",
+  "score": 54.3,
   "classification": "consolidation",
-  "trend_strength": 13.4,
-  "change_7d": -9.899999999999991,
+  "trend_strength": 8.6,
+  "change_7d": -11.600000000000009,
   "expected_assets": 20,
   "available_assets": 20,
   "coverage": 1.0,
@@ -16,9 +16,9 @@
   "usage": "context only; candidate scores and eligibility unchanged",
   "breadth_assets": 20,
   "components": {
-    "trend": 83.33333333333333,
-    "breadth": 27.500000000000004,
-    "momentum": 54.42575078885383,
-    "participation": 67.54007224953904
+    "trend": 66.66666666666666,
+    "breadth": 7.5,
+    "momentum": 48.02146837023177,
+    "participation": 62.2057806044075
   }
 }

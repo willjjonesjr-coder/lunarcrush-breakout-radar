@@ -1,0 +1,24 @@
+{
+  "status": "AVAILABLE",
+  "as_of": "2026-10-29T00:00:00+00:00",
+  "expected_day": "2026-10-29T00:00:00+00:00",
+  "observed_at": "2026-10-30T07:15:04.407745+00:00",
+  "score": 54.3,
+  "classification": "consolidation",
+  "trend_strength": 8.6,
+  "change_7d": -11.600000000000009,
+  "expected_assets": 20,
+  "available_assets": 20,
+  "coverage": 1.0,
+  "source": "kraken",
+  "model": "market_regime.py",
+  "sentiment_available": false,
+  "usage": "context only; candidate scores and eligibility unchanged",
+  "breadth_assets": 20,
+  "components": {
+    "trend": 66.66666666666666,
+    "breadth": 7.5,
+    "momentum": 48.02146837023177,
+    "participation": 62.2057806044075
+  }
+}
