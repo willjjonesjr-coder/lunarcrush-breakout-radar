@@ -153,8 +153,6 @@ def run(reports):
               "unrated": sum(r["undervaluation_score"] is None for r in compact),
               "rated": sum(r["undervaluation_score"] is not None for r in compact),
               "assets": compact}
-    (reports / "undervaluation_radar.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
-    file.write_text(json.dumps(assessed, allow_nan=False) + "\n")
     csvpath = reports / "breakout_radar.csv"
     with csvpath.open(newline="") as handle:
         reader = csv.DictReader(handle)
@@ -175,6 +173,7 @@ def run(reports):
     for field in fields:
         if field not in oldfields:
             oldfields.append(field)
+    file.write_text(json.dumps(assessed, allow_nan=False) + "\n")
     with csvpath.open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=oldfields)
         writer.writeheader()
