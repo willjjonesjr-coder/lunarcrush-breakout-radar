@@ -32,6 +32,13 @@ LABELS = {
  'technical_status':'EMA technical status',
  'technical_reasons':'EMA technical cautions',
  'ema50':'EMA 50 ($)', 'ema100':'EMA 100 ($)', 'ema200':'EMA 200 ($)',
+ 'undervaluation_score':'Undervaluation research score (provisional)',
+ 'undervaluation_classification':'Value research classification',
+ 'undervaluation_confidence':'Value data confidence',
+ 'undervaluation_price_context':'Sell-off price context',
+ 'undervaluation_peer_count':'Comparable sector peers',
+ 'undervaluation_sector':'Valuation comparison sector',
+ 'undervaluation_reasons':'Valuation research cautions',
  'liquidity_tier':'Liquidity tier (volume proxy)',
  'liquidity_adjusted_score':'Liquidity-adjusted score (volume proxy)',
  'liquidity_volume_factor':'Liquidity volume factor',
@@ -43,8 +50,8 @@ PERCENT = {'market_regime_coverage','volume_daily_accel','engagement_daily_accel
  'fundamentals_holder_revenue_growth_30d','fundamentals_holder_capture_30d',
  'fundamentals_circulating_to_total'}
 TEXT = {'market_cap_label','liquidity_label','price_extension_label','history_selection','finalist_label','market_regime_classification','market_regime_status','symbol','name','stage','fundamentals_status','fundamentals_confidence',
-        'daily_spike_flag','data_status','asset_type','liquidity_tier','confirmation_label','confirmation_blockers','technical_status','technical_reasons'}
-DEFAULT = ['symbol','name','breakout_score','confirmation_label','technical_status','liquidity_adjusted_score','liquidity_tier','volume_daily_accel','engagement_daily_accel',
+        'daily_spike_flag','data_status','asset_type','liquidity_tier','confirmation_label','confirmation_blockers','technical_status','technical_reasons','undervaluation_classification','undervaluation_confidence','undervaluation_price_context','undervaluation_sector','undervaluation_reasons'}
+DEFAULT = ['symbol','name','breakout_score','undervaluation_score','undervaluation_classification','confirmation_label','technical_status','liquidity_adjusted_score','liquidity_tier','volume_daily_accel','engagement_daily_accel',
            'volume_accel','engagement_accel','price_change_7d','market_cap_label','liquidity_label','data_status','fundamentals_status']
 
 
