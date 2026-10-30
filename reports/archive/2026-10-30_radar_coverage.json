@@ -1,48 +1,48 @@
 {
-  "as_of": "2026-10-30T06:40:54.482089+00:00",
+  "as_of": "2026-10-30T22:18:55.106854+00:00",
   "history_candidates": 300,
-  "visible_candidates": 5415,
-  "outside_history_budget": 5115,
+  "visible_candidates": 5419,
+  "outside_history_budget": 5119,
   "data_status_counts": {
-    "NOT ANALYZED": 5115,
-    "COMPLETE": 224,
-    "PARTIAL HISTORY": 55,
-    "INSUFFICIENT DATA": 21
+    "NOT ANALYZED": 5119,
+    "COMPLETE": 232,
+    "PARTIAL HISTORY": 45,
+    "INSUFFICIENT DATA": 23
   },
-  "scored_candidates": 279,
-  "finalists": 15,
-  "separated_assets": 117,
+  "scored_candidates": 277,
+  "finalists": 100,
+  "separated_assets": 116,
   "missing_feature_counts": {
-    "social_accel": 11,
-    "contributor_accel": 11,
-    "engagement_accel": 11,
-    "sentiment_change": 12,
-    "social_dominance_change": 9,
+    "sentiment_change": 13,
+    "spam_change": 16,
+    "social_accel": 7,
+    "contributor_accel": 7,
+    "engagement_accel": 7,
+    "social_dominance_change": 10,
     "volume_accel": 10,
-    "social_price_divergence": 11,
+    "social_price_divergence": 10,
     "galaxy_score_change": 9,
     "price_change_7d": 9,
-    "spam_change": 17,
-    "last_price": 1,
+    "last_price": 6,
     "volume_daily_accel": 9,
-    "engagement_daily_accel": 9
+    "engagement_daily_accel": 7
   },
   "history_missing_field_counts": {
-    "sentiment": 38,
-    "spam": 74,
-    "close": 18,
-    "contributors_active": 19,
-    "galaxy_score": 20,
-    "interactions": 19,
-    "posts_active": 19,
-    "social_dominance": 19,
-    "volume_24h": 18
+    "sentiment": 35,
+    "spam": 63,
+    "close": 12,
+    "contributors_active": 13,
+    "galaxy_score": 13,
+    "interactions": 13,
+    "posts_active": 13,
+    "social_dominance": 14,
+    "volume_24h": 12
   },
   "daily_spike_counts": {
-    "NONE": 182,
-    "ENGAGEMENT": 41,
-    "VOLUME": 38,
-    "VOLUME + ENGAGEMENT": 30,
-    "INSUFFICIENT DATA": 9
+    "NONE": 225,
+    "ENGAGEMENT": 30,
+    "VOLUME": 24,
+    "VOLUME + ENGAGEMENT": 11,
+    "INSUFFICIENT DATA": 10
   }
 }
