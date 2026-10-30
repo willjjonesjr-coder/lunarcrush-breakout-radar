@@ -8,18 +8,41 @@ coin_id,status,exchange,pair,bars_fetched,earliest_time,latest_time,gaps_detecte
 10,ok,kraken,XLM/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol XLM (Stellar); token identity review required
 11,ok,kraken,ADA/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol ADA (Cardano); token identity review required
 12,ok,kraken,TRX/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol TRX (TRON); token identity review required
+15,ok,kraken,DASH/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol DASH (Dash); token identity review required
 18,ok,kraken,LINK/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol LINK (Chainlink); token identity review required
+19,ok,kraken,ATOM/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol ATOM (Cosmos); token identity review required
+20,ok,kraken,XTZ/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol XTZ (Tezos); token identity review required
 26,ok,kraken,ZEC/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol ZEC (Zcash); token identity review required
 29,ok,kraken,DOGE/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol DOGE (Dogecoin); token identity review required
 169,ok,kraken,FET/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol FET (Fetch); token identity review required
+830,ok,kraken,STX/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol STX (Stacks); token identity review required
+1790,ok,kraken,LUNC/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol LUNC (Terra Classic); token identity review required
 1813,ok,kraken,FIL/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol FIL (Filecoin); token identity review required
+2222,ok,kraken,RUNE/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol RUNE (THORChain); token identity review required
 2545,ok,kraken,AVAX/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol AVAX (Avalanche); token identity review required
+2917,ok,kraken,SHIB/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol SHIB (Shiba Inu); token identity review required
 3079,ok,kraken,SOL/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol SOL (Solana); token identity review required
 3377,ok,kraken,NEAR/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol NEAR (Near Protocol); token identity review required
 3378,ok,kraken,INJ/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol INJ (Injective); token identity review required
+9887,ok,kraken,JASMY/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol JASMY (JasmyCoin); token identity review required
+11880,ok,kraken,RAY/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol RAY (Raydium); token identity review required
+12391,ok,kraken,ICP/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol ICP (Internet Computer); token identity review required
 13238,ok,kraken,PENDLE/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol PENDLE (Pendle); token identity review required
+14226,ok,kraken,CVX/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol CVX (Convex Finance); token identity review required
+42935,ok,kraken,FLOKI/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol FLOKI (Floki); token identity review required
+52238,ok,kraken,KAS/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol KAS (Kaspa); token identity review required
 70056,ok,kraken,SUI/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol SUI (Sui); token identity review required
+70741,ok,kraken,STRK/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol STRK (StarkNet); token identity review required
 84657,ok,kraken,TAO/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol TAO (Bittensor); token identity review required
+90376,ok,kraken,FLR/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol FLR (Flare); token identity review required
 110579,ok,kraken,PEPE/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol PEPE (Pepe); token identity review required
+145271,ok,kraken,SEI/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol SEI (Sei); token identity review required
 146377,ok,kraken,AERO/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol AERO (Aerodrome); token identity review required
+148569,ok,kraken,JTO/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol JTO (Jito); token identity review required
+149030,ok,kraken,SPX/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol SPX (SPX6900); token identity review required
+149895,ok,kraken,ETHFI/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol ETHFI (Ether.fi); token identity review required
+151267,ok,kraken,KMNO/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol KMNO (Kamino); token identity review required
+152283,ok,kraken,ZRO/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol ZRO (Layerzero); token identity review required
 152389,ok,kraken,VIRTUAL/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol VIRTUAL (Virtuals Protocol); token identity review required
+159180,ok,kraken,PENGU/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol PENGU (Pudgy Penguins); token identity review required
+159730,ok,kraken,VVV/USD,500,2025-06-16T00:00:00Z,2026-10-28T00:00:00Z,0,LunarCrush symbol VVV (Venice Token); token identity review required
