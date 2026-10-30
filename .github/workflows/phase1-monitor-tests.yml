@@ -7,6 +7,8 @@ on:
       - "phase2_safeguards.py"
       - "tests/test_phase2_safeguards.py"
       - "tests/test_ema_backfill_bridge.py"
+      - "refresh_ema_prices.py"
+      - "tests/test_refresh_ema_prices.py"
       - "config/sector_coin_ids.json"
       - ".github/workflows/phase1-monitor-tests.yml"
   pull_request:
@@ -16,6 +18,8 @@ on:
       - "phase2_safeguards.py"
       - "tests/test_phase2_safeguards.py"
       - "tests/test_ema_backfill_bridge.py"
+      - "refresh_ema_prices.py"
+      - "tests/test_refresh_ema_prices.py"
       - "config/sector_coin_ids.json"
       - ".github/workflows/phase1-monitor-tests.yml"
 permissions:
@@ -33,5 +37,6 @@ jobs:
           python -m unittest discover -s tests -p test_phase1_monitor.py -v
           python -m unittest discover -s tests -p test_phase2_safeguards.py -v
           python -m unittest discover -s tests -p test_ema_backfill_bridge.py -v
+          python -m unittest discover -s tests -p test_refresh_ema_prices.py -v
       - name: Syntax check
-        run: python -m py_compile phase1_monitor.py phase2_safeguards.py sortable_report.py
+        run: python -m py_compile phase1_monitor.py phase2_safeguards.py refresh_ema_prices.py sortable_report.py
