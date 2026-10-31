@@ -1,14 +1,14 @@
 {
-  "as_of": "2026-10-30",
+  "as_of": "2026-10-31",
   "analyzed": 300,
   "technical_status_counts": {
-    "INSUFFICIENT EMA HISTORY": 257,
-    "EMA NOT CONFIRMED": 39,
-    "EMA CONFIRMED": 4
+    "INSUFFICIENT EMA HISTORY": 259,
+    "EMA NOT CONFIRMED": 38,
+    "EMA CONFIRMED": 3
   },
   "ema_history_source_counts": {
-    "LUNARCRUSH HISTORY": 257,
-    "VERIFIED EXCHANGE MAPPING": 43
+    "LUNARCRUSH HISTORY": 259,
+    "VERIFIED EXCHANGE MAPPING": 41
   },
   "note": "Exchange candles require verified coin-ID mapping and matching backfill inventory; no symbols inferred."
 }
