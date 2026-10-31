@@ -9,6 +9,10 @@ on:
       - 'tests/test_daily_spikes.py'
       - 'tests/test_radar_quality.py'
       - 'tests/test_filter_labels.py'
+      - 'tests/test_ema_inventory_coverage.py'
+      - 'ema_inventory_coverage.py'
+      - 'ema_freshness_audit.py'
+      - 'phase2_safeguards.py'
       - '.github/workflows/lunarcrush-radar.yml'
       - '.github/workflows/radar-quality-tests.yml'
   workflow_dispatch:
@@ -26,3 +30,4 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_radar_quality.py' -v
       - run: python -m unittest discover -s tests -p 'test_daily_spikes.py' -v
       - run: python -m unittest discover -s tests -p 'test_filter_labels.py' -v
+      - run: python -m unittest discover -s tests -p 'test_ema_inventory_coverage.py' -v
