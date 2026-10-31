@@ -1,0 +1,30 @@
+name: Research EMA identity evidence for 30 unique candidates
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: ema-staged-identity-review
+          path: artifact-review
+          run-id: 41244214651
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - run: python tools/ema_identity_evidence.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ema-identity-evidence-30
+          path: reports/ema_identity_evidence_30.*
+          if-no-files-found: warn
+          retention-days: 30
