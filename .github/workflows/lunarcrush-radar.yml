@@ -106,6 +106,10 @@ jobs:
         if: steps.start_date.outputs.run_scan == 'true'
         run: python undervaluation_radar.py
 
+      - name: Audit valuation evidence gaps during selloffs
+        if: steps.start_date.outputs.run_scan == 'true'
+        run: python undervaluation_evidence_gaps.py
+
       - name: Build sortable results view
         if: steps.start_date.outputs.run_scan == 'true'
         run: python sortable_report.py
@@ -231,6 +235,8 @@ jobs:
             reports/history_recovery_queue.json
             reports/radar_sortable.html
             reports/undervaluation_radar.json
+            reports/undervaluation_evidence_gaps.csv
+            reports/undervaluation_evidence_gaps.json
             reports/market_regime.csv
             reports/market_regime_latest.json
             reports/market_regime_inventory.csv
