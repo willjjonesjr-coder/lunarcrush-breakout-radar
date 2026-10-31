@@ -78,6 +78,10 @@ jobs:
         if: steps.start_date.outputs.run_scan == 'true'
         run: python phase1_monitor.py
 
+      - name: Prioritize vetted EMA expansion candidates
+        if: steps.start_date.outputs.run_scan == 'true'
+        run: python tools/ema_expansion_queue.py
+
       - name: Prioritize historical recovery review
         if: steps.start_date.outputs.run_scan == 'true'
         run: python history_recovery_queue.py
@@ -213,6 +217,8 @@ jobs:
             reports/daily_spike_history.json
             reports/volume_surge_latest.json
             reports/ema_coverage_latest.json
+            reports/ema_expansion_review_queue.csv
+            reports/ema_expansion_review_queue.json
             reports/ema_refresh_latest.json
             reports/ema_freshness_audit.json
             reports/production_readiness.json
