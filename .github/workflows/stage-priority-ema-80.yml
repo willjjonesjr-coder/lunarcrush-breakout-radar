@@ -1,0 +1,30 @@
+name: Stage priority 80 EMA histories (identity review required)
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "Maximum priority candidates to stage (1-80)"
+        required: true
+        default: "80"
+permissions:
+  contents: read
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ccxt
+      - name: Stage price histories (no production imports)
+        run: python tools/stage_priority_ema_backfill.py --count "${{ inputs.count }}" --bars 500
+      - name: Upload provisional review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: priority-ema-80-staging
+          path: staging/ema_backfill_80/
+          retention-days: 30
+          if-no-files-found: warn
