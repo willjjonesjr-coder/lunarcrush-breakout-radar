@@ -98,6 +98,10 @@ jobs:
         if: steps.start_date.outputs.run_scan == 'true'
         run: python ema_freshness_audit.py
 
+      - name: Report EMA inventory separately from daily radar selection
+        if: steps.start_date.outputs.run_scan == 'true'
+        run: python ema_inventory_coverage.py
+
       - name: Build independent undervaluation research radar
         if: steps.start_date.outputs.run_scan == 'true'
         run: python undervaluation_radar.py
@@ -141,7 +145,7 @@ jobs:
           DAY=$(date -u +%Y-%m-%d)
           cp reports/breakout_radar.csv "reports/archive/breakout_radar_${DAY}.csv"
           cp reports/breakout_radar.json "reports/archive/breakout_radar_${DAY}.json"
-          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json daily_spike_history.csv daily_spike_history.json volume_surge_latest.json ema_refresh_latest.json production_readiness.json history_gap_triage.json history_recovery_queue.json radar_sortable.html undervaluation_radar.json market_regime.csv market_regime_latest.json market_regime_inventory.csv; do
+          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json daily_spike_history.csv daily_spike_history.json volume_surge_latest.json ema_refresh_latest.json ema_inventory_coverage_latest.json production_readiness.json history_gap_triage.json history_recovery_queue.json radar_sortable.html undervaluation_radar.json market_regime.csv market_regime_latest.json market_regime_inventory.csv; do
             cp "reports/$REPORT" "reports/archive/${DAY}_${REPORT}"
           done
 
@@ -221,6 +225,7 @@ jobs:
             reports/ema_expansion_review_queue.json
             reports/ema_refresh_latest.json
             reports/ema_freshness_audit.json
+            reports/ema_inventory_coverage_latest.json
             reports/production_readiness.json
             reports/history_gap_triage.json
             reports/history_recovery_queue.json
