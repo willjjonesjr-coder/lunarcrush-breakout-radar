@@ -1,0 +1,32 @@
+name: Reconcile provisional EMA coin identities
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: priority-ema-80-staging
+          path: artifact-backfill
+          run-id: 41196139681
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - name: Resolve canonical candidates and evidence gaps
+        run: python tools/reconcile_ema_identities.py
+      - name: Upload identity review report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ema-80-identity-review
+          path: |
+            reports/ema_identity_reconciliation.csv
+            reports/ema_identity_reconciliation.json
+          retention-days: 30
