@@ -7,7 +7,7 @@ permissions:
 jobs:
   evidence:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -20,7 +20,15 @@ jobs:
           run-id: 41244214651
           repository: willjjonesjr-coder/lunarcrush-breakout-radar
           github-token: ${{ github.token }}
-      - run: python tools/ema_identity_evidence.py
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: ema-identity-evidence-30
+          path: previous-evidence
+          run-id: 41305811191
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - run: python tools/ema_identity_evidence.py --resume previous-evidence/ema_identity_evidence_30.csv --delay 15
       - if: always()
         uses: actions/upload-artifact@v4
         with:
