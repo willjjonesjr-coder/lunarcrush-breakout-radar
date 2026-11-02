@@ -1,0 +1,44 @@
+name: Build master EMA identity audit CSV
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: priority-ema-80-staging
+          path: artifact-stage
+          run-id: 41196139681
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: ema-80-identity-review
+          path: artifact-reconciliation
+          run-id: 41230796034
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: ema-identity-evidence-30
+          path: artifact-evidence
+          run-id: 41379357983
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - run: python tools/build_ema_master_identity_audit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ema-master-identity-audit
+          path: |
+            reports/ema_master_identity_audit.csv
+            reports/ema_master_identity_audit.json
+          retention-days: 30
