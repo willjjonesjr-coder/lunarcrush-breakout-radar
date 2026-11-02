@@ -1,0 +1,26 @@
+name: Audit EMA final identity approvals
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: ema-identity-evidence-30
+          path: artifact-evidence
+          run-id: 41379357983
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - run: python tools/audit_ema_identity_approvals.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ema-final-approval-audit
+          path: reports/ema_identity_approval_audit.json
