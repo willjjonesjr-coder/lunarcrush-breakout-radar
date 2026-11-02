@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-11-01",
+  "as_of": "2026-11-02",
   "verified_inventory_records": 47,
   "fresh_eligible_inventory": 47,
-  "verified_in_current_300": 42,
-  "ema_evaluable_in_current_300": 42,
-  "off_universe_fresh_eligible": 5,
-  "off_universe_technical_confirmed": 1,
+  "verified_in_current_300": 38,
+  "ema_evaluable_in_current_300": 38,
+  "off_universe_fresh_eligible": 9,
+  "off_universe_technical_confirmed": 0,
   "alert_policy": "Report only. Off-universe technical results never qualify for alerts or rankings.",
   "assets": [
     {
@@ -14,7 +14,7 @@
       "pair": "BTC/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -25,7 +25,7 @@
       "pair": "ETH/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -36,7 +36,7 @@
       "pair": "XRP/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -47,7 +47,7 @@
       "pair": "LTC/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -58,7 +58,7 @@
       "pair": "BCH/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -69,7 +69,7 @@
       "pair": "BNB/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -80,7 +80,7 @@
       "pair": "XLM/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -91,7 +91,7 @@
       "pair": "ADA/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -102,7 +102,7 @@
       "pair": "TRX/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -113,7 +113,7 @@
       "pair": "DASH/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -124,7 +124,7 @@
       "pair": "LINK/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -133,12 +133,18 @@
       "coin_id": "19",
       "exchange": "kraken",
       "pair": "ATOM/USD",
-      "selected_in_300": true,
+      "selected_in_300": false,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
-      "off_universe_technical": null
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 1.6746221111,
+        "ema100": 1.6664293544,
+        "ema200": 1.7313205816
+      }
     },
     {
       "coin_id": "20",
@@ -146,7 +152,7 @@
       "pair": "XTZ/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -157,7 +163,7 @@
       "pair": "ZEC/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA CONFIRMED",
       "off_universe_technical": null
@@ -168,7 +174,7 @@
       "pair": "DOGE/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -179,7 +185,7 @@
       "pair": "FET/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -190,7 +196,7 @@
       "pair": "STX/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -201,7 +207,7 @@
       "pair": "LUNC/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -212,7 +218,7 @@
       "pair": "FIL/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -223,15 +229,15 @@
       "pair": "RUNE/USD",
       "selected_in_300": false,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
-      "technical_status": "EMA CONFIRMED",
+      "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": {
-        "technical_status": "EMA CONFIRMED",
-        "technical_reasons": "",
-        "ema50": 0.6301882517,
-        "ema100": 0.5804687713,
-        "ema200": 0.5356539425
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA50 slope; Price below EMA50 support",
+        "ema50": 0.6271220457,
+        "ema100": 0.5799050332,
+        "ema200": 0.5358165899
       }
     },
     {
@@ -240,7 +246,7 @@
       "pair": "AVAX/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -251,7 +257,7 @@
       "pair": "SHIB/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -262,7 +268,7 @@
       "pair": "SOL/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -273,7 +279,7 @@
       "pair": "NEAR/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA CONFIRMED",
       "off_universe_technical": null
@@ -284,27 +290,21 @@
       "pair": "INJ/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
-      "technical_status": "EMA CONFIRMED",
+      "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
     },
     {
       "coin_id": "9887",
       "exchange": "kraken",
       "pair": "JASMY/USD",
-      "selected_in_300": false,
+      "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
-      "off_universe_technical": {
-        "technical_status": "EMA NOT CONFIRMED",
-        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
-        "ema50": 0.0045359209,
-        "ema100": 0.0045872205,
-        "ema200": 0.0048890123
-      }
+      "off_universe_technical": null
     },
     {
       "coin_id": "11880",
@@ -312,7 +312,7 @@
       "pair": "RAY/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -323,7 +323,7 @@
       "pair": "ICP/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -332,23 +332,35 @@
       "coin_id": "13238",
       "exchange": "kraken",
       "pair": "PENDLE/USD",
-      "selected_in_300": true,
+      "selected_in_300": false,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
-      "off_universe_technical": null
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA50 slope; Price below EMA50 support",
+        "ema50": 2.064432222,
+        "ema100": 1.9674735041,
+        "ema200": 1.8417217402
+      }
     },
     {
       "coin_id": "14226",
       "exchange": "kraken",
       "pair": "CVX/USD",
-      "selected_in_300": true,
+      "selected_in_300": false,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
-      "off_universe_technical": null
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA50 slope; Price below EMA50 support",
+        "ema50": 2.1343119427,
+        "ema100": 2.0002374943,
+        "ema200": 1.8853927192
+      }
     },
     {
       "coin_id": "42935",
@@ -356,7 +368,7 @@
       "pair": "FLOKI/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -365,18 +377,12 @@
       "coin_id": "52238",
       "exchange": "kraken",
       "pair": "KAS/USD",
-      "selected_in_300": false,
+      "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
-      "off_universe_technical": {
-        "technical_status": "EMA NOT CONFIRMED",
-        "technical_reasons": "EMA50 slope; Price below EMA50 support",
-        "ema50": 0.0366253001,
-        "ema100": 0.0351450972,
-        "ema200": 0.0346933513
-      }
+      "off_universe_technical": null
     },
     {
       "coin_id": "70056",
@@ -384,7 +390,7 @@
       "pair": "SUI/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -395,7 +401,7 @@
       "pair": "STRK/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -406,7 +412,7 @@
       "pair": "TAO/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -417,7 +423,7 @@
       "pair": "FLR/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -428,7 +434,7 @@
       "pair": "PEPE/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -437,12 +443,18 @@
       "coin_id": "145271",
       "exchange": "kraken",
       "pair": "SEI/USD",
-      "selected_in_300": true,
+      "selected_in_300": false,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
-      "off_universe_technical": null
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 0.0573707539,
+        "ema100": 0.055965828,
+        "ema200": 0.0597408758
+      }
     },
     {
       "coin_id": "146377",
@@ -450,7 +462,7 @@
       "pair": "AERO/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -461,7 +473,7 @@
       "pair": "JTO/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -472,7 +484,7 @@
       "pair": "SPX/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -481,12 +493,18 @@
       "coin_id": "149895",
       "exchange": "kraken",
       "pair": "ETHFI/USD",
-      "selected_in_300": true,
+      "selected_in_300": false,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
-      "off_universe_technical": null
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA50 slope; Price below EMA50 support",
+        "ema50": 0.6525718528,
+        "ema100": 0.6064246045,
+        "ema200": 0.5656013321
+      }
     },
     {
       "coin_id": "151267",
@@ -494,7 +512,7 @@
       "pair": "KMNO/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": null
@@ -505,9 +523,9 @@
       "pair": "ZRO/USD",
       "selected_in_300": true,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
-      "technical_status": "EMA NOT CONFIRMED",
+      "technical_status": "EMA CONFIRMED",
       "off_universe_technical": null
     },
     {
@@ -516,15 +534,15 @@
       "pair": "VIRTUAL/USD",
       "selected_in_300": false,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": {
         "technical_status": "EMA NOT CONFIRMED",
         "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
-        "ema50": 0.6747789558,
-        "ema100": 0.6729649874,
-        "ema200": 0.6906014187
+        "ema50": 0.6716781184,
+        "ema100": 0.671555431,
+        "ema200": 0.692076717
       }
     },
     {
@@ -533,27 +551,33 @@
       "pair": "PENGU/USD",
       "selected_in_300": false,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
       "off_universe_technical": {
         "technical_status": "EMA NOT CONFIRMED",
         "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
-        "ema50": 0.0079969871,
-        "ema100": 0.0078940634,
-        "ema200": 0.0080077068
+        "ema50": 0.0079685969,
+        "ema100": 0.0078823525,
+        "ema200": 0.0080121955
       }
     },
     {
       "coin_id": "159730",
       "exchange": "kraken",
       "pair": "VVV/USD",
-      "selected_in_300": true,
+      "selected_in_300": false,
       "fresh_300_bar_history": true,
-      "last_completed_candle": "2026-10-31",
+      "last_completed_candle": "2026-11-01",
       "blocker": null,
       "technical_status": "EMA NOT CONFIRMED",
-      "off_universe_technical": null
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA50 slope; Price below EMA50 support",
+        "ema50": 23.8386218386,
+        "ema100": 21.419036432,
+        "ema200": 17.4357095759
+      }
     }
   ]
 }
