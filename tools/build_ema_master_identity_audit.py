@@ -10,10 +10,11 @@ APPROVALS=Path("config/ema_identity_approvals.json")
 OUT=Path("reports/ema_master_identity_audit.csv")
 FIELDS=["coin_id","lunarcrush_symbol","lunarcrush_name","lunarcrush_network_raw",
 "lunarcrush_contract_raw","coingecko_id","coingecko_symbol_raw","coingecko_name_raw",
-"coingecko_platform_contracts_raw","project_network_raw","project_contract_raw",
+"coingecko_platform_contracts_raw","coingecko_networks_raw","project_network_raw","project_contract_raw",
 "exchange","exchange_pair","exchange_asset_id_raw","exchange_network_raw",
 "exchange_contract_raw","staging_status","identity_candidate_status",
 "coingecko_listing_status","lunarcrush_canonical_comparison",
+"lunarcrush_coingecko_name_comparison","lunarcrush_coingecko_symbol_comparison","coingecko_id_cross_source_comparison",
 "project_coingecko_contract_comparison","project_coingecko_network_comparison",
 "exchange_canonical_comparison","project_evidence_url","exchange_evidence_url",
 "coingecko_evidence_url","reviewer","reviewed_at","approval_record_status",
@@ -26,6 +27,17 @@ def records(path):
 def compare(a,b):
     if not a or not b: return "UNKNOWN"
     return "MATCH" if a.strip().casefold()==b.strip().casefold() else "MISMATCH"
+
+def compare_contract(a, b, network):
+    if not a or not b:
+        return "UNKNOWN"
+    # EVM hex addresses are case-insensitive identifiers; case is meaningful
+    # on Base58 chains such as Solana.
+    evm = str(network).strip().casefold() in ("ethereum","eth","base","arbitrum-one","polygon-pos","binance-smart-chain")
+    if evm and str(a).startswith("0x") and str(b).startswith("0x"):
+        return compare(a,b)
+    return "MATCH" if a.strip()==b.strip() else "MISMATCH"
+
 
 def make(stage,recon,evidence,approvals):
     re={str(x["coin_id"]):x for x in recon}
@@ -45,13 +57,22 @@ def make(stage,recon,evidence,approvals):
         cg_contract=str(platforms.get(pn,"")) if pn else ""
         if isinstance(platforms.get(pn),dict):
             cg_contract=str(platforms[pn].get("contract_address",""))
-        canonical=compare(x.get("symbol",""),a.get("symbol",""))
-        # Comparing shared input symbol does not substantiate canonical identity.
-        canonical="UNKNOWN" if canonical=="MATCH" else canonical
-        project_contract=compare(pc,cg_contract)
-        project_network="UNKNOWN"  # CoinGecko platform key may be an alias, not a normalized chain ID.
-        exchange_identity="UNKNOWN"  # A ticker/pair listing alone never proves token contract identity.
+        # Independent canonical values must come from CoinGecko rather than
+        # copying the staging record back into the comparison.
+        cg_symbol = a.get("coingecko_symbol","") or e.get("coingecko_symbol","")
+        cg_name = a.get("coingecko_name","") or e.get("coingecko_name","")
+        symbol_result = compare(x.get("symbol",""),cg_symbol)
+        name_result = compare(x.get("name",""),cg_name)
+        canonical = ("MISMATCH" if "MISMATCH" in (name_result,symbol_result) else
+                     "MATCH" if name_result=="MATCH" and symbol_result=="MATCH" else "UNKNOWN")
+        project_contract=compare_contract(pc,cg_contract,pn)
+        project_network="MATCH" if pn and pn in platforms else "UNKNOWN"
+        exchange_identity="UNKNOWN"  # Ticker listing never proves token contract identity.
+        cross_source_id = compare(a.get("coingecko_id",""),e.get("coingecko_id",""))
         gaps=[]
+        if not cg_symbol: gaps.append("independent CoinGecko symbol not captured")
+        if not cg_name: gaps.append("independent CoinGecko name not captured")
+        if not a.get("coingecko_id") or not e.get("coingecko_id"): gaps.append("cross-source CoinGecko ID comparison unavailable")
         for label,val in [("project contract/native chain",pc or p.get("native_chain")),
                           ("official project evidence",p.get("project_evidence_url")),
                           ("independent exchange evidence",p.get("exchange_evidence_url")),
@@ -59,16 +80,17 @@ def make(stage,recon,evidence,approvals):
                           ("reviewer",p.get("reviewer"))]:
             if not val: gaps.append(label)
         status="PENDING"
-        if any(v=="MISMATCH" for v in (canonical,project_contract,project_network,exchange_identity)):
+        if any(v=="MISMATCH" for v in (canonical,project_contract,project_network,exchange_identity,cross_source_id)):
             status="AMBIGUOUS"
         row=dict.fromkeys(FIELDS,"")
         row.update(coin_id=cid,lunarcrush_symbol=x.get("symbol",""),lunarcrush_name=x.get("name",""),
             lunarcrush_network_raw=p.get("lunarcrush_network",""),
             lunarcrush_contract_raw=p.get("lunarcrush_contract",""),
             coingecko_id=e.get("coingecko_id") or a.get("coingecko_id",""),
-            coingecko_symbol_raw=a.get("coingecko_symbol",""),
-            coingecko_name_raw=a.get("coingecko_name",""),
+            coingecko_symbol_raw=cg_symbol,
+            coingecko_name_raw=cg_name,
             coingecko_platform_contracts_raw=json.dumps(platforms,sort_keys=True),
+            coingecko_networks_raw=json.dumps(sorted(platforms)),
             project_network_raw=pn,project_contract_raw=pc,
             exchange=x.get("exchange",""),exchange_pair=x.get("pair",""),
             exchange_asset_id_raw=p.get("exchange_asset_id",""),
@@ -77,6 +99,9 @@ def make(stage,recon,evidence,approvals):
             staging_status=x.get("status",""),identity_candidate_status=a.get("identity_status",""),
             coingecko_listing_status=e.get("coingecko_exchange_listing",""),
             lunarcrush_canonical_comparison=canonical,
+            lunarcrush_coingecko_name_comparison=name_result,
+            lunarcrush_coingecko_symbol_comparison=symbol_result,
+            coingecko_id_cross_source_comparison=cross_source_id,
             project_coingecko_contract_comparison=project_contract,
             project_coingecko_network_comparison=project_network,
             exchange_canonical_comparison=exchange_identity,
