@@ -15,7 +15,7 @@ from pathlib import Path
 
 URL = "https://api.coingecko.com/api/v3/coins/list?include_platform=true"
 FIELDS = ("coin_id","symbol","name","exchange","pair","status","coingecko_id",
-          "coingecko_name","platform_contracts","identity_status","evidence_needed","reason")
+          "coingecko_name","coingecko_symbol","platform_contracts","identity_status","evidence_needed","reason")
 
 def reconcile(stage_rows, catalog, registry):
     by_symbol = defaultdict(list)
@@ -34,6 +34,7 @@ def reconcile(stage_rows, catalog, registry):
         canonical = exact[0] if len(exact)==1 else {}
         item.update(coingecko_id=canonical.get("id",""),
                     coingecko_name=canonical.get("name",""),
+                    coingecko_symbol=canonical.get("symbol",""),
                     platform_contracts=json.dumps(canonical.get("platforms",{}),sort_keys=True),
                     identity_status=("EXISTING REGISTRY EVIDENCE — REVIEW" if same else
                                      "UNIQUE EXACT CANDIDATE — NOT VERIFIED" if len(exact)==1 else
