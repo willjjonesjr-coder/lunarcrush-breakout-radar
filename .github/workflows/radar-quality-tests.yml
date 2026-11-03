@@ -10,6 +10,8 @@ on:
       - 'tests/test_radar_quality.py'
       - 'tests/test_filter_labels.py'
       - 'tests/test_ema_inventory_coverage.py'
+      - 'tests/test_radar_cohort_quality.py'
+      - 'radar_cohort_quality.py'
       - 'ema_inventory_coverage.py'
       - 'ema_freshness_audit.py'
       - 'phase2_safeguards.py'
@@ -31,3 +33,4 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_daily_spikes.py' -v
       - run: python -m unittest discover -s tests -p 'test_filter_labels.py' -v
       - run: python -m unittest discover -s tests -p 'test_ema_inventory_coverage.py' -v
+      - run: python -m unittest discover -s tests -p 'test_radar_cohort_quality.py' -v

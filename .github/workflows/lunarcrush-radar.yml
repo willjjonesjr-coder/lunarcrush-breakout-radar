@@ -110,6 +110,10 @@ jobs:
         if: steps.start_date.outputs.run_scan == 'true'
         run: python undervaluation_evidence_gaps.py
 
+      - name: Diagnose universe turnover versus same-coin data regressions
+        if: steps.start_date.outputs.run_scan == 'true'
+        run: python radar_cohort_quality.py
+
       - name: Build sortable results view
         if: steps.start_date.outputs.run_scan == 'true'
         run: python sortable_report.py
@@ -149,7 +153,7 @@ jobs:
           DAY=$(date -u +%Y-%m-%d)
           cp reports/breakout_radar.csv "reports/archive/breakout_radar_${DAY}.csv"
           cp reports/breakout_radar.json "reports/archive/breakout_radar_${DAY}.json"
-          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json daily_spike_history.csv daily_spike_history.json volume_surge_latest.json ema_refresh_latest.json ema_inventory_coverage_latest.json production_readiness.json history_gap_triage.json history_recovery_queue.json radar_sortable.html undervaluation_radar.json market_regime.csv market_regime_latest.json market_regime_inventory.csv; do
+          for REPORT in radar_candidates.csv radar_candidates.json separated_assets.csv separated_assets.json radar_coverage.json radar_cohort_quality_latest.json daily_spike_history.csv daily_spike_history.json volume_surge_latest.json ema_refresh_latest.json ema_inventory_coverage_latest.json production_readiness.json history_gap_triage.json history_recovery_queue.json radar_sortable.html undervaluation_radar.json market_regime.csv market_regime_latest.json market_regime_inventory.csv; do
             cp "reports/$REPORT" "reports/archive/${DAY}_${REPORT}"
           done
 
@@ -221,6 +225,7 @@ jobs:
             reports/separated_assets.csv
             reports/separated_assets.json
             reports/radar_coverage.json
+            reports/radar_cohort_quality_latest.json
             reports/daily_spike_history.csv
             reports/daily_spike_history.json
             reports/volume_surge_latest.json
