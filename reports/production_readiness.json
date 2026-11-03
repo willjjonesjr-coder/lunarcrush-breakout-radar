@@ -1,14 +1,14 @@
 {
-  "as_of": "2026-11-02",
+  "as_of": "2026-11-03",
   "baseline": {
     "required_dates": [
-      "2026-10-26",
       "2026-10-27",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
       "2026-10-31",
-      "2026-11-01"
+      "2026-11-01",
+      "2026-11-02"
     ],
     "present_dates": [
       "2026-10-27",
@@ -16,24 +16,24 @@
       "2026-10-29",
       "2026-10-30",
       "2026-10-31",
-      "2026-11-01"
+      "2026-11-01",
+      "2026-11-02"
     ],
-    "missing_dates": [
-      "2026-10-26"
+    "missing_dates": [],
+    "ready": true,
+    "ready_segments": [
+      "Tracked universe proxy",
+      "BTC",
+      "ETH",
+      "DeFi basket",
+      "AI basket",
+      "NFT/Gaming basket",
+      "Layer 1 basket",
+      "Layer 2 basket",
+      "Memecoin basket",
+      "RWA basket"
     ],
-    "ready": false,
-    "ready_segments": [],
     "blocked_segments": {
-      "Tracked universe proxy": "INSUFFICIENT BASELINE",
-      "BTC": "INSUFFICIENT BASELINE",
-      "ETH": "INSUFFICIENT BASELINE",
-      "DeFi basket": "INSUFFICIENT BASELINE",
-      "AI basket": "INSUFFICIENT BASELINE",
-      "NFT/Gaming basket": "INSUFFICIENT BASELINE",
-      "Layer 1 basket": "INSUFFICIENT BASELINE",
-      "Layer 2 basket": "INSUFFICIENT BASELINE",
-      "Memecoin basket": "INSUFFICIENT BASELINE",
-      "RWA basket": "INSUFFICIENT BASELINE",
       "DeFi basket (vetted IDs)": "INSUFFICIENT BASELINE",
       "AI basket (vetted IDs)": "INSUFFICIENT BASELINE",
       "NFT/Gaming basket (vetted IDs)": "INSUFFICIENT BASELINE",
@@ -46,20 +46,20 @@
   },
   "history": {
     "attempted": 300,
-    "complete": 226,
-    "partial": 41,
-    "insufficient": 33,
-    "complete_pct": 75.3,
+    "complete": 234,
+    "partial": 42,
+    "insufficient": 24,
+    "complete_pct": 78.0,
     "missing_fields": {
-      "sentiment": 51,
-      "spam": 68,
-      "close": 20,
-      "galaxy_score": 21,
-      "volume_24h": 20,
-      "contributors_active": 21,
-      "interactions": 21,
-      "posts_active": 21,
-      "social_dominance": 20
+      "sentiment": 40,
+      "spam": 65,
+      "close": 11,
+      "contributors_active": 12,
+      "galaxy_score": 11,
+      "interactions": 12,
+      "posts_active": 12,
+      "social_dominance": 11,
+      "volume_24h": 11
     }
   },
   "next_actions": [
