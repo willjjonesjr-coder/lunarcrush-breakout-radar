@@ -11,6 +11,9 @@ on:
       - 'tests/test_filter_labels.py'
       - 'tests/test_ema_inventory_coverage.py'
       - 'tests/test_radar_cohort_quality.py'
+      - 'tests/test_ema_master_identity_audit.py'
+      - 'tools/build_ema_master_identity_audit.py'
+      - 'tools/reconcile_ema_identities.py'
       - 'radar_cohort_quality.py'
       - 'ema_inventory_coverage.py'
       - 'ema_freshness_audit.py'
@@ -34,3 +37,4 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_filter_labels.py' -v
       - run: python -m unittest discover -s tests -p 'test_ema_inventory_coverage.py' -v
       - run: python -m unittest discover -s tests -p 'test_radar_cohort_quality.py' -v
+      - run: python -m unittest discover -s tests -p 'test_ema_master_identity_audit.py' -v
