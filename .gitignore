@@ -4,3 +4,7 @@
 __pycache__/
 *.pyc
 .venv/
+
+
+# Full backtest detail is uploaded as an Actions artifact, not committed.
+/reports/backtest_artifacts/
