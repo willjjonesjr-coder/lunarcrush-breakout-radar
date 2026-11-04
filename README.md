@@ -81,6 +81,25 @@ Example:
 
 The backtest is deliberately point-in-time: features use only data available at T, and forward returns use later observations.
 
+### Backtest publication
+
+The Actions workflow commits only `reports/backtest.csv` and
+`reports/backtest_tech_summary.csv`. Full per-signal detail is written to
+`reports/backtest_artifacts/backtest_per_coin.csv` and uploaded alongside both
+summaries in the `anti-pump-backtest-results` artifact (30-day retention).
+Download that artifact from the completed run for current detailed results.
+Older tracked `reports/backtest_per_coin.csv`, `backtest_events.csv`, and
+`backtest_matrix.csv` files are historical snapshots, not refreshed by this workflow.
+Local CLI defaults remain unchanged.
+
+Publication checks the Git index before committing: only the two summary paths
+are allowed, and each staged blob must be at most 10 MiB. Oversized summaries or
+unexpected staged paths stop publication with a clear error after the results
+have been uploaded. The check reads staged blob sizes, not working-tree sizes.
+Run its regression tests with:
+
+`python -m unittest discover -s tests -p test_backtest_publication.py -v`
+
 ## Important
 
 ## GitHub Actions Workflow Catalog
@@ -90,7 +109,7 @@ The repository includes multiple workflows. Two are production-facing (`LunarCru
 | Workflow | File | Trigger(s) | Branch Scope | Purpose | Main Outputs |
 |---|---|---|---|---|---|
 | LunarCrush Breakout Radar | `.github/workflows/lunarcrush-radar.yml` | `schedule` (daily), `workflow_dispatch` | default branch | Runs the main LunarCrush scanner and publishes ranked breakout radar files. | `reports/breakout_radar.csv`, `reports/breakout_radar.json`, `reports/archive/*`, artifact `lunarcrush-breakout-radar` |
-| Anti-pump Backtest Analysis | `.github/workflows/backtest.yml` | `schedule` (weekly), `workflow_dispatch` with inputs (`thresholds`, `horizons`, `strategy`) | default branch | Runs configurable backtests on saved data and uploads/commits backtest result CSVs. | `reports/backtest*.csv`, artifact `anti-pump-backtest-results` |
+| Anti-pump Backtest Analysis | `.github/workflows/backtest.yml` | `schedule` (weekly), `workflow_dispatch` with inputs (`thresholds`, `horizons`, `strategy`) | default branch | Runs configurable backtests, uploads full results, and commits only small summaries. | `reports/backtest*.csv`, artifact `anti-pump-backtest-results` |
 | Historical Signals Smoke Test | `.github/workflows/historical-smoke.yml` | `push` (selected paths), `workflow_dispatch` (`top`) | `feat/historical-signals` | Fast sanity check for historical backfill and EMA eligibility diagnostics. | `reports/ema_eligibility_diagnostics.csv.gz`, `reports/backfill_inventory.csv`, `data_price/`, `logs/backfill.log` |
 | BTC ETH Regime Data Validation | `.github/workflows/btc-eth-regime.yml` | `push` (selected paths), `workflow_dispatch` | `feat/historical-signals` | Validates BTC/ETH data pull and computes a BTC/ETH-only regime preview. | `data_price/btc.csv`, `data_price/eth.csv`, `reports/btc_eth_inventory.csv`, `reports/btc_eth_regime_preview.csv` |
 | Provisional Crypto Market Breadth | `.github/workflows/market-breadth.yml` | `push` (selected paths), `workflow_dispatch` | `feat/historical-signals` | Builds provisional universe and computes broader market breadth regime preview. | `reports/market_breadth_provisional.csv`, inventories/logs, runtime symbol mapping |
@@ -127,3 +146,4 @@ See [PROVISIONAL_EMA.md](PROVISIONAL_EMA.md) for the opt-in lighter identity pat
 It requires unique names and symbols plus CoinGecko exchange/pair corroboration,
 flags missing contract documentation, and keeps provisional histories and EMA
 research separate from verified inventory and production confirmation.
+

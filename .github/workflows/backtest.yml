@@ -51,6 +51,7 @@ jobs:
           python backtest.py \
             --data-dir data \
             --output reports/backtest.csv \
+            --per-signal reports/backtest_artifacts/backtest_per_coin.csv \
             --thresholds "${{ inputs.thresholds || '20,25,30,35,40' }}" \
             --horizons "${{ inputs.horizons || '7,14,30' }}" \
             --strategy "${{ inputs.strategy || 'all' }}"
@@ -60,15 +61,19 @@ jobs:
         with:
           name: anti-pump-backtest-results
           path: |
-            reports/backtest*.csv
+            reports/backtest.csv
+            reports/backtest_tech_summary.csv
+            reports/backtest_artifacts/backtest_per_coin.csv
           retention-days: 30
+          if-no-files-found: error
 
       - name: Commit backtest results (if changed)
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports/backtest*.csv
+          git add -- reports/backtest.csv reports/backtest_tech_summary.csv
+          python tools/check_backtest_publication.py
           if git diff --cached --quiet; then
             echo "No backtest changes to commit."
           else
@@ -76,3 +81,4 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME:-main}"
             git push origin "HEAD:${GITHUB_REF_NAME:-main}"
           fi
+
