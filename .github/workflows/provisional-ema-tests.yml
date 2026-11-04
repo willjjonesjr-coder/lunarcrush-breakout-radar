@@ -1,0 +1,23 @@
+name: Provisional EMA tests
+on:
+  pull_request:
+    paths:
+      - 'provisional_ema.py'
+      - 'sortable_report.py'
+      - 'tests/test_provisional_ema.py'
+      - 'tests/test_provisional_report.py'
+      - '.github/workflows/provisional-ema*.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -v
+      - run: node tests/test_sort_rows.js
