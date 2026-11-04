@@ -30,6 +30,14 @@ LABELS = {
  'confirmation_label':'Breakout confirmation',
  'confirmation_blockers':'Confirmation cautions',
  'technical_status':'EMA technical status',
+ 'provisional_status':'Provisional identity/history status',
+ 'provisional_technical_status':'Provisional EMA research (unverified)',
+ 'provisional_review_flags':'Provisional review cautions',
+ 'provisional_reason':'Provisional history/review reason',
+ 'provisional_exchange_pair':'Provisional exchange / pair',
+ 'provisional_ema50':'Provisional EMA 50 ($)',
+ 'provisional_ema100':'Provisional EMA 100 ($)',
+ 'provisional_ema200':'Provisional EMA 200 ($)',
  'technical_reasons':'EMA technical cautions',
  'ema50':'EMA 50 ($)', 'ema100':'EMA 100 ($)', 'ema200':'EMA 200 ($)',
  'undervaluation_score':'Undervaluation research score (provisional)',
@@ -51,7 +59,9 @@ PERCENT = {'market_regime_coverage','volume_daily_accel','engagement_daily_accel
  'fundamentals_circulating_to_total'}
 TEXT = {'market_cap_label','liquidity_label','price_extension_label','history_selection','finalist_label','market_regime_classification','market_regime_status','symbol','name','stage','fundamentals_status','fundamentals_confidence',
         'daily_spike_flag','data_status','asset_type','liquidity_tier','confirmation_label','confirmation_blockers','technical_status','technical_reasons','undervaluation_classification','undervaluation_confidence','undervaluation_price_context','undervaluation_sector','undervaluation_reasons'}
-DEFAULT = ['symbol','name','breakout_score','undervaluation_score','undervaluation_classification','confirmation_label','technical_status','liquidity_adjusted_score','liquidity_tier','volume_daily_accel','engagement_daily_accel',
+TEXT.update({'provisional_status', 'provisional_technical_status', 'provisional_review_flags',
+             'provisional_reason', 'provisional_exchange_pair'})
+DEFAULT = ['symbol','name','breakout_score','undervaluation_score','undervaluation_classification','confirmation_label','technical_status','provisional_technical_status','liquidity_adjusted_score','liquidity_tier','volume_daily_accel','engagement_daily_accel',
            'volume_accel','engagement_accel','price_change_7d','market_cap_label','liquidity_label','data_status','fundamentals_status']
 
 
@@ -96,6 +106,16 @@ def payload(reports):
     if (reports/'radar_candidates.json').exists():groups['All candidates']=candidates
     if (reports/'separated_assets.json').exists():groups['Separated assets']=read_rows(reports/'separated_assets.json')
     groups = {name: [add_liquidity_proxy(r) for r in group] for name, group in groups.items()}
+    # Research fields never replace verified technical status, scores or alerts.
+    from provisional_ema import report_fields
+    provisional = report_fields(reports/'provisional_ema'/'report.json')
+    for group in groups.values():
+        for row in group:
+            evidence = provisional.get(str(row.get('id')))
+            if evidence:
+                from provisional_ema import identity_key
+                if identity_key(evidence) == identity_key(row):
+                    row.update({k: v for k, v in evidence.items() if k.startswith('provisional_')})
     rows = [r for group in groups.values() for r in group]
     fields = dict.fromkeys(list(LABELS) + [k for r in rows for k,v in r.items()
                                           if type(v) in (int,float) and k not in ('id','fundamentals_version')])
@@ -130,3 +150,4 @@ def main():
 
 
 if __name__=='__main__':main()
+

@@ -119,3 +119,11 @@ For historical/regime research (feature branch):
 LunarCrush data can be revised, and cached universe data can lag the live market.
 
 This backtest explores fixed thresholds rather than validating the live cross-sectional ranking. It uses currently selected coins and revised historical data, so selection and survivorship bias remain. Horizons count daily observations. Returns exclude fees and slippage; drawdown uses daily closes relative to entry. Signals overlap. On iPad run Actions → LunarCrush Backtest after a successful scan.
+
+
+## Provisional name-and-symbol EMA research
+
+See [PROVISIONAL_EMA.md](PROVISIONAL_EMA.md) for the opt-in lighter identity path.
+It requires unique names and symbols plus CoinGecko exchange/pair corroboration,
+flags missing contract documentation, and keeps provisional histories and EMA
+research separate from verified inventory and production confirmation.
