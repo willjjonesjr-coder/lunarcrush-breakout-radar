@@ -48,7 +48,7 @@ jobs:
 
       - name: Run anti-pump backtest
         run: |
-          python backtest.py \
+          python -u backtest.py \
             --data-dir data \
             --output reports/backtest.csv \
             --per-signal reports/backtest_artifacts/backtest_per_coin.csv \

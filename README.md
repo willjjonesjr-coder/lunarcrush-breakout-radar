@@ -81,6 +81,35 @@ Example:
 
 The backtest is deliberately point-in-time: features use only data available at T, and forward returns use later observations.
 
+### Backtest runtime and parity
+
+Historical rolling and EMA features are computed once per coin, without using
+future observations. Prior and forward returns are cached once per coin/horizon
+and reused across the matrix. The live scanner's scoring and trading filters are
+unchanged. Return endpoints still use the last close at/before the prior target
+and the first close at/after the forward target, preserving missing-price rules.
+
+The CLI streams per-signal detail instead of retaining millions of dictionaries.
+It reports elapsed time and progress for features, dates scored, return caching,
+each matrix combination, and output completion. Repeated observations across
+thresholds remain in both detail and technical summaries, exactly as before.
+The Python `build_backtest_records` API still returns hit dictionaries by default.
+
+Run the correctness and publication checks together:
+
+`python -m unittest discover -s tests -p 'test_backtest*.py' -v`
+
+To measure before/after runtime and verify exact output parity on an evenly
+spaced sample of saved histories, export the original code and run:
+
+`git show 5cded1f55ed8a663deaba136ca3d97f6b9483f88:backtest.py > /tmp/backtest_before.py`
+
+`python tools/benchmark_backtest.py --baseline /tmp/backtest_before.py --data-dir data --coins 10`
+
+The benchmark checks all 45 default combinations and exact CSV contents, prints
+input hashes and package versions, and never changes source histories or reports.
+Full-universe timing should use the normal CLI with temporary output paths.
+
 ### Backtest publication
 
 The Actions workflow commits only `reports/backtest.csv` and
