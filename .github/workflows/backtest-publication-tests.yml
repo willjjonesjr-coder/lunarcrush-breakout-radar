@@ -3,6 +3,11 @@ on:
   pull_request:
     paths:
       - 'backtest.py'
+      - 'backtest_features.py'
+      - 'tools/benchmark_backtest.py'
+      - 'tests/test_backtest_features.py'
+      - 'tests/test_backtest_runtime.py'
+      - 'tests/backtest_reference.py'
       - 'signals.py'
       - 'requirements.txt'
       - '.gitignore'
@@ -22,4 +27,4 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: python -m unittest discover -s tests -p 'test_backtest_publication.py' -v
+      - run: python -m unittest discover -s tests -p 'test_backtest*.py' -v
