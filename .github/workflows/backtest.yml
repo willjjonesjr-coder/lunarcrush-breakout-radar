@@ -46,6 +46,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Audit EMA200 backtest input eligibility
+        run: python tools/backtest_ema_eligibility.py --data-dir data --output reports/backtest_ema_eligibility.json
+
       - name: Run anti-pump backtest
         run: |
           python -u backtest.py \
@@ -63,6 +66,7 @@ jobs:
           path: |
             reports/backtest.csv
             reports/backtest_tech_summary.csv
+            reports/backtest_ema_eligibility.json
             reports/backtest_artifacts/backtest_per_coin.csv
           retention-days: 30
           if-no-files-found: error
