@@ -5,9 +5,11 @@ Does not substitute exchange candles or change trading signals. A zero result in
 a technical strategy is only interpretable if sufficient EMA histories exist.
 """
 import argparse
-import csv
 import json
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from backtest import load_history_map
 
