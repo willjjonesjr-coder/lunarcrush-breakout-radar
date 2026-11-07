@@ -1,0 +1,71 @@
+{
+  "as_of": "2026-11-07",
+  "baseline": {
+    "required_dates": [
+      "2026-10-31",
+      "2026-11-01",
+      "2026-11-02",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-05",
+      "2026-11-06"
+    ],
+    "present_dates": [
+      "2026-10-31",
+      "2026-11-01",
+      "2026-11-02",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-05",
+      "2026-11-06"
+    ],
+    "missing_dates": [],
+    "ready": true,
+    "ready_segments": [
+      "Tracked universe proxy",
+      "BTC",
+      "ETH",
+      "DeFi basket",
+      "AI basket",
+      "NFT/Gaming basket",
+      "Layer 1 basket",
+      "Layer 2 basket",
+      "Memecoin basket",
+      "RWA basket"
+    ],
+    "blocked_segments": {
+      "DeFi basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "AI basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "NFT/Gaming basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "Layer 1 basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "Layer 2 basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "Memecoin basket (vetted IDs)": "INSUFFICIENT BASELINE",
+      "RWA basket (vetted IDs)": "INSUFFICIENT BASELINE"
+    },
+    "note": "Do not synthesize missing snapshots from 24h rolling volumes or historical coin candles."
+  },
+  "history": {
+    "attempted": 300,
+    "complete": 232,
+    "partial": 41,
+    "insufficient": 27,
+    "complete_pct": 77.3,
+    "missing_fields": {
+      "sentiment": 35,
+      "spam": 66,
+      "contributors_active": 16,
+      "galaxy_score": 14,
+      "interactions": 16,
+      "posts_active": 16,
+      "social_dominance": 14,
+      "close": 12,
+      "volume_24h": 12
+    }
+  },
+  "next_actions": [
+    "Collect one UTC-dated snapshot daily until seven preceding dates are present.",
+    "Audit missing spam, sentiment, and social-history fields before increasing the API budget.",
+    "Validate coin IDs and reported-volume provenance before enabling automated alerts.",
+    "Do not interpret a successful workflow as a confirmed breakout."
+  ]
+}
