@@ -1,0 +1,942 @@
+{
+  "incomplete_candidates": 57,
+  "issue_categories": {
+    "PROVIDER FIELD GAPS": 45,
+    "MISSING DAILY BARS": 12
+  },
+  "affected_assets_by_field": {
+    "spam": 54,
+    "sentiment": 32,
+    "social_dominance": 15,
+    "contributors_active": 14,
+    "interactions": 14,
+    "posts_active": 14,
+    "galaxy_score": 13,
+    "close": 12,
+    "volume_24h": 12
+  },
+  "candidates": [
+    {
+      "id": "163755",
+      "symbol": "DACITY",
+      "name": "Dacity Coin",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 30,
+        "galaxy_score": 30,
+        "social_dominance": 30,
+        "volume_24h": 30
+      },
+      "missing_features": "social_dominance_change,volume_accel,social_price_divergence,galaxy_score_change,price_change_7d,last_price,volume_daily_accel",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": ""
+    },
+    {
+      "id": "163847",
+      "symbol": "DESSA",
+      "name": "Dessa",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 30,
+        "contributors_active": 12,
+        "galaxy_score": 30,
+        "interactions": 12,
+        "posts_active": 12,
+        "sentiment": 12,
+        "social_dominance": 30,
+        "spam": 12,
+        "volume_24h": 30
+      },
+      "missing_features": "social_dominance_change,volume_accel,social_price_divergence,galaxy_score_change,price_change_7d,last_price,volume_daily_accel",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": ""
+    },
+    {
+      "id": "163903",
+      "symbol": "ELYSION",
+      "name": "Elysion",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 29,
+        "contributors_active": 27,
+        "galaxy_score": 29,
+        "interactions": 27,
+        "posts_active": 27,
+        "sentiment": 27,
+        "social_dominance": 27,
+        "spam": 28,
+        "volume_24h": 29
+      },
+      "missing_features": "social_accel,contributor_accel,engagement_accel,sentiment_change,social_dominance_change,volume_accel,social_price_divergence,galaxy_score_change,price_change_7d,spam_change,volume_daily_accel,engagement_daily_accel",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163838",
+      "symbol": "FOBO",
+      "name": "FOBO",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 16,
+        "contributors_active": 15,
+        "galaxy_score": 17,
+        "interactions": 15,
+        "posts_active": 15,
+        "sentiment": 15,
+        "social_dominance": 15,
+        "spam": 15,
+        "volume_24h": 16
+      },
+      "missing_features": "volume_accel",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163850",
+      "symbol": "GLITCH",
+      "name": "Infinite Money Glitch",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 16,
+        "contributors_active": 18,
+        "galaxy_score": 20,
+        "interactions": 18,
+        "posts_active": 18,
+        "sentiment": 18,
+        "social_dominance": 18,
+        "spam": 18,
+        "volume_24h": 16
+      },
+      "missing_features": "social_accel,contributor_accel,engagement_accel,volume_accel,social_price_divergence",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163882",
+      "symbol": "IMPEACH",
+      "name": "Impeach",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 23,
+        "contributors_active": 23,
+        "galaxy_score": 25,
+        "interactions": 23,
+        "posts_active": 23,
+        "sentiment": 23,
+        "social_dominance": 23,
+        "spam": 23,
+        "volume_24h": 23
+      },
+      "missing_features": "social_accel,contributor_accel,engagement_accel,sentiment_change,social_dominance_change,volume_accel,social_price_divergence,galaxy_score_change,price_change_7d,spam_change,volume_daily_accel,engagement_daily_accel",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163842",
+      "symbol": "JAGENT",
+      "name": "JAGENT",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 30,
+        "contributors_active": 14,
+        "galaxy_score": 30,
+        "interactions": 14,
+        "posts_active": 14,
+        "sentiment": 15,
+        "social_dominance": 30,
+        "spam": 15,
+        "volume_24h": 30
+      },
+      "missing_features": "social_dominance_change,volume_accel,social_price_divergence,galaxy_score_change,price_change_7d,last_price,volume_daily_accel",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": ""
+    },
+    {
+      "id": "163852",
+      "symbol": "LOBIN",
+      "name": "LOBIN",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 19,
+        "contributors_active": 18,
+        "galaxy_score": 20,
+        "interactions": 18,
+        "posts_active": 18,
+        "sentiment": 18,
+        "social_dominance": 18,
+        "spam": 18,
+        "volume_24h": 19
+      },
+      "missing_features": "social_accel,contributor_accel,engagement_accel,volume_accel,social_price_divergence",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163803",
+      "symbol": "PANGEA",
+      "name": "PANGEA",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 11,
+        "contributors_active": 10,
+        "galaxy_score": 11,
+        "interactions": 10,
+        "posts_active": 10,
+        "sentiment": 10,
+        "social_dominance": 10,
+        "spam": 10,
+        "volume_24h": 11
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163779",
+      "symbol": "RAETO",
+      "name": "RAETO",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 30,
+        "contributors_active": 1,
+        "galaxy_score": 30,
+        "interactions": 1,
+        "posts_active": 1,
+        "sentiment": 1,
+        "social_dominance": 30,
+        "spam": 1,
+        "volume_24h": 30
+      },
+      "missing_features": "social_dominance_change,volume_accel,social_price_divergence,galaxy_score_change,price_change_7d,last_price,volume_daily_accel",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": ""
+    },
+    {
+      "id": "163894",
+      "symbol": "STANK",
+      "name": "STANK",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 27,
+        "contributors_active": 25,
+        "galaxy_score": 27,
+        "interactions": 25,
+        "posts_active": 25,
+        "sentiment": 25,
+        "social_dominance": 25,
+        "spam": 25,
+        "volume_24h": 27
+      },
+      "missing_features": "social_accel,contributor_accel,engagement_accel,sentiment_change,social_dominance_change,volume_accel,social_price_divergence,galaxy_score_change,price_change_7d,spam_change,volume_daily_accel,engagement_daily_accel",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163866",
+      "symbol": "WASTED",
+      "name": "WASTED",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "MISSING DAILY BARS",
+      "history_error": "",
+      "missing_fields": {
+        "close": 19,
+        "contributors_active": 20,
+        "galaxy_score": 22,
+        "interactions": 20,
+        "posts_active": 20,
+        "sentiment": 20,
+        "social_dominance": 20,
+        "spam": 20,
+        "volume_24h": 19
+      },
+      "missing_features": "social_accel,contributor_accel,engagement_accel,volume_accel,social_price_divergence",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "159662",
+      "symbol": "$FARTBOY",
+      "name": "Fartboy",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 3
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "18539",
+      "symbol": "AGLD",
+      "name": "Adventure Gold",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 1
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "75564",
+      "symbol": "ALEO",
+      "name": "ALEO",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 4
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "141197",
+      "symbol": "APEPE",
+      "name": "Ape and Pepe",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 2,
+        "spam": 5
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "19665",
+      "symbol": "ATLAS",
+      "name": "Star Atlas",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 7
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "9907",
+      "symbol": "AUCTION",
+      "name": "Bounce",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 16,
+        "spam": 9
+      },
+      "missing_features": "sentiment_change,spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "160503",
+      "symbol": "B2",
+      "name": "BSquared Token",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 14,
+        "spam": 11
+      },
+      "missing_features": "sentiment_change,spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "159282",
+      "symbol": "BANANAS31",
+      "name": "Banana For Scale",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 6
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "114667",
+      "symbol": "BITCOINALT",
+      "name": "HarryPotterObamaSonic10Inu (ERC-20)",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 5
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "75253",
+      "symbol": "BLUR",
+      "name": "Blur",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "140077",
+      "symbol": "BROCCOLI",
+      "name": "Broccoli",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "114023",
+      "symbol": "CETUS",
+      "name": "Cetus Protocol",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 6
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "85",
+      "symbol": "ENJ",
+      "name": "Enjin Coin",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "21",
+      "symbol": "ETC",
+      "name": "Ethereum Classic",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "contributors_active": 4,
+        "interactions": 4,
+        "posts_active": 4,
+        "sentiment": 10,
+        "social_dominance": 3,
+        "spam": 10
+      },
+      "missing_features": "sentiment_change,social_dominance_change,spam_change,engagement_daily_accel",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "157639",
+      "symbol": "G",
+      "name": "Gravity",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 13,
+        "spam": 5
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163713",
+      "symbol": "GIGATENEV",
+      "name": "GIGATENEV",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 2
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163857",
+      "symbol": "GLDSTN",
+      "name": "GLDSTN",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "contributors_active": 4,
+        "galaxy_score": 21,
+        "interactions": 4,
+        "posts_active": 4,
+        "sentiment": 5,
+        "social_dominance": 19,
+        "spam": 6
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "51896",
+      "symbol": "GOMINING",
+      "name": "Gomining Token",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 12,
+        "spam": 4
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "52010",
+      "symbol": "GTAI",
+      "name": "GT Protocol",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 10
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "150833",
+      "symbol": "HTX",
+      "name": "HTX DAO",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 2,
+        "spam": 4
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "161079",
+      "symbol": "IDOL",
+      "name": "MEET48",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 4,
+        "spam": 10
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "59",
+      "symbol": "IOST",
+      "name": "IOStoken",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 7
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "160026",
+      "symbol": "IP",
+      "name": "Story",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 12,
+        "spam": 12
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "159751",
+      "symbol": "JELLYJELLY",
+      "name": "jelly-my-jelly",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 11
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "162866",
+      "symbol": "MAGMA",
+      "name": "Magma Finance",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 5
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "142520",
+      "symbol": "MAV",
+      "name": "Maverick Protocol",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 10
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "151314",
+      "symbol": "MERL",
+      "name": "Merlin Chain",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 2
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "163287",
+      "symbol": "MICRODUCK",
+      "name": "MICRODUCK",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "158209",
+      "symbol": "MLC",
+      "name": "My Lovely Planet",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "contributors_active": 10,
+        "interactions": 10,
+        "posts_active": 10,
+        "sentiment": 23,
+        "social_dominance": 10,
+        "spam": 25
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "157602",
+      "symbol": "MOCA",
+      "name": "Moca Coin",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 9
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "148066",
+      "symbol": "MORI",
+      "name": "MORI COIN",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 13,
+        "spam": 4
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "52769",
+      "symbol": "NOS",
+      "name": "Nosana",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "160829",
+      "symbol": "OBOL",
+      "name": "Obol",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 24
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "161112",
+      "symbol": "ONYC",
+      "name": "ONyc",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "162653",
+      "symbol": "OPG",
+      "name": "OpenGradient",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "162052",
+      "symbol": "PIEVERSE",
+      "name": "Pieverse",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 2
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "14001",
+      "symbol": "PNG",
+      "name": "Pangolin",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 3
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "148829",
+      "symbol": "PURR",
+      "name": "Purr",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "52554",
+      "symbol": "SHELL",
+      "name": "MyShell Token",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 4
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "82",
+      "symbol": "SNT",
+      "name": "Status",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 2,
+        "spam": 7
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "160783",
+      "symbol": "SXT",
+      "name": "Space and Time",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 18,
+        "spam": 20
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "161526",
+      "symbol": "TRADOOR",
+      "name": "TRADOOR",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "160024",
+      "symbol": "TST",
+      "name": "Test",
+      "data_status": "PARTIAL HISTORY",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 1
+      },
+      "missing_features": "",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "7444",
+      "symbol": "XSGD",
+      "name": "XSGD",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "sentiment": 1,
+        "spam": 20
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    },
+    {
+      "id": "411",
+      "symbol": "XYO",
+      "name": "XY Oracle",
+      "data_status": "INSUFFICIENT DATA",
+      "priority": "PROVIDER FIELD GAPS",
+      "history_error": "",
+      "missing_fields": {
+        "spam": 6
+      },
+      "missing_features": "spam_change",
+      "expected_complete_day": "2026-11-09T00:00:00+00:00",
+      "latest_price_day": "2026-11-09T00:00:00+00:00"
+    }
+  ],
+  "safety": "Diagnostic only; do not fill missing provider fields with zero, interpolate, or treat historical revisions as point-in-time data."
+}
