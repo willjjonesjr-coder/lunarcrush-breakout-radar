@@ -1,0 +1,1178 @@
+{
+  "as_of_utc": "2026-11-11",
+  "status": "AVAILABLE",
+  "prior_path": "reports/archive/breakout_radar_2026-11-10.csv",
+  "before_count": 300,
+  "after_count": 300,
+  "overlap": 192,
+  "exited": 108,
+  "entered": 108,
+  "turnover_pct_of_current": 36.0,
+  "prior_status_counts": {
+    "COMPLETE": 243,
+    "PARTIAL HISTORY": 32,
+    "INSUFFICIENT DATA": 25
+  },
+  "current_status_counts": {
+    "COMPLETE": 223,
+    "PARTIAL HISTORY": 51,
+    "INSUFFICIENT DATA": 26
+  },
+  "exited_status_counts": {
+    "COMPLETE": 78,
+    "INSUFFICIENT DATA": 14,
+    "PARTIAL HISTORY": 16
+  },
+  "entered_status_counts": {
+    "INSUFFICIENT DATA": 18,
+    "PARTIAL HISTORY": 33,
+    "COMPLETE": 57
+  },
+  "shared_prior_status_counts": {
+    "COMPLETE": 165,
+    "PARTIAL HISTORY": 16,
+    "INSUFFICIENT DATA": 11
+  },
+  "shared_current_status_counts": {
+    "COMPLETE": 166,
+    "INSUFFICIENT DATA": 8,
+    "PARTIAL HISTORY": 18
+  },
+  "same_asset_status_changes": [
+    {
+      "coin_id": "82",
+      "symbol": "SNT",
+      "prior_status": "INSUFFICIENT DATA",
+      "current_status": "PARTIAL HISTORY",
+      "prior_missing_fields": "{\"sentiment\": 2, \"spam\": 7}",
+      "current_missing_fields": "{\"sentiment\": 2, \"spam\": 6}"
+    },
+    {
+      "coin_id": "411",
+      "symbol": "XYO",
+      "prior_status": "INSUFFICIENT DATA",
+      "current_status": "PARTIAL HISTORY",
+      "prior_missing_fields": "{\"spam\": 6}",
+      "current_missing_fields": "{\"spam\": 5}"
+    },
+    {
+      "coin_id": "18539",
+      "symbol": "AGLD",
+      "prior_status": "INSUFFICIENT DATA",
+      "current_status": "PARTIAL HISTORY",
+      "prior_missing_fields": "{\"spam\": 1}",
+      "current_missing_fields": "{\"spam\": 1}"
+    },
+    {
+      "coin_id": "75253",
+      "symbol": "BLUR",
+      "prior_status": "PARTIAL HISTORY",
+      "current_status": "COMPLETE",
+      "prior_missing_fields": "{\"spam\": 1}",
+      "current_missing_fields": "{}"
+    },
+    {
+      "coin_id": "161112",
+      "symbol": "ONYC",
+      "prior_status": "PARTIAL HISTORY",
+      "current_status": "INSUFFICIENT DATA",
+      "prior_missing_fields": "{\"spam\": 1}",
+      "current_missing_fields": "{\"spam\": 1}"
+    },
+    {
+      "coin_id": "163838",
+      "symbol": "FOBO",
+      "prior_status": "INSUFFICIENT DATA",
+      "current_status": "PARTIAL HISTORY",
+      "prior_missing_fields": "{\"close\": 16, \"contributors_active\": 15, \"galaxy_score\": 17, \"interactions\": 15, \"posts_active\": 15, \"sentiment\": 15, \"social_dominance\": 15, \"spam\": 15, \"volume_24h\": 16}",
+      "current_missing_fields": "{\"close\": 15, \"contributors_active\": 14, \"galaxy_score\": 16, \"interactions\": 14, \"posts_active\": 14, \"sentiment\": 14, \"social_dominance\": 14, \"spam\": 14, \"volume_24h\": 15}"
+    }
+  ],
+  "same_asset_complete_to_incomplete": 0,
+  "same_asset_incomplete_to_complete": 1,
+  "new_assets": [
+    {
+      "coin_id": "5",
+      "symbol": "BCH",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "43",
+      "symbol": "LSK",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "44",
+      "symbol": "BTT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "48",
+      "symbol": "WAVES",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "53",
+      "symbol": "DGB",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "90",
+      "symbol": "NEXO",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "140",
+      "symbol": "SNX",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "166",
+      "symbol": "TEL",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "298",
+      "symbol": "FLUX",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "299",
+      "symbol": "ADX",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "389",
+      "symbol": "MTV",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "637",
+      "symbol": "NCT",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "1314",
+      "symbol": "WLD",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "1374",
+      "symbol": "TROLL",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2151",
+      "symbol": "BAND",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2208",
+      "symbol": "EWT",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "2216",
+      "symbol": "CTSI",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "2232",
+      "symbol": "CKB",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2780",
+      "symbol": "DOT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2819",
+      "symbol": "JST",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2921",
+      "symbol": "KSM",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "2963",
+      "symbol": "SAND",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "3049",
+      "symbol": "SUN",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "3267",
+      "symbol": "GALA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "3309",
+      "symbol": "TBTC",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "3702",
+      "symbol": "BFC",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "3713",
+      "symbol": "AMP",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "8030",
+      "symbol": "GRT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "9021",
+      "symbol": "FIRO",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "11893",
+      "symbol": "LIT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "11915",
+      "symbol": "SUPRA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "12350",
+      "symbol": "TARA",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "12407",
+      "symbol": "CSPR",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "17106",
+      "symbol": "BONE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "21641",
+      "symbol": "DESU",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "21658",
+      "symbol": "PEOPLE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "22031",
+      "symbol": "BICO",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "22809",
+      "symbol": "HIGH",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "27975",
+      "symbol": "NFT",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "28087",
+      "symbol": "POKT",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "29973",
+      "symbol": "IMX",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "50218",
+      "symbol": "LUNA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "50645",
+      "symbol": "ASTR",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "50990",
+      "symbol": "BRN",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "52433",
+      "symbol": "MBX",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "57391",
+      "symbol": "CHO",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "57562",
+      "symbol": "COW",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "64655",
+      "symbol": "WXT",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "73716",
+      "symbol": "GRND",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "111419",
+      "symbol": "PZP",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "146377",
+      "symbol": "AERO",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "148055",
+      "symbol": "MOG",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "148371",
+      "symbol": "ASTRA",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "148484",
+      "symbol": "HOLD",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "148812",
+      "symbol": "PROPS",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "149164",
+      "symbol": "TOKEN",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "149175",
+      "symbol": "TOSHI",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "149398",
+      "symbol": "ACE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "149449",
+      "symbol": "DEGEN",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "149470",
+      "symbol": "ZKJ",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "149694",
+      "symbol": "BURN",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "149979",
+      "symbol": "GME",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "150293",
+      "symbol": "W",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "151207",
+      "symbol": "GIGA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "151379",
+      "symbol": "NOT",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "151469",
+      "symbol": "ESE",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "152222",
+      "symbol": "IO",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "152264",
+      "symbol": "ATH",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "152366",
+      "symbol": "FISH",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "152410",
+      "symbol": "TAI",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "157533",
+      "symbol": "FISH",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "157584",
+      "symbol": "TRAC",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "157793",
+      "symbol": "UTYA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "158063",
+      "symbol": "ANVL",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "158760",
+      "symbol": "LYX",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "158973",
+      "symbol": "ELSA",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "159246",
+      "symbol": "HYPE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "159726",
+      "symbol": "BID",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "159853",
+      "symbol": "OFT",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "159917",
+      "symbol": "FRXUSD",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "160073",
+      "symbol": "PWEASE",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "160400",
+      "symbol": "KERNEL",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "160705",
+      "symbol": "KLED",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "160776",
+      "symbol": "SOPH",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "160816",
+      "symbol": "AGT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161098",
+      "symbol": "ICNT",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "161139",
+      "symbol": "VELVET",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161523",
+      "symbol": "HEMI",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "162727",
+      "symbol": "EDGE",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "162728",
+      "symbol": "USDGO",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "162732",
+      "symbol": "WORLDCUP",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "162742",
+      "symbol": "MEGA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "162769",
+      "symbol": "ZEST",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "162786",
+      "symbol": "SURPLUS",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163082",
+      "symbol": "STONKBROKER",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163175",
+      "symbol": "CHONKETHA",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "163219",
+      "symbol": "WIF",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "163265",
+      "symbol": "BNBCAT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163269",
+      "symbol": "DGAI",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163611",
+      "symbol": "US",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163636",
+      "symbol": "USDSUI",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "163651",
+      "symbol": "BEM",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163818",
+      "symbol": "DACITYCOIN",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163834",
+      "symbol": "REBATE",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "163837",
+      "symbol": "RITUAL",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163868",
+      "symbol": "MAMESUKE",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163875",
+      "symbol": "RYFT",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163910",
+      "symbol": "MIHAO",
+      "data_status": "INSUFFICIENT DATA"
+    }
+  ],
+  "exited_assets": [
+    {
+      "coin_id": "12",
+      "symbol": "TRX",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "21",
+      "symbol": "ETC",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "59",
+      "symbol": "IOST",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "71",
+      "symbol": "ZIL",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "85",
+      "symbol": "ENJ",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "114",
+      "symbol": "MANA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "119",
+      "symbol": "ARK",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "123",
+      "symbol": "ORBS",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "279",
+      "symbol": "RSR",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "466",
+      "symbol": "COTI",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "959",
+      "symbol": "PENG",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "1868",
+      "symbol": "ADM",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2123",
+      "symbol": "CHZ",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2222",
+      "symbol": "RUNE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2276",
+      "symbol": "PORTAL",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2545",
+      "symbol": "AVAX",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2550",
+      "symbol": "RARI",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "2818",
+      "symbol": "HIVE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "3173",
+      "symbol": "HTR",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "3555",
+      "symbol": "FLOW",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "7444",
+      "symbol": "XSGD",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "8370",
+      "symbol": "ATM",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "9907",
+      "symbol": "AUCTION",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "12811",
+      "symbol": "COP2",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "17671",
+      "symbol": "ORCA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "19008",
+      "symbol": "SPA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "19665",
+      "symbol": "ATLAS",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "20358",
+      "symbol": "CPOOL",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "20992",
+      "symbol": "ENS",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "24391",
+      "symbol": "GMT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "51896",
+      "symbol": "GOMINING",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "52554",
+      "symbol": "SHELL",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "55431",
+      "symbol": "OP",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "70319",
+      "symbol": "SKY",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "70832",
+      "symbol": "APT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "75564",
+      "symbol": "ALEO",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "90376",
+      "symbol": "FLR",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "99316",
+      "symbol": "THE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "108339",
+      "symbol": "ARB",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "112798",
+      "symbol": "TURBO",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "114667",
+      "symbol": "BITCOINALT",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "140966",
+      "symbol": "POPCAT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "142520",
+      "symbol": "MAV",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "147746",
+      "symbol": "AVA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "147994",
+      "symbol": "MNT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "148066",
+      "symbol": "MORI",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "148109",
+      "symbol": "NPC",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "151267",
+      "symbol": "KMNO",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "152081",
+      "symbol": "REZ",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "157354",
+      "symbol": "QUBIC",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "157639",
+      "symbol": "G",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "157819",
+      "symbol": "MOODENG",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "157931",
+      "symbol": "EIGEN",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "158209",
+      "symbol": "MLC",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "158278",
+      "symbol": "PIPPIN",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "158332",
+      "symbol": "SYRUP",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "159101",
+      "symbol": "KMNO",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "159253",
+      "symbol": "BERT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "159282",
+      "symbol": "BANANAS31",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "159432",
+      "symbol": "MOVE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "159528",
+      "symbol": "BNKR",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "159596",
+      "symbol": "TRUMP",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "159695",
+      "symbol": "SLC",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "159730",
+      "symbol": "VVV",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "159834",
+      "symbol": "SERV",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "160087",
+      "symbol": "KTA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "160146",
+      "symbol": "MUBARAK",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "160216",
+      "symbol": "PARTI",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "160783",
+      "symbol": "SXT",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "160828",
+      "symbol": "PUMP",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "160829",
+      "symbol": "OBOL",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "160830",
+      "symbol": "AIOT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "160840",
+      "symbol": "MYX",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161524",
+      "symbol": "TAKE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161526",
+      "symbol": "TRADOOR",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "161571",
+      "symbol": "CARDS",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161600",
+      "symbol": "GAME",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161630",
+      "symbol": "ASTER",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161644",
+      "symbol": "AVNT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161646",
+      "symbol": "HOLO",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161703",
+      "symbol": "FF",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161826",
+      "symbol": "ON",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "161979",
+      "symbol": "CC",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "162050",
+      "symbol": "RAVE",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "162052",
+      "symbol": "PIEVERSE",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "162351",
+      "symbol": "AZTEC",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "162653",
+      "symbol": "OPG",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "162865",
+      "symbol": "KNTQ",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163061",
+      "symbol": "PONS",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163194",
+      "symbol": "HOOKR",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163233",
+      "symbol": "BASECAT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163287",
+      "symbol": "MICRODUCK",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "163309",
+      "symbol": "UBIK",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163323",
+      "symbol": "ZCAT",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163369",
+      "symbol": "MUSEBOOK",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163406",
+      "symbol": "PRIORS",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163452",
+      "symbol": "ANTHROPIC",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163487",
+      "symbol": "FWA",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163616",
+      "symbol": "STONKEX",
+      "data_status": "COMPLETE"
+    },
+    {
+      "coin_id": "163713",
+      "symbol": "GIGATENEV",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "163779",
+      "symbol": "RAETO",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163847",
+      "symbol": "DESSA",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163850",
+      "symbol": "GLITCH",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163852",
+      "symbol": "LOBIN",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163857",
+      "symbol": "GLDSTN",
+      "data_status": "PARTIAL HISTORY"
+    },
+    {
+      "coin_id": "163866",
+      "symbol": "WASTED",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163882",
+      "symbol": "IMPEACH",
+      "data_status": "INSUFFICIENT DATA"
+    },
+    {
+      "coin_id": "163903",
+      "symbol": "ELYSION",
+      "data_status": "INSUFFICIENT DATA"
+    }
+  ],
+  "note": "A change in cohort composition is not evidence of corrupted histories. Missing provider fields remain genuine coverage constraints."
+}
