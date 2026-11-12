@@ -1,23 +1,23 @@
 {
-  "as_of": "2026-11-11",
+  "as_of": "2026-11-12",
   "baseline": {
     "required_dates": [
-      "2026-11-04",
       "2026-11-05",
       "2026-11-06",
       "2026-11-07",
       "2026-11-08",
       "2026-11-09",
-      "2026-11-10"
+      "2026-11-10",
+      "2026-11-11"
     ],
     "present_dates": [
-      "2026-11-04",
       "2026-11-05",
       "2026-11-06",
       "2026-11-07",
       "2026-11-08",
       "2026-11-09",
-      "2026-11-10"
+      "2026-11-10",
+      "2026-11-11"
     ],
     "missing_dates": [],
     "ready": true,
@@ -46,20 +46,20 @@
   },
   "history": {
     "attempted": 300,
-    "complete": 223,
-    "partial": 51,
-    "insufficient": 26,
-    "complete_pct": 74.3,
+    "complete": 236,
+    "partial": 34,
+    "insufficient": 30,
+    "complete_pct": 78.7,
     "missing_fields": {
-      "sentiment": 39,
-      "spam": 73,
-      "close": 11,
-      "contributors_active": 11,
+      "sentiment": 32,
+      "spam": 59,
+      "contributors_active": 14,
       "galaxy_score": 11,
-      "interactions": 11,
-      "posts_active": 11,
-      "social_dominance": 12,
-      "volume_24h": 12
+      "interactions": 14,
+      "posts_active": 14,
+      "social_dominance": 13,
+      "close": 10,
+      "volume_24h": 10
     }
   },
   "next_actions": [
