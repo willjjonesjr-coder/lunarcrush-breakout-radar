@@ -1,0 +1,24 @@
+{
+  "status": "AVAILABLE",
+  "as_of": "2026-11-14T00:00:00+00:00",
+  "expected_day": "2026-11-14T00:00:00+00:00",
+  "observed_at": "2026-11-15T09:19:09.241287+00:00",
+  "score": 32.5,
+  "classification": "mild bearish",
+  "trend_strength": 35.0,
+  "change_7d": -10.0,
+  "expected_assets": 20,
+  "available_assets": 20,
+  "coverage": 1.0,
+  "source": "kraken",
+  "model": "market_regime.py",
+  "sentiment_available": false,
+  "usage": "context only; candidate scores and eligibility unchanged",
+  "breadth_assets": 20,
+  "components": {
+    "trend": 49.99999999999999,
+    "breadth": 2.5,
+    "momentum": 18.264390651164106,
+    "participation": 18.752964327695373
+  }
+}
