@@ -4,7 +4,7 @@ from datetime import date, datetime, timezone
 from tools.audit_expanded_cex_coverage import markets_for_coin, validate_bars, audit, summarize
 
 
-def candles(n=300, start=date(2025, 1, 1)):
+def candles(n=300, start=date(2026, 1, 1)):
     from datetime import timedelta
     return [[int(datetime.combine(start + timedelta(days=i), datetime.min.time(), timezone.utc).timestamp()*1000),
              1, 2, 0.5, 1.5, 100] for i in range(n)]
@@ -35,6 +35,11 @@ class ExpandedCexAuditTests(unittest.TestCase):
         self.assertEqual(result["status"], "300_BAR_READY_PROVISIONAL")
         result = validate_bars(candles(), date(2026, 10, 27), preferred=500)
         self.assertEqual(result["status"], "300_BAR_READY_PROVISIONAL")
+
+    def test_old_history_is_stale_even_with_300_candles(self):
+        result = validate_bars(candles(start=date(2025, 1, 1)), date(2026, 10, 27))
+        self.assertEqual(result["status"], "STALE")
+        self.assertEqual(result["bars"], 300)
 
     def test_completed_and_short_history(self):
         from datetime import timedelta
