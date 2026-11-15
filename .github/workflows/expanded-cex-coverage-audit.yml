@@ -1,0 +1,51 @@
+name: Audit expanded CEX coverage (research only)
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "Priority queue candidates to inspect (1-80)"
+        required: true
+        default: "80"
+      max_pairs:
+        description: "Max OHLCV spot markets sampled per exchange per coin"
+        required: true
+        default: "2"
+  pull_request:
+    paths:
+      - "tools/audit_expanded_cex_coverage.py"
+      - "tests/test_expanded_cex_coverage.py"
+      - ".github/workflows/expanded-cex-coverage-audit.yml"
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest tests.test_expanded_cex_coverage -v
+  coverage:
+    if: github.event_name == 'workflow_dispatch'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "ccxt>=4.4"
+      - name: Discover markets and inspect completed candles
+        run: python tools/audit_expanded_cex_coverage.py --count "${{ inputs.count }}" --max-pairs-per-exchange "${{ inputs.max_pairs }}"
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: expanded-cex-coverage-audit
+          path: |
+            reports/expanded_cex_coverage.csv
+            reports/expanded_cex_coverage.json
+          retention-days: 30
+          if-no-files-found: warn
