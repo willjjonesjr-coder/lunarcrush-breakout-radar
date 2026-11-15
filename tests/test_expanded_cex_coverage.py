@@ -32,9 +32,9 @@ class ExpandedCexAuditTests(unittest.TestCase):
 
     def test_complete_history_is_always_provisional(self):
         result = validate_bars(candles(), date(2026, 10, 27))
-        self.assertEqual(result["status"], "STALE")
+        self.assertEqual(result["status"], "300_BAR_READY_PROVISIONAL")
         result = validate_bars(candles(), date(2026, 10, 27), preferred=500)
-        self.assertNotEqual(result["status"], "500_BAR_READY_PROVISIONAL")
+        self.assertEqual(result["status"], "300_BAR_READY_PROVISIONAL")
 
     def test_completed_and_short_history(self):
         from datetime import timedelta
@@ -47,7 +47,7 @@ class ExpandedCexAuditTests(unittest.TestCase):
         bars = candles()
         bars.pop(250)
         result = validate_bars(bars, date(2026, 10, 27))
-        self.assertEqual(result["status"], "STALE")
+        self.assertEqual(result["status"], "SHORT_HISTORY")
         self.assertEqual(result["bars"], 49)
 
     def test_unknown_market_remains_unapproved(self):
