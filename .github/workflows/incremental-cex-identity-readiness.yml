@@ -1,5 +1,10 @@
 name: Review incremental CEX identity readiness (research only)
 on:
+  pull_request:
+    paths:
+      - 'tools/build_incremental_cex_identity_readiness.py'
+      - 'tests/test_incremental_cex_identity_readiness.py'
+      - '.github/workflows/incremental-cex-identity-readiness.yml'
   workflow_dispatch:
     inputs:
       coverage_run_id:
@@ -10,7 +15,18 @@ permissions:
   contents: read
   actions: read
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest tests.test_incremental_cex_identity_readiness -v
   readiness:
+    if: github.event_name == 'workflow_dispatch'
+    needs: test
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -18,8 +34,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run isolated tests
-        run: python -m unittest tests.test_incremental_cex_identity_readiness -v
       - name: Fetch source audit from specified run
         uses: actions/download-artifact@v4
         with:
