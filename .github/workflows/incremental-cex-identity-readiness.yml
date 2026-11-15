@@ -1,0 +1,39 @@
+name: Review incremental CEX identity readiness (research only)
+on:
+  workflow_dispatch:
+    inputs:
+      coverage_run_id:
+        description: "Successful manual expanded-CEX coverage workflow run ID"
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run isolated tests
+        run: python -m unittest tests.test_incremental_cex_identity_readiness -v
+      - name: Fetch source audit from specified run
+        uses: actions/download-artifact@v4
+        with:
+          name: expanded-cex-coverage-audit
+          path: source
+          run-id: ${{ inputs.coverage_run_id }}
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - name: Generate review-only dossier
+        run: python tools/build_incremental_cex_identity_readiness.py --before-after source/expanded_cex_before_after.csv --coverage source/expanded_cex_coverage.csv
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: incremental-cex-identity-readiness
+          path: reports/identity_readiness/
+          retention-days: 30
+          if-no-files-found: warn
