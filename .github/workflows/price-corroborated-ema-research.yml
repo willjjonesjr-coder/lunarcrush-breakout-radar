@@ -30,6 +30,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Smoke test research CLI module imports from repository root
+        run: python -m tools.research_price_corroborated_ema --help
       - name: Run independent price corroboration regression tests
         run: python -m unittest tests.test_price_corroborated_ema tests.test_incremental_cex_identity_readiness -v
   research:
@@ -60,7 +62,7 @@ jobs:
             --out reports/price_research_input
       - name: Corroborate prices and compute provisional EMA (no imports)
         run: |
-          python tools/research_price_corroborated_ema.py \
+          python -m tools.research_price_corroborated_ema \
             --input reports/price_research_input/incremental_cex_identity_readiness.csv \
             --output reports/price_corroboration_research \
             --max-sources "${{ inputs.max_sources }}" \
