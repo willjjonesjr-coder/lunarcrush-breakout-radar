@@ -106,7 +106,8 @@ class PriceCorroborationTests(unittest.TestCase):
             self.assertEqual(result["alerts"],0)
             # The 500 day synthetic sequence must end on Nov 14.
             self.assertEqual(result["corroborated"],1)
-            row=list(csv.DictReader(open(p/"out"/"price_corroboration.csv")))[0]
+            with (p/"out"/"price_corroboration.csv").open(newline="") as fh:
+                row = list(csv.DictReader(fh))[0]
             self.assertEqual(row["identity_confidence"],"PRICE_CORROBORATED")
             self.assertEqual(row["production_approval"],"NO")
             self.assertEqual(row["alert_eligible"],"NO")
