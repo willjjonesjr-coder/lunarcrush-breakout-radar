@@ -1,13 +1,13 @@
 {
-  "as_of": "2026-11-15",
+  "as_of": "2026-11-16",
   "baseline_days": [
-    "2026-11-08",
     "2026-11-09",
     "2026-11-10",
     "2026-11-11",
     "2026-11-12",
     "2026-11-13",
-    "2026-11-14"
+    "2026-11-14",
+    "2026-11-15"
   ],
   "data_source": "LunarCrush coin-list snapshots (reported 24h volume)",
   "scope_warning": "Tracked-universe and named-sector baskets are NOT comprehensive market spot volume, nor deduplicated exchange trade volume.",
@@ -17,30 +17,30 @@
       "segment": "Tracked universe proxy",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 1.7564,
-      "current_volume": 220277427486.41,
-      "baseline_volume": 125414524396.19,
+      "multiple": 0.8477,
+      "current_volume": 126617188150.02,
+      "baseline_volume": 149359892444.37,
       "coverage": 0.9999,
       "top_contributors": [
         {
           "symbol": "USDT",
-          "volume": 92801938732.99
+          "volume": 54931250218.18
         },
         {
           "symbol": "BTC",
-          "volume": 52072018771.37
+          "volume": 28544560006.91
         },
         {
           "symbol": "ETH",
-          "volume": 21335130841.81
+          "volume": 11433436529.02
         },
         {
           "symbol": "USDC",
-          "volume": 18221490603.14
+          "volume": 10569050724.82
         },
         {
           "symbol": "SOL",
-          "volume": 5375200866.61
+          "volume": 3123567246.06
         }
       ],
       "classification": "NO ALERT",
@@ -59,14 +59,14 @@
       "segment": "BTC",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 1.9617,
-      "current_volume": 52072018771.37,
-      "baseline_volume": 26544449617.63,
+      "multiple": 0.8717,
+      "current_volume": 28544560006.91,
+      "baseline_volume": 32746743903.13,
       "coverage": 1.0,
       "top_contributors": [
         {
           "symbol": "BTC",
-          "volume": 52072018771.37
+          "volume": 28544560006.91
         }
       ],
       "classification": "NO ALERT",
@@ -85,14 +85,14 @@
       "segment": "ETH",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 1.9195,
-      "current_volume": 21335130841.81,
-      "baseline_volume": 11114705362.45,
+      "multiple": 0.8394,
+      "current_volume": 11433436529.02,
+      "baseline_volume": 13621469477.15,
       "coverage": 1.0,
       "top_contributors": [
         {
           "symbol": "ETH",
-          "volume": 21335130841.81
+          "volume": 11433436529.02
         }
       ],
       "classification": "NO ALERT",
@@ -111,30 +111,30 @@
       "segment": "DeFi basket",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 1.5408,
-      "current_volume": 1231936244.71,
-      "baseline_volume": 799529765.52,
+      "multiple": 0.7369,
+      "current_volume": 664858080.3,
+      "baseline_volume": 902263384.49,
       "coverage": 1.0,
       "top_contributors": [
         {
           "symbol": "UNI",
-          "volume": 751668201.95
+          "volume": 341081396.94
         },
         {
           "symbol": "AAVE",
-          "volume": 302060428.86
-        },
-        {
-          "symbol": "CRV",
-          "volume": 48180223.42
-        },
-        {
-          "symbol": "JST",
-          "volume": 47412206.5
+          "volume": 195211304.24
         },
         {
           "symbol": "LDO",
-          "volume": 47248479.36
+          "volume": 36951937.24
+        },
+        {
+          "symbol": "CRV",
+          "volume": 36701950.94
+        },
+        {
+          "symbol": "JST",
+          "volume": 29480621.74
         }
       ],
       "classification": "NO ALERT",
@@ -153,30 +153,30 @@
       "segment": "AI basket",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 1.5362,
-      "current_volume": 628930519.04,
-      "baseline_volume": 409417538.14,
+      "multiple": 0.8328,
+      "current_volume": 384192040.76,
+      "baseline_volume": 461333898.49,
       "coverage": 1.0,
       "top_contributors": [
         {
-          "symbol": "TAO",
-          "volume": 227130167.06
+          "symbol": "FET",
+          "volume": 141550166.59
         },
         {
-          "symbol": "FET",
-          "volume": 156886994.22
+          "symbol": "TAO",
+          "volume": 100616173.38
         },
         {
           "symbol": "ARKM",
-          "volume": 98670493.37
+          "volume": 66036714.74
         },
         {
           "symbol": "VIRTUAL",
-          "volume": 70722113.26
+          "volume": 39482056.38
         },
         {
           "symbol": "RENDER",
-          "volume": 47971313.02
+          "volume": 18634690.59
         }
       ],
       "classification": "NO ALERT",
@@ -195,30 +195,30 @@
       "segment": "NFT/Gaming basket",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 1.2354,
-      "current_volume": 230005921.74,
-      "baseline_volume": 186175690.9,
+      "multiple": 1.0862,
+      "current_volume": 217360462.04,
+      "baseline_volume": 200113614.15,
       "coverage": 1.0,
       "top_contributors": [
         {
           "symbol": "BLUR",
-          "volume": 83979896.99
+          "volume": 124673608.21
         },
         {
           "symbol": "GALA",
-          "volume": 39921565.3
+          "volume": 25499259.32
         },
         {
           "symbol": "SAND",
-          "volume": 26060395.21
-        },
-        {
-          "symbol": "AXS",
-          "volume": 20966353.33
+          "volume": 15365282.06
         },
         {
           "symbol": "APE",
-          "volume": 20838482.39
+          "volume": 12690891.64
+        },
+        {
+          "symbol": "IMX",
+          "volume": 12264018.83
         }
       ],
       "classification": "NO ALERT",
@@ -237,30 +237,30 @@
       "segment": "Layer 1 basket",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 1.9398,
-      "current_volume": 29399515697.34,
-      "baseline_volume": 15156163337.07,
+      "multiple": 0.8514,
+      "current_volume": 15818844201.31,
+      "baseline_volume": 18579063320.95,
       "coverage": 1.0,
       "top_contributors": [
         {
           "symbol": "ETH",
-          "volume": 21335130841.81
+          "volume": 11433436529.02
         },
         {
           "symbol": "SOL",
-          "volume": 5375200866.61
+          "volume": 3123567246.06
         },
         {
           "symbol": "NEAR",
-          "volume": 895550834.82
-        },
-        {
-          "symbol": "ADA",
-          "volume": 568886887.3
+          "volume": 394383025.49
         },
         {
           "symbol": "SUI",
-          "volume": 567992006.12
+          "volume": 287765882.85
+        },
+        {
+          "symbol": "ADA",
+          "volume": 247091626.83
         }
       ],
       "classification": "NO ALERT",
@@ -279,30 +279,30 @@
       "segment": "Layer 2 basket",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 1.1453,
-      "current_volume": 228703137.37,
-      "baseline_volume": 199693083.26,
+      "multiple": 0.5527,
+      "current_volume": 119627188.2,
+      "baseline_volume": 216434878.39,
       "coverage": 1.0,
       "top_contributors": [
         {
           "symbol": "ARB",
-          "volume": 154114268.41
+          "volume": 77909828.8
         },
         {
           "symbol": "OP",
-          "volume": 52038798.11
+          "volume": 29871976.09
         },
         {
           "symbol": "ZK",
-          "volume": 15528201.92
+          "volume": 7360703.21
         },
         {
           "symbol": "MANTA",
-          "volume": 4435726.25
+          "volume": 2595368.85
         },
         {
           "symbol": "METIS",
-          "volume": 2586142.68
+          "volume": 1889311.25
         }
       ],
       "classification": "NO ALERT",
@@ -321,36 +321,37 @@
       "segment": "Memecoin basket",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 2.2153,
-      "current_volume": 1441252943.55,
-      "baseline_volume": 650598055.89,
+      "multiple": 0.8792,
+      "current_volume": 716318137.53,
+      "baseline_volume": 814750053.43,
       "coverage": 1.0,
       "top_contributors": [
         {
           "symbol": "DOGE",
-          "volume": 1277786807.48
+          "volume": 626076017.74
         },
         {
           "symbol": "SHIB",
-          "volume": 83881384.94
+          "volume": 43384125.01
         },
         {
           "symbol": "BONK",
-          "volume": 50562932.93
+          "volume": 25018446.4
         },
         {
           "symbol": "FLOKI",
-          "volume": 25582789.28
+          "volume": 19886924.58
         },
         {
           "symbol": "BRETT",
-          "volume": 3439028.92
+          "volume": 1952623.8
         }
       ],
-      "classification": "SURGE >=2x",
+      "classification": "NO ALERT",
       "notification_readiness": {
         "eligible_for_push": false,
         "reasons": [
+          "surge threshold not met",
           "not verified as exchange-wide spot or approved ID sector basket",
           "independent confirmation not verified",
           "push delivery and duplicate suppression not configured"
@@ -362,30 +363,30 @@
       "segment": "RWA basket",
       "source": "LunarCrush 24h reported-volume proxy",
       "status": "READY",
-      "multiple": 1.6917,
-      "current_volume": 689085081.88,
-      "baseline_volume": 407334093.49,
+      "multiple": 0.7062,
+      "current_volume": 333539375.9,
+      "baseline_volume": 472285301.83,
       "coverage": 1.0,
       "top_contributors": [
         {
           "symbol": "LINK",
-          "volume": 452976875.7
+          "volume": 216950622.17
         },
         {
           "symbol": "ONDO",
-          "volume": 183830343.76
+          "volume": 90766237.14
         },
         {
           "symbol": "PENDLE",
-          "volume": 42076089.73
+          "volume": 20596484.21
         },
         {
           "symbol": "CFG",
-          "volume": 8278510.22
+          "volume": 4401519.23
         },
         {
           "symbol": "POLYX",
-          "volume": 1657313.79
+          "volume": 630794.65
         }
       ],
       "classification": "NO ALERT",
