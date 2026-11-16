@@ -95,8 +95,8 @@ class PriceCorroborationTests(unittest.TestCase):
                 close=(1+(i-495)/100) if i>=495 else 0.9
                 candles.append([d.isoformat()+"T00:00:00Z",close,close,close,close,100])
             # Use last five exact closes from local history.
-            with patch.dict(sys.modules, {"ccxt":mock_ccxt}), \\
-                 patch("tools.research_price_corroborated_ema.fetch_history",return_value=candles), \\
+            with patch.dict(sys.modules, {"ccxt":mock_ccxt}), \
+                 patch("tools.research_price_corroborated_ema.fetch_history",return_value=candles), \
                  patch("tools.research_price_corroborated_ema.provisional_technicals",
                        return_value={"provisional_technical_status":"PROVISIONAL EMA ALIGNED",
                          "provisional_ema50":1.0,"provisional_ema100":0.9,"provisional_ema200":0.8}):
