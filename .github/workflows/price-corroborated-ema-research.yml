@@ -1,0 +1,77 @@
+name: Price corroborate incremental CEX EMA research
+on:
+  pull_request:
+    paths:
+      - 'tools/research_price_corroborated_ema.py'
+      - 'tests/test_price_corroborated_ema.py'
+      - '.github/workflows/price-corroborated-ema-research.yml'
+      - 'config/price_corroboration_conflicts.json'
+  workflow_dispatch:
+    inputs:
+      coverage_run_id:
+        description: 'Successful expanded CEX coverage workflow run ID'
+        required: true
+        type: string
+      max_sources:
+        description: 'Max new CEX market sources inspected per coin (1-3)'
+        required: true
+        default: '1'
+        type: choice
+        options: ['1','2','3']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run independent price corroboration regression tests
+        run: python -m unittest tests.test_price_corroborated_ema tests.test_incremental_cex_identity_readiness -v
+  research:
+    if: github.event_name == 'workflow_dispatch'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CCXT for research-only market candles
+        run: pip install 'ccxt>=4.4'
+      - name: Download full audit from chosen run
+        uses: actions/download-artifact@v4
+        with:
+          name: expanded-cex-coverage-audit
+          path: source
+          run-id: ${{ inputs.coverage_run_id }}
+          repository: willjjonesjr-coder/lunarcrush-breakout-radar
+          github-token: ${{ github.token }}
+      - name: Reconstruct exactly the incremental candidates
+        run: |
+          python tools/build_incremental_cex_identity_readiness.py \
+            --before-after source/expanded_cex_before_after.csv \
+            --coverage source/expanded_cex_coverage.csv \
+            --out reports/price_research_input
+      - name: Corroborate prices and compute provisional EMA (no imports)
+        run: |
+          python tools/research_price_corroborated_ema.py \
+            --input reports/price_research_input/incremental_cex_identity_readiness.csv \
+            --output reports/price_corroboration_research \
+            --max-sources "${{ inputs.max_sources }}" \
+            --minimum-days 3 --tolerance-pct 2.0
+      - name: Upload research results even on failed market checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: price-corroborated-ema-research
+          path: |
+            reports/price_research_input/
+            reports/price_corroboration_research/
+          if-no-files-found: warn
+          retention-days: 30
