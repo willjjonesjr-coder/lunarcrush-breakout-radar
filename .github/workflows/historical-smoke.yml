@@ -4,7 +4,13 @@ on:
     branches: [feat/historical-signals]
     paths:
       - 'tools/ccxt_backfill.py'
+      - 'tools/historical_exchange_diversity.py'
       - 'tools/ema_eligibility_diagnostics.py'
+      - '.github/workflows/historical-smoke.yml'
+  pull_request:
+    paths:
+      - 'tools/historical_exchange_diversity.py'
+      - 'tests/test_historical_exchange_diversity.py'
       - '.github/workflows/historical-smoke.yml'
   workflow_dispatch:
     inputs:
@@ -15,9 +21,22 @@ on:
 permissions:
   contents: read
 jobs:
-  historical-smoke:
+  diversity-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas
+      - name: Test same-cohort research safeguards and exchange scorecard
+        run: python -m unittest tests.test_historical_exchange_diversity -v
+  historical-smoke:
+    if: github.event_name != 'pull_request'
+    needs: diversity-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,6 +49,22 @@ jobs:
         env:
           TOP: ${{ github.event.inputs.top || '20' }}
         run: python tools/ccxt_backfill.py --top "$TOP" --bars 500
+      - name: Prepare exact historical cohort for nine-venue research
+        env:
+          TOP: ${{ github.event.inputs.top || '20' }}
+        run: python tools/historical_exchange_diversity.py prepare --top "$TOP"
+      - name: Discover all nine exchange sources (provisional, research only)
+        env:
+          TOP: ${{ github.event.inputs.top || '20' }}
+        run: |
+          python tools/audit_expanded_cex_coverage.py \
+            --queue reports/historical_research_queue.json \
+            --count "$TOP" --bars 500 --max-pairs-per-exchange 2 \
+            --output reports/expanded_cex_coverage
+      - name: Compare original three against additional six CEXs
+        run: python tools/compare_cex_coverage.py
+      - name: Publish per-exchange diversity and legacy-source concentration
+        run: python tools/historical_exchange_diversity.py report
       - name: Upload reports and prices
         if: always()
         uses: actions/upload-artifact@v4
@@ -40,4 +75,11 @@ jobs:
             reports/backfill_inventory.csv
             data_price/
             logs/backfill.log
+            reports/historical_research_queue.json
+            reports/expanded_cex_coverage.csv
+            reports/expanded_cex_coverage.json
+            reports/expanded_cex_before_after.csv
+            reports/expanded_cex_before_after.json
+            reports/historical_exchange_diversity.csv
+            reports/historical_exchange_diversity.json
           if-no-files-found: warn
