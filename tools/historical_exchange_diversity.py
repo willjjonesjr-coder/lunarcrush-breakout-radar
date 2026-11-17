@@ -7,8 +7,11 @@ Never edits data_price/, approved inventory, symbol_map, production data or aler
 import argparse
 import csv
 import json
+import sys
 from collections import defaultdict
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tools.audit_expanded_cex_coverage import EXCHANGES
 from tools.ccxt_backfill import universe
