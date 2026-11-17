@@ -1,12 +1,12 @@
 {
   "status": "AVAILABLE",
-  "as_of": "2026-11-15T00:00:00+00:00",
-  "expected_day": "2026-11-15T00:00:00+00:00",
-  "observed_at": "2026-11-16T09:29:08.777080+00:00",
-  "score": 27.9,
+  "as_of": "2026-11-16T00:00:00+00:00",
+  "expected_day": "2026-11-16T00:00:00+00:00",
+  "observed_at": "2026-11-17T10:33:41.508719+00:00",
+  "score": 22.8,
   "classification": "strong bearish",
-  "trend_strength": 44.2,
-  "change_7d": -13.700000000000003,
+  "trend_strength": 54.4,
+  "change_7d": -17.7,
   "expected_assets": 20,
   "available_assets": 20,
   "coverage": 1.0,
@@ -16,9 +16,9 @@
   "usage": "context only; candidate scores and eligibility unchanged",
   "breadth_assets": 20,
   "components": {
-    "trend": 49.99999999999999,
+    "trend": 33.33333333333333,
     "breadth": 2.5,
-    "momentum": 21.202881125592043,
-    "participation": 15.918958151823016
+    "momentum": 20.243205637602934,
+    "participation": 16.954232663675143
   }
 }
