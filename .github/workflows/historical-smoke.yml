@@ -5,17 +5,20 @@ on:
     paths:
       - 'tools/ccxt_backfill.py'
       - 'tools/historical_exchange_diversity.py'
+      - 'tools/audit_expanded_cex_coverage.py'
       - 'tools/ema_eligibility_diagnostics.py'
       - '.github/workflows/historical-smoke.yml'
   pull_request:
     paths:
       - 'tools/historical_exchange_diversity.py'
+      - 'tools/audit_expanded_cex_coverage.py'
       - 'tests/test_historical_exchange_diversity.py'
+      - 'tests/test_expanded_cex_coverage.py'
       - '.github/workflows/historical-smoke.yml'
   workflow_dispatch:
     inputs:
       top:
-        description: Number of coins (20 smoke test, 80 full)
+        description: 'Coin cohort size (20 smoke; 80, 200, or 300 expanded)'
         required: true
         default: '20'
 permissions:
@@ -31,7 +34,7 @@ jobs:
           python-version: '3.11'
       - run: pip install pandas
       - name: Test same-cohort research safeguards and exchange scorecard
-        run: python -m unittest tests.test_historical_exchange_diversity -v
+        run: python -m unittest tests.test_historical_exchange_diversity tests.test_expanded_cex_coverage tests.test_compare_cex_coverage -v
   historical-smoke:
     if: github.event_name != 'pull_request'
     needs: diversity-tests
