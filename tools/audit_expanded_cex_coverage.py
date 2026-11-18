@@ -182,8 +182,8 @@ def main():
     p.add_argument("--exchanges", default=",".join(EXCHANGES))
     p.add_argument("--output", default="reports/expanded_cex_coverage")
     args = p.parse_args()
-    if not 1 <= args.count <= 80 or args.bars < 300 or not 1 <= args.max_pairs_per_exchange <= 5:
-        p.error("count must be 1-80, bars >=300, and max pairs 1-5")
+    if not 1 <= args.count <= 300 or args.bars < 300 or not 1 <= args.max_pairs_per_exchange <= 5:
+        p.error("count must be 1-300, bars >=300, and max pairs 1-5")
     queue = json.loads(Path(args.queue).read_text())["first_review_batch"][:args.count]
     import ccxt
     clients = {}
