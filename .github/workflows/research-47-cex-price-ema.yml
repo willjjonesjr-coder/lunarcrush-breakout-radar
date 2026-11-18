@@ -1,0 +1,106 @@
+name: Research 47 incremental 500-bar CEX histories (provisional)
+on:
+  pull_request:
+    paths:
+      - 'tools/build_47_cex_research.py'
+      - 'tools/research_47_cex_price_ema.py'
+      - 'tests/test_research_47_cex_price_ema.py'
+      - '.github/workflows/research-47-cex-price-ema.yml'
+  workflow_dispatch:
+    inputs:
+      historical_run_id:
+        description: 'Successful 200-coin historical smoke run with nine-CEX artifact'
+        required: true
+        default: '44219837951'
+        type: string
+      max_sources:
+        description: 'Distinct additional CEXs to corroborate per coin (2-3 recommended)'
+        required: true
+        default: '3'
+        type: choice
+        options: ['2', '3']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Smoke test research CLI imports
+        run: |
+          python -m tools.build_47_cex_research --help
+          python -m tools.research_47_cex_price_ema --help
+      - name: Offline provenance, price comparison and research-only tests
+        run: |
+          python -m unittest tests.test_research_47_cex_price_ema tests.test_price_corroborated_ema -v
+
+  research:
+    if: github.event_name == 'workflow_dispatch'
+    needs: tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CCXT for research-only market data
+        run: pip install 'ccxt>=4.4'
+      - name: Verify exact successful source run and expected branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.historical_run_id }}
+        run: |
+          case "$RUN_ID" in ''|*[!0-9]*) echo 'Invalid workflow run ID'; exit 1;; esac
+          gh api "repos/${{ github.repository }}/actions/runs/$RUN_ID" > source_run.json
+          python - <<'PY'
+          import json
+          run=json.load(open('source_run.json'))
+          if (run.get('conclusion')!='success' or run.get('head_branch')!='main'
+              or run.get('path')!='.github/workflows/historical-smoke.yml'
+              or run.get('event')!='workflow_dispatch'):
+              raise SystemExit('Source run must be a successful dispatched historical smoke run on main')
+          print('Source:', run['html_url'], run['head_sha'])
+          PY
+      - name: Download historical smoke artifact for exact run
+        uses: actions/download-artifact@v4
+        with:
+          name: historical-smoke-results
+          path: source
+          run-id: ${{ inputs.historical_run_id }}
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+      - name: Reconstruct and prioritize exactly 47 incremental 500-bar candidates
+        run: |
+          python -m tools.build_47_cex_research \
+            --source source --expected-count 47 --expected-cohort 200 \
+            --output reports/47_cex_research_input
+          python - <<'PY'
+          import json
+          stats=json.load(open('reports/47_cex_research_input/candidates.json'))
+          if stats['candidates']!=47 or stats['multiple_exchange']!=38 or stats['single_exchange']!=9:
+              raise SystemExit('Expected 47 incremental assets (38 multi-venue and 9 single-venue); audit source artifact before using')
+          PY
+      - name: Compare every selected venue with LunarCrush and calculate provisional EMA
+        run: |
+          python -m tools.research_47_cex_price_ema \
+            --input reports/47_cex_research_input/candidates.csv \
+            --history-dir data \
+            --output reports/47_cex_price_research \
+            --max-sources "${{ inputs.max_sources }}"
+      - name: Upload full research evidence, even on market errors
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: incremental-47-cex-price-ema-research
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            source_run.json
+            reports/47_cex_research_input/
+            reports/47_cex_price_research/
