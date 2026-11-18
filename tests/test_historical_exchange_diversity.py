@@ -29,7 +29,31 @@ class HistoricalDiversityTests(unittest.TestCase):
             self.assertEqual([r["review_rank"] for r in queue], [1, 2])
             self.assertEqual([r["symbol"] for r in queue], ["BBB", "AAA"])
             with self.assertRaises(ValueError):
-                make_queue(tmp, 81, radar)
+                make_queue(tmp, 301, radar)
+            with self.assertRaises(ValueError):
+                make_queue(tmp, 0, radar)
+
+    def test_queue_80_200_300_limits_and_same_ranked_cohort(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            radar = Path(tmp) / "radar.csv"
+            with radar.open("w", newline="") as f:
+                w = csv.DictWriter(f, fieldnames=["id", "symbol", "name"])
+                w.writeheader()
+                w.writerows({"id": str(i), "symbol": "X" + str(i),
+                             "name": "Coin " + str(i)} for i in range(1, 301))
+            for size in (80, 200, 300):
+                expected = [str(i) for i in range(1, size + 1)]
+                with self.subTest(size=size):
+                    with patch("tools.historical_exchange_diversity.universe",
+                               return_value=expected) as legacy:
+                        queue = make_queue(tmp, size, radar)
+                    legacy.assert_called_once_with(tmp, size)
+                    self.assertEqual(len(queue), size)
+                    self.assertEqual([r["coin_id"] for r in queue], expected)
+                    self.assertEqual([r["review_rank"] for r in queue],
+                                     list(range(1, size + 1)))
+                    self.assertTrue(all(r["symbol"] == "X" + r["coin_id"]
+                                        for r in queue))
 
     def test_incremental_coverage_and_unique_coins_not_market_rows(self):
         rows = [
