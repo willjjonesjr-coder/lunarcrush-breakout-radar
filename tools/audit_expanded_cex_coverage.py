@@ -173,6 +173,12 @@ def summarize(rows, requested):
             "policy": "Spot listing and even 500 clean candles are provisional until independent identity, provenance and liquidity verification. No production writes."}
 
 
+def validate_request(count, bars, max_pairs):
+    """Enforce research-only request bounds independently of network access."""
+    if not 1 <= count <= 300 or bars < 300 or not 1 <= max_pairs <= 5:
+        raise ValueError("count must be 1-300, bars >=300, and max pairs 1-5")
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--queue", default="reports/ema_expansion_review_queue.json")
@@ -182,8 +188,10 @@ def main():
     p.add_argument("--exchanges", default=",".join(EXCHANGES))
     p.add_argument("--output", default="reports/expanded_cex_coverage")
     args = p.parse_args()
-    if not 1 <= args.count <= 300 or args.bars < 300 or not 1 <= args.max_pairs_per_exchange <= 5:
-        p.error("count must be 1-300, bars >=300, and max pairs 1-5")
+    try:
+        validate_request(args.count, args.bars, args.max_pairs_per_exchange)
+    except ValueError as exc:
+        p.error(str(exc))
     queue = json.loads(Path(args.queue).read_text())["first_review_batch"][:args.count]
     import ccxt
     clients = {}
