@@ -1,7 +1,7 @@
 """Offline regression tests for the research-only expanded CEX coverage audit."""
 import unittest
 from datetime import date, datetime, timezone
-from tools.audit_expanded_cex_coverage import markets_for_coin, validate_bars, audit, summarize
+from tools.audit_expanded_cex_coverage import markets_for_coin, validate_bars, audit, summarize, validate_request
 
 
 def candles(n=300, start=date(2026, 1, 1)):
@@ -21,6 +21,19 @@ class FakeExchange:
 
 
 class ExpandedCexAuditTests(unittest.TestCase):
+    def test_research_audit_supports_80_200_300_but_rejects_invalid(self):
+        for size in (80, 200, 300):
+            with self.subTest(count=size):
+                self.assertIsNone(validate_request(size, 500, 2))
+        for size in (0, -1, 301):
+            with self.subTest(invalid_count=size):
+                with self.assertRaisesRegex(ValueError, "count must be 1-300"):
+                    validate_request(size, 500, 2)
+        with self.assertRaises(ValueError):
+            validate_request(200, 299, 2)
+        with self.assertRaises(ValueError):
+            validate_request(200, 500, 6)
+
     def test_market_filter_rejects_derivatives_and_wrong_base(self):
         ex = FakeExchange({
             "abc": {"symbol":"ABC/USDT", "id":"ABCUSDT", "base":"ABC", "quote":"USDT", "spot":True, "active":True},
