@@ -20,8 +20,8 @@ from tools.compare_cex_coverage import ORIGINAL, ADDED, READY
 
 def make_queue(data_dir, top, radar_csv):
     """Use exactly the backfill cohort/order; no alternative ranked queue."""
-    if not 1 <= top <= 80:
-        raise ValueError("research cohort must be 1-80")
+    if not 1 <= top <= 300:
+        raise ValueError("research cohort must be 1-300")
     ids = universe(data_dir, top)
     with open(radar_csv, newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
