@@ -13,7 +13,7 @@ from tools.compare_cex_coverage import ORIGINAL, ADDED
 
 READY = "500_BAR_READY_PROVISIONAL"
 FIELDS = ("priority_rank", "coin_id", "symbol", "name", "radar_score",
-          "source_count", "source_markets", "source_exchanges",
+          "source_count", "source_markets", "source_exchanges", "primary_source_markets",
           "priority_group", "history_status", "identity_status",
           "production_approval", "alert_eligible")
 
@@ -69,6 +69,26 @@ def reconstruct(diversity, coverage, expected_count=47, expected_cohort=200):
                                            {"USD": 0, "USDT": 1, "USDC": 2}.get(r["pair"].split("/")[1].upper(), 9),
                                            r["pair"]))
             sources.append(venue + ":" + candidates[0]["pair"])
+        # The cohort is incremental at 500 bars, but a primary venue may still
+        # offer enough recent daily closes for independent corroboration.
+        primary = []
+        for venue in ORIGINAL:
+            choices = [r for r in group
+                       if r.get("exchange") == venue
+                       and r.get("market_status") == "FOUND_PROVISIONAL"
+                       and r.get("identity_status") == "UNVERIFIED_SYMBOL_MATCH_ONLY"
+                       and r.get("approval_status") == "RESEARCH_ONLY_DO_NOT_IMPORT"
+                       and r.get("history_status") not in ("INVALID_OHLCV", "NOT_SAMPLED")]
+            valid = []
+            for r in choices:
+                pair = str(r.get("pair") or "")
+                base, sep, quote = pair.partition("/")
+                if sep == "/" and ":" not in quote and base.upper() == sym.upper() and quote.upper() in ("USD", "USDT", "USDC"):
+                    valid.append(r)
+            valid.sort(key=lambda r: ({"USD":0,"USDT":1,"USDC":2}[r["pair"].split("/")[1].upper()],
+                                      -int(r.get("bars_available") or 0), r["pair"]))
+            if valid:
+                primary.append(venue + ":" + valid[0]["pair"])
         score_raw = group[0].get("breakout_score") or "0"
         try:
             score = float(score_raw)
@@ -77,6 +97,7 @@ def reconstruct(diversity, coverage, expected_count=47, expected_cohort=200):
         results.append(dict(coin_id=str(cid), symbol=sym, name=name,
                             radar_score=score, source_count=len(sources),
                             source_markets=";".join(sources),
+                            primary_source_markets=";".join(primary),
                             source_exchanges=";".join(sorted(by_venue)),
                             priority_group="MULTI_EXCHANGE" if len(sources) >= 2 else "SINGLE_EXCHANGE",
                             history_status=READY, identity_status="UNVERIFIED_RESEARCH_ONLY",
