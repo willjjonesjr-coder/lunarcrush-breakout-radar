@@ -7,6 +7,7 @@ imports, approved maps, scanner scores or alert fields are modified.
 import argparse
 import csv
 import json
+import math
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -32,6 +33,46 @@ def primary_sources(item):
         if slash == "/" and ":" not in quote and base.upper() == symbol and quote.upper() in QUOTES:
             entries[venue] = pair
     return entries
+
+
+
+def fetch_primary_history(client, pair, required_day):
+    """Only 3 recent completed UTC OHLCV bars, with strict spot validation.
+
+    Intentionally separate from provisional_ema.fetch_history, which requires
+    300+ observations and cannot check otherwise-useful short histories.
+    """
+    market = client.markets.get(pair, {})
+    base, sep, quote = pair.partition("/")
+    if (sep != "/" or ":" in quote or market.get("spot") is not True
+            or market.get("active") is not True or market.get("base") != base
+            or market.get("quote") != quote or not client.has.get("fetchOHLCV")):
+        raise ValueError("Exact active primary spot pair unavailable")
+    since = int(datetime.combine(required_day - timedelta(days=9),
+                                  datetime.min.time(), timezone.utc).timestamp() * 1000)
+    candles = client.fetch_ohlcv(pair, "1d", since=since, limit=20)
+    by_day = {}
+    for candle in candles:
+        if len(candle) < 6:
+            raise ValueError("Malformed primary candle")
+        stamp = float(candle[0])
+        if not math.isfinite(stamp) or stamp % 86400000:
+            raise ValueError("Non-UTC daily candle timestamp")
+        day = datetime.fromtimestamp(stamp / 1000, timezone.utc).date()
+        if day > required_day:
+            continue  # no current unfinished or future price is used
+        vals = [float(v) for v in candle[1:6]]
+        o, h, l, close, volume = vals
+        if (not all(math.isfinite(v) for v in vals) or min(o, h, l, close) <= 0
+                or volume < 0 or h < max(o, close, l) or l > min(o, close, h)):
+            raise ValueError("Invalid primary OHLCV envelope")
+        if day in by_day and by_day[day] != vals:
+            raise ValueError("Conflicting primary duplicate candle")
+        by_day[day] = vals
+    dates = [required_day - timedelta(days=i) for i in (2, 1, 0)]
+    if any(day not in by_day for day in dates):
+        raise ValueError("Three consecutive completed primary UTC dates required")
+    return [[day.isoformat() + "T00:00:00Z", *by_day[day]] for day in dates]
 
 
 AUDIT_FIELDS = ("priority_rank", "coin_id", "symbol", "name", "source_count",
@@ -108,7 +149,8 @@ def check_candidate(item, histories, client_for, required_day, conflicts,
         candles = []
         try:
             client = client_for(venue)
-            candles = fetch_history(client, pair, required_day, bars)
+            candles = (fetch_primary_history(client, pair, required_day)
+                       if bars == 3 else fetch_history(client, pair, required_day, bars))
             closes = {datetime.fromisoformat(str(c[0])[:10]).date(): float(c[4])
                       for c in candles}
             verdict = evaluate_prices(reference, closes, required_day,
