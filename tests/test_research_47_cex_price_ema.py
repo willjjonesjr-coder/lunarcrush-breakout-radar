@@ -132,29 +132,32 @@ class PriceResearchTests(unittest.TestCase):
 
 
 class PrimaryExchangePolicyTests(PriceResearchTests):
-    """Validate exact venue order and two-of-three rule with no network."""
+    """Validate primary venue priority and two-of-three confirmation policy."""
 
-    def test_coinbase_kraken_two_pass_third_mismatch_still_confirms(self):
-        self.item["primary_source_markets"] = (
-            "coinbase:X/USD;kraken:X/USD;binance:X/USDT")
+    @staticmethod
+    def technicals():
+        return {"provisional_technical_status":"PROVISIONAL EMA ALIGNED",
+                "provisional_ema50":1, "provisional_ema100":0.9,
+                "provisional_ema200":0.8}
+
+    def test_coinbase_kraken_two_pass_binance_mismatch_does_not_veto(self):
+        self.item["primary_source_markets"] = "coinbase:X/USD;kraken:X/USD;binance:X/USDT"
         third = [list(c) for c in self.candles]
         third[-1][4] *= 1.05
         order = []
-        def fetch(client, pair, day, bars):
-            order.append((client, pair, bars))
-            if len(order) == 3:
-                return third
+        def primary(venue, pair, day):
+            order.append((venue, 3))
+            return third if venue == "binance" else self.candles
+        def secondary(venue, pair, day, bars):
+            order.append((venue, bars))
             return self.candles
-        with patch("tools.research_47_cex_price_ema.fetch_history", side_effect=fetch), \
+        with patch("tools.research_47_cex_price_ema.fetch_primary_history", side_effect=primary), \
+             patch("tools.research_47_cex_price_ema.fetch_history", side_effect=secondary), \
              patch("tools.research_47_cex_price_ema.provisional_technicals",
-                   return_value={"provisional_technical_status":"PROVISIONAL EMA ALIGNED",
-                                 "provisional_ema50":1, "provisional_ema100":0.9,
-                                 "provisional_ema200":0.8}):
+                   return_value=self.technicals()):
             result, audit, selected = check_candidate(
                 self.item, self.dir, lambda venue: venue, self.required, {}, 3)
-        self.assertEqual([x[0] for x in order],
-                         ["coinbase","kraken","binance","gate"])
-        self.assertEqual([x[2] for x in order], [3,3,3,500])
+        self.assertEqual(order, [("coinbase",3),("kraken",3),("binance",3),("gate",500)])
         self.assertEqual(result["corroboration_status"], "PRICE_CORROBORATED_PRIMARY_TWO")
         self.assertEqual(result["primary_venues_corrob"], 2)
         self.assertEqual(result["source_disagreements"], 1)
@@ -163,42 +166,47 @@ class PrimaryExchangePolicyTests(PriceResearchTests):
         self.assertEqual(audit[2]["status"], "PRICE_MISMATCH")
         self.assertEqual(selected[0], "gate")
 
-    def test_fallback_only_after_all_three_primary_attempted(self):
+    def test_check_all_three_original_venues_before_smaller_sources(self):
         self.item["primary_source_markets"] = "coinbase:X/USD;kraken:X/USD;binance:X/USDT"
         seen = []
-        def fetch(venue, pair, day, bars):
+        def primary(venue, pair, day):
             seen.append(venue)
             return self.candles
-        with patch("tools.research_47_cex_price_ema.fetch_history", side_effect=fetch), \
+        def secondary(venue, pair, day, bars):
+            seen.append(venue)
+            return self.candles
+        with patch("tools.research_47_cex_price_ema.fetch_primary_history", side_effect=primary), \
+             patch("tools.research_47_cex_price_ema.fetch_history", side_effect=secondary), \
              patch("tools.research_47_cex_price_ema.provisional_technicals",
-                   return_value={"provisional_technical_status":"PROVISIONAL EMA ALIGNED",
-                                 "provisional_ema50":1, "provisional_ema100":0.9,
-                                 "provisional_ema200":0.8}):
+                   return_value=self.technicals()):
             result, audit, _ = check_candidate(
                 self.item, self.dir, lambda venue: venue, self.required, {}, 3)
-        self.assertEqual(seen[:3], ["coinbase","kraken","binance"])
-        self.assertEqual(seen[3:], ["gate"])
+        self.assertEqual(seen, ["coinbase","kraken","binance","gate"])
         self.assertEqual(result["primary_venues_checked"], 3)
         self.assertEqual(result["primary_venues_corrob"], 3)
+        self.assertEqual([a["exchange"] for a in audit[:3]], list(("coinbase","kraken","binance")))
 
-    def test_two_primary_agree_but_no_good_500_bar_source_withholds_ema(self):
+    def test_two_primary_agree_but_no_500_bar_source_withholds_ema(self):
         self.item["primary_source_markets"] = "coinbase:X/USD;kraken:X/USD"
-        with patch("tools.research_47_cex_price_ema.fetch_history",
-                   side_effect=[self.candles,self.candles, RuntimeError("no 500 bars"),
-                                RuntimeError("no 500 bars")]):
+        with patch("tools.research_47_cex_price_ema.fetch_primary_history",
+                   return_value=self.candles), \
+             patch("tools.research_47_cex_price_ema.fetch_history",
+                   side_effect=RuntimeError("no 500 bars")):
             result, _, selected = check_candidate(
                 self.item, self.dir, lambda venue: venue, self.required, {}, 3)
         self.assertEqual(result["corroboration_status"], "PRICE_CORROBORATED_PRIMARY_TWO")
         self.assertEqual(result["ema_status"], "NOT_EVALUATED")
         self.assertIsNone(selected)
 
-    def test_known_identity_conflict_prevents_primary_and_fallback(self):
+    def test_known_identity_conflict_prevents_all_exchange_fetches(self):
         self.item["primary_source_markets"] = "coinbase:X/USD;kraken:X/USD"
-        with patch("tools.research_47_cex_price_ema.fetch_history") as fetch:
+        with patch("tools.research_47_cex_price_ema.fetch_history") as secondary, \
+             patch("tools.research_47_cex_price_ema.fetch_primary_history") as primary:
             result, _, selected = check_candidate(
                 self.item, self.dir, lambda _: object(), self.required,
                 {"1":"wrong contract"})
-        fetch.assert_not_called()
+        secondary.assert_not_called()
+        primary.assert_not_called()
         self.assertEqual(result["corroboration_status"], "IDENTITY_CONFLICT")
         self.assertIsNone(selected)
 
@@ -207,6 +215,23 @@ class PrimaryExchangePolicyTests(PriceResearchTests):
         item = {"symbol":"X", "primary_source_markets":
                 "coinbase:OTHER/USD;kraken:X/USDT:USDT;binance:X/USDT;coinbase:X/USD"}
         self.assertEqual(primary_sources(item), {"coinbase":"X/USD","binance":"X/USDT"})
+
+    def test_primary_three_day_candles_do_not_need_300_bars(self):
+        from datetime import datetime, timezone
+        from tools.research_47_cex_price_ema import fetch_primary_history
+        class Client:
+            markets = {"X/USD":{"spot":True,"active":True,"base":"X","quote":"USD"}}
+            has = {"fetchOHLCV": True}
+            def fetch_ohlcv(self, *args, **kwargs):
+                rows = []
+                for i in range(3):
+                    day = date(2026,11,15) + timedelta(days=i)
+                    ms = int(datetime.combine(day, datetime.min.time(), timezone.utc).timestamp()*1000)
+                    rows.append([ms, 1, 2, 0.5, 1.5 + i*0.01, 100])
+                return rows
+        result = fetch_primary_history(Client(), "X/USD", date(2026,11,17))
+        self.assertEqual(len(result), 3)
+        self.assertEqual(result[-1][0], "2026-11-17T00:00:00Z")
 
 
 if __name__ == "__main__":
