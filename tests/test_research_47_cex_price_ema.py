@@ -91,10 +91,10 @@ class PriceResearchTests(unittest.TestCase):
 
     def test_two_venues_agree_multi_ema_research_only(self):
         result, audit, selected = self.evaluate()
-        self.assertEqual(result["corroboration_status"], "PRICE_CORROBORATED_MULTI_SOURCE")
+        self.assertEqual(result["corroboration_status"], "PRICE_CORROBORATED_FALLBACK_MULTI_SOURCE")
         self.assertEqual(result["sources_corrob"], 2)
-        self.assertEqual(len(audit), 2)
-        self.assertEqual(len(audit[0]["comparison_days"].split(";")), 5)
+        self.assertEqual(len(audit), 5)
+        self.assertEqual(len(audit[3]["comparison_days"].split(";")), 5)
         self.assertEqual(result["production_approval"], "NO")
         self.assertEqual(result["alert_eligible"], "NO")
         self.assertIsNotNone(selected)
@@ -107,7 +107,7 @@ class PriceResearchTests(unittest.TestCase):
         self.assertEqual(result["source_disagreements"], 1)
         self.assertEqual(result["ema_status"], "NOT_EVALUATED")
         self.assertIsNone(selected)
-        self.assertEqual(audit[1]["status"], "PRICE_MISMATCH")
+        self.assertEqual(audit[-1]["status"], "PRICE_MISMATCH")
 
     def test_one_available_source_is_not_multisource_confirmation(self):
         result, _, selected = self.evaluate([self.candles, RuntimeError("offline")])
@@ -126,8 +126,86 @@ class PriceResearchTests(unittest.TestCase):
     def test_single_source_is_separate_research_classification(self):
         self.item.update(source_count="1", source_markets="mexc:X/USDT")
         result, _, selected = self.evaluate([self.candles])
-        self.assertEqual(result["corroboration_status"], "PRICE_CORROBORATED_SINGLE_SOURCE")
+        self.assertEqual(result["corroboration_status"], "PRICE_CORROBORATED_FALLBACK_SINGLE_SOURCE")
         self.assertIsNotNone(selected)
+
+
+class PrimaryExchangePolicyTests(PriceResearchTests):
+    """Validate exact venue order and two-of-three rule with no network."""
+
+    def test_coinbase_kraken_two_pass_third_mismatch_still_confirms(self):
+        self.item["primary_source_markets"] = (
+            "coinbase:X/USD;kraken:X/USD;binance:X/USDT")
+        third = [list(c) for c in self.candles]
+        third[-1][4] *= 1.05
+        order = []
+        def fetch(client, pair, day, bars):
+            order.append((client, pair, bars))
+            if len(order) == 3:
+                return third
+            return self.candles
+        with patch("tools.research_47_cex_price_ema.fetch_history", side_effect=fetch), \
+             patch("tools.research_47_cex_price_ema.provisional_technicals",
+                   return_value={"provisional_technical_status":"PROVISIONAL EMA ALIGNED",
+                                 "provisional_ema50":1, "provisional_ema100":0.9,
+                                 "provisional_ema200":0.8}):
+            result, audit, selected = check_candidate(
+                self.item, self.dir, lambda venue: venue, self.required, {}, 3)
+        self.assertEqual([x[0] for x in order],
+                         ["coinbase","kraken","binance","gate"])
+        self.assertEqual([x[2] for x in order], [3,3,3,500])
+        self.assertEqual(result["corroboration_status"], "PRICE_CORROBORATED_PRIMARY_TWO")
+        self.assertEqual(result["primary_venues_corrob"], 2)
+        self.assertEqual(result["source_disagreements"], 1)
+        self.assertEqual(result["production_approval"], "NO")
+        self.assertEqual(result["alert_eligible"], "NO")
+        self.assertEqual(audit[2]["status"], "PRICE_MISMATCH")
+        self.assertEqual(selected[0], "gate")
+
+    def test_fallback_only_after_all_three_primary_attempted(self):
+        self.item["primary_source_markets"] = "coinbase:X/USD;kraken:X/USD;binance:X/USDT"
+        seen = []
+        def fetch(venue, pair, day, bars):
+            seen.append(venue)
+            return self.candles
+        with patch("tools.research_47_cex_price_ema.fetch_history", side_effect=fetch), \
+             patch("tools.research_47_cex_price_ema.provisional_technicals",
+                   return_value={"provisional_technical_status":"PROVISIONAL EMA ALIGNED",
+                                 "provisional_ema50":1, "provisional_ema100":0.9,
+                                 "provisional_ema200":0.8}):
+            result, audit, _ = check_candidate(
+                self.item, self.dir, lambda venue: venue, self.required, {}, 3)
+        self.assertEqual(seen[:3], ["coinbase","kraken","binance"])
+        self.assertEqual(seen[3:], ["gate"])
+        self.assertEqual(result["primary_venues_checked"], 3)
+        self.assertEqual(result["primary_venues_corrob"], 3)
+
+    def test_two_primary_agree_but_no_good_500_bar_source_withholds_ema(self):
+        self.item["primary_source_markets"] = "coinbase:X/USD;kraken:X/USD"
+        with patch("tools.research_47_cex_price_ema.fetch_history",
+                   side_effect=[self.candles,self.candles, RuntimeError("no 500 bars"),
+                                RuntimeError("no 500 bars")]):
+            result, _, selected = check_candidate(
+                self.item, self.dir, lambda venue: venue, self.required, {}, 3)
+        self.assertEqual(result["corroboration_status"], "PRICE_CORROBORATED_PRIMARY_TWO")
+        self.assertEqual(result["ema_status"], "NOT_EVALUATED")
+        self.assertIsNone(selected)
+
+    def test_known_identity_conflict_prevents_primary_and_fallback(self):
+        self.item["primary_source_markets"] = "coinbase:X/USD;kraken:X/USD"
+        with patch("tools.research_47_cex_price_ema.fetch_history") as fetch:
+            result, _, selected = check_candidate(
+                self.item, self.dir, lambda _: object(), self.required,
+                {"1":"wrong contract"})
+        fetch.assert_not_called()
+        self.assertEqual(result["corroboration_status"], "IDENTITY_CONFLICT")
+        self.assertIsNone(selected)
+
+    def test_primary_source_parser_rejects_wrong_base_or_derivatives(self):
+        from tools.research_47_cex_price_ema import primary_sources
+        item = {"symbol":"X", "primary_source_markets":
+                "coinbase:OTHER/USD;kraken:X/USDT:USDT;binance:X/USDT;coinbase:X/USD"}
+        self.assertEqual(primary_sources(item), {"coinbase":"X/USD","binance":"X/USDT"})
 
 
 if __name__ == "__main__":
