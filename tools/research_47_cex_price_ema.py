@@ -15,6 +15,24 @@ from tools.research_price_corroborated_ema import (
     evaluate_prices, reference_history, parse_sources, known_conflict,
 )
 
+PRIMARY = ("coinbase", "kraken", "binance")
+QUOTES = {"USD", "USDT", "USDC"}
+
+
+def primary_sources(item):
+    """Only exact-base spot pairs recorded by the nine-CEX source audit."""
+    symbol = str(item.get("symbol") or "").upper()
+    entries = {}
+    for source in str(item.get("primary_source_markets") or "").split(";"):
+        venue, sep, pair = source.partition(":")
+        if not sep or venue not in PRIMARY or venue in entries:
+            continue
+        base, slash, quote = pair.partition("/")
+        if slash == "/" and ":" not in quote and base.upper() == symbol and quote.upper() in QUOTES:
+            entries[venue] = pair
+    return entries
+
+
 AUDIT_FIELDS = ("priority_rank", "coin_id", "symbol", "name", "source_count",
                 "exchange", "pair", "quote", "status", "reason", "history_bars",
                 "comparison_days", "reference_prices", "exchange_prices",
@@ -22,6 +40,7 @@ AUDIT_FIELDS = ("priority_rank", "coin_id", "symbol", "name", "source_count",
                 "mean_difference_pct", "production_approval", "alert_eligible")
 SUMMARY_FIELDS = ("priority_rank", "coin_id", "symbol", "name", "source_count",
                   "sources_checked", "sources_corrob", "source_disagreements",
+                  "primary_venues_checked", "primary_venues_corrob",
                   "corroboration_status", "ema_status", "ema50", "ema100",
                   "ema200", "research_csv", "reason", "production_approval",
                   "alert_eligible")
@@ -29,22 +48,25 @@ SUMMARY_FIELDS = ("priority_rank", "coin_id", "symbol", "name", "source_count",
 
 def check_candidate(item, histories, client_for, required_day, conflicts,
                     max_sources=3, tolerance_pct=2.0):
-    """One coin: do not promote on any observed price conflict.
+    """Check Coinbase, Kraken, Binance first, then fallback venues.
 
-    Evaluate each selected distinct venue against LunarCrush's latest five
-    completed days; require >=3 consecutive aligned completed dates and <=2%
-    absolute differences on *every* matched date. A multi-venue candidate
-    needs two corroborating exchanges; single-venue results stay distinct.
+    Primary comparisons need only 3 contiguous recent daily OHLCV bars, not
+    500; 500 validated bars remain mandatory for an EMA candle source.
+    Two passing primary venues prevail over a third *price* disagreement,
+    but no explicit identity conflict or uncorroborated 500-bar series passes.
     """
     cid = str(item["coin_id"])
-    sources = parse_sources(item)[:max_sources]
+    primary = primary_sources(item)
+    fallback = parse_sources(item)[:max_sources]
     ref_path = Path(histories) / ("history_" + cid + ".csv")
     base = {k: item.get(k, "") for k in ("priority_rank", "coin_id", "symbol", "name", "source_count")}
     result = dict(base, sources_checked=0, sources_corrob=0, source_disagreements=0,
+                  primary_venues_checked=0, primary_venues_corrob=0,
                   corroboration_status="NOT_EVALUATED", ema_status="NOT_EVALUATED",
                   ema50="", ema100="", ema200="", research_csv="", reason="",
                   production_approval="NO", alert_eligible="NO")
     audit = []
+
     def add(venue="", pair="", status="NOT_EVALUATED", reason="", checks=None, n=0):
         checks = checks or []
         audit.append(dict(base, exchange=venue, pair=pair,
@@ -57,6 +79,7 @@ def check_candidate(item, histories, client_for, required_day, conflicts,
                           max_difference_pct=max((c["difference_pct"] for c in checks), default=""),
                           mean_difference_pct=(sum(c["difference_pct"] for c in checks) / len(checks)) if checks else "",
                           production_approval="NO", alert_eligible="NO"))
+
     conflict = known_conflict(item, conflicts)
     if conflict:
         result.update(corroboration_status="IDENTITY_CONFLICT", reason=conflict)
@@ -66,7 +89,7 @@ def check_candidate(item, histories, client_for, required_day, conflicts,
         result.update(corroboration_status="MISSING_REFERENCE", reason="LunarCrush history unavailable")
         add(status="MISSING_REFERENCE", reason=result["reason"])
         return result, audit, None
-    if not sources:
+    if not fallback and not primary:
         result.update(corroboration_status="NO_VALID_SOURCES", reason="No exact supported spot base/quote")
         add(status="NO_VALID_SOURCES", reason=result["reason"])
         return result, audit, None
@@ -77,55 +100,96 @@ def check_candidate(item, histories, client_for, required_day, conflicts,
         add(status="IDENTITY_CONFLICT", reason=str(exc))
         return result, audit, None
 
-    good, bad, issues = [], [], []
-    for venue, pair in sources:
+    primary_good, fallback_good, bad, issues = [], [], [], []
+
+    def inspect(venue, pair, bars):
         result["sources_checked"] += 1
         candles = []
         try:
             client = client_for(venue)
-            # PR #60 fetcher validates active exact spot pair and complete
-            # contiguous daily OHLCV ending yesterday, excluding live candles.
-            candles = fetch_history(client, pair, required_day, 500)
-            exchange_closes = {datetime.fromisoformat(str(c[0])[:10]).date(): float(c[4]) for c in candles}
-            verdict = evaluate_prices(reference, exchange_closes, required_day,
+            candles = fetch_history(client, pair, required_day, bars)
+            closes = {datetime.fromisoformat(str(c[0])[:10]).date(): float(c[4])
+                      for c in candles}
+            verdict = evaluate_prices(reference, closes, required_day,
                                       tolerance_pct=tolerance_pct, minimum_days=3, window=5)
-            status = verdict["status"]
-            reason = verdict["reason"]
-            add(venue, pair, status, reason, verdict.get("checks"), len(candles))
-            if status == "PRICE_CORROBORATED":
-                good.append((venue, pair, candles))
-            elif status in ("PRICE_MISMATCH", "CONFLICT", "INVALID_EXCHANGE_PRICE",
-                            "INVALID_REFERENCE_PRICE"):
-                bad.append(venue + ":" + status)
+            add(venue, pair, verdict["status"], verdict["reason"],
+                verdict.get("checks"), len(candles))
+            if verdict["status"] == "PRICE_CORROBORATED":
+                return (venue, pair, candles)
+            if verdict["status"] in ("PRICE_MISMATCH", "CONFLICT",
+                                     "INVALID_EXCHANGE_PRICE", "INVALID_REFERENCE_PRICE"):
+                bad.append(venue + ":" + verdict["status"])
             else:
-                issues.append(venue + ":" + status)
+                issues.append(venue + ":" + verdict["status"])
         except Exception as exc:
             reason = type(exc).__name__ + ": " + str(exc)[:200]
             add(venue, pair, "SOURCE_ERROR", reason, n=len(candles))
             issues.append(venue + ":SOURCE_ERROR")
+        return None
 
-    result["sources_corrob"] = len(good)
+    # Inspect every primary venue in strict order, including absent or failed
+    # listings. No secondary exchange may be queried during this phase.
+    for venue in PRIMARY:
+        result["primary_venues_checked"] += 1
+        pair = primary.get(venue)
+        if not pair:
+            add(venue, status="NO_EXACT_SPOT_PAIR",
+                reason="No vetted exact-base primary market in source-run audit")
+            continue
+        passed = inspect(venue, pair, 3)
+        if passed:
+            primary_good.append(passed)
+
+    result["primary_venues_corrob"] = len(primary_good)
+    primary_rule = len(primary_good) >= 2
+
+    # Smaller venues are checked only AFTER all three primary venues. They
+    # supply 500-bar research EMA data when the primary pair coverage is short.
+    # Otherwise they can provide corroboration, but never override an observed
+    # failure of the primary-source policy without a distinct review status.
+    for venue, pair in fallback:
+        passed = inspect(venue, pair, 500)
+        if passed:
+            fallback_good.append(passed)
+        if primary_rule and fallback_good:
+            break  # one corroborated 500-bar EMA source is sufficient
+
+    result["sources_corrob"] = len(primary_good) + len(fallback_good)
     result["source_disagreements"] = len(bad)
-    required_good = 2 if int(item.get("source_count") or 0) >= 2 else 1
-    if bad:
-        result.update(corroboration_status="PRICE_CONFLICT_REVIEW",
-                      reason="Observed source disagreement: " + ";".join(bad))
-    elif len(good) < required_good:
-        result.update(corroboration_status="INSUFFICIENT_CORROBORATION",
-                      reason=f"{len(good)}/{required_good} required venues agree; " + ";".join(issues))
+    if primary_rule:
+        result.update(corroboration_status="PRICE_CORROBORATED_PRIMARY_TWO",
+                      reason="Two of Coinbase/Kraken/Binance pass 2% exact-day close policy; "
+                             "third-source price disagreements retained as evidence.")
+        if not fallback_good:
+            result.update(ema_status="NOT_EVALUATED",
+                          reason=result["reason"] + " No corroborated 500-bar EMA source.")
+            return result, audit, None
+        selected = fallback_good[0]
     else:
-        result.update(corroboration_status=("PRICE_CORROBORATED_MULTI_SOURCE"
-                                          if required_good == 2 else "PRICE_CORROBORATED_SINGLE_SOURCE"),
-                      reason="LunarCrush exact-day close comparison passed; canonical identity and liquidity unverified")
-        selected = good[0]
-        technicals = provisional_technicals(selected[2])
-        result.update(ema_status=technicals["provisional_technical_status"],
-                      ema50=technicals["provisional_ema50"],
-                      ema100=technicals["provisional_ema100"],
-                      ema200=technicals["provisional_ema200"])
-        return result, audit, selected
-    return result, audit, None
+        # The stricter old fail-closed rule remains in force for secondary
+        # validation. Two source checks must pass to call this multi-source.
+        if bad:
+            result.update(corroboration_status="PRICE_CONFLICT_REVIEW",
+                          reason="Source discrepancy before two-primary confirmation: " + ";".join(bad))
+            return result, audit, None
+        required_good = 2 if int(item.get("source_count") or 0) >= 2 else 1
+        if result["sources_corrob"] < required_good or not fallback_good:
+            result.update(corroboration_status="INSUFFICIENT_CORROBORATION",
+                          reason=f"{result['sources_corrob']}/{required_good} agreeing venues; "
+                                 + ";".join(issues))
+            return result, audit, None
+        result.update(corroboration_status=("PRICE_CORROBORATED_FALLBACK_MULTI_SOURCE"
+                                          if required_good == 2 else "PRICE_CORROBORATED_FALLBACK_SINGLE_SOURCE"),
+                      reason="Primary three checked first; fallback comparison passed. "
+                             "Canonical identity and liquidity remain unverified.")
+        selected = fallback_good[0]
 
+    technicals = provisional_technicals(selected[2])
+    result.update(ema_status=technicals["provisional_technical_status"],
+                  ema50=technicals["provisional_ema50"],
+                  ema100=technicals["provisional_ema100"],
+                  ema200=technicals["provisional_ema200"])
+    return result, audit, selected
 
 def write_report(input_csv, history_dir, output, today=None, max_sources=3,
                  tolerance_pct=2.0, conflicts=None, client_factory=None):
@@ -175,7 +239,9 @@ def write_report(input_csv, history_dir, output, today=None, max_sources=3,
     summary = {"source_candidates": len(items), "multi_exchange_candidates":
                sum(int(x["source_count"]) >= 2 for x in items),
                "single_exchange_candidates": sum(int(x["source_count"]) == 1 for x in items),
-               "statuses": counts, "source_checks": len(audit_rows), "fully_verified": 0,
+               "statuses": counts, "source_checks": len(audit_rows),
+               "primary_order": list(PRIMARY),
+               "primary_two_confirmed": sum(r["primary_venues_corrob"] >= 2 for r in report_rows), "fully_verified": 0,
                "production_approvals": 0, "alerts": 0, "completed_day": required_day.isoformat(),
                "tolerance_pct": tolerance_pct, "minimum_consecutive_dates": 3,
                "policy": "Research only; price agreement does not verify canonical identity. "
