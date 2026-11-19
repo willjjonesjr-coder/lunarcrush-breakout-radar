@@ -33,6 +33,7 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(len(result), 2)
         self.assertEqual([r["coin_id"] for r in result], ["1", "2"])
         self.assertEqual([r["source_count"] for r in result], [2, 1])
+        self.assertEqual(result[0]["primary_source_markets"], "kraken:X/USDT")
         self.assertEqual([r["priority_group"] for r in result],
                          ["MULTI_EXCHANGE", "SINGLE_EXCHANGE"])
         self.assertTrue(all(r["production_approval"] == "NO" and r["alert_eligible"] == "NO" for r in result))
