@@ -14,7 +14,7 @@ on:
         default: '44219837951'
         type: string
       max_sources:
-        description: 'Distinct additional CEXs to corroborate per coin (2-3 recommended)'
+        description: 'Secondary 500-bar sources after Coinbase, Kraken and Binance (2-3)'
         required: true
         default: '3'
         type: choice
@@ -86,7 +86,7 @@ jobs:
           if stats['candidates']!=47 or stats['multiple_exchange']!=38 or stats['single_exchange']!=9:
               raise SystemExit('Expected 47 incremental assets (38 multi-venue and 9 single-venue); audit source artifact before using')
           PY
-      - name: Compare every selected venue with LunarCrush and calculate provisional EMA
+      - name: Check Coinbase then Kraken then Binance; fallback only afterward for research EMA
         run: |
           python -m tools.research_47_cex_price_ema \
             --input reports/47_cex_research_input/candidates.csv \
