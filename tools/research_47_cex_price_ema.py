@@ -11,6 +11,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from provisional_ema import fetch_history, provisional_technicals
+from tools.audit_expanded_cex_coverage import markets_for_coin
 from tools.research_price_corroborated_ema import (
     evaluate_prices, reference_history, parse_sources, known_conflict,
 )
@@ -133,9 +134,22 @@ def check_candidate(item, histories, client_for, required_day, conflicts,
         result["primary_venues_checked"] += 1
         pair = primary.get(venue)
         if not pair:
-            add(venue, status="NO_EXACT_SPOT_PAIR",
-                reason="No vetted exact-base primary market in source-run audit")
-            continue
+            # Live retry: an unavailable or unlisted venue in the older source
+            # artifact must not be silently treated as checked today.
+            try:
+                client = client_for(venue)
+                matches = markets_for_coin(client, str(item.get("symbol") or "").upper())
+                if matches:
+                    pair = matches[0]["symbol"]
+                else:
+                    add(venue, status="NO_EXACT_SPOT_PAIR",
+                        reason="No active exact-base USD/USDT/USDC spot market")
+                    continue
+            except Exception as exc:
+                add(venue, status="PRIMARY_EXCHANGE_UNAVAILABLE",
+                    reason=type(exc).__name__ + ": " + str(exc)[:180])
+                issues.append(venue + ":PRIMARY_EXCHANGE_UNAVAILABLE")
+                continue
         passed = inspect(venue, pair, 3)
         if passed:
             primary_good.append(passed)
