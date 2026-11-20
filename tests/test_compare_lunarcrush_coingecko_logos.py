@@ -137,6 +137,62 @@ class LogoTests(unittest.TestCase):
             with self.assertRaisesRegex(ImageDownloadError, "REDIRECT_UNTRUSTED"):
                 ImageClient(root).get("https://cdn.lunarcrush.com/terra.png")
 
+    def test_binary_mime_valid_image_passes_decoding(self):
+        class Response:
+            status_code = 200
+            headers = {"Content-Type": "binary"}
+            def iter_content(self, size):
+                yield image_bytes()
+            def close(self):
+                pass
+        with tempfile.TemporaryDirectory() as root, patch(
+            "tools.compare_lunarcrush_coingecko_logos.requests.get",
+            return_value=Response()):
+            result = ImageClient(root).get("https://cdn.lunarcrush.com/terra.png")
+        self.assertEqual(result, image_bytes())
+
+    def test_binary_mime_non_image_still_rejected(self):
+        class Response:
+            status_code = 200
+            headers = {"Content-Type": "binary"}
+            def iter_content(self, size):
+                yield b"<html>not an image</html>"
+            def close(self):
+                pass
+        with tempfile.TemporaryDirectory() as root, patch(
+            "tools.compare_lunarcrush_coingecko_logos.requests.get",
+            return_value=Response()):
+            with self.assertRaisesRegex(ImageDownloadError, "IMAGE_DECODE"):
+                ImageClient(root).get("https://cdn.lunarcrush.com/terra.png")
+
+    def test_binary_mime_oversized_payload_still_rejected(self):
+        class Response:
+            status_code = 200
+            headers = {"Content-Type": "binary"}
+            def iter_content(self, size):
+                yield b"x" * 1_000_001
+            def close(self):
+                pass
+        with tempfile.TemporaryDirectory() as root, patch(
+            "tools.compare_lunarcrush_coingecko_logos.requests.get",
+            return_value=Response()):
+            with self.assertRaisesRegex(ImageDownloadError, "IMAGE_BYTES_EXCEED_LIMIT"):
+                ImageClient(root).get("https://cdn.lunarcrush.com/terra.png")
+
+    def test_html_content_type_stays_rejected(self):
+        class Response:
+            status_code = 200
+            headers = {"Content-Type": "text/html"}
+            def iter_content(self, size):
+                yield image_bytes()
+            def close(self):
+                pass
+        with tempfile.TemporaryDirectory() as root, patch(
+            "tools.compare_lunarcrush_coingecko_logos.requests.get",
+            return_value=Response()):
+            with self.assertRaisesRegex(ImageDownloadError, "UNSUPPORTED_CONTENT_TYPE_text/html"):
+                ImageClient(root).get("https://cdn.lunarcrush.com/terra.png")
+
     def test_http_error_and_invalid_image_have_specific_reasons(self):
         class Response:
             def __init__(self, status, media, data):
