@@ -64,6 +64,18 @@ def fingerprint(data):
     return hashlib.sha256(data).hexdigest(), bits, means
 
 
+def safe_error(exc):
+    """Audit sanitized HTTP/image errors without exposing arbitrary response bodies."""
+    msg = str(exc)
+    if isinstance(exc, ImageDownloadError):
+        return msg[:160]
+    return type(exc).__name__ + (": " + msg[:120] if isinstance(exc, ValueError) else "")
+
+
+class ImageDownloadError(ValueError):
+    """Stable, bounded reason suitable for the evidence CSV."""
+
+
 def compare(url_lc, url_cg, get_image):
     if not url_lc or not url_cg:
         return dict(logo_status="IMAGE_URL_MISSING", reason="A provider URL is absent")
@@ -72,11 +84,11 @@ def compare(url_lc, url_cg, get_image):
     try:
         sha_l, bits_l, mean_l = fingerprint(get_image(url_lc))
     except Exception as exc:
-        return dict(logo_status="LUNARCRUSH_IMAGE_ERROR", reason=type(exc).__name__)
+        return dict(logo_status="LUNARCRUSH_IMAGE_ERROR", reason=safe_error(exc))
     try:
         sha_g, bits_g, mean_g = fingerprint(get_image(url_cg))
     except Exception as exc:
-        return dict(logo_status="COINGECKO_IMAGE_ERROR", reason=type(exc).__name__,
+        return dict(logo_status="COINGECKO_IMAGE_ERROR", reason=safe_error(exc),
                     lunarcrush_sha256=sha_l)
     diff = (bits_l ^ bits_g).bit_count()
     color = sum((a-b)**2 for a,b in zip(mean_l,mean_g))**0.5
@@ -154,37 +166,65 @@ class ImageClient:
 
     def get(self, url):
         if not trusted(url):
-            raise ValueError("Image URL not permitted")
+            raise ImageDownloadError("UNTRUSTED_INITIAL_URL")
         path = self.cache / (hashlib.sha256(url.encode()).hexdigest() + ".img")
         if path.exists() and time.time()-path.stat().st_mtime < 86400:
             return path.read_bytes()
         interval = 1.0-(time.monotonic()-self.last)
         if interval > 0:
             time.sleep(interval)
-        for retry in range(3):
+        current = url
+        redirects = 0
+        retries = 0
+        while True:
             self.last = time.monotonic()
-            response = requests.get(url, timeout=15, allow_redirects=False,
-                                    stream=True,
-                                    headers={"Accept": "image/png,image/jpeg,image/webp"})
             try:
-                if response.status_code == 429 and retry < 2:
-                    time.sleep(5*(2**retry))
+                response = requests.get(current, timeout=15, allow_redirects=False,
+                                        stream=True,
+                                        headers={"Accept": "image/png,image/jpeg,image/webp,image/avif,*/*;q=0.2"})
+            except requests.RequestException as exc:
+                raise ImageDownloadError("NETWORK_" + type(exc).__name__) from exc
+            try:
+                # Do not blindly follow redirects or leave the approved CDN list.
+                if response.status_code in (301, 302, 303, 307, 308):
+                    from urllib.parse import urljoin
+                    location = response.headers.get("Location", "")
+                    next_url = urljoin(current, location)
+                    if not location or not trusted(next_url):
+                        raise ImageDownloadError("REDIRECT_UNTRUSTED_OR_MISSING")
+                    if redirects >= 3:
+                        raise ImageDownloadError("REDIRECT_LIMIT")
+                    current = next_url
+                    redirects += 1
                     continue
-                if 300 <= response.status_code < 400:
-                    raise ValueError("Image redirected; no automatic redirect following")
-                response.raise_for_status()
-                if not response.headers.get("Content-Type", "").lower().startswith("image/"):
-                    raise ValueError("Non-image content type")
+                if response.status_code == 429:
+                    if retries >= 2:
+                        raise ImageDownloadError("HTTP_429_RATE_LIMIT")
+                    time.sleep(5 * (2 ** retries))
+                    retries += 1
+                    continue
+                if response.status_code >= 400:
+                    raise ImageDownloadError("HTTP_" + str(response.status_code))
+                if response.status_code != 200:
+                    raise ImageDownloadError("UNEXPECTED_HTTP_" + str(response.status_code))
+                media = response.headers.get("Content-Type", "").split(";")[0].lower().strip()
+                if media not in ("image/png", "image/jpeg", "image/webp",
+                                 "image/gif", "image/avif", "application/octet-stream"):
+                    raise ImageDownloadError("UNSUPPORTED_CONTENT_TYPE_" + (media[:48] or "missing"))
                 data = bytearray()
                 for block in response.iter_content(65536):
                     data.extend(block)
                     if len(data) > 1_000_000:
-                        raise ValueError("Image too large")
-                path.write_bytes(data)
-                return bytes(data)
+                        raise ImageDownloadError("IMAGE_BYTES_EXCEED_LIMIT")
+                raw = bytes(data)
+                try:
+                    fingerprint(raw)  # Validate real decodable image before caching.
+                except (OSError, ValueError, Image.DecompressionBombError) as exc:
+                    raise ImageDownloadError("IMAGE_DECODE_" + type(exc).__name__) from exc
+                path.write_bytes(raw)
+                return raw
             finally:
                 response.close()
-        raise RuntimeError("Rate limited")
 
 
 def main():
