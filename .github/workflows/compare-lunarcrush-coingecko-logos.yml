@@ -1,0 +1,103 @@
+name: Compare LunarCrush and CoinGecko logos (research only)
+on:
+  pull_request:
+    paths:
+      - 'tools/compare_lunarcrush_coingecko_logos.py'
+      - 'tests/test_compare_lunarcrush_coingecko_logos.py'
+      - '.github/workflows/compare-lunarcrush-coingecko-logos.yml'
+  workflow_dispatch:
+    inputs:
+      logo_probe_run_id:
+        description: 'Successful main LunarCrush logo probe (all 20 logos found)'
+        required: true
+        default: '44660202663'
+        type: string
+      identity_run_id:
+        description: 'Successful main 47-coin identity/price research (20 conflicts)'
+        required: true
+        default: '44651786881'
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow requests
+      - name: Offline identity and image comparison regression tests
+        run: |
+          python -m tools.compare_lunarcrush_coingecko_logos --help
+          python -m unittest tests.test_compare_lunarcrush_coingecko_logos -v
+  research:
+    if: github.event_name == 'workflow_dispatch'
+    needs: tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow requests
+      - name: Validate exact successful main research run provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PROBE_ID: ${{ inputs.logo_probe_run_id }}
+          IDENTITY_ID: ${{ inputs.identity_run_id }}
+        run: |
+          for run in "$PROBE_ID" "$IDENTITY_ID"; do
+            case "$run" in ''|*[!0-9]*) echo "Invalid run ID"; exit 1;; esac
+          done
+          gh api "repos/${{ github.repository }}/actions/runs/$PROBE_ID" > probe_run.json
+          gh api "repos/${{ github.repository }}/actions/runs/$IDENTITY_ID" > identity_run.json
+          python - <<'PY'
+          import json
+          for file,expected in (
+              ('probe_run.json','.github/workflows/probe-lunarcrush-list-logos.yml'),
+              ('identity_run.json','.github/workflows/research-47-cex-price-ema.yml')):
+              r=json.load(open(file))
+              if (r.get('conclusion')!='success' or r.get('head_branch')!='main'
+                  or r.get('event')!='workflow_dispatch' or r.get('path')!=expected):
+                  raise SystemExit(f'Source {file} is not the requested successful main research workflow')
+          PY
+      - name: Download prior LunarCrush logo inventory
+        uses: actions/download-artifact@v4
+        with:
+          name: lunarcrush-list-logo-probe
+          path: probe
+          run-id: ${{ inputs.logo_probe_run_id }}
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+      - name: Download previous CoinGecko identity audit
+        uses: actions/download-artifact@v4
+        with:
+          name: incremental-47-cex-price-ema-research
+          path: identity
+          run-id: ${{ inputs.identity_run_id }}
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+      - name: Compare 12 logos; retain 8 unresolved identities separately
+        run: |
+          python -m tools.compare_lunarcrush_coingecko_logos \
+            --inventory probe/reports/lunarcrush_logo_probe/lunarcrush_logo_inventory.csv \
+            --prior identity/reports/47_cex_name_logo_audit/name_logo_identity_audit.csv \
+            --output reports/lunarcrush_coingecko_logo_comparison \
+            --cache reports/lunarcrush_coingecko_logo_cache \
+            --expected 20 --expected-matches 12
+      - name: Upload research evidence even after provider download failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lunarcrush-coingecko-logo-evidence
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            probe_run.json
+            identity_run.json
+            reports/lunarcrush_coingecko_logo_comparison/
