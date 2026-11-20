@@ -4,11 +4,12 @@ import io
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from PIL import Image
 
 from tools.compare_lunarcrush_coingecko_logos import (
-    compare, trusted, reconcile, write, fingerprint,
+    compare, trusted, reconcile, write, fingerprint, ImageClient, ImageDownloadError,
 )
 
 
@@ -100,6 +101,61 @@ class LogoTests(unittest.TestCase):
             self.assertEqual(stats["images_compared"],1)
             self.assertEqual(stats["production_approvals"],0)
             self.assertTrue((directory/"output"/"lunarcrush_coingecko_logo_comparison.csv").exists())
+
+    def test_allowlisted_redirect_and_byte_validation(self):
+        class Response:
+            def __init__(self, status, headers=None, data=b""):
+                self.status_code = status
+                self.headers = headers or {}
+                self.data = data
+            def iter_content(self, size):
+                yield self.data
+            def close(self):
+                pass
+        target = "https://cdn.lunarcrush.com/terra.png"
+        final = "https://cdn.lunarcrush.com/assets/terra.png"
+        calls = []
+        def request(url, **kwargs):
+            calls.append((url, kwargs["allow_redirects"]))
+            if url == target:
+                return Response(302, {"Location": "/assets/terra.png"})
+            return Response(200, {"Content-Type": "image/png"}, image_bytes())
+        with tempfile.TemporaryDirectory() as root, patch(
+            "tools.compare_lunarcrush_coingecko_logos.requests.get", side_effect=request):
+            data = ImageClient(root).get(target)
+        self.assertEqual(data, image_bytes())
+        self.assertEqual(calls, [(target, False), (final, False)])
+
+    def test_cross_origin_redirect_remains_blocked_with_diagnostic(self):
+        class Redirect:
+            status_code = 302
+            headers = {"Location":"https://untrusted.example/terra.png"}
+            def close(self): pass
+        with tempfile.TemporaryDirectory() as root, patch(
+            "tools.compare_lunarcrush_coingecko_logos.requests.get",
+            return_value=Redirect()):
+            with self.assertRaisesRegex(ImageDownloadError, "REDIRECT_UNTRUSTED"):
+                ImageClient(root).get("https://cdn.lunarcrush.com/terra.png")
+
+    def test_http_error_and_invalid_image_have_specific_reasons(self):
+        class Response:
+            def __init__(self, status, media, data):
+                self.status_code = status
+                self.headers = {"Content-Type":media}
+                self.data = data
+            def iter_content(self, size): yield self.data
+            def close(self): pass
+        target = "https://cdn.lunarcrush.com/terra.png"
+        with tempfile.TemporaryDirectory() as root, patch(
+            "tools.compare_lunarcrush_coingecko_logos.requests.get",
+            return_value=Response(403,"text/html",b"denied")):
+            with self.assertRaisesRegex(ImageDownloadError, "HTTP_403"):
+                ImageClient(root).get(target)
+        with tempfile.TemporaryDirectory() as root, patch(
+            "tools.compare_lunarcrush_coingecko_logos.requests.get",
+            return_value=Response(200,"image/png",b"not-a-png")):
+            with self.assertRaisesRegex(ImageDownloadError, "IMAGE_DECODE"):
+                ImageClient(root).get(target)
 
 
 if __name__=="__main__":
