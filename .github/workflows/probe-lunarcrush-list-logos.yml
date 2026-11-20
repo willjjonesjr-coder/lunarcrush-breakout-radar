@@ -1,0 +1,95 @@
+name: Probe LunarCrush coin-list logos (research only)
+on:
+  pull_request:
+    paths:
+      - 'tools/probe_lunarcrush_list_logos.py'
+      - 'tests/test_probe_lunarcrush_list_logos.py'
+      - '.github/workflows/probe-lunarcrush-list-logos.yml'
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: 'Successful main 47-coin run containing the 20-coin name/logo audit'
+        required: true
+        default: '44651786881'
+        type: string
+      skip_v2:
+        description: 'Use cached list/v1 and optional 3 per-coin meta checks only'
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: read
+  actions: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install existing LunarCrush client dependency
+        run: pip install requests
+      - name: Run offline list pagination and identity evidence tests
+        run: |
+          python -m tools.probe_lunarcrush_list_logos --help
+          python -m unittest tests.test_probe_lunarcrush_list_logos -v
+  probe:
+    if: github.event_name == 'workflow_dispatch'
+    needs: tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Verify source provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.source_run_id }}
+        run: |
+          case "$RUN_ID" in ''|*[!0-9]*) exit 1;; esac
+          gh api "repos/${{ github.repository }}/actions/runs/$RUN_ID" > source_run.json
+          python - <<'PY'
+          import json
+          r=json.load(open('source_run.json'))
+          if (r.get('conclusion')!='success' or r.get('head_branch')!='main'
+              or r.get('event')!='workflow_dispatch'
+              or r.get('path')!='.github/workflows/research-47-cex-price-ema.yml'):
+              raise SystemExit('Source must be successful manual 47-coin run on main')
+          PY
+      - name: Download original identity audit without repeating price analysis
+        uses: actions/download-artifact@v4
+        with:
+          name: incremental-47-cex-price-ema-research
+          path: source
+          run-id: ${{ inputs.source_run_id }}
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+      - name: Probe LunarCrush list/v1 and optional list/v2 and meta/v1
+        env:
+          LUNARCRUSH_API_KEY: ${{ secrets.LUNARCRUSH_API_KEY }}
+          SKIP_V2: ${{ inputs.skip_v2 }}
+        run: |
+          if [ -z "$LUNARCRUSH_API_KEY" ]; then
+            echo "LUNARCRUSH_API_KEY is required for this authenticated provider test"
+            exit 1
+          fi
+          FLAGS=""
+          if [ "$SKIP_V2" = "true" ]; then FLAGS="--skip-v2"; fi
+          python -m tools.probe_lunarcrush_list_logos \
+            --audit source/reports/47_cex_name_logo_audit/name_logo_identity_audit.csv \
+            --output reports/lunarcrush_logo_probe --meta-limit 3 $FLAGS
+      - name: Upload the research inventory even after partial provider failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lunarcrush-list-logo-probe
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            source_run.json
+            reports/lunarcrush_logo_probe/
