@@ -208,8 +208,13 @@ class ImageClient:
                 if response.status_code != 200:
                     raise ImageDownloadError("UNEXPECTED_HTTP_" + str(response.status_code))
                 media = response.headers.get("Content-Type", "").split(";")[0].lower().strip()
+                # LunarCrush CDN sometimes sends a generic "binary" MIME
+                # even for real PNG images. Accept these headers ONLY after
+                # the complete bounded payload passes Pillow image decoding.
+                # HTML/text and other content types are never accepted.
                 if media not in ("image/png", "image/jpeg", "image/webp",
-                                 "image/gif", "image/avif", "application/octet-stream"):
+                                 "image/gif", "image/avif",
+                                 "application/octet-stream", "binary"):
                     raise ImageDownloadError("UNSUPPORTED_CONTENT_TYPE_" + (media[:48] or "missing"))
                 data = bytearray()
                 for block in response.iter_content(65536):
