@@ -4,7 +4,9 @@ on:
     paths:
       - 'tools/build_47_cex_research.py'
       - 'tools/research_47_cex_price_ema.py'
+      - 'tools/audit_47_coin_name_logo.py'
       - 'tests/test_research_47_cex_price_ema.py'
+      - 'tests/test_47_coin_name_logo.py'
       - '.github/workflows/research-47-cex-price-ema.yml'
   workflow_dispatch:
     inputs:
@@ -31,13 +33,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install name/logo comparison dependencies
+        run: pip install pillow requests
       - name: Smoke test research CLI imports
         run: |
           python -m tools.build_47_cex_research --help
           python -m tools.research_47_cex_price_ema --help
+          python -m tools.audit_47_coin_name_logo --help
       - name: Offline provenance, price comparison and research-only tests
         run: |
-          python -m unittest tests.test_research_47_cex_price_ema tests.test_price_corroborated_ema -v
+          python -m unittest tests.test_research_47_cex_price_ema tests.test_price_corroborated_ema tests.test_47_coin_name_logo -v
 
   research:
     if: github.event_name == 'workflow_dispatch'
@@ -50,7 +55,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install CCXT for research-only market data
-        run: pip install 'ccxt>=4.4'
+        run: pip install 'ccxt>=4.4' pillow requests
       - name: Verify exact successful source run and expected branch
         env:
           GH_TOKEN: ${{ github.token }}
@@ -93,6 +98,15 @@ jobs:
             --history-dir data \
             --output reports/47_cex_price_research \
             --max-sources "${{ inputs.max_sources }}"
+      - name: Compare LunarCrush and CoinGecko full names and logos for price conflicts
+        if: success()
+        env:
+          LUNARCRUSH_API_KEY: ${{ secrets.LUNARCRUSH_API_KEY }}
+        run: |
+          python -m tools.audit_47_coin_name_logo \
+            --price-summary reports/47_cex_price_research/provisional_ema_summary.csv \
+            --candidates reports/47_cex_research_input/candidates.csv \
+            --output reports/47_cex_name_logo_audit
       - name: Upload full research evidence, even on market errors
         if: always()
         uses: actions/upload-artifact@v4
@@ -104,3 +118,4 @@ jobs:
             source_run.json
             reports/47_cex_research_input/
             reports/47_cex_price_research/
+            reports/47_cex_name_logo_audit/
