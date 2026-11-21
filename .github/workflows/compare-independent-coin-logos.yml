@@ -1,0 +1,82 @@
+name: Compare CoinGecko and CoinMarketCap logos (research only)
+on:
+  pull_request:
+    paths:
+      - 'tools/compare_independent_coin_logos.py'
+      - 'tests/test_independent_coin_logos.py'
+      - '.github/workflows/compare-independent-coin-logos.yml'
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: 'Completed original 47-coin research run with name/logo audit'
+        required: true
+        default: '44651786881'
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow requests
+      - name: Check independent logo research module and offline regressions
+        run: |
+          python -m tools.compare_independent_coin_logos --help
+          python -m unittest tests.test_independent_coin_logos -v
+  research:
+    if: github.event_name == 'workflow_dispatch'
+    needs: tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow requests
+      - name: Verify exact original source run and branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.source_run_id }}
+        run: |
+          case "$RUN_ID" in ''|*[!0-9]*) echo 'Invalid run ID'; exit 1;; esac
+          gh api "repos/${{ github.repository }}/actions/runs/$RUN_ID" > source_run.json
+          python - <<'PY'
+          import json
+          r=json.load(open('source_run.json'))
+          if (r.get('conclusion')!='success' or r.get('head_branch')!='main'
+              or r.get('event')!='workflow_dispatch'
+              or r.get('path')!='.github/workflows/research-47-cex-price-ema.yml'):
+              raise SystemExit('Must select a successful, manually dispatched 47-coin main research run')
+          print('Source:',r['html_url'])
+          PY
+      - name: Download original 47-coin identity research artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: incremental-47-cex-price-ema-research
+          path: source
+          run-id: ${{ inputs.source_run_id }}
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+      - name: Compare 12 unique CoinGecko names and logos against CoinMarketCap
+        run: |
+          python -m tools.compare_independent_coin_logos \
+            --source source/reports/47_cex_name_logo_audit/name_logo_identity_audit.csv \
+            --output reports/independent_logo_research \
+            --cache reports/independent_logo_research_cache --expected 12
+      - name: Upload research report even on data-provider errors
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coin-logo-independent-evidence
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            source_run.json
+            reports/independent_logo_research/
