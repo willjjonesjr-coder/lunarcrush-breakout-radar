@@ -64,8 +64,11 @@ jobs:
 
           base = Path("artifact-input")
           # Search only within the explicitly supplied artifact kind.
+          # Priority order: accept either the full identity master audit or
+          # the older 80-coin reconciliation artifact (run 41568880127).
+          # A missing expected file is diagnosed with available filenames.
           patterns = {
-              "identity": ("ema_master_identity_audit.csv",),
+              "identity": ("ema_master_identity_audit.csv", "ema_identity_reconciliation.csv"),
               "price": ("provisional_ema_summary.csv", "price_corroboration.csv"),
               "provisional": ("report.json",),
               "history": ("incremental_cex_identity_readiness.csv",),
@@ -76,10 +79,21 @@ jobs:
               folder = base / kind
               if not folder.exists():
                   continue
-              matches = [p for name in names for p in folder.rglob(name) if p.is_file()]
-              if len(matches) != 1:
-                  raise SystemExit(f"Expected exactly one {kind} artifact input; found {len(matches)}")
-              cmd += ["--" + kind, str(matches[0])]
+              selected = None
+              for name in names:
+                  matches = sorted(p for p in folder.rglob(name) if p.is_file())
+                  if len(matches) > 1:
+                      raise SystemExit(f"Multiple {kind} files named {name}: {matches}")
+                  if matches:
+                      selected = matches[0]
+                      break
+              if selected is None:
+                  available = sorted(str(p.relative_to(folder)) for p in folder.rglob("*") if p.is_file())
+                  raise SystemExit(
+                      f"No supported {kind} artifact file. Expected one of {names}. "
+                      f"Available: {available[:40]}")
+              print(f"{kind} input: {selected}", flush=True)
+              cmd += ["--" + kind, str(selected)]
           subprocess.run(cmd, check=True)
           PY
       - name: Upload audit output
