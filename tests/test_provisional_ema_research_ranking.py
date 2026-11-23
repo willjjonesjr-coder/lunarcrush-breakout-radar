@@ -70,6 +70,28 @@ class RankingTests(unittest.TestCase):
         r, _ = build([first,second], [prod("1"),prod("2")])
         self.assertEqual([x["coin_id"] for x in r], ["2","1"])
 
+    def test_current_cohort_drift_preserves_historical_candidate(self):
+        old = prod("1")
+        current = [prod("2")]
+        r, summary = build([record("1")], [old], current_production=current)
+        self.assertEqual(len(r), 1)
+        self.assertEqual(r[0]["current_selection_status"], "NOT_IN_CURRENT_REPORT")
+        self.assertIn("NOT_IN_CURRENT_REPORT", r[0]["caution_flags"])
+        self.assertEqual(summary["current_selection_counts"]["NOT_IN_CURRENT_REPORT"], 1)
+        self.assertEqual(r[0]["alert_eligible"], "NO")
+
+    def test_current_symbol_change_is_flag_not_identity_promotion(self):
+        r, _ = build([record()], [prod()],
+                     current_production=[dict(prod(), symbol="XYZ")])
+        self.assertEqual(r[0]["current_selection_status"], "CURRENT_NAME_SYMBOL_CONFLICT")
+        self.assertIn("CURRENT_NAME_SYMBOL_CONFLICT", r[0]["caution_flags"])
+
+    def test_current_unselected_and_newer_day_are_flagged(self):
+        r, _ = build([record()], [prod()], current_production=[
+            dict(prod(expected="2026-11-22"), history_selection="NOT ANALYZED")])
+        self.assertEqual(r[0]["current_selection_status"], "NOT_IN_CURRENT_300")
+        self.assertIn("CURRENT_REPORT_DAY_DIFFERS", r[0]["caution_flags"])
+
     def test_duplicate_coverage_fails(self):
         with self.assertRaises(ValueError):
             build([record(),record()], [prod()])

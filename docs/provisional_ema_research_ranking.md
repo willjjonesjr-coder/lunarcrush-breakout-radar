@@ -42,3 +42,24 @@ the production radar. Updating production research presentation or enabling
 new alert pathways requires a separate explicitly reviewed change.
 
 Run local regression tests: `python -m unittest tests.test_provisional_ema_research_ranking -v`.
+
+## Reproducibility across changing 300-coin selections
+
+The ranking fetches the **exact production CSV at the coverage workflow's
+successful main-branch commit** rather than joining the coverage cohort to the
+latest moving `reports/breakout_radar.csv`. The coverage run must be a successful
+`unified-ema-coverage-audit.yml` execution on main, and its commit SHA is
+recorded in the job logs. Research candidates remain anchored to that
+historical snapshot; a different current production cohort cannot silently
+erase or re-identify them.
+
+The current committed production CSV is compared *separately*. The output
+includes `current_selection_status`, `current_expected_day`, and
+`current_ema_evaluable`, with explicit flags for absent candidates, no longer
+selected candidates, ticker/name conflicts, newer observation days, and
+newly available production EMA. All candidates still have
+`production_eligible=NO` and `alert_eligible=NO` in this research list.
+
+A source that was aligned to its historical reference day is **not** thereby
+fresh today. Use `current_expected_day` and the date warnings before reviewing
+a candidate; rerun the evidence research for up-to-date analysis.
