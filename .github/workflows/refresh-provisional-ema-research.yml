@@ -1,0 +1,79 @@
+name: Refresh current provisional EMA research (no alerts)
+on:
+  pull_request:
+    paths:
+      - tools/refresh_provisional_ema_research.py
+      - tests/test_refresh_provisional_ema_research.py
+      - .github/workflows/refresh-provisional-ema-research.yml
+  workflow_dispatch:
+    inputs:
+      ranking_run_id:
+        description: 'Successful 41-candidate provisional ranking run'
+        required: true
+        type: string
+        default: '45280254375'
+      provisional_run_id:
+        description: 'Original provisional identity and exchange-pair evidence run'
+        required: true
+        type: string
+        default: '41746836284'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline refresh regression tests
+        run: python -m unittest tests.test_refresh_provisional_ema_research -v
+      - name: Install CCXT for manual exchange research
+        if: github.event_name == 'workflow_dispatch'
+        run: pip install 'ccxt>=4.4,<5'
+      - name: Validate and download historical research artifacts
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RANKING_RUN: ${{ inputs.ranking_run_id }}
+          PROVISIONAL_RUN: ${{ inputs.provisional_run_id }}
+        run: |
+          set -euo pipefail
+          for kind in RANKING PROVISIONAL; do
+            var="${kind}_RUN"
+            id="${!var}"
+            case "$id" in ''|*[!0-9]*) echo "Invalid run ID for $kind"; exit 1;; esac
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$id" > "${kind,,}_source_run.json"
+          done
+          python - <<'PY'
+          import json
+          expected={"ranking": "provisional-ema-research-ranking.yml",
+                    "provisional": "provisional-ema.yml"}
+          for kind, name in expected.items():
+              row=json.load(open(kind+"_source_run.json"))
+              if (row.get("conclusion")!="success" or
+                  not str(row.get("path") or "").endswith("/"+name)):
+                  raise SystemExit("Invalid "+kind+" source run")
+          PY
+          mkdir -p artifact-input/ranking artifact-input/provisional
+          gh run download "$RANKING_RUN" --repo "$GITHUB_REPOSITORY" --name provisional-ema-research-ranking -D artifact-input/ranking
+          gh run download "$PROVISIONAL_RUN" --repo "$GITHUB_REPOSITORY" --name provisional-ema-research -D artifact-input/provisional
+      - name: Refresh currently selected research EMA histories
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          python -m tools.refresh_provisional_ema_research \
+            --ranking artifact-input/ranking/ranking.csv \
+            --provisional-report artifact-input/provisional/report.json \
+            --current-production reports/breakout_radar.csv \
+            --bars 300
+      - name: Upload all candidate outcomes, including failed refreshes
+        if: always() && github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: refreshed-provisional-ema-research
+          path: reports/provisional_ema_refresh/
+          if-no-files-found: warn
+          retention-days: 30
