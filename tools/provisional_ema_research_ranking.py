@@ -10,7 +10,7 @@ import csv
 import json
 import math
 from collections import Counter
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 FIELDS = (
@@ -137,8 +137,7 @@ def build(coverage, production, price=(), provisional=(), provisional_report=Non
                 # The report's global freshness must be valid as well as per-asset day.
                 fresh = (bool(evidence_day) and evidence_day == expected
                          and report_day == expected
-                         and report_as_of == (date.fromisoformat(expected).fromordinal(
-                             date.fromisoformat(expected).toordinal() + 1)).isoformat())
+                         and report_as_of == (date.fromisoformat(expected) + timedelta(days=1)).isoformat())
             else:
                 fresh = evidence_day == expected and bool(evidence_day)
             if origin == "price" and not evidence_day:
