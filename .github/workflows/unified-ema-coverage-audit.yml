@@ -1,0 +1,92 @@
+name: Unified EMA coverage audit (read-only)
+on:
+  workflow_dispatch:
+    inputs:
+      identity_run_id:
+        description: 'Optional run ID with identity audit artifacts'
+        required: false
+        type: string
+      price_run_id:
+        description: 'Optional run ID with price corroboration artifacts'
+        required: false
+        type: string
+      provisional_run_id:
+        description: 'Optional run ID with provisional EMA artifacts'
+        required: false
+        type: string
+      history_run_id:
+        description: 'Optional run ID with CEX coverage artifacts'
+        required: false
+        type: string
+  pull_request:
+    paths:
+      - tools/unified_ema_coverage_audit.py
+      - tests/test_unified_ema_coverage_audit.py
+      - .github/workflows/unified-ema-coverage-audit.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run isolated unit tests
+        run: python -m unittest tests.test_unified_ema_coverage_audit -v
+      - name: Download optional research artifacts by run ID
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IDENTITY_RUN: ${{ inputs.identity_run_id }}
+          PRICE_RUN: ${{ inputs.price_run_id }}
+          PROVISIONAL_RUN: ${{ inputs.provisional_run_id }}
+          HISTORY_RUN: ${{ inputs.history_run_id }}
+        run: |
+          mkdir -p artifact-input
+          for kind in IDENTITY PRICE PROVISIONAL HISTORY; do
+            var="${kind}_RUN"
+            run="${!var}"
+            if [ -n "$run" ]; then
+              case "$run" in *[!0-9]*) echo "Invalid run ID: $run"; exit 1;; esac
+              mkdir -p "artifact-input/${kind,,}"
+              gh run download "$run" --repo "$GITHUB_REPOSITORY" -D "artifact-input/${kind,,}"
+            fi
+          done
+      - name: Build candidate-level coverage and provenance
+        run: |
+          python - <<'PY'
+          import subprocess
+          from pathlib import Path
+
+          base = Path("artifact-input")
+          # Search only within the explicitly supplied artifact kind.
+          patterns = {
+              "identity": ("ema_master_identity_audit.csv",),
+              "price": ("provisional_ema_summary.csv", "price_corroboration.csv"),
+              "provisional": ("report.json",),
+              "history": ("incremental_cex_identity_readiness.csv",),
+          }
+          cmd = ["python", "-m", "tools.unified_ema_coverage_audit",
+                 "--production", "reports/breakout_radar.csv"]
+          for kind, names in patterns.items():
+              folder = base / kind
+              if not folder.exists():
+                  continue
+              matches = [p for name in names for p in folder.rglob(name) if p.is_file()]
+              if len(matches) != 1:
+                  raise SystemExit(f"Expected exactly one {kind} artifact input; found {len(matches)}")
+              cmd += ["--" + kind, str(matches[0])]
+          subprocess.run(cmd, check=True)
+          PY
+      - name: Upload audit output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unified-ema-coverage-audit
+          path: reports/unified_ema_coverage/
+          if-no-files-found: warn
+          retention-days: 30
