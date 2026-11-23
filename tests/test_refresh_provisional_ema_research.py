@@ -15,9 +15,11 @@ def ranking(cid="1", status="CURRENT_ANALYZED"):
 
 
 def source(cid="1", **other):
-    return dict({"coin_id": cid, "name": "Alpha", "symbol": "ABC",
-                 "status": "PROVISIONAL READY", "exchange": "kraken",
-                 "pair": "ABC/USD"}, **other)
+    result = {"coin_id": cid, "name": "Alpha", "symbol": "ABC",
+              "status": "PROVISIONAL READY", "exchange": "kraken",
+              "pair": "ABC/USD"}
+    result.update(other)
+    return result
 
 
 def prod(cid="1", selection="ANALYZED"):
