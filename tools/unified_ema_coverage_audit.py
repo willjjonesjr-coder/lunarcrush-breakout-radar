@@ -112,6 +112,7 @@ def make(production, identity=(), price=(), provisional=(), history=(), supplied
                           price_row.get("status") or "")
         provisional_state = str(prov_row.get("provisional_technical_status") or
                                 prov_row.get("ema_status") or
+                                price_row.get("ema_status") or
                                 prov_row.get("status") or "")
         bars = str(prov_row.get("history_bars") or prov_row.get("bars") or
                    history_row.get("candles_max") or history_row.get("bars_available") or "")
@@ -167,7 +168,7 @@ def make(production, identity=(), price=(), provisional=(), history=(), supplied
             price_corroboration_status=price_state or "UNKNOWN",
             provisional_ema_status=provisional_state or "UNKNOWN",
             provisional_bars=bars, primary_blocker=primary,
-            secondary_blockers=";".join(secondary + discrepancies),
+            secondary_blockers=";".join(dict.fromkeys(secondary + discrepancies)),
             research_ready="YES" if research_ready else "NO",
             artifact_sources=";".join(sources),
             review_action=action))
