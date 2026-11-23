@@ -9,7 +9,7 @@ Run `python -m tools.unified_ema_coverage_audit` for the committed production
 CSV baseline. This baseline shows `NO_MATCHING_RESEARCH_ARTIFACT` for unknowns,
 **not** an identification failure. To provide evidence, supply:
 
-- `--identity`: master EMA identity audit CSV
+- `--identity`: master EMA identity audit CSV **or** `ema_identity_reconciliation.csv` from the 80-coin reconciliation run (e.g., `41568880127`)
 - `--price`: 47-CEX `provisional_ema_summary.csv` or `price_corroboration.csv`
 - `--provisional`: `provisional_ema/report.json` or equivalent research CSV
 - `--history`: incremental CEX readiness CSV
@@ -36,3 +36,7 @@ due diligence and explicit controls before any production promotion.
 Recommended workflow: first run on PR (baseline + regression tests), then
 dispatch the audit against selected recent research workflow run IDs. Compare
 the blocker counts and 300-row CSV before making any promotion-policy changes.
+
+## Artifact compatibility
+
+The manual workflow selects the first available supported filename per kind: master identity audit before reconciliation; 47-CEX provisional EMA summary before price-corroboration CSV. It reports available artifact filenames if the expected format is absent. A reconciliation candidate label is **not a verified identity**; ambiguous or not-found statuses remain flagged for review, and ambiguous evidence cannot become research-ready solely from price matches. The optional historical input is the **incremental CEX readiness CSV**, not the raw `historical-smoke-results` archive; omit `history_run_id` if no compatible readiness artifact is available.

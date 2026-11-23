@@ -41,6 +41,27 @@ class CoverageTest(unittest.TestCase):
         self.assertEqual(result[0]["primary_blocker"], "IDENTITY_OR_PRICE_CONFLICT")
         self.assertEqual(result[0]["research_ready"], "NO")
 
+    def test_reconciliation_artifact_status_is_retained(self):
+        result, _ = make(
+            [prod(1)],
+            identity=[{"coin_id": "1", "symbol": "ABC", "name": "Alpha",
+                       "identity_status": "UNIQUE EXACT CANDIDATE — NOT VERIFIED",
+                       "evidence_needed": "contract/network review"}])
+        self.assertEqual(result[0]["identity_status"], "UNIQUE EXACT CANDIDATE — NOT VERIFIED")
+        self.assertEqual(result[0]["primary_blocker"], "UNCLASSIFIED_MISSING_EMA")
+        self.assertEqual(result[0]["artifact_sources"], "identity")
+
+    def test_ambiguous_reconciliation_blocks_research_ready(self):
+        result, _ = make(
+            [prod(1)],
+            identity=[{"coin_id": "1", "symbol": "ABC",
+                       "identity_status": "AMBIGUOUS: multiple possible symbols"}],
+            price=[{"coin_id": "1", "symbol": "ABC",
+                    "corroboration_status": "PRICE_CORROBORATED",
+                    "ema_status": "PROVISIONAL EMA ALIGNED", "ema50": "1"}])
+        self.assertIn("IDENTITY_REVIEW", result[0]["secondary_blockers"])
+        self.assertEqual(result[0]["research_ready"], "NO")
+
     def test_mismatched_symbols_do_not_join(self):
         result, _ = make([prod(1)], price=[{"coin_id": "1", "symbol": "XYZ",
                                             "corroboration_status": "PRICE_CORROBORATED"}])

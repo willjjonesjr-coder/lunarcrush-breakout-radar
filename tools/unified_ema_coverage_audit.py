@@ -131,7 +131,10 @@ def make(production, identity=(), price=(), provisional=(), history=(), supplied
                 price_state.upper() in INSUFFICIENT or
                 str(history_row.get("history_status") or "").upper() in INSUFFICIENT):
             blockers.append("HISTORY_INSUFFICIENT_OR_STALE")
-        if identity_state.upper() in {"PENDING", "REVIEW REQUIRED", "UNVERIFIED", "AMBIGUOUS"}:
+        identity_uncertain = (identity_state.upper() in {"PENDING", "REVIEW REQUIRED", "UNVERIFIED", "AMBIGUOUS", "NOT FOUND"}
+                              or "AMBIGUOUS" in identity_state.upper()
+                              or "NOT FOUND" in identity_state.upper())
+        if identity_uncertain:
             blockers.append("IDENTITY_REVIEW")
         if not sources:
             blockers.append("NO_MATCHING_RESEARCH_ARTIFACT")
@@ -146,7 +149,8 @@ def make(production, identity=(), price=(), provisional=(), history=(), supplied
         research_ready = (not evaluable and
                           "RESEARCH_TO_PRODUCTION_HANDOFF" in blockers and
                           not any(x in blockers for x in ("EVIDENCE_CONFLICT",
-                                  "IDENTITY_OR_PRICE_CONFLICT", "HISTORY_INSUFFICIENT_OR_STALE")))
+                                  "IDENTITY_OR_PRICE_CONFLICT", "HISTORY_INSUFFICIENT_OR_STALE",
+                                  "IDENTITY_REVIEW")))
         if evaluable:
             action = "NONE"
         elif research_ready:
@@ -190,7 +194,7 @@ def make(production, identity=(), price=(), provisional=(), history=(), supplied
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--production", default="reports/breakout_radar.csv")
-    p.add_argument("--identity", help="EMA master identity CSV artifact")
+    p.add_argument("--identity", help="EMA master audit or 80-coin reconciliation CSV artifact")
     p.add_argument("--price", help="47-CEX research summary or price corroboration CSV artifact")
     p.add_argument("--provisional", help="Provisional EMA report.json or research CSV artifact")
     p.add_argument("--history", help="Expanded CEX identity readiness CSV artifact")
