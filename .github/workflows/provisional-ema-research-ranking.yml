@@ -1,0 +1,88 @@
+name: Provisional EMA research ranking (no alerts)
+on:
+  pull_request:
+    paths:
+      - tools/provisional_ema_research_ranking.py
+      - tests/test_provisional_ema_research_ranking.py
+      - .github/workflows/provisional-ema-research-ranking.yml
+  workflow_dispatch:
+    inputs:
+      coverage_run_id:
+        description: 'Successful unified EMA coverage audit run'
+        required: true
+        default: '45109654773'
+        type: string
+      price_run_id:
+        description: '47-CEX price/EMA research run'
+        required: true
+        default: '44292165792'
+        type: string
+      provisional_run_id:
+        description: 'Provisional identity/EMA research run'
+        required: true
+        default: '41746836284'
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  ranking:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test research-only safety and freshness
+        run: python -m unittest tests.test_provisional_ema_research_ranking -v
+      - name: Download source artifacts only for dispatched research
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COVERAGE_RUN: ${{ inputs.coverage_run_id }}
+          PRICE_RUN: ${{ inputs.price_run_id }}
+          PROVISIONAL_RUN: ${{ inputs.provisional_run_id }}
+        run: |
+          for kind in COVERAGE PRICE PROVISIONAL; do
+            var="${kind}_RUN"
+            run="${!var}"
+            case "$run" in ''|*[!0-9]*) echo "Invalid $kind run ID"; exit 1;; esac
+            mkdir -p "artifact-input/${kind,,}"
+            gh run download "$run" --repo "$GITHUB_REPOSITORY" -D "artifact-input/${kind,,}"
+          done
+      - name: Rank audited provisional research candidates
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          python - <<'PY'
+          import subprocess
+          from pathlib import Path
+
+          base = Path("artifact-input")
+          def select(kind, names):
+              path = base / kind
+              for name in names:
+                  matches = sorted(path.rglob(name))
+                  if len(matches) > 1:
+                      raise SystemExit(f"Duplicate {kind} filenames {name}: {matches}")
+                  if matches:
+                      return str(matches[0])
+              raise SystemExit(f"Missing {kind} evidence: expected {names}; "
+                               f"found {[str(p) for p in path.rglob('*') if p.is_file()]}")
+          coverage = select("coverage", ("coverage.csv",))
+          price = select("price", ("provisional_ema_summary.csv", "price_corroboration.csv"))
+          provisional = select("provisional", ("report.json",))
+          subprocess.run(["python", "-m", "tools.provisional_ema_research_ranking",
+                          "--coverage", coverage, "--price", price,
+                          "--provisional", provisional,
+                          "--production", "reports/breakout_radar.csv"],
+                         check=True)
+          PY
+      - name: Upload separate provisional research ranking
+        if: always() && github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: provisional-ema-research-ranking
+          path: reports/provisional_ema_research_ranking/
+          if-no-files-found: warn
+          retention-days: 30
