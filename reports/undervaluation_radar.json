@@ -1,18 +1,30 @@
 {
-  "generated_at": "2026-11-22T09:48:16.590940+00:00",
+  "generated_at": "2026-11-23T10:41:40.367551+00:00",
   "source": "Existing production radar and observational fundamentals only",
   "scoring_status": "PROVISIONAL RESEARCH; NOT A FAIR-VALUE ESTIMATE",
   "unrated": 300,
   "rated": 0,
   "assets": [
     {
-      "id": 3154,
-      "symbol": "AAVE",
-      "breakout_score": 43.9002125542,
+      "id": 163876,
+      "symbol": "1WIN",
+      "breakout_score": 42.375735489,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 3154,
+      "symbol": "AAVE",
+      "breakout_score": 47.3936068636,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -20,7 +32,7 @@
     {
       "id": 151,
       "symbol": "AB",
-      "breakout_score": 40.0187595139,
+      "breakout_score": 43.0791751852,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -32,7 +44,7 @@
     {
       "id": 149398,
       "symbol": "ACE",
-      "breakout_score": 35.4189729093,
+      "breakout_score": 43.3136830571,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -44,7 +56,7 @@
     {
       "id": 3002,
       "symbol": "ACH",
-      "breakout_score": 48.0095835733,
+      "breakout_score": 48.1446148022,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -56,7 +68,7 @@
     {
       "id": 158293,
       "symbol": "ACT",
-      "breakout_score": 42.4229176683,
+      "breakout_score": 44.5613150947,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -66,13 +78,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 11,
-      "symbol": "ADA",
-      "breakout_score": 47.796787937,
+      "id": 1868,
+      "symbol": "ADM",
+      "breakout_score": 45.0997258897,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -80,7 +92,7 @@
     {
       "id": 12077,
       "symbol": "ADP",
-      "breakout_score": 46.2226190999,
+      "breakout_score": 44.2381467435,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -92,11 +104,11 @@
     {
       "id": 146377,
       "symbol": "AERO",
-      "breakout_score": 48.9401018623,
+      "breakout_score": 47.1122520126,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -104,7 +116,7 @@
     {
       "id": 18539,
       "symbol": "AGLD",
-      "breakout_score": 33.9961288508,
+      "breakout_score": 35.7292625938,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -114,9 +126,45 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 149397,
-      "symbol": "AI",
-      "breakout_score": 45.6310914302,
+      "id": 160816,
+      "symbol": "AGT",
+      "breakout_score": 46.040868071,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 160830,
+      "symbol": "AIOT",
+      "breakout_score": 42.2327445597,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 158798,
+      "symbol": "AIXBT",
+      "breakout_score": 52.9746785091,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 161648,
+      "symbol": "AKE",
+      "breakout_score": 47.0046894918,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -128,7 +176,7 @@
     {
       "id": 11998,
       "symbol": "AKT",
-      "breakout_score": 40.20546237,
+      "breakout_score": 42.9702406762,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -140,11 +188,23 @@
     {
       "id": 2108,
       "symbol": "ALGO",
-      "breakout_score": 42.9757283605,
+      "breakout_score": 49.7516497443,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
       "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 163255,
+      "symbol": "ALIGN",
+      "breakout_score": null,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -152,23 +212,11 @@
     {
       "id": 162027,
       "symbol": "ALLO",
-      "breakout_score": 47.0554419481,
+      "breakout_score": 45.3815045069,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
       "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 3713,
-      "symbol": "AMP",
-      "breakout_score": 47.351761278,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -176,19 +224,7 @@
     {
       "id": 215,
       "symbol": "ANKR",
-      "breakout_score": 53.739949017,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "Liquid Staking",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 106778,
-      "symbol": "ANYONE",
-      "breakout_score": 39.9889421713,
+      "breakout_score": 40.1500412235,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -198,9 +234,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 70832,
-      "symbol": "APT",
-      "breakout_score": 42.4234428197,
+      "id": 163452,
+      "symbol": "ANTHROPIC",
+      "breakout_score": 54.8800887846,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -210,9 +246,33 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 3086,
-      "symbol": "AR",
-      "breakout_score": 47.7974106505,
+      "id": 36543,
+      "symbol": "APE",
+      "breakout_score": 42.5696425387,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 141197,
+      "symbol": "APEPE",
+      "breakout_score": 42.3262891117,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 70832,
+      "symbol": "APT",
+      "breakout_score": 47.7528032548,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -224,7 +284,7 @@
     {
       "id": 108339,
       "symbol": "ARB",
-      "breakout_score": 40.0746644716,
+      "breakout_score": 42.4775824564,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -248,7 +308,7 @@
     {
       "id": 162556,
       "symbol": "ARIA",
-      "breakout_score": 39.7141290064,
+      "breakout_score": 43.713737106,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -260,23 +320,11 @@
     {
       "id": 119,
       "symbol": "ARK",
-      "breakout_score": 48.0440729591,
+      "breakout_score": 48.6808266266,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 2678,
-      "symbol": "ASM",
-      "breakout_score": 49.0031595004,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -284,7 +332,19 @@
     {
       "id": 161630,
       "symbol": "ASTER",
-      "breakout_score": 56.4492971049,
+      "breakout_score": 58.7469594561,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 50645,
+      "symbol": "ASTR",
+      "breakout_score": null,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -296,7 +356,7 @@
     {
       "id": 152264,
       "symbol": "ATH",
-      "breakout_score": 52.3539769202,
+      "breakout_score": 54.3982429888,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -308,7 +368,7 @@
     {
       "id": 8370,
       "symbol": "ATM",
-      "breakout_score": 46.0974357245,
+      "breakout_score": 43.8251967853,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -320,7 +380,7 @@
     {
       "id": 19,
       "symbol": "ATOM",
-      "breakout_score": 47.0801755839,
+      "breakout_score": 45.8097501349,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -330,25 +390,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 157925,
-      "symbol": "AUKI",
-      "breakout_score": 49.5130276002,
+      "id": 147746,
+      "symbol": "AVA",
+      "breakout_score": 44.3917282816,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 2545,
-      "symbol": "AVAX",
-      "breakout_score": 42.2512059742,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -356,7 +404,7 @@
     {
       "id": 160683,
       "symbol": "B",
-      "breakout_score": null,
+      "breakout_score": 45.9278772306,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -368,7 +416,7 @@
     {
       "id": 12901,
       "symbol": "BABYDOGE",
-      "breakout_score": 48.3311557718,
+      "breakout_score": 47.0463578918,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -380,7 +428,7 @@
     {
       "id": 2151,
       "symbol": "BAND",
-      "breakout_score": 44.8275264243,
+      "breakout_score": 45.2267979173,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -390,13 +438,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 5,
-      "symbol": "BCH",
-      "breakout_score": 46.7098763933,
+      "id": 163233,
+      "symbol": "BASECAT",
+      "breakout_score": 46.129982471,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -404,7 +452,7 @@
     {
       "id": 2112,
       "symbol": "BDX",
-      "breakout_score": 45.1857853744,
+      "breakout_score": 44.6284598024,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -414,9 +462,45 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 149,
+      "symbol": "BEAM",
+      "breakout_score": 44.8151755794,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 162049,
+      "symbol": "BEAT",
+      "breakout_score": null,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 3702,
+      "symbol": "BFC",
+      "breakout_score": 45.4207915615,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 162860,
       "symbol": "BILL",
-      "breakout_score": 66.2144116189,
+      "breakout_score": 67.008442685,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -426,45 +510,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 144774,
-      "symbol": "BKN",
-      "breakout_score": 43.322465892,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 159239,
-      "symbol": "BLESS",
-      "breakout_score": 36.306312684,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 160130,
-      "symbol": "BMT",
-      "breakout_score": 35.4954486365,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 6,
-      "symbol": "BNB",
-      "breakout_score": 46.2204162663,
+      "id": 159511,
+      "symbol": "BIO",
+      "breakout_score": 41.6195753511,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -474,9 +522,45 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163265,
-      "symbol": "BNBCAT",
-      "breakout_score": 41.4066628347,
+      "id": 144774,
+      "symbol": "BKN",
+      "breakout_score": 39.2866592792,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 159239,
+      "symbol": "BLESS",
+      "breakout_score": 34.3506037842,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 159248,
+      "symbol": "BLUE",
+      "breakout_score": 37.8451167424,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 75253,
+      "symbol": "BLUR",
+      "breakout_score": 34.8747406893,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -488,23 +572,11 @@
     {
       "id": 159528,
       "symbol": "BNKR",
-      "breakout_score": 44.0137587492,
+      "breakout_score": 45.6992745104,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 143,
-      "symbol": "BNT",
-      "breakout_score": 35.9826112944,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -512,7 +584,7 @@
     {
       "id": 50951,
       "symbol": "BOBA",
-      "breakout_score": 49.727292846,
+      "breakout_score": 50.0686564615,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -524,7 +596,7 @@
     {
       "id": 89249,
       "symbol": "BONK",
-      "breakout_score": 45.5952434083,
+      "breakout_score": 38.876563838,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -534,21 +606,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 140077,
-      "symbol": "BROCCOLI",
-      "breakout_score": 40.6649100376,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 159900,
       "symbol": "BROCCOLI",
-      "breakout_score": 39.581732218,
+      "breakout_score": 42.0883936494,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -558,9 +618,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 9,
-      "symbol": "BSV",
-      "breakout_score": 48.1107659781,
+      "id": 140077,
+      "symbol": "BROCCOLI",
+      "breakout_score": 41.8424567412,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -572,7 +632,7 @@
     {
       "id": 1,
       "symbol": "BTC",
-      "breakout_score": 47.3563558222,
+      "breakout_score": 49.2391918618,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -588,7 +648,7 @@
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -596,31 +656,7 @@
     {
       "id": 44,
       "symbol": "BTT",
-      "breakout_score": 44.3966707636,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 162601,
-      "symbol": "BURNIE",
-      "breakout_score": 37.8253960019,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 159375,
-      "symbol": "BUTTCOIN",
-      "breakout_score": 27.1293114006,
+      "breakout_score": 43.0536813587,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -630,9 +666,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 161871,
-      "symbol": "C",
-      "breakout_score": 44.833073987,
+      "id": 161571,
+      "symbol": "CARDS",
+      "breakout_score": 40.9571108662,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 158090,
+      "symbol": "CARV",
+      "breakout_score": null,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -644,7 +692,7 @@
     {
       "id": 162987,
       "symbol": "CASHCAT",
-      "breakout_score": 45.6827306539,
+      "breakout_score": 46.048721617,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -656,47 +704,11 @@
     {
       "id": 161979,
       "symbol": "CC",
-      "breakout_score": 46.0510942818,
+      "breakout_score": 47.4818557533,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
       "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 2770,
-      "symbol": "CELO",
-      "breakout_score": 39.3015551769,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 14846,
-      "symbol": "CFG",
-      "breakout_score": 47.4917891264,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 109767,
-      "symbol": "CGPT",
-      "breakout_score": 44.7056575842,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -704,7 +716,7 @@
     {
       "id": 2123,
       "symbol": "CHZ",
-      "breakout_score": 47.6498485098,
+      "breakout_score": 44.6441511042,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -714,9 +726,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 2232,
-      "symbol": "CKB",
-      "breakout_score": 38.0334218565,
+      "id": 163648,
+      "symbol": "CLAUDIA",
+      "breakout_score": 41.1151727073,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -726,21 +738,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 1543,
-      "symbol": "COMP",
-      "breakout_score": 45.2709125998,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 12811,
       "symbol": "COP2",
-      "breakout_score": 49.73126459,
+      "breakout_score": 46.7343257364,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -752,7 +752,7 @@
     {
       "id": 101031,
       "symbol": "CORE",
-      "breakout_score": 44.0970955802,
+      "breakout_score": 52.4091232561,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -762,13 +762,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 20358,
-      "symbol": "CPOOL",
-      "breakout_score": 54.560627919,
+      "id": 57562,
+      "symbol": "COW",
+      "breakout_score": 48.8959294722,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -776,11 +776,11 @@
     {
       "id": 160946,
       "symbol": "CREPE",
-      "breakout_score": 40.9478059505,
+      "breakout_score": 41.3397097343,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -788,7 +788,7 @@
     {
       "id": 25,
       "symbol": "CRO",
-      "breakout_score": 47.5103102116,
+      "breakout_score": 47.9795741436,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -798,21 +798,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 161294,
-      "symbol": "CROSS",
-      "breakout_score": 44.6102315392,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 2004,
       "symbol": "CRV",
-      "breakout_score": 41.7916449355,
+      "breakout_score": 49.0929150886,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -824,7 +812,7 @@
     {
       "id": 14226,
       "symbol": "CVX",
-      "breakout_score": 44.8633864617,
+      "breakout_score": 46.9430518362,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -834,13 +822,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163818,
-      "symbol": "DACITYCOIN",
-      "breakout_score": 53.5825950251,
+      "id": 15,
+      "symbol": "DASH",
+      "breakout_score": 45.4842119705,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -858,21 +846,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163613,
-      "symbol": "DEBIT",
-      "breakout_score": null,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 74520,
       "symbol": "DEOD",
-      "breakout_score": 34.633922892,
+      "breakout_score": 35.6562459384,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -884,7 +860,19 @@
     {
       "id": 163269,
       "symbol": "DGAI",
-      "breakout_score": 45.4606271944,
+      "breakout_score": 43.0981151009,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 53,
+      "symbol": "DGB",
+      "breakout_score": 50.3820590102,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -894,9 +882,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 53,
-      "symbol": "DGB",
-      "breakout_score": 42.4964287589,
+      "id": 2517,
+      "symbol": "DIA",
+      "breakout_score": 46.246056099,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 19286,
+      "symbol": "DMTR",
+      "breakout_score": 36.8834809026,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -908,7 +908,7 @@
     {
       "id": 3157,
       "symbol": "DODO",
-      "breakout_score": 35.2497940585,
+      "breakout_score": 40.2405859567,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -918,13 +918,25 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 29,
-      "symbol": "DOGE",
-      "breakout_score": 46.1215631373,
+      "id": 150955,
+      "symbol": "DOG",
+      "breakout_score": 46.5649546445,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 29,
+      "symbol": "DOGE",
+      "breakout_score": 44.6171322075,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -932,7 +944,7 @@
     {
       "id": 51540,
       "symbol": "DOGS",
-      "breakout_score": 47.7524411262,
+      "breakout_score": 47.3581317058,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -944,23 +956,11 @@
     {
       "id": 159930,
       "symbol": "DOOD",
-      "breakout_score": 35.417429227,
+      "breakout_score": 35.3698295842,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 2780,
-      "symbol": "DOT",
-      "breakout_score": 46.6145612155,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -968,7 +968,7 @@
     {
       "id": 159635,
       "symbol": "DRV",
-      "breakout_score": 31.7473003298,
+      "breakout_score": 47.1120353582,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -980,7 +980,31 @@
     {
       "id": 149349,
       "symbol": "DYM",
-      "breakout_score": 45.6859437724,
+      "breakout_score": 47.6107745604,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 112112,
+      "symbol": "EDU",
+      "breakout_score": 38.5022498377,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 162207,
+      "symbol": "EIGEN",
+      "breakout_score": 33.5957232841,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -992,7 +1016,7 @@
     {
       "id": 89,
       "symbol": "ELF",
-      "breakout_score": 47.8272980869,
+      "breakout_score": 44.8738196505,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1004,7 +1028,7 @@
     {
       "id": 158973,
       "symbol": "ELSA",
-      "breakout_score": 32.1505057096,
+      "breakout_score": 33.3339408835,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1016,7 +1040,7 @@
     {
       "id": 149893,
       "symbol": "ENA",
-      "breakout_score": 40.0223638869,
+      "breakout_score": 40.0994300307,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1026,13 +1050,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 161770,
-      "symbol": "ENSO",
-      "breakout_score": 44.0339918889,
+      "id": 20992,
+      "symbol": "ENS",
+      "breakout_score": 45.8820859546,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -1040,7 +1064,7 @@
     {
       "id": 161293,
       "symbol": "ERA",
-      "breakout_score": 41.2961667506,
+      "breakout_score": 44.4059690391,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1050,21 +1074,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 151469,
-      "symbol": "ESE",
-      "breakout_score": 66.4103421451,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "Prediction Market",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 161263,
       "symbol": "ESPORTS",
-      "breakout_score": 33.3356055028,
+      "breakout_score": 38.6927971232,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1076,11 +1088,11 @@
     {
       "id": 2,
       "symbol": "ETH",
-      "breakout_score": 46.3498626976,
+      "breakout_score": 46.7294521461,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -1088,7 +1100,7 @@
     {
       "id": 149895,
       "symbol": "ETHFI",
-      "breakout_score": 41.6416612778,
+      "breakout_score": 43.9231592163,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1100,7 +1112,19 @@
     {
       "id": 107,
       "symbol": "ETN",
-      "breakout_score": 44.9035410122,
+      "breakout_score": 46.0515550745,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 67570,
+      "symbol": "EUL",
+      "breakout_score": null,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1112,7 +1136,19 @@
     {
       "id": 152384,
       "symbol": "EURC",
-      "breakout_score": 41.8345790674,
+      "breakout_score": 44.2665704621,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 161700,
+      "symbol": "EVAA",
+      "breakout_score": 65.035955056,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1124,7 +1160,7 @@
     {
       "id": 158054,
       "symbol": "FARTCOIN",
-      "breakout_score": 45.7221778604,
+      "breakout_score": 46.9099770202,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1136,7 +1172,7 @@
     {
       "id": 169,
       "symbol": "FET",
-      "breakout_score": 45.5014251101,
+      "breakout_score": 47.0551870859,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1148,7 +1184,19 @@
     {
       "id": 161703,
       "symbol": "FF",
-      "breakout_score": 46.1749195821,
+      "breakout_score": 51.9112518543,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 157991,
+      "symbol": "FIONA",
+      "breakout_score": null,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1160,7 +1208,19 @@
     {
       "id": 42935,
       "symbol": "FLOKI",
-      "breakout_score": 45.3546639905,
+      "breakout_score": 44.8200911327,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 3555,
+      "symbol": "FLOW",
+      "breakout_score": 47.3170152007,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1172,31 +1232,7 @@
     {
       "id": 90376,
       "symbol": "FLR",
-      "breakout_score": 45.5557597581,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 298,
-      "symbol": "FLUX",
-      "breakout_score": 40.205492511,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 161879,
-      "symbol": "FOLKS",
-      "breakout_score": 44.3067441945,
+      "breakout_score": 46.8922098033,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1206,9 +1242,33 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 298,
+      "symbol": "FLUX",
+      "breakout_score": 43.9781516762,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 162467,
+      "symbol": "FOGO",
+      "breakout_score": 41.123035813,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 160373,
       "symbol": "FORM",
-      "breakout_score": 44.4091020272,
+      "breakout_score": 45.0674818429,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1220,43 +1280,7 @@
     {
       "id": 18665,
       "symbol": "FOX",
-      "breakout_score": 48.0664574376,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 3607,
-      "symbol": "FUSE",
-      "breakout_score": 36.2533696215,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 157639,
-      "symbol": "G",
-      "breakout_score": null,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 72737,
-      "symbol": "GEOD",
-      "breakout_score": 43.6864462647,
+      "breakout_score": 47.400790313,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1266,9 +1290,81 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 163159,
+      "symbol": "FRONG",
+      "breakout_score": 47.0830328551,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 163965,
+      "symbol": "FSDV15",
+      "breakout_score": null,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 681,
+      "symbol": "FTT",
+      "breakout_score": 51.3784562156,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 190,
+      "symbol": "FUN",
+      "breakout_score": 34.4897672435,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 161600,
+      "symbol": "GAME",
+      "breakout_score": 45.0492748081,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 72737,
+      "symbol": "GEOD",
+      "breakout_score": 43.062632917,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 51906,
       "symbol": "GFI",
-      "breakout_score": 48.3104145506,
+      "breakout_score": 49.5004607759,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1290,9 +1386,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 158149,
+      "symbol": "GOAT",
+      "breakout_score": 53.0265968384,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 51896,
       "symbol": "GOMINING",
-      "breakout_score": 55.7711314404,
+      "breakout_score": 52.773530768,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1304,7 +1412,7 @@
     {
       "id": 152379,
       "symbol": "GOMINING",
-      "breakout_score": 46.5962327399,
+      "breakout_score": 43.4285931106,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1316,7 +1424,7 @@
     {
       "id": 159615,
       "symbol": "GPS",
-      "breakout_score": 43.3563116479,
+      "breakout_score": 44.4538818979,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1326,9 +1434,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 158218,
-      "symbol": "GRASS",
-      "breakout_score": null,
+      "id": 159512,
+      "symbol": "GRIFFAIN",
+      "breakout_score": 46.5603583801,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1352,7 +1460,7 @@
     {
       "id": 163393,
       "symbol": "GSTOCK",
-      "breakout_score": 36.1344760885,
+      "breakout_score": 40.7789979584,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1364,7 +1472,7 @@
     {
       "id": 2122,
       "symbol": "GT",
-      "breakout_score": 46.8554415999,
+      "breakout_score": 45.5124667695,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1374,9 +1482,45 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 6137,
-      "symbol": "HAI",
+      "id": 159749,
+      "symbol": "GTA 6 COIN",
       "breakout_score": null,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 162068,
+      "symbol": "H",
+      "breakout_score": 44.4271414432,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 75512,
+      "symbol": "HELLO",
+      "breakout_score": null,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 157404,
+      "symbol": "HMSTR",
+      "breakout_score": 44.5289978278,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1386,13 +1530,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163962,
-      "symbol": "HALBROOK",
-      "breakout_score": null,
+      "id": 1251,
+      "symbol": "HNT",
+      "breakout_score": 38.4867144913,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -1400,7 +1544,31 @@
     {
       "id": 163194,
       "symbol": "HOOKR",
-      "breakout_score": 49.5109982387,
+      "breakout_score": 48.6068965563,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 3173,
+      "symbol": "HTR",
+      "breakout_score": 48.2379926929,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 160799,
+      "symbol": "HUMA",
+      "breakout_score": 42.3475252113,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1410,9 +1578,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 150833,
-      "symbol": "HTX",
-      "breakout_score": 48.5602134186,
+      "id": 159246,
+      "symbol": "HYPE",
+      "breakout_score": 44.504298328,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1422,33 +1590,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163955,
-      "symbol": "HUSS",
-      "breakout_score": null,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 159246,
-      "symbol": "HYPE",
-      "breakout_score": 44.3763210543,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 161098,
       "symbol": "ICNT",
-      "breakout_score": 28.0703337499,
+      "breakout_score": 26.9728106859,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1460,7 +1604,7 @@
     {
       "id": 12391,
       "symbol": "ICP",
-      "breakout_score": 43.2235519527,
+      "breakout_score": 43.3648134232,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1472,7 +1616,7 @@
     {
       "id": 161079,
       "symbol": "IDOL",
-      "breakout_score": 20.7796633775,
+      "breakout_score": 52.4869622184,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1484,7 +1628,7 @@
     {
       "id": 160777,
       "symbol": "INIT",
-      "breakout_score": 43.9547677765,
+      "breakout_score": 44.6478535428,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1494,33 +1638,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 3378,
-      "symbol": "INJ",
-      "breakout_score": 44.6658448144,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 152222,
       "symbol": "IO",
-      "breakout_score": 40.0254006791,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 17,
-      "symbol": "IOTA",
-      "breakout_score": 45.8371991415,
+      "breakout_score": 41.4369654361,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1532,7 +1652,19 @@
     {
       "id": 160026,
       "symbol": "IP",
-      "breakout_score": 53.5411874532,
+      "breakout_score": 49.5492270879,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 76814,
+      "symbol": "IQ",
+      "breakout_score": 54.3188124463,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1542,15 +1674,15 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 76814,
-      "symbol": "IQ",
-      "breakout_score": 55.2019479268,
+      "id": 161971,
+      "symbol": "IRYS",
+      "breakout_score": 27.1041848354,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
       "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
-      "undervaluation_sector": "Services",
+      "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
@@ -1566,9 +1698,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 9887,
-      "symbol": "JASMY",
-      "breakout_score": 47.1511687245,
+      "id": 163386,
+      "symbol": "JEANPHIL",
+      "breakout_score": 43.4955896199,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1578,21 +1710,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163386,
-      "symbol": "JEANPHIL",
-      "breakout_score": 43.3241499481,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 163076,
       "symbol": "JIMOTHY",
-      "breakout_score": 45.9491460443,
+      "breakout_score": 48.5213736346,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1604,7 +1724,7 @@
     {
       "id": 17554,
       "symbol": "JOE",
-      "breakout_score": 56.3617224111,
+      "breakout_score": 54.1913332955,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1616,7 +1736,19 @@
     {
       "id": 148569,
       "symbol": "JTO",
-      "breakout_score": 40.3680162624,
+      "breakout_score": 42.586607669,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 163037,
+      "symbol": "JUGGERNAUT",
+      "breakout_score": 45.2641166754,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1628,7 +1760,7 @@
     {
       "id": 2267,
       "symbol": "JUP",
-      "breakout_score": 43.9372399888,
+      "breakout_score": 47.1945634818,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1640,7 +1772,19 @@
     {
       "id": 159961,
       "symbol": "KAITO",
-      "breakout_score": 41.7080124326,
+      "breakout_score": 48.3635330238,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 2143,
+      "symbol": "KAVA",
+      "breakout_score": 56.1164266747,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1656,6 +1800,42 @@
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 160400,
+      "symbol": "KERNEL",
+      "breakout_score": 62.2648291233,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 163225,
+      "symbol": "KII",
+      "breakout_score": 51.3115867788,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 160705,
+      "symbol": "KLED",
+      "breakout_score": 44.9268253654,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
       "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
@@ -1664,7 +1844,7 @@
     {
       "id": 151267,
       "symbol": "KMNO",
-      "breakout_score": 45.9513920668,
+      "breakout_score": 44.163998603,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1676,7 +1856,7 @@
     {
       "id": 162865,
       "symbol": "KNTQ",
-      "breakout_score": 45.0475328952,
+      "breakout_score": 43.6144984026,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1688,19 +1868,7 @@
     {
       "id": 160087,
       "symbol": "KTA",
-      "breakout_score": 46.2673857311,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 161580,
-      "symbol": "LINEA",
-      "breakout_score": 55.229296906,
+      "breakout_score": 46.7634661418,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1710,57 +1878,57 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 65139,
+      "symbol": "LAT",
+      "breakout_score": 42.1150869513,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 8288,
+      "symbol": "LDO",
+      "breakout_score": 46.3688243549,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 18,
       "symbol": "LINK",
-      "breakout_score": 42.6498120075,
+      "breakout_score": 44.7617120534,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 162755,
-      "symbol": "LIT",
-      "breakout_score": 43.0161730521,
+      "id": 160911,
+      "symbol": "LION",
+      "breakout_score": 47.1975358709,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 113764,
-      "symbol": "LMWR",
-      "breakout_score": 46.2407324388,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 4,
-      "symbol": "LTC",
-      "breakout_score": 41.7315236019,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 1790,
-      "symbol": "LUNC",
-      "breakout_score": 44.1090177853,
+      "id": 151743,
+      "symbol": "LISTA",
+      "breakout_score": null,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1770,9 +1938,69 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 161418,
-      "symbol": "M",
-      "breakout_score": 44.1972071407,
+      "id": 162755,
+      "symbol": "LIT",
+      "breakout_score": 44.4242810006,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 113764,
+      "symbol": "LMWR",
+      "breakout_score": 50.1602662245,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 43,
+      "symbol": "LSK",
+      "breakout_score": 40.0031773643,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 4,
+      "symbol": "LTC",
+      "breakout_score": 44.3137500947,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 1790,
+      "symbol": "LUNC",
+      "breakout_score": 49.2563595748,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 163804,
+      "symbol": "MACCA",
+      "breakout_score": 55.7499490732,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1784,19 +2012,7 @@
     {
       "id": 162866,
       "symbol": "MAGMA",
-      "breakout_score": 43.5783739136,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 151303,
-      "symbol": "MANEKI",
-      "breakout_score": 45.9997173253,
+      "breakout_score": 48.2848883055,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1808,7 +2024,7 @@
     {
       "id": 16332,
       "symbol": "MASK",
-      "breakout_score": 47.9976676245,
+      "breakout_score": 47.264336705,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1818,9 +2034,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 64697,
-      "symbol": "MAX",
-      "breakout_score": 48.7538855116,
+      "id": 52433,
+      "symbol": "MBX",
+      "breakout_score": null,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1830,37 +2046,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 159090,
-      "symbol": "ME",
-      "breakout_score": 52.356326786,
+      "id": 111755,
+      "symbol": "MEME",
+      "breakout_score": 43.5985466399,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 162742,
-      "symbol": "MEGA",
-      "breakout_score": 41.4822267699,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 159609,
-      "symbol": "MELANIA",
-      "breakout_score": 45.5141953717,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -1868,19 +2060,7 @@
     {
       "id": 151314,
       "symbol": "MERL",
-      "breakout_score": 54.1637688623,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "Bridge",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 163287,
-      "symbol": "MICRODUCK",
-      "breakout_score": 42.1540523441,
+      "breakout_score": 54.0368497523,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1890,9 +2070,45 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 163287,
+      "symbol": "MICRODUCK",
+      "breakout_score": 42.3165279998,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 163910,
+      "symbol": "MIHAO",
+      "breakout_score": 55.2763432378,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 163964,
+      "symbol": "MINELIUS",
+      "breakout_score": null,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 147994,
       "symbol": "MNT",
-      "breakout_score": 50.9801153047,
+      "breakout_score": 48.3476431217,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1904,7 +2120,7 @@
     {
       "id": 148055,
       "symbol": "MOG",
-      "breakout_score": 43.5644156336,
+      "breakout_score": 44.9545045145,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1916,7 +2132,19 @@
     {
       "id": 161961,
       "symbol": "MON",
-      "breakout_score": 45.4237990575,
+      "breakout_score": 44.3161650114,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 157819,
+      "symbol": "MOODENG",
+      "breakout_score": 52.4283537777,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1928,11 +2156,11 @@
     {
       "id": 148067,
       "symbol": "MORPHO",
-      "breakout_score": 37.8822738319,
+      "breakout_score": 41.219571924,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -1940,7 +2168,7 @@
     {
       "id": 18377,
       "symbol": "MOVR",
-      "breakout_score": 48.3718050282,
+      "breakout_score": 47.892470053,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1952,7 +2180,7 @@
     {
       "id": 74232,
       "symbol": "MPLX",
-      "breakout_score": 44.6738359877,
+      "breakout_score": 45.3175902683,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1964,7 +2192,7 @@
     {
       "id": 205,
       "symbol": "MTL",
-      "breakout_score": 42.7835518707,
+      "breakout_score": 47.5914348269,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1976,7 +2204,7 @@
     {
       "id": 2996,
       "symbol": "MX",
-      "breakout_score": 45.8816420367,
+      "breakout_score": 44.2513676106,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1986,9 +2214,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 160840,
-      "symbol": "MYX",
-      "breakout_score": 48.7265262297,
+      "id": 3377,
+      "symbol": "NEAR",
+      "breakout_score": 44.588400568,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -1998,45 +2226,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 161289,
-      "symbol": "NAORIS",
-      "breakout_score": 37.5989388408,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 159614,
-      "symbol": "NC",
-      "breakout_score": null,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 3377,
-      "symbol": "NEAR",
-      "breakout_score": 43.1914504368,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 16,
       "symbol": "NEO",
-      "breakout_score": 44.6837976686,
+      "breakout_score": 46.0138689732,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2048,7 +2240,7 @@
     {
       "id": 162059,
       "symbol": "NIGHT",
-      "breakout_score": 48.5566628921,
+      "breakout_score": 49.854861338,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2060,7 +2252,7 @@
     {
       "id": 351,
       "symbol": "NMR",
-      "breakout_score": 43.5584658791,
+      "breakout_score": 42.7406649352,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2072,67 +2264,7 @@
     {
       "id": 162864,
       "symbol": "NOCK",
-      "breakout_score": 34.8620254294,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 151379,
-      "symbol": "NOT",
-      "breakout_score": 46.3510399718,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 148109,
-      "symbol": "NPC",
-      "breakout_score": 50.3265092012,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 159252,
-      "symbol": "NS",
-      "breakout_score": 51.2048045181,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 148678,
-      "symbol": "OBI",
-      "breakout_score": 46.1326784849,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 2144,
-      "symbol": "OGN",
-      "breakout_score": 44.2080341003,
+      "breakout_score": 41.4444740125,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2144,23 +2276,11 @@
     {
       "id": 2113,
       "symbol": "OKB",
-      "breakout_score": 44.1729600157,
+      "breakout_score": 46.4816174501,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
       "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 9335,
-      "symbol": "OMI",
-      "breakout_score": 47.2297855537,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -2168,43 +2288,7 @@
     {
       "id": 161826,
       "symbol": "ON",
-      "breakout_score": 34.9289354595,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 46356,
-      "symbol": "ONDO",
-      "breakout_score": 43.3747528039,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 152,
-      "symbol": "ONE",
-      "breakout_score": 46.2635879268,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 161112,
-      "symbol": "ONYC",
-      "breakout_score": 47.9966151054,
+      "breakout_score": 34.909453874,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2216,7 +2300,7 @@
     {
       "id": 55431,
       "symbol": "OP",
-      "breakout_score": 38.6861212106,
+      "breakout_score": 36.6318008633,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2226,21 +2310,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 123,
-      "symbol": "ORBS",
-      "breakout_score": 47.4495526324,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 17671,
       "symbol": "ORCA",
-      "breakout_score": 46.1289179544,
+      "breakout_score": 47.0116777416,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2252,19 +2324,7 @@
     {
       "id": 116459,
       "symbol": "ORDI",
-      "breakout_score": 43.7966145922,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 18925,
-      "symbol": "OSMO",
-      "breakout_score": 45.618098659,
+      "breakout_score": 45.155780409,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2274,21 +2334,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163289,
-      "symbol": "OTC",
-      "breakout_score": 42.9417939314,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 90047,
       "symbol": "OZO",
-      "breakout_score": 47.9922983485,
+      "breakout_score": 46.4324354553,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2300,7 +2348,7 @@
     {
       "id": 160216,
       "symbol": "PARTI",
-      "breakout_score": 33.8748069548,
+      "breakout_score": 37.207540234,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2310,21 +2358,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163960,
-      "symbol": "PATRICK",
-      "breakout_score": null,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 13238,
       "symbol": "PENDLE",
-      "breakout_score": 43.0244583955,
+      "breakout_score": 47.8054999506,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2336,7 +2372,7 @@
     {
       "id": 959,
       "symbol": "PENG",
-      "breakout_score": 46.5909183954,
+      "breakout_score": 45.5515346347,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2348,7 +2384,7 @@
     {
       "id": 159180,
       "symbol": "PENGU",
-      "breakout_score": 40.2786755448,
+      "breakout_score": 44.901857322,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2360,31 +2396,7 @@
     {
       "id": 21658,
       "symbol": "PEOPLE",
-      "breakout_score": 45.289545493,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 110579,
-      "symbol": "PEPE",
-      "breakout_score": 43.7842165546,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 148744,
-      "symbol": "PEPECOIN",
-      "breakout_score": 43.7656330763,
+      "breakout_score": 43.3084387647,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2394,9 +2406,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 110579,
+      "symbol": "PEPE",
+      "breakout_score": 44.1325266806,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 2986,
       "symbol": "PHA",
-      "breakout_score": 40.1064861069,
+      "breakout_score": 41.6572476604,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2408,7 +2432,7 @@
     {
       "id": 162052,
       "symbol": "PIEVERSE",
-      "breakout_score": 37.3800257635,
+      "breakout_score": 41.1217626596,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2418,9 +2442,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 158249,
-      "symbol": "PNUT",
-      "breakout_score": 46.1666717279,
+      "id": 158278,
+      "symbol": "PIPPIN",
+      "breakout_score": 45.4708423175,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 159642,
+      "symbol": "PLUME",
+      "breakout_score": 44.7582572842,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2430,13 +2466,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 28087,
-      "symbol": "POKT",
-      "breakout_score": null,
+      "id": 158249,
+      "symbol": "PNUT",
+      "breakout_score": 45.2062837975,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -2444,7 +2480,7 @@
     {
       "id": 163061,
       "symbol": "PONS",
-      "breakout_score": 44.2249881588,
+      "breakout_score": 44.6790207506,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2456,7 +2492,7 @@
     {
       "id": 140966,
       "symbol": "POPCAT",
-      "breakout_score": 47.857975923,
+      "breakout_score": 49.9084780813,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2468,7 +2504,7 @@
     {
       "id": 19350,
       "symbol": "POR",
-      "breakout_score": 51.6953571489,
+      "breakout_score": 55.0515047981,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2478,9 +2514,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 151919,
-      "symbol": "PRCL",
-      "breakout_score": 42.1741156733,
+      "id": 161591,
+      "symbol": "PROMPT",
+      "breakout_score": 35.5973928986,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 148812,
+      "symbol": "PROPS",
+      "breakout_score": 35.2635340721,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2490,9 +2538,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 148812,
-      "symbol": "PROPS",
-      "breakout_score": 37.1252514453,
+      "id": 53003,
+      "symbol": "PROS",
+      "breakout_score": 47.7016921801,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2504,7 +2552,7 @@
     {
       "id": 161158,
       "symbol": "PUMP",
-      "breakout_score": 45.6047543903,
+      "breakout_score": 45.7809115457,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2514,9 +2562,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 160828,
+      "symbol": "PUMP",
+      "breakout_score": 25.3103808103,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 148829,
       "symbol": "PURR",
-      "breakout_score": 49.5616027065,
+      "breakout_score": 48.4625352933,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2528,23 +2588,11 @@
     {
       "id": 148360,
       "symbol": "PYTH",
-      "breakout_score": 46.3742814568,
+      "breakout_score": 47.2322428733,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 111419,
-      "symbol": "PZP",
-      "breakout_score": 39.1406518141,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -2564,43 +2612,7 @@
     {
       "id": 70,
       "symbol": "QNT",
-      "breakout_score": 44.4318122826,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 34,
-      "symbol": "QTUM",
-      "breakout_score": 43.7989797959,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 157354,
-      "symbol": "QUBIC",
-      "breakout_score": 48.968366999,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 157420,
-      "symbol": "RAD",
-      "breakout_score": 49.565987424,
+      "breakout_score": 46.0108686078,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2612,7 +2624,7 @@
     {
       "id": 4577,
       "symbol": "RARE",
-      "breakout_score": 21.8391010546,
+      "breakout_score": 45.1597224041,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2624,7 +2636,7 @@
     {
       "id": 162050,
       "symbol": "RAVE",
-      "breakout_score": 55.5933788186,
+      "breakout_score": 60.8754966351,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2636,7 +2648,7 @@
     {
       "id": 11880,
       "symbol": "RAY",
-      "breakout_score": 42.9341542357,
+      "breakout_score": 42.9852863324,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2646,45 +2658,33 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163961,
-      "symbol": "RINGS",
-      "breakout_score": null,
+      "id": 305,
+      "symbol": "REQ",
+      "breakout_score": 57.9427499359,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_sector": "Developer Tools",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 161650,
-      "symbol": "RIVER",
-      "breakout_score": 43.3171625427,
+      "id": 160855,
+      "symbol": "RESOLV",
+      "breakout_score": 65.1258918985,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 158835,
-      "symbol": "RIZZMAS",
-      "breakout_score": 44.6722147974,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_sector": "Basis Trading",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
       "id": 161992,
       "symbol": "RLS",
-      "breakout_score": 49.5700072959,
+      "breakout_score": 43.1750175239,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2696,23 +2696,11 @@
     {
       "id": 3487,
       "symbol": "ROSE",
-      "breakout_score": 43.1060838827,
+      "breakout_score": 44.8668058158,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 2222,
-      "symbol": "RUNE",
-      "breakout_score": 49.6038295609,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -2720,7 +2708,7 @@
     {
       "id": 159814,
       "symbol": "S",
-      "breakout_score": 50.7555369791,
+      "breakout_score": 48.4004445128,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2732,7 +2720,7 @@
     {
       "id": 51325,
       "symbol": "SAGA",
-      "breakout_score": 47.6891223795,
+      "breakout_score": 48.6687834339,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2742,9 +2730,33 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 2963,
-      "symbol": "SAND",
-      "breakout_score": 49.0084772429,
+      "id": 160999,
+      "symbol": "SAHARA",
+      "breakout_score": 44.7781863933,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 161444,
+      "symbol": "SAPIEN",
+      "breakout_score": null,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 148930,
+      "symbol": "SATS",
+      "breakout_score": 38.1096606655,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2756,7 +2768,7 @@
     {
       "id": 159167,
       "symbol": "SBTC",
-      "breakout_score": 50.5575147379,
+      "breakout_score": 51.7137304899,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2768,7 +2780,7 @@
     {
       "id": 63,
       "symbol": "SC",
-      "breakout_score": 50.9084742385,
+      "breakout_score": 53.8638677351,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2778,9 +2790,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 145271,
+      "symbol": "SEI",
+      "breakout_score": 46.4898798917,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 159834,
       "symbol": "SERV",
-      "breakout_score": 46.3001592751,
+      "breakout_score": 49.055006487,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2792,35 +2816,35 @@
     {
       "id": 9878,
       "symbol": "SFP",
-      "breakout_score": 39.8658668659,
+      "breakout_score": 34.1392290322,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 2917,
-      "symbol": "SHIB",
-      "breakout_score": 44.4957523704,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 159946,
-      "symbol": "SIREN",
-      "breakout_score": 42.8301736,
+      "id": 52554,
+      "symbol": "SHELL",
+      "breakout_score": 54.2957634001,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
       "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 70319,
+      "symbol": "SKY",
+      "breakout_score": 53.2585488189,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -2828,43 +2852,7 @@
     {
       "id": 159305,
       "symbol": "SKYAI",
-      "breakout_score": 46.7128747574,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 163729,
-      "symbol": "SLOPCORE",
-      "breakout_score": null,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 114765,
-      "symbol": "SNEK",
-      "breakout_score": 47.293748129,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 82,
-      "symbol": "SNT",
-      "breakout_score": 44.8060301567,
+      "breakout_score": 54.9928952017,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2876,7 +2864,7 @@
     {
       "id": 3079,
       "symbol": "SOL",
-      "breakout_score": 47.7887177433,
+      "breakout_score": 47.4456007707,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2886,9 +2874,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 161519,
-      "symbol": "SOMI",
-      "breakout_score": null,
+      "id": 75800,
+      "symbol": "SOLV",
+      "breakout_score": 44.0853668542,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 160776,
+      "symbol": "SOPH",
+      "breakout_score": 49.6047997772,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2898,13 +2898,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 19008,
-      "symbol": "SPA",
-      "breakout_score": 38.8446110851,
+      "id": 160800,
+      "symbol": "SOSO",
+      "breakout_score": 53.2242463657,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -2912,11 +2912,11 @@
     {
       "id": 149030,
       "symbol": "SPX",
-      "breakout_score": 48.1995966738,
+      "breakout_score": 47.4503155784,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -2924,7 +2924,7 @@
     {
       "id": 20232,
       "symbol": "SSV",
-      "breakout_score": null,
+      "breakout_score": 46.1611720371,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2936,7 +2936,7 @@
     {
       "id": 161852,
       "symbol": "STAR",
-      "breakout_score": 43.6285144455,
+      "breakout_score": 50.5379604828,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2948,7 +2948,7 @@
     {
       "id": 163082,
       "symbol": "STONKBROKER",
-      "breakout_score": 41.6001904552,
+      "breakout_score": 41.9425698207,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2960,7 +2960,7 @@
     {
       "id": 70741,
       "symbol": "STRK",
-      "breakout_score": 39.1195921851,
+      "breakout_score": 40.8032074281,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2972,11 +2972,11 @@
     {
       "id": 830,
       "symbol": "STX",
-      "breakout_score": 43.3893362216,
+      "breakout_score": 46.0334681443,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -2984,7 +2984,7 @@
     {
       "id": 70056,
       "symbol": "SUI",
-      "breakout_score": 42.3757031483,
+      "breakout_score": 44.5533619879,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -2996,7 +2996,7 @@
     {
       "id": 64391,
       "symbol": "SUPER",
-      "breakout_score": 43.9653584303,
+      "breakout_score": 45.4890590393,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3006,9 +3006,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 11915,
-      "symbol": "SUPRA",
-      "breakout_score": 48.4479823736,
+      "id": 151173,
+      "symbol": "SUSDE",
+      "breakout_score": 53.8001714642,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3018,21 +3018,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 162786,
-      "symbol": "SURPLUS",
-      "breakout_score": 35.2290421975,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 2847,
       "symbol": "SUSHI",
-      "breakout_score": null,
+      "breakout_score": 40.5160896877,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3042,13 +3030,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 158332,
-      "symbol": "SYRUP",
-      "breakout_score": 42.4326418636,
+      "id": 161171,
+      "symbol": "TAC",
+      "breakout_score": 65.0902364076,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -3056,19 +3044,7 @@
     {
       "id": 84657,
       "symbol": "TAO",
-      "breakout_score": 43.6919545929,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 3309,
-      "symbol": "TBTC",
-      "breakout_score": 42.6348100479,
+      "breakout_score": 46.627347617,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3080,7 +3056,7 @@
     {
       "id": 166,
       "symbol": "TEL",
-      "breakout_score": 48.3060701466,
+      "breakout_score": 46.3209125417,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3090,9 +3066,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163063,
-      "symbol": "TENDIES",
-      "breakout_score": 39.8854466682,
+      "id": 160224,
+      "symbol": "TIBBIR",
+      "breakout_score": 47.8690043849,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3102,21 +3078,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 99316,
-      "symbol": "THE",
-      "breakout_score": 40.8998583767,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 148203,
-      "symbol": "TIA",
-      "breakout_score": 46.2811616785,
+      "id": 21681,
+      "symbol": "TKO",
+      "breakout_score": 47.2252382462,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3126,21 +3090,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 160224,
-      "symbol": "TIBBIR",
-      "breakout_score": 48.2566165462,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
       "id": 149164,
       "symbol": "TOKEN",
-      "breakout_score": 46.9144328551,
+      "breakout_score": 47.0587654195,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3152,11 +3104,11 @@
     {
       "id": 18349,
       "symbol": "TON",
-      "breakout_score": 63.26415053,
+      "breakout_score": 65.9065568502,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -3164,7 +3116,7 @@
     {
       "id": 149175,
       "symbol": "TOSHI",
-      "breakout_score": 45.6740986205,
+      "breakout_score": 42.2826836428,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3176,7 +3128,7 @@
     {
       "id": 161526,
       "symbol": "TRADOOR",
-      "breakout_score": 37.6914993922,
+      "breakout_score": 37.923060164,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3186,9 +3138,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 159596,
-      "symbol": "TRUMP",
-      "breakout_score": 48.0203571732,
+      "id": 161295,
+      "symbol": "TREE",
+      "breakout_score": 47.0287973507,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3198,9 +3150,33 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 1374,
+      "symbol": "TROLL",
+      "breakout_score": 52.0844148562,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 159596,
+      "symbol": "TRUMP",
+      "breakout_score": 44.2925946943,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 12,
       "symbol": "TRX",
-      "breakout_score": 42.2019535968,
+      "breakout_score": 42.0663239359,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3212,7 +3188,7 @@
     {
       "id": 112798,
       "symbol": "TURBO",
-      "breakout_score": 47.979409838,
+      "breakout_score": 47.783122021,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3224,7 +3200,7 @@
     {
       "id": 2761,
       "symbol": "TWT",
-      "breakout_score": 46.4080503009,
+      "breakout_score": 44.6695035522,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3236,11 +3212,11 @@
     {
       "id": 161592,
       "symbol": "UB",
-      "breakout_score": 44.8182766443,
+      "breakout_score": 40.5072050358,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -3248,7 +3224,7 @@
     {
       "id": 159181,
       "symbol": "UFD",
-      "breakout_score": 47.8385485269,
+      "breakout_score": 46.5200679775,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3258,21 +3234,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 163529,
-      "symbol": "UMXM",
-      "breakout_score": null,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 161216,
-      "symbol": "URANUS",
-      "breakout_score": 75.3204949342,
+      "id": 162728,
+      "symbol": "USDGO",
+      "breakout_score": 49.3124839973,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3282,9 +3246,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 13231,
-      "symbol": "USELESS",
-      "breakout_score": 46.1040335846,
+      "id": 159172,
+      "symbol": "VANA",
+      "breakout_score": 46.5374793581,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3294,13 +3258,13 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 158860,
-      "symbol": "USUAL",
-      "breakout_score": 50.020178868,
+      "id": 9322,
+      "symbol": "VELO",
+      "breakout_score": 49.1443885353,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -3308,7 +3272,7 @@
     {
       "id": 161139,
       "symbol": "VELVET",
-      "breakout_score": 49.0443470263,
+      "breakout_score": 51.7514835255,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3320,11 +3284,11 @@
     {
       "id": 32,
       "symbol": "VET",
-      "breakout_score": 41.8915841189,
+      "breakout_score": 48.5173090808,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -3332,7 +3296,7 @@
     {
       "id": 152389,
       "symbol": "VIRTUAL",
-      "breakout_score": 41.7043465468,
+      "breakout_score": 44.3567042681,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3344,7 +3308,7 @@
     {
       "id": 159730,
       "symbol": "VVV",
-      "breakout_score": 29.2651587647,
+      "breakout_score": 38.7757187116,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3354,9 +3318,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 163866,
+      "symbol": "WASTED",
+      "breakout_score": 47.723213617,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "PRICE HISTORY UNKNOWN",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 149337,
       "symbol": "WIF",
-      "breakout_score": 47.4824848256,
+      "breakout_score": 48.8134949939,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3366,9 +3342,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 161685,
-      "symbol": "XAN",
-      "breakout_score": 34.5840488655,
+      "id": 159308,
+      "symbol": "WOD",
+      "breakout_score": null,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3378,9 +3354,21 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 64655,
+      "symbol": "WXT",
+      "breakout_score": 50.6266922902,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 66919,
       "symbol": "XDC",
-      "breakout_score": 45.0743906625,
+      "breakout_score": 44.16529095,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3392,7 +3380,7 @@
     {
       "id": 16508,
       "symbol": "XEC",
-      "breakout_score": 47.2042536332,
+      "breakout_score": 49.3583896164,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3404,11 +3392,11 @@
     {
       "id": 10,
       "symbol": "XLM",
-      "breakout_score": 45.9646016553,
+      "breakout_score": 47.5434428212,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -3416,11 +3404,11 @@
     {
       "id": 13,
       "symbol": "XMR",
-      "breakout_score": 43.6125343343,
+      "breakout_score": 44.0489166595,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -3428,11 +3416,11 @@
     {
       "id": 160376,
       "symbol": "XP",
-      "breakout_score": 44.746263222,
+      "breakout_score": 42.3146644492,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
@@ -3440,19 +3428,7 @@
     {
       "id": 161677,
       "symbol": "XPL",
-      "breakout_score": 33.1582360914,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 3,
-      "symbol": "XRP",
-      "breakout_score": 44.8145254256,
+      "breakout_score": 41.1264393159,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3464,7 +3440,7 @@
     {
       "id": 20,
       "symbol": "XTZ",
-      "breakout_score": 45.2257399138,
+      "breakout_score": 47.4916710402,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3474,9 +3450,33 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
+      "id": 72,
+      "symbol": "XVG",
+      "breakout_score": 56.4902981861,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
       "id": 161769,
       "symbol": "YB",
-      "breakout_score": 44.4295488711,
+      "breakout_score": 48.3444242576,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 53823,
+      "symbol": "YGG",
+      "breakout_score": 44.1841112291,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3488,7 +3488,7 @@
     {
       "id": 162308,
       "symbol": "ZAMA",
-      "breakout_score": 37.5111153153,
+      "breakout_score": 40.0266900954,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3500,43 +3500,7 @@
     {
       "id": 152191,
       "symbol": "ZBCN",
-      "breakout_score": 47.4829710851,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 163323,
-      "symbol": "ZCAT",
-      "breakout_score": 34.2083376362,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 26,
-      "symbol": "ZEC",
-      "breakout_score": 43.6027852437,
-      "undervaluation_score": null,
-      "undervaluation_classification": "UNRATED",
-      "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
-      "undervaluation_peer_count": 0,
-      "undervaluation_sector": "UNKNOWN",
-      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
-    },
-    {
-      "id": 152188,
-      "symbol": "ZENT",
-      "breakout_score": 50.7162222936,
+      "breakout_score": 45.7095381269,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3546,9 +3510,9 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 72564,
-      "symbol": "ZETA",
-      "breakout_score": 46.1761191657,
+      "id": 163323,
+      "symbol": "ZCAT",
+      "breakout_score": 40.9598711775,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3558,9 +3522,33 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 53844,
-      "symbol": "ZIG",
-      "breakout_score": 41.773998022,
+      "id": 152188,
+      "symbol": "ZENT",
+      "breakout_score": 50.7790246598,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "NO DEEP DISCOUNT SIGNAL",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 162769,
+      "symbol": "ZEST",
+      "breakout_score": 45.4799282323,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 72564,
+      "symbol": "ZETA",
+      "breakout_score": 43.9536626467,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3572,7 +3560,7 @@
     {
       "id": 157295,
       "symbol": "ZK",
-      "breakout_score": 45.7203481056,
+      "breakout_score": 44.2312394112,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
@@ -3582,25 +3570,37 @@
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
-      "id": 19443,
-      "symbol": "ZKP",
-      "breakout_score": 60.2772368528,
+      "id": 161643,
+      "symbol": "ZKC",
+      "breakout_score": null,
+      "undervaluation_score": null,
+      "undervaluation_classification": "UNRATED",
+      "undervaluation_confidence": "INSUFFICIENT",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
+      "undervaluation_peer_count": 0,
+      "undervaluation_sector": "UNKNOWN",
+      "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
+    },
+    {
+      "id": 149470,
+      "symbol": "ZKJ",
+      "breakout_score": 41.0057069464,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
       "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
       "undervaluation_peer_count": 0,
-      "undervaluation_sector": "Services",
+      "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"
     },
     {
       "id": 152283,
       "symbol": "ZRO",
-      "breakout_score": 50.2484145148,
+      "breakout_score": 51.3540880458,
       "undervaluation_score": null,
       "undervaluation_classification": "UNRATED",
       "undervaluation_confidence": "INSUFFICIENT",
-      "undervaluation_price_context": "HEAVY SELL-OFF (NOT VALUATION)",
+      "undervaluation_price_context": "SELL-OFF WATCH (NOT VALUATION)",
       "undervaluation_peer_count": 0,
       "undervaluation_sector": "UNKNOWN",
       "undervaluation_reasons": "Missing verified identity, holder value capture, 365d holder revenue, economic growth, supply, or price history"

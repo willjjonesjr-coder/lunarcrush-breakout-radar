@@ -1,0 +1,601 @@
+{
+  "as_of": "2026-11-23",
+  "verified_inventory_records": 47,
+  "fresh_eligible_inventory": 47,
+  "verified_in_current_300": 35,
+  "ema_evaluable_in_current_300": 35,
+  "off_universe_fresh_eligible": 12,
+  "off_universe_technical_confirmed": 0,
+  "alert_policy": "Report only. Off-universe technical results never qualify for alerts or rankings.",
+  "assets": [
+    {
+      "coin_id": "1",
+      "exchange": "kraken",
+      "pair": "BTC/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "2",
+      "exchange": "kraken",
+      "pair": "ETH/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "3",
+      "exchange": "kraken",
+      "pair": "XRP/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 1.1664925415,
+        "ema100": 1.2295317612,
+        "ema200": 1.2874116229
+      }
+    },
+    {
+      "coin_id": "4",
+      "exchange": "kraken",
+      "pair": "LTC/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "5",
+      "exchange": "kraken",
+      "pair": "BCH/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 248.0942074332,
+        "ema100": 258.9761396606,
+        "ema200": 291.7054684022
+      }
+    },
+    {
+      "coin_id": "6",
+      "exchange": "kraken",
+      "pair": "BNB/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 669.9541623752,
+        "ema100": 681.2504728513,
+        "ema200": 681.9884470186
+      }
+    },
+    {
+      "coin_id": "10",
+      "exchange": "kraken",
+      "pair": "XLM/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "11",
+      "exchange": "kraken",
+      "pair": "ADA/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 0.1872345627,
+        "ema100": 0.1985320447,
+        "ema200": 0.2128421097
+      }
+    },
+    {
+      "coin_id": "12",
+      "exchange": "kraken",
+      "pair": "TRX/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "15",
+      "exchange": "kraken",
+      "pair": "DASH/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "18",
+      "exchange": "kraken",
+      "pair": "LINK/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "19",
+      "exchange": "kraken",
+      "pair": "ATOM/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "20",
+      "exchange": "kraken",
+      "pair": "XTZ/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "26",
+      "exchange": "kraken",
+      "pair": "ZEC/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA50 slope; Price below EMA50 support",
+        "ema50": 1083.1657101086,
+        "ema100": 1040.8091873541,
+        "ema200": 877.058093708
+      }
+    },
+    {
+      "coin_id": "29",
+      "exchange": "kraken",
+      "pair": "DOGE/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "169",
+      "exchange": "kraken",
+      "pair": "FET/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "830",
+      "exchange": "kraken",
+      "pair": "STX/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "1790",
+      "exchange": "kraken",
+      "pair": "LUNC/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "1813",
+      "exchange": "kraken",
+      "pair": "FIL/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 0.7967964589,
+        "ema100": 0.8401621533,
+        "ema200": 0.8726179817
+      }
+    },
+    {
+      "coin_id": "2222",
+      "exchange": "kraken",
+      "pair": "RUNE/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA50 slope; Price below EMA50 support",
+        "ema50": 0.5839144569,
+        "ema100": 0.5714742072,
+        "ema200": 0.5382909301
+      }
+    },
+    {
+      "coin_id": "2545",
+      "exchange": "kraken",
+      "pair": "AVAX/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 8.328063228,
+        "ema100": 8.441946736,
+        "ema200": 8.5331834269
+      }
+    },
+    {
+      "coin_id": "2917",
+      "exchange": "kraken",
+      "pair": "SHIB/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 4.5431e-06,
+        "ema100": 4.812e-06,
+        "ema200": 5.1347e-06
+      }
+    },
+    {
+      "coin_id": "3079",
+      "exchange": "kraken",
+      "pair": "SOL/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "3377",
+      "exchange": "kraken",
+      "pair": "NEAR/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "3378",
+      "exchange": "kraken",
+      "pair": "INJ/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA50 slope; Price below EMA50 support",
+        "ema50": 7.3140004048,
+        "ema100": 6.8958021222,
+        "ema200": 6.12722877
+      }
+    },
+    {
+      "coin_id": "9887",
+      "exchange": "kraken",
+      "pair": "JASMY/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 0.0038652049,
+        "ema100": 0.0041698771,
+        "ema200": 0.0045681688
+      }
+    },
+    {
+      "coin_id": "11880",
+      "exchange": "kraken",
+      "pair": "RAY/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "12391",
+      "exchange": "kraken",
+      "pair": "ICP/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "13238",
+      "exchange": "kraken",
+      "pair": "PENDLE/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "14226",
+      "exchange": "kraken",
+      "pair": "CVX/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "42935",
+      "exchange": "kraken",
+      "pair": "FLOKI/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "52238",
+      "exchange": "kraken",
+      "pair": "KAS/USD",
+      "selected_in_300": false,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": {
+        "technical_status": "EMA NOT CONFIRMED",
+        "technical_reasons": "EMA ordering; EMA50 slope; Price below EMA50 support",
+        "ema50": 0.0316664899,
+        "ema100": 0.032721842,
+        "ema200": 0.0329842837
+      }
+    },
+    {
+      "coin_id": "70056",
+      "exchange": "kraken",
+      "pair": "SUI/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "70741",
+      "exchange": "kraken",
+      "pair": "STRK/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "84657",
+      "exchange": "kraken",
+      "pair": "TAO/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "90376",
+      "exchange": "kraken",
+      "pair": "FLR/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "110579",
+      "exchange": "kraken",
+      "pair": "PEPE/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "145271",
+      "exchange": "kraken",
+      "pair": "SEI/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "146377",
+      "exchange": "kraken",
+      "pair": "AERO/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "148569",
+      "exchange": "kraken",
+      "pair": "JTO/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "149030",
+      "exchange": "kraken",
+      "pair": "SPX/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "149895",
+      "exchange": "kraken",
+      "pair": "ETHFI/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "151267",
+      "exchange": "kraken",
+      "pair": "KMNO/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "152283",
+      "exchange": "kraken",
+      "pair": "ZRO/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "152389",
+      "exchange": "kraken",
+      "pair": "VIRTUAL/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "159180",
+      "exchange": "kraken",
+      "pair": "PENGU/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    },
+    {
+      "coin_id": "159730",
+      "exchange": "kraken",
+      "pair": "VVV/USD",
+      "selected_in_300": true,
+      "fresh_300_bar_history": true,
+      "last_completed_candle": "2026-11-22",
+      "blocker": null,
+      "technical_status": "EMA NOT CONFIRMED",
+      "off_universe_technical": null
+    }
+  ]
+}
