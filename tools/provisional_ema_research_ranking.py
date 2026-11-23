@@ -19,6 +19,7 @@ FIELDS = (
     "provisional_ema_status", "ema50", "ema100", "ema200",
     "ema_history_bars", "ema_evidence_source", "ema_evidence_day",
     "production_expected_day", "evidence_freshness", "research_priority",
+    "current_selection_status", "current_expected_day", "current_ema_evaluable",
     "caution_flags", "production_eligible", "alert_eligible",
 )
 
@@ -76,8 +77,10 @@ def values(row, prefix=""):
     return result
 
 
-def build(coverage, production, price=(), provisional=(), provisional_report=None):
+def build(coverage, production, price=(), provisional=(), provisional_report=None,
+          current_production=None):
     prod, prod_duplicate = indexed(production)
+    current, current_duplicates = indexed(current_production or [])
     prices, price_duplicate = indexed(price)
     prov, prov_duplicate = indexed(provisional)
     report = provisional_report or {}
@@ -102,6 +105,30 @@ def build(coverage, production, price=(), provisional=(), provisional_report=Non
         if not expected:
             raise ValueError("Missing production reference day: " + cid)
         flags = []
+        current_row = current.get(cid)
+        if cid in current_duplicates:
+            current_status = "DUPLICATE_CURRENT_ID"
+            flags.append("CURRENT_ID_CONFLICT")
+        elif current_row is None:
+            current_status = "NOT_IN_CURRENT_REPORT" if current_production is not None else "NOT_CHECKED"
+            if current_production is not None:
+                flags.append("NOT_IN_CURRENT_REPORT")
+        elif not consistent(row, current_row):
+            current_status = "CURRENT_NAME_SYMBOL_CONFLICT"
+            flags.append("CURRENT_NAME_SYMBOL_CONFLICT")
+        elif current_row.get("history_selection") != "ANALYZED":
+            current_status = "NOT_IN_CURRENT_300"
+            flags.append("NOT_IN_CURRENT_300")
+        else:
+            current_status = "CURRENT_ANALYZED"
+        current_day = day(current_row.get("expected_complete_day") or
+                          current_row.get("latest_price_day")) if current_row else ""
+        current_ema = bool(current_row and all(
+            str(current_row.get("ema" + str(n)) or "").strip() for n in (50, 100, 200)))
+        if current_ema:
+            flags.append("CURRENT_PRODUCTION_EMA_AVAILABLE")
+        if current_row and current_day and current_day != expected:
+            flags.append("CURRENT_REPORT_DAY_DIFFERS")
         evidence = []
         if cid in price_duplicate or cid in prov_duplicate:
             flags.append("DUPLICATE_SOURCE_ID")
@@ -182,7 +209,10 @@ def build(coverage, production, price=(), provisional=(), provisional_report=Non
             ema200=ema[2] if ema else "", ema_history_bars=bars,
             ema_evidence_source=origin or "NONE", ema_evidence_day=evidence_day,
             production_expected_day=expected, evidence_freshness=freshness,
-            research_priority=priority, caution_flags=";".join(dict.fromkeys(flags)),
+            research_priority=priority, current_selection_status=current_status,
+            current_expected_day=current_day,
+            current_ema_evaluable="YES" if current_ema else "NO",
+            caution_flags=";".join(dict.fromkeys(flags)),
             production_eligible="NO", alert_eligible="NO"))
     output.sort(key=lambda r: (-float(r["breakout_score"]), r["coin_id"]))
     for position, item in enumerate(output, 1):
@@ -194,6 +224,8 @@ def build(coverage, production, price=(), provisional=(), provisional_report=Non
         "stale_or_unverified_ema": sum(x["evidence_freshness"] == "STALE_OR_UNVERIFIED" for x in output),
         "missing_ema_values": sum(x["evidence_freshness"] == "MISSING_VALUES" for x in output),
         "priority_counts": dict(Counter(x["research_priority"] for x in output)),
+        "current_selection_counts": dict(Counter(x["current_selection_status"] for x in output)),
+        "snapshot_note": "EMA evidence freshness is relative to the original coverage snapshot, not today's market.",
         "production_promotions": 0,
         "alerts": 0,
         "policy": "Standalone provisional research only, no production promotion or notifications."
@@ -203,7 +235,10 @@ def build(coverage, production, price=(), provisional=(), provisional_report=Non
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--coverage", required=True)
-    parser.add_argument("--production", default="reports/breakout_radar.csv")
+    parser.add_argument("--production", default="reports/breakout_radar.csv",
+                        help="Production CSV at the exact coverage audit commit")
+    parser.add_argument("--current-production",
+                        help="Optional latest production CSV for non-blocking status comparison")
     parser.add_argument("--price")
     parser.add_argument("--provisional")
     parser.add_argument("--output", default="reports/provisional_ema_research_ranking")
@@ -216,7 +251,9 @@ def main():
             parser.error("Provisional input must be report.json with assets")
         provisional = report["assets"]
     output, summary = build(csv_rows(args.coverage), csv_rows(args.production),
-                            csv_rows(args.price) if args.price else [], provisional, report)
+                            csv_rows(args.price) if args.price else [], provisional, report,
+                            current_production=csv_rows(args.current_production)
+                            if args.current_production else None)
     target = Path(args.output)
     target.mkdir(parents=True, exist_ok=True)
     with (target / "ranking.csv").open("w", newline="", encoding="utf-8") as f:
