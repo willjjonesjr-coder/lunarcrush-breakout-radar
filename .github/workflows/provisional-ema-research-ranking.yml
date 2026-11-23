@@ -51,6 +51,28 @@ jobs:
             mkdir -p "artifact-input/${kind,,}"
             gh run download "$run" --repo "$GITHUB_REPOSITORY" -D "artifact-input/${kind,,}"
           done
+      - name: Retrieve exact production snapshot for the coverage audit
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COVERAGE_RUN: ${{ inputs.coverage_run_id }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$COVERAGE_RUN" > artifact-input/coverage/source_run.json
+          python - <<'PY'
+          import json
+          run=json.load(open("artifact-input/coverage/source_run.json"))
+          if (run.get("conclusion") != "success" or run.get("head_branch") != "main"
+              or not str(run.get("path") or "").endswith("unified-ema-coverage-audit.yml")):
+              raise SystemExit("Coverage run must be successful unified audit on main")
+          sha=run.get("head_sha","")
+          if len(sha)!=40 or any(c not in "0123456789abcdef" for c in sha):
+              raise SystemExit("Invalid coverage commit SHA")
+          open("artifact-input/coverage/source_sha.txt","w").write(sha+"\n")
+          print("Pinned coverage production SHA:",sha)
+          PY
+          sha=$(cat artifact-input/coverage/source_sha.txt)
+          git fetch --no-tags --depth=1 origin "$sha"
+          git show "$sha:reports/breakout_radar.csv" > artifact-input/coverage/production_snapshot.csv
       - name: Rank audited provisional research candidates
         if: github.event_name == 'workflow_dispatch'
         run: |
@@ -75,7 +97,8 @@ jobs:
           subprocess.run(["python", "-m", "tools.provisional_ema_research_ranking",
                           "--coverage", coverage, "--price", price,
                           "--provisional", provisional,
-                          "--production", "reports/breakout_radar.csv"],
+                          "--production", "artifact-input/coverage/production_snapshot.csv",
+                          "--current-production", "reports/breakout_radar.csv"],
                          check=True)
           PY
       - name: Upload separate provisional research ranking
