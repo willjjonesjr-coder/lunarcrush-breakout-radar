@@ -18,6 +18,11 @@ on:
         default: '40'
         type: choice
         options: ['20', '40', '60']
+      batch_offset:
+        description: 'Ranked cohort offset (0, 40, 80, etc.)'
+        required: true
+        default: '0'
+        type: string
       exchanges:
         description: 'Exchange research set; default all nine supported sources'
         required: true
@@ -76,11 +81,13 @@ jobs:
       - name: Select research-only unresolved candidates
         env:
           BATCH: ${{ inputs.batch_count }}
+          OFFSET: ${{ inputs.batch_offset }}
         run: |
+          case "$OFFSET" in ''|*[!0-9]*) echo 'Invalid offset'; exit 1;; esac
           python -m tools.build_ema_coverage_expansion_queue \
             --coverage artifact-input/coverage/coverage.csv \
             --production artifact-input/production_snapshot.csv \
-            --count "$BATCH"
+            --count "$BATCH" --offset "$OFFSET"
       - name: Discover 300-day spot histories across nine CEXs
         env:
           BATCH: ${{ inputs.batch_count }}
