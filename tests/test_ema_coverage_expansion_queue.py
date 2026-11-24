@@ -49,6 +49,15 @@ class CoverageExpansionTests(unittest.TestCase):
         self.assertFalse(rows)
         self.assertEqual(summary["skipped"]["SOURCE_PRODUCTION_MISSING_OR_DUPLICATED"],1)
 
+    def test_batch_offset_no_duplicate_coins(self):
+        coverage=[cov(str(i),score=str(i)) for i in range(1,91)]
+        production=[prod(str(i)) for i in range(1,91)]
+        _,first,_=build(coverage,production,40,0)
+        _,second,summary=build(coverage,production,40,40)
+        self.assertEqual(summary["batch_offset"],40)
+        self.assertEqual(len({r["coin_id"] for r in first+second}),80)
+        self.assertEqual(second[0]["coin_id"],"50")
+
     def test_batch_bounds(self):
         with self.assertRaises(ValueError):
             build([cov("1")],[prod("1")],0)
