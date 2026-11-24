@@ -1,0 +1,110 @@
+name: Expand missing EMA research coverage (no alerts)
+on:
+  pull_request:
+    paths:
+      - tools/build_ema_coverage_expansion_queue.py
+      - tests/test_ema_coverage_expansion_queue.py
+      - .github/workflows/expand-ema-research-coverage.yml
+  workflow_dispatch:
+    inputs:
+      coverage_run_id:
+        description: 'Successful unified 300-coin coverage audit run'
+        required: true
+        type: string
+        default: '45109654773'
+      batch_count:
+        description: 'How many unresolved candidates to explore (20-60)'
+        required: true
+        default: '40'
+        type: choice
+        options: ['20', '40', '60']
+      batch_offset:
+        description: 'Ranked cohort offset (0, 40, 80, etc.)'
+        required: true
+        default: '0'
+        type: string
+      exchanges:
+        description: 'Exchange research set; default all nine supported sources'
+        required: true
+        default: 'kraken,coinbase,binance,okx,bybit,bitget,gate,mexc,kucoin'
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test coverage selection, exclusion and identity safeguards
+        run: python -m unittest tests.test_ema_coverage_expansion_queue -v
+  research:
+    needs: test
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exchange market-data client
+        run: pip install 'ccxt>=4.4,<5'
+      - name: Validate source audit and retrieve its exact production snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COVERAGE_RUN: ${{ inputs.coverage_run_id }}
+        run: |
+          set -euo pipefail
+          case "$COVERAGE_RUN" in ''|*[!0-9]*) echo 'Invalid coverage run ID'; exit 1;; esac
+          mkdir -p artifact-input
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$COVERAGE_RUN" > artifact-input/source_run.json
+          python - <<'PY'
+          import json
+          r=json.load(open("artifact-input/source_run.json"))
+          if (r.get("conclusion")!="success" or r.get("head_branch")!="main" or
+              not str(r.get("path") or "").endswith("/unified-ema-coverage-audit.yml")):
+              raise SystemExit("Must use completed, successful, main-branch unified EMA coverage audit")
+          sha=r.get("head_sha","")
+          if len(sha)!=40 or any(ch not in "0123456789abcdef" for ch in sha):
+              raise SystemExit("Invalid pinned coverage commit")
+          open("artifact-input/source_sha.txt","w").write(sha+"\n")
+          PY
+          gh run download "$COVERAGE_RUN" --repo "$GITHUB_REPOSITORY" --name unified-ema-coverage-audit -D artifact-input/coverage
+          sha=$(cat artifact-input/source_sha.txt)
+          git fetch --no-tags --depth=1 origin "$sha"
+          git show "$sha:reports/breakout_radar.csv" > artifact-input/production_snapshot.csv
+      - name: Select research-only unresolved candidates
+        env:
+          BATCH: ${{ inputs.batch_count }}
+          OFFSET: ${{ inputs.batch_offset }}
+        run: |
+          case "$OFFSET" in ''|*[!0-9]*) echo 'Invalid offset'; exit 1;; esac
+          python -m tools.build_ema_coverage_expansion_queue \
+            --coverage artifact-input/coverage/coverage.csv \
+            --production artifact-input/production_snapshot.csv \
+            --count "$BATCH" --offset "$OFFSET"
+      - name: Discover 300-day spot histories across nine CEXs
+        env:
+          BATCH: ${{ inputs.batch_count }}
+          EXCHANGES: ${{ inputs.exchanges }}
+        run: |
+          python tools/audit_expanded_cex_coverage.py \
+            --queue reports/ema_coverage_expansion/research_queue.json \
+            --count "$BATCH" --bars 300 --max-pairs-per-exchange 1 \
+            --exchanges "$EXCHANGES" \
+            --output reports/ema_coverage_expansion/exchange_discovery
+      - name: Upload queue, coverage, warnings, and source provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: expanded-ema-coverage-research
+          path: |
+            reports/ema_coverage_expansion/
+            artifact-input/source_run.json
+          retention-days: 30
+          if-no-files-found: warn
