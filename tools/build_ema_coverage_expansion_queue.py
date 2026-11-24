@@ -23,9 +23,9 @@ def read(path):
         return list(csv.DictReader(f))
 
 
-def build(coverage, production, count=40):
-    if not 1 <= count <= 300:
-        raise ValueError("Batch size must be between 1 and 300")
+def build(coverage, production, count=40, offset=0):
+    if not 1 <= count <= 300 or offset < 0:
+        raise ValueError("Batch size must be 1-300 and offset >= 0")
     prod, duplicates = {}, set()
     for r in production:
         cid = str(r.get("id") or "").strip()
@@ -79,11 +79,11 @@ def build(coverage, production, count=40):
     output.sort(key=lambda x: (-x["breakout_score"], x["coin_id"]))
     for i,r in enumerate(output,1):
         r["review_rank"]=i
-    chosen=output[:count]
+    chosen=output[offset:offset+count]
     return output, chosen, {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "eligible_discovery_targets": len(output),
-        "requested_batch": count, "selected_batch": len(chosen),
+        "requested_batch": count, "batch_offset":offset, "selected_batch": len(chosen),
         "eligible_blockers": dict(sorted(Counter(r["coverage_blocker"] for r in output).items())),
         "skipped": dict(sorted(skipped.items())),
         "production_approvals":0, "alerts":0,
@@ -97,9 +97,10 @@ def main():
     p.add_argument("--production",required=True,
                    help="Pinned production CSV from the coverage audit source commit")
     p.add_argument("--count",type=int,default=40)
+    p.add_argument("--offset",type=int,default=0)
     p.add_argument("--output",default="reports/ema_coverage_expansion")
     a=p.parse_args()
-    universe,queue,summary=build(read(a.coverage),read(a.production),a.count)
+    universe,queue,summary=build(read(a.coverage),read(a.production),a.count,a.offset)
     out=Path(a.output)
     out.mkdir(parents=True,exist_ok=True)
     for filename,items in (("all_targets.csv",universe),("selected_batch.csv",queue)):
