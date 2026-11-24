@@ -13,6 +13,8 @@ After merging, dispatch **Expand missing EMA research coverage (no alerts)**
 on main with:
 - `coverage_run_id=45109654773` (or a newer verified unified coverage run)
 - `batch_count=40` to start, then 60 after examining errors and API load
+- `batch_offset=0` for the first 40, then 40, 80, 120, 160, 200
+  for nonoverlapping batches against the **same coverage run**
 - `exchanges=kraken,coinbase,binance,okx,bybit,bitget,gate,mexc,kucoin`
 
 The workflow validates the source run, fetches the exact production
@@ -44,10 +46,9 @@ verified coin mapping. Review duplicates, name conflicts, contract
 conflicts, exact date-aligned independent prices, liquidity, and history
 quality before computing research EMAs.
 
-Subsequent batches should use a new queue offset or a refreshed audited
-cohort; rerunning the same initial 40 does **not** expand unique coverage.
-A future follow-up can introduce an explicit offset/pagination for
-batch 2 and batch 3 after the first audit.
+Subsequent batches must use a new ranked offset against the same frozen
+coverage run. Changing the coverage run changes the ordering and can
+reintroduce overlap; compare source IDs before combining independent runs.
 
 No production scores, ranking, verified coin inventory, symbol maps,
 `data_price/` files, or breakout alerts are modified. This step is for
