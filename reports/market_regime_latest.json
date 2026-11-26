@@ -1,12 +1,12 @@
 {
   "status": "AVAILABLE",
-  "as_of": "2026-11-24T00:00:00+00:00",
-  "expected_day": "2026-11-24T00:00:00+00:00",
-  "observed_at": "2026-11-25T11:20:53.340872+00:00",
-  "score": 6.2,
+  "as_of": "2026-11-25T00:00:00+00:00",
+  "expected_day": "2026-11-25T00:00:00+00:00",
+  "observed_at": "2026-11-26T10:51:29.278264+00:00",
+  "score": 6.5,
   "classification": "extreme bearish",
-  "trend_strength": 87.6,
-  "change_7d": -11.0,
+  "trend_strength": 87.0,
+  "change_7d": -8.3,
   "expected_assets": 20,
   "available_assets": 20,
   "coverage": 1.0,
@@ -17,8 +17,8 @@
   "breadth_assets": 20,
   "components": {
     "trend": 0.0,
-    "breadth": 0.0,
-    "momentum": 14.904027999235499,
-    "participation": 17.043977672851554
+    "breadth": 2.5,
+    "momentum": 15.934450148560067,
+    "participation": 17.869646897393267
   }
 }
