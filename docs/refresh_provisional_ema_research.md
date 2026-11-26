@@ -50,3 +50,19 @@ multi-signal breakout confirmation without fresh independent evidence.
 
 The job does not modify `config/symbol_map.json`, `data_price/`, the
 production radar, production EMA inventory, ranking, or notifications.
+
+## Combined shortlist for manual due diligence
+
+After the production snapshot for the latest completed UTC day is available,
+run **Refresh current provisional EMA research (no alerts)**. The existing
+artifact also contains `combined_shortlist.csv`, `combined_screen_audit.csv`,
+and `combined_screen_summary.json`. Both identity paths use the same current
+production breakout score, with no rank bonus for verified identity. Rows must
+pass their existing EMA screen. Verified evidence wins when both paths exist;
+provisional rows are clearly labeled and require manual identity checks.
+
+Stale histories, known price or identity conflicts, and unscored rows stay
+out of the shortlist. The audit shows why. Smaller cap and thin liquidity are
+visible flags, not new rank gates. A stale production snapshot fails the
+combined step rather than publishing misleading results; the refresh artifact
+is still uploaded. None of these outputs changes production or sends alerts.

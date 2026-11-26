@@ -4,6 +4,8 @@ on:
     paths:
       - tools/refresh_provisional_ema_research.py
       - tests/test_refresh_provisional_ema_research.py
+      - tools/build_combined_ema_shortlist.py
+      - tests/test_combined_ema_shortlist.py
       - .github/workflows/refresh-provisional-ema-research.yml
   workflow_dispatch:
     inputs:
@@ -30,7 +32,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Offline refresh regression tests
-        run: python -m unittest tests.test_refresh_provisional_ema_research -v
+        run: python -m unittest tests.test_refresh_provisional_ema_research tests.test_combined_ema_shortlist -v
       - name: Install CCXT for manual exchange research
         if: github.event_name == 'workflow_dispatch'
         run: pip install 'ccxt>=4.4,<5'
@@ -69,6 +71,14 @@ jobs:
             --provisional-report artifact-input/provisional/report.json \
             --current-production reports/breakout_radar.csv \
             --bars 300
+      - name: Build combined research shortlist from same-day evidence
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          python -m tools.build_combined_ema_shortlist \
+            --production reports/breakout_radar.csv \
+            --inventory reports/ema_inventory_coverage_latest.json \
+            --provisional reports/provisional_ema_refresh/refreshed_ranking.csv \
+            --output reports/provisional_ema_refresh
       - name: Upload all candidate outcomes, including failed refreshes
         if: always() && github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
