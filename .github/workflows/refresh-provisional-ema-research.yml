@@ -5,6 +5,8 @@ on:
       - tools/refresh_provisional_ema_research.py
       - tests/test_refresh_provisional_ema_research.py
       - tools/build_combined_ema_shortlist.py
+      - tools/alternate_ema_research.py
+      - tests/test_alternate_ema_research.py
       - tests/test_combined_ema_shortlist.py
       - .github/workflows/refresh-provisional-ema-research.yml
   workflow_dispatch:
@@ -31,8 +33,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Pin the completed UTC day once
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "CLOSED_DAY=$(date -u -d yesterday +%F)" >> "$GITHUB_ENV"
       - name: Offline refresh regression tests
-        run: python -m unittest tests.test_refresh_provisional_ema_research tests.test_combined_ema_shortlist -v
+        run: python -m unittest tests.test_refresh_provisional_ema_research tests.test_combined_ema_shortlist tests.test_alternate_ema_research -v
       - name: Install CCXT for manual exchange research
         if: github.event_name == 'workflow_dispatch'
         run: pip install 'ccxt>=4.4,<5'
@@ -70,6 +75,7 @@ jobs:
             --ranking artifact-input/ranking/ranking.csv \
             --provisional-report artifact-input/provisional/report.json \
             --current-production reports/breakout_radar.csv \
+            --closed-day "$CLOSED_DAY" \
             --bars 300
       - name: Build combined research shortlist from same-day evidence
         if: github.event_name == 'workflow_dispatch'
@@ -78,6 +84,32 @@ jobs:
             --production reports/breakout_radar.csv \
             --inventory reports/ema_inventory_coverage_latest.json \
             --provisional reports/provisional_ema_refresh/refreshed_ranking.csv \
+            --closed-day "$CLOSED_DAY" \
+            --output reports/provisional_ema_refresh
+      - name: Check alternate spot venues for unevaluated research candidates
+        if: github.event_name == 'workflow_dispatch'
+        id: alternate
+        env:
+          COINGECKO_DEMO_API_KEY: ${{ secrets.COINGECKO_DEMO_API_KEY }}
+        timeout-minutes: 12
+        continue-on-error: true
+        run: |
+          python -m tools.alternate_ema_research \
+            --shortlist reports/provisional_ema_refresh/combined_shortlist.csv \
+            --production reports/breakout_radar.csv \
+            --history-dir data \
+            --registry config/asset_identity_registry.json \
+            --closed-day "$CLOSED_DAY" \
+            --output reports/provisional_ema_refresh/alternate_venue_audit.json
+      - name: Apply alternate evidence without changing shortlist eligibility
+        if: github.event_name == 'workflow_dispatch' && steps.alternate.outcome == 'success'
+        run: |
+          python -m tools.build_combined_ema_shortlist \
+            --production reports/breakout_radar.csv \
+            --inventory reports/ema_inventory_coverage_latest.json \
+            --provisional reports/provisional_ema_refresh/refreshed_ranking.csv \
+            --alternate reports/provisional_ema_refresh/alternate_venue_audit.json \
+            --closed-day "$CLOSED_DAY" \
             --output reports/provisional_ema_refresh
       - name: Upload all candidate outcomes, including failed refreshes
         if: always() && github.event_name == 'workflow_dispatch'
@@ -87,3 +119,4 @@ jobs:
           path: reports/provisional_ema_refresh/
           if-no-files-found: warn
           retention-days: 30
+
