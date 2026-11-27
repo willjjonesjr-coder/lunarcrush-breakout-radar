@@ -1,0 +1,559 @@
+{
+  "as_of": "2026-11-27",
+  "baseline_days": [
+    "2026-11-20",
+    "2026-11-21",
+    "2026-11-22",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26"
+  ],
+  "data_source": "LunarCrush coin-list snapshots (reported 24h volume)",
+  "scope_warning": "Tracked-universe and named-sector baskets are NOT comprehensive market spot volume, nor deduplicated exchange trade volume.",
+  "alert_policy": "Review-only. Notify only after independent verification; no automated notifications.",
+  "segments": [
+    {
+      "segment": "Tracked universe proxy",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 0.6116,
+      "current_volume": 101776173327.11,
+      "baseline_volume": 166400500549.37,
+      "coverage": 0.9997,
+      "top_contributors": [
+        {
+          "symbol": "USDT",
+          "volume": 43864501201.3
+        },
+        {
+          "symbol": "BTC",
+          "volume": 21043507184.14
+        },
+        {
+          "symbol": "USDC",
+          "volume": 9520074402.49
+        },
+        {
+          "symbol": "ETH",
+          "volume": 8524903720.36
+        },
+        {
+          "symbol": "SOL",
+          "volume": 1966244194.22
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "BTC",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 0.4944,
+      "current_volume": 21043507184.14,
+      "baseline_volume": 42561159771.96,
+      "coverage": 1.0,
+      "top_contributors": [
+        {
+          "symbol": "BTC",
+          "volume": 21043507184.14
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "ETH",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 0.602,
+      "current_volume": 8524903720.36,
+      "baseline_volume": 14162115355.97,
+      "coverage": 1.0,
+      "top_contributors": [
+        {
+          "symbol": "ETH",
+          "volume": 8524903720.36
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "DeFi basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 0.9214,
+      "current_volume": 661256171.36,
+      "baseline_volume": 717666243.03,
+      "coverage": 1.0,
+      "top_contributors": [
+        {
+          "symbol": "UNI",
+          "volume": 325211911.98
+        },
+        {
+          "symbol": "AAVE",
+          "volume": 214537544.6
+        },
+        {
+          "symbol": "LDO",
+          "volume": 38195633.73
+        },
+        {
+          "symbol": "JST",
+          "volume": 35620241.77
+        },
+        {
+          "symbol": "CRV",
+          "volume": 22711449.66
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "AI basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 0.9322,
+      "current_volume": 396033846.16,
+      "baseline_volume": 424825131.31,
+      "coverage": 1.0,
+      "top_contributors": [
+        {
+          "symbol": "FET",
+          "volume": 176765653.43
+        },
+        {
+          "symbol": "TAO",
+          "volume": 83253031.42
+        },
+        {
+          "symbol": "ARKM",
+          "volume": 71887635.58
+        },
+        {
+          "symbol": "VIRTUAL",
+          "volume": 32193327.56
+        },
+        {
+          "symbol": "RENDER",
+          "volume": 15638369.5
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "NFT/Gaming basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 1.0076,
+      "current_volume": 214382279.07,
+      "baseline_volume": 212759506.87,
+      "coverage": 1.0,
+      "top_contributors": [
+        {
+          "symbol": "BLUR",
+          "volume": 126043670.69
+        },
+        {
+          "symbol": "GALA",
+          "volume": 27467869.51
+        },
+        {
+          "symbol": "SAND",
+          "volume": 20076127.38
+        },
+        {
+          "symbol": "IMX",
+          "volume": 12115195.2
+        },
+        {
+          "symbol": "AXS",
+          "volume": 11130364.51
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "Layer 1 basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 0.6228,
+      "current_volume": 11769301503.36,
+      "baseline_volume": 18898691931.75,
+      "coverage": 1.0,
+      "top_contributors": [
+        {
+          "symbol": "ETH",
+          "volume": 8524903720.36
+        },
+        {
+          "symbol": "SOL",
+          "volume": 1966244194.22
+        },
+        {
+          "symbol": "NEAR",
+          "volume": 511808663.05
+        },
+        {
+          "symbol": "SUI",
+          "volume": 273794826.48
+        },
+        {
+          "symbol": "AVAX",
+          "volume": 202970318.79
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "Layer 2 basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 0.6622,
+      "current_volume": 87736611.74,
+      "baseline_volume": 132492914.74,
+      "coverage": 1.0,
+      "top_contributors": [
+        {
+          "symbol": "ARB",
+          "volume": 55119993.17
+        },
+        {
+          "symbol": "OP",
+          "volume": 23660412.29
+        },
+        {
+          "symbol": "ZK",
+          "volume": 5219380.5
+        },
+        {
+          "symbol": "METIS",
+          "volume": 1955686.28
+        },
+        {
+          "symbol": "MANTA",
+          "volume": 1781139.5
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "Memecoin basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 0.6594,
+      "current_volume": 453800093.1,
+      "baseline_volume": 688167410.33,
+      "coverage": 1.0,
+      "top_contributors": [
+        {
+          "symbol": "DOGE",
+          "volume": 380375841.91
+        },
+        {
+          "symbol": "SHIB",
+          "volume": 34074482.2
+        },
+        {
+          "symbol": "BONK",
+          "volume": 22552124.48
+        },
+        {
+          "symbol": "FLOKI",
+          "volume": 14648975.93
+        },
+        {
+          "symbol": "BRETT",
+          "volume": 2148668.58
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "RWA basket",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "READY",
+      "multiple": 0.9204,
+      "current_volume": 398764297.34,
+      "baseline_volume": 433245073.94,
+      "coverage": 1.0,
+      "top_contributors": [
+        {
+          "symbol": "LINK",
+          "volume": 258722320.3
+        },
+        {
+          "symbol": "ONDO",
+          "volume": 71184993.32
+        },
+        {
+          "symbol": "CFG",
+          "volume": 44197520.32
+        },
+        {
+          "symbol": "PENDLE",
+          "volume": 23230191.3
+        },
+        {
+          "symbol": "POLYX",
+          "volume": 1298599.9
+        }
+      ],
+      "classification": "NO ALERT",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      },
+      "coverage_note": "Unverified symbol basket or non-spot market proxy"
+    },
+    {
+      "segment": "DeFi basket (vetted IDs)",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT",
+      "membership_source": "config/sector_coin_ids.json",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "seven-day baseline or coverage not ready",
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      }
+    },
+    {
+      "segment": "AI basket (vetted IDs)",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT",
+      "membership_source": "config/sector_coin_ids.json",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "seven-day baseline or coverage not ready",
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      }
+    },
+    {
+      "segment": "NFT/Gaming basket (vetted IDs)",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT",
+      "membership_source": "config/sector_coin_ids.json",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "seven-day baseline or coverage not ready",
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      }
+    },
+    {
+      "segment": "Layer 1 basket (vetted IDs)",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT",
+      "membership_source": "config/sector_coin_ids.json",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "seven-day baseline or coverage not ready",
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      }
+    },
+    {
+      "segment": "Layer 2 basket (vetted IDs)",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT",
+      "membership_source": "config/sector_coin_ids.json",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "seven-day baseline or coverage not ready",
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      }
+    },
+    {
+      "segment": "Memecoin basket (vetted IDs)",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT",
+      "membership_source": "config/sector_coin_ids.json",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "seven-day baseline or coverage not ready",
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      }
+    },
+    {
+      "segment": "RWA basket (vetted IDs)",
+      "source": "LunarCrush 24h reported-volume proxy",
+      "status": "INSUFFICIENT BASELINE",
+      "multiple": null,
+      "current_volume": null,
+      "baseline_volume": null,
+      "coverage": 0,
+      "top_contributors": [],
+      "classification": "NO ALERT",
+      "membership_source": "config/sector_coin_ids.json",
+      "notification_readiness": {
+        "eligible_for_push": false,
+        "reasons": [
+          "seven-day baseline or coverage not ready",
+          "surge threshold not met",
+          "not verified as exchange-wide spot or approved ID sector basket",
+          "independent confirmation not verified",
+          "push delivery and duplicate suppression not configured"
+        ]
+      }
+    }
+  ]
+}
