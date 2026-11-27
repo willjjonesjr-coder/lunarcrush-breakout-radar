@@ -8,19 +8,24 @@ on:
       - tools/alternate_ema_research.py
       - tests/test_alternate_ema_research.py
       - tests/test_combined_ema_shortlist.py
+      - tests/test_research_seed_fallback.py
+      - config/provisional_research_seed.json
       - .github/workflows/refresh-provisional-ema-research.yml
   workflow_dispatch:
     inputs:
+      score_only:
+        description: 'Skip optional exchange downloads; retain verified EMA and known identity holds'
+        required: false
+        type: boolean
+        default: false
       ranking_run_id:
-        description: 'Successful 41-candidate provisional ranking run'
-        required: true
+        description: 'Optional ranking run override (both IDs required)'
+        required: false
         type: string
-        default: '45280254375'
       provisional_run_id:
-        description: 'Original provisional identity and exchange-pair evidence run'
-        required: true
+        description: 'Optional original identity run override (both IDs required)'
+        required: false
         type: string
-        default: '41746836284'
 permissions:
   contents: read
   actions: read
@@ -37,12 +42,24 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: echo "CLOSED_DAY=$(date -u -d yesterday +%F)" >> "$GITHUB_ENV"
       - name: Offline refresh regression tests
-        run: python -m unittest tests.test_refresh_provisional_ema_research tests.test_combined_ema_shortlist tests.test_alternate_ema_research -v
-      - name: Install CCXT for manual exchange research
+        run: python -m unittest tests.test_refresh_provisional_ema_research tests.test_combined_ema_shortlist tests.test_alternate_ema_research tests.test_research_seed_fallback -v
+      - name: Build baseline from durable identity evidence and current scores
         if: github.event_name == 'workflow_dispatch'
-        run: pip install 'ccxt>=4.4,<5'
-      - name: Validate and download historical research artifacts
-        if: github.event_name == 'workflow_dispatch'
+        id: baseline
+        run: |
+          python -m tools.refresh_provisional_ema_research \
+            --plan-only --closed-day "$CLOSED_DAY"
+          python -m tools.build_combined_ema_shortlist \
+            --production reports/breakout_radar.csv \
+            --inventory reports/ema_inventory_coverage_latest.json \
+            --provisional reports/provisional_ema_refresh/refreshed_ranking.csv \
+            --closed-day "$CLOSED_DAY" \
+            --output reports/provisional_ema_refresh
+      - name: Validate optional archive overrides
+        id: override
+        if: github.event_name == 'workflow_dispatch' && inputs.score_only == false && (inputs.ranking_run_id != '' || inputs.provisional_run_id != '')
+        timeout-minutes: 5
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
           RANKING_RUN: ${{ inputs.ranking_run_id }}
@@ -68,26 +85,56 @@ jobs:
           mkdir -p artifact-input/ranking artifact-input/provisional
           gh run download "$RANKING_RUN" --repo "$GITHUB_REPOSITORY" --name provisional-ema-research-ranking -D artifact-input/ranking
           gh run download "$PROVISIONAL_RUN" --repo "$GITHUB_REPOSITORY" --name provisional-ema-research -D artifact-input/provisional
-      - name: Refresh currently selected research EMA histories
-        if: github.event_name == 'workflow_dispatch'
+      - name: Retain any additional override holds before starting exchange work
+        id: override_plan
+        if: github.event_name == 'workflow_dispatch' && steps.override.outcome == 'success'
+        continue-on-error: true
         run: |
+          set -euo pipefail
           python -m tools.refresh_provisional_ema_research \
+            --plan-only --closed-day "$CLOSED_DAY" \
             --ranking artifact-input/ranking/ranking.csv \
             --provisional-report artifact-input/provisional/report.json \
-            --current-production reports/breakout_radar.csv \
-            --closed-day "$CLOSED_DAY" \
-            --bars 300
-      - name: Build combined research shortlist from same-day evidence
-        if: github.event_name == 'workflow_dispatch'
-        run: |
+            --output override-plan
           python -m tools.build_combined_ema_shortlist \
             --production reports/breakout_radar.csv \
             --inventory reports/ema_inventory_coverage_latest.json \
-            --provisional reports/provisional_ema_refresh/refreshed_ranking.csv \
+            --provisional override-plan/refreshed_ranking.csv \
             --closed-day "$CLOSED_DAY" \
             --output reports/provisional_ema_refresh
+          cp override-plan/{refreshed_ranking.csv,summary.json} reports/provisional_ema_refresh/
+      - name: Install CCXT for optional exchange research
+        if: github.event_name == 'workflow_dispatch' && inputs.score_only == false
+        id: exchange_client
+        timeout-minutes: 5
+        continue-on-error: true
+        run: pip install 'ccxt>=4.4,<5'
+      - name: Add refreshed provisional EMA evidence
+        id: legacy
+        if: github.event_name == 'workflow_dispatch' && steps.exchange_client.outcome == 'success'
+        timeout-minutes: 50
+        continue-on-error: true
+        env:
+          OVERRIDE_PLAN: ${{ steps.override_plan.outcome }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [[ "$OVERRIDE_PLAN" == success ]]; then
+            args+=(--ranking artifact-input/ranking/ranking.csv
+                   --provisional-report artifact-input/provisional/report.json
+                   --retain-holds override-plan/refreshed_ranking.csv)
+          fi
+          python -m tools.refresh_provisional_ema_research \
+            --closed-day "$CLOSED_DAY" --output refreshed-live "${args[@]}"
+          python -m tools.build_combined_ema_shortlist \
+            --production reports/breakout_radar.csv \
+            --inventory reports/ema_inventory_coverage_latest.json \
+            --provisional refreshed-live/refreshed_ranking.csv \
+            --closed-day "$CLOSED_DAY" \
+            --output reports/provisional_ema_refresh
+          cp refreshed-live/{refreshed_ranking.csv,summary.json} reports/provisional_ema_refresh/
       - name: Check alternate spot venues for unevaluated research candidates
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' && steps.exchange_client.outcome == 'success'
         id: alternate
         env:
           COINGECKO_DEMO_API_KEY: ${{ secrets.COINGECKO_DEMO_API_KEY }}
@@ -111,6 +158,28 @@ jobs:
             --alternate reports/provisional_ema_refresh/alternate_venue_audit.json \
             --closed-day "$CLOSED_DAY" \
             --output reports/provisional_ema_refresh
+      - name: Record what ran and what was unavailable
+        if: always() && github.event_name == 'workflow_dispatch'
+        env:
+          SCORE_ONLY: ${{ inputs.score_only }}
+          BASELINE_STATUS: ${{ steps.baseline.outcome }}
+          OVERRIDE_STATUS: ${{ steps.override.outcome }}
+          OVERRIDE_PLAN_STATUS: ${{ steps.override_plan.outcome }}
+          CLIENT_STATUS: ${{ steps.exchange_client.outcome }}
+          HISTORY_STATUS: ${{ steps.legacy.outcome }}
+          ALTERNATE_STATUS: ${{ steps.alternate.outcome }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          names = ("CLOSED_DAY", "SCORE_ONLY", "BASELINE_STATUS", "OVERRIDE_STATUS",
+                   "OVERRIDE_PLAN_STATUS", "CLIENT_STATUS", "HISTORY_STATUS", "ALTERNATE_STATUS")
+          output = Path("reports/provisional_ema_refresh")
+          output.mkdir(parents=True, exist_ok=True)
+          status = {name.lower(): os.environ.get(name) for name in names}
+          (output / "research_workflow_status.json").write_text(json.dumps(status, indent=2) + "\n")
+          PY
       - name: Upload all candidate outcomes, including failed refreshes
         if: always() && github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
@@ -119,4 +188,5 @@ jobs:
           path: reports/provisional_ema_refresh/
           if-no-files-found: warn
           retention-days: 30
+
 

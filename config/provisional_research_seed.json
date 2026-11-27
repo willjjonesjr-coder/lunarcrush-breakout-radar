@@ -1,0 +1,796 @@
+{
+  "schema_version": 1,
+  "source": {
+    "identity": {
+      "run_id": 41746836284,
+      "artifact_id": 13292082440,
+      "commit": "1603f6f58c9d20e759d42eddf4f54ba06b7969ff",
+      "sha256": "2701e36c0ee9c93fdfbdc9b735cc5a314d5111bdf0aae4ae4c236e87dd92ebf5"
+    },
+    "ranking": {
+      "run_id": 45280254375,
+      "artifact_id": 14869400733,
+      "commit": "f6b1d913cb02afc4b8b10f0a6fec7f0b7e812b8a",
+      "sha256": "b3b42497af870950da905072948faa170e742d94809fc6d95b1eab23318b4c73"
+    }
+  },
+  "ranking": [
+    {
+      "research_rank": "1",
+      "coin_id": "161630",
+      "symbol": "ASTER",
+      "name": "Aster",
+      "breakout_score": "56.4493",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "2",
+      "coin_id": "161580",
+      "symbol": "LINEA",
+      "name": "Linea",
+      "breakout_score": "55.2293",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "NOT_IN_CURRENT_REPORT",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "3",
+      "coin_id": "159090",
+      "symbol": "ME",
+      "name": "Magic Eden",
+      "breakout_score": "52.3563",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "NOT_IN_CURRENT_REPORT",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "4",
+      "coin_id": "147994",
+      "symbol": "MNT",
+      "name": "Mantle",
+      "breakout_score": "50.9801",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "5",
+      "coin_id": "148109",
+      "symbol": "NPC",
+      "name": "Non-Playable Coin",
+      "breakout_score": "50.3265",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "NOT_IN_CURRENT_REPORT",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "6",
+      "coin_id": "159596",
+      "symbol": "TRUMP",
+      "name": "Official Trump",
+      "breakout_score": "48.0204",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "7",
+      "coin_id": "3002",
+      "symbol": "ACH",
+      "name": "Alchemy Pay",
+      "breakout_score": "48.0096",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "8",
+      "coin_id": "159181",
+      "symbol": "UFD",
+      "name": "Unicorn Fart Dust",
+      "breakout_score": "47.8385",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "9",
+      "coin_id": "2123",
+      "symbol": "CHZ",
+      "name": "Chiliz",
+      "breakout_score": "47.6498",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "10",
+      "coin_id": "152191",
+      "symbol": "ZBCN",
+      "name": "Zebec Network",
+      "breakout_score": "47.483",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "PRICE_CONFLICT_REVIEW"
+    },
+    {
+      "research_rank": "11",
+      "coin_id": "162027",
+      "symbol": "ALLO",
+      "name": "Allora",
+      "breakout_score": "47.0554",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "12",
+      "coin_id": "2780",
+      "symbol": "DOT",
+      "name": "Polkadot",
+      "breakout_score": "46.6146",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "NOT_IN_CURRENT_REPORT",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "13",
+      "coin_id": "148203",
+      "symbol": "TIA",
+      "name": "Celestia",
+      "breakout_score": "46.2812",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "NOT_IN_CURRENT_REPORT",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "14",
+      "coin_id": "72564",
+      "symbol": "ZETA",
+      "name": "ZetaChain",
+      "breakout_score": "46.1761",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "15",
+      "coin_id": "158249",
+      "symbol": "PNUT",
+      "name": "Peanut the Squirrel",
+      "breakout_score": "46.1667",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "16",
+      "coin_id": "17671",
+      "symbol": "ORCA",
+      "name": "ORCA",
+      "breakout_score": "46.1289",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "17",
+      "coin_id": "158054",
+      "symbol": "FARTCOIN",
+      "name": "Fartcoin",
+      "breakout_score": "45.7222",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "18",
+      "coin_id": "157295",
+      "symbol": "ZK",
+      "name": "zkSync",
+      "breakout_score": "45.7203",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "19",
+      "coin_id": "161158",
+      "symbol": "PUMP",
+      "name": "Pump.fun",
+      "breakout_score": "45.6048",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "20",
+      "coin_id": "89249",
+      "symbol": "BONK",
+      "name": "Bonk",
+      "breakout_score": "45.5952",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "21",
+      "coin_id": "159609",
+      "symbol": "MELANIA",
+      "name": "Melania Meme",
+      "breakout_score": "45.5142",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "NOT_IN_CURRENT_REPORT",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "22",
+      "coin_id": "161961",
+      "symbol": "MON",
+      "name": "Monad",
+      "breakout_score": "45.4238",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "23",
+      "coin_id": "74232",
+      "symbol": "MPLX",
+      "name": "Metaplex",
+      "breakout_score": "44.6738",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "PRICE_CONFLICT_REVIEW"
+    },
+    {
+      "research_rank": "24",
+      "coin_id": "161294",
+      "symbol": "CROSS",
+      "name": "CROSS",
+      "breakout_score": "44.6102",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "",
+      "current_selection_status": "NOT_IN_CURRENT_REPORT",
+      "price_corroboration_status": "PRICE_CORROBORATED_MULTI_SOURCE"
+    },
+    {
+      "research_rank": "25",
+      "coin_id": "44",
+      "symbol": "BTT",
+      "name": "BitTorrent",
+      "breakout_score": "44.3967",
+      "provisional_ema_status": "PROVISIONAL EMA ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "26",
+      "coin_id": "159528",
+      "symbol": "BNKR",
+      "name": "BankrCoin",
+      "breakout_score": "44.0138",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "27",
+      "coin_id": "3154",
+      "symbol": "AAVE",
+      "name": "Aave",
+      "breakout_score": "43.9002",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "28",
+      "coin_id": "13",
+      "symbol": "XMR",
+      "name": "Monero",
+      "breakout_score": "43.6125",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "29",
+      "coin_id": "148055",
+      "symbol": "MOG",
+      "name": "Mog Coin",
+      "breakout_score": "43.5644",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "30",
+      "coin_id": "161650",
+      "symbol": "RIVER",
+      "name": "River",
+      "breakout_score": "43.3172",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "NOT_IN_CURRENT_REPORT",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "31",
+      "coin_id": "2108",
+      "symbol": "ALGO",
+      "name": "Algorand",
+      "breakout_score": "42.9757",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "32",
+      "coin_id": "70832",
+      "symbol": "APT",
+      "name": "Aptos",
+      "breakout_score": "42.4234",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "33",
+      "coin_id": "32",
+      "symbol": "VET",
+      "name": "VeChain",
+      "breakout_score": "41.8916",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "34",
+      "coin_id": "11998",
+      "symbol": "AKT",
+      "name": "Akash Network",
+      "breakout_score": "40.2055",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "35",
+      "coin_id": "108339",
+      "symbol": "ARB",
+      "name": "Arbitrum",
+      "breakout_score": "40.0747",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "36",
+      "coin_id": "149893",
+      "symbol": "ENA",
+      "name": "Ethena",
+      "breakout_score": "40.0224",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "37",
+      "coin_id": "2770",
+      "symbol": "CELO",
+      "name": "Celo",
+      "breakout_score": "39.3016",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "NOT_IN_CURRENT_REPORT",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "38",
+      "coin_id": "18539",
+      "symbol": "AGLD",
+      "name": "Adventure Gold",
+      "breakout_score": "33.9961",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "39",
+      "coin_id": "159635",
+      "symbol": "DRV",
+      "name": "Derive",
+      "breakout_score": "31.7473",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "40",
+      "coin_id": "161098",
+      "symbol": "ICNT",
+      "name": "Impossible Cloud Network Token",
+      "breakout_score": "28.0703",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    },
+    {
+      "research_rank": "41",
+      "coin_id": "4577",
+      "symbol": "RARE",
+      "name": "SuperRare",
+      "breakout_score": "21.8391",
+      "provisional_ema_status": "PROVISIONAL EMA NOT ALIGNED",
+      "ema_evidence_day": "2026-11-03",
+      "current_selection_status": "CURRENT_ANALYZED",
+      "price_corroboration_status": "UNKNOWN"
+    }
+  ],
+  "original_report": {
+    "as_of": "2026-11-04",
+    "required_completed_day": "2026-11-03",
+    "assets": [
+      {
+        "coin_id": "2770",
+        "symbol": "CELO",
+        "name": "Celo",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "CELO/USD"
+      },
+      {
+        "coin_id": "147994",
+        "symbol": "MNT",
+        "name": "Mantle",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "MNT/USD"
+      },
+      {
+        "coin_id": "159181",
+        "symbol": "UFD",
+        "name": "Unicorn Fart Dust",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "UFD/USD"
+      },
+      {
+        "coin_id": "162027",
+        "symbol": "ALLO",
+        "name": "Allora",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ALLO/USD"
+      },
+      {
+        "coin_id": "11998",
+        "symbol": "AKT",
+        "name": "Akash Network",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "AKT/USD"
+      },
+      {
+        "coin_id": "3002",
+        "symbol": "ACH",
+        "name": "Alchemy Pay",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ACH/USD"
+      },
+      {
+        "coin_id": "149893",
+        "symbol": "ENA",
+        "name": "Ethena",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ENA/USD"
+      },
+      {
+        "coin_id": "4577",
+        "symbol": "RARE",
+        "name": "SuperRare",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "RARE/USD"
+      },
+      {
+        "coin_id": "148203",
+        "symbol": "TIA",
+        "name": "Celestia",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "TIA/USD"
+      },
+      {
+        "coin_id": "161650",
+        "symbol": "RIVER",
+        "name": "River",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "RIVER/USD"
+      },
+      {
+        "coin_id": "32",
+        "symbol": "VET",
+        "name": "VeChain",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "VET/USD"
+      },
+      {
+        "coin_id": "161158",
+        "symbol": "PUMP",
+        "name": "Pump.fun",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "PUMP/USD"
+      },
+      {
+        "coin_id": "157295",
+        "symbol": "ZK",
+        "name": "zkSync",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ZK/USD"
+      },
+      {
+        "coin_id": "159090",
+        "symbol": "ME",
+        "name": "Magic Eden",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ME/USD"
+      },
+      {
+        "coin_id": "148055",
+        "symbol": "MOG",
+        "name": "Mog Coin",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "MOG/USD"
+      },
+      {
+        "coin_id": "161098",
+        "symbol": "ICNT",
+        "name": "Impossible Cloud Network Token",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ICNT/USD"
+      },
+      {
+        "coin_id": "3154",
+        "symbol": "AAVE",
+        "name": "Aave",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "AAVE/USD"
+      },
+      {
+        "coin_id": "161630",
+        "symbol": "ASTER",
+        "name": "Aster",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ASTER/USD"
+      },
+      {
+        "coin_id": "158054",
+        "symbol": "FARTCOIN",
+        "name": "Fartcoin",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "FARTCOIN/USD"
+      },
+      {
+        "coin_id": "108339",
+        "symbol": "ARB",
+        "name": "Arbitrum",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ARB/USD"
+      },
+      {
+        "coin_id": "152191",
+        "symbol": "ZBCN",
+        "name": "Zebec Network",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ZBCN/USD"
+      },
+      {
+        "coin_id": "13",
+        "symbol": "XMR",
+        "name": "Monero",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "XMR/USD"
+      },
+      {
+        "coin_id": "2123",
+        "symbol": "CHZ",
+        "name": "Chiliz",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "CHZ/USD"
+      },
+      {
+        "coin_id": "70832",
+        "symbol": "APT",
+        "name": "Aptos",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "APT/USD"
+      },
+      {
+        "coin_id": "159596",
+        "symbol": "TRUMP",
+        "name": "Official Trump",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "TRUMP/USD"
+      },
+      {
+        "coin_id": "44",
+        "symbol": "BTT",
+        "name": "BitTorrent",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "BTT/USD"
+      },
+      {
+        "coin_id": "161961",
+        "symbol": "MON",
+        "name": "Monad",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "MON/USD"
+      },
+      {
+        "coin_id": "89249",
+        "symbol": "BONK",
+        "name": "Bonk",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "BONK/USD"
+      },
+      {
+        "coin_id": "161580",
+        "symbol": "LINEA",
+        "name": "Linea",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "LINEA/USD"
+      },
+      {
+        "coin_id": "17671",
+        "symbol": "ORCA",
+        "name": "ORCA",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ORCA/USD"
+      },
+      {
+        "coin_id": "2780",
+        "symbol": "DOT",
+        "name": "Polkadot",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "DOT/USD"
+      },
+      {
+        "coin_id": "159528",
+        "symbol": "BNKR",
+        "name": "BankrCoin",
+        "status": "PROVISIONAL READY",
+        "exchange": "coinbase",
+        "pair": "BNKR/USD"
+      },
+      {
+        "coin_id": "72564",
+        "symbol": "ZETA",
+        "name": "ZetaChain",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ZETA/USD"
+      },
+      {
+        "coin_id": "148109",
+        "symbol": "NPC",
+        "name": "Non-Playable Coin",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "NPC/USD"
+      },
+      {
+        "coin_id": "18539",
+        "symbol": "AGLD",
+        "name": "Adventure Gold",
+        "status": "PROVISIONAL READY",
+        "exchange": "coinbase",
+        "pair": "AGLD/USD"
+      },
+      {
+        "coin_id": "158249",
+        "symbol": "PNUT",
+        "name": "Peanut the Squirrel",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "PNUT/USD"
+      },
+      {
+        "coin_id": "2108",
+        "symbol": "ALGO",
+        "name": "Algorand",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "ALGO/USD"
+      },
+      {
+        "coin_id": "159609",
+        "symbol": "MELANIA",
+        "name": "Melania Meme",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "MELANIA/USD"
+      },
+      {
+        "coin_id": "159635",
+        "symbol": "DRV",
+        "name": "Derive",
+        "status": "PROVISIONAL READY",
+        "exchange": "kraken",
+        "pair": "DRV/USD"
+      },
+      {
+        "coin_id": "74232",
+        "symbol": "MPLX",
+        "name": "Metaplex",
+        "status": "PROVISIONAL READY",
+        "exchange": "coinbase",
+        "pair": "MPLX/USD"
+      }
+    ]
+  }
+}
