@@ -9,7 +9,7 @@ import csv
 import json
 import re
 from collections import Counter
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from provisional_ema import fetch_history, provisional_technicals
@@ -153,6 +153,7 @@ def main():
     p.add_argument("--provisional-report", required=True)
     p.add_argument("--current-production", default="reports/breakout_radar.csv")
     p.add_argument("--output", default="reports/provisional_ema_refresh")
+    p.add_argument("--closed-day", type=date.fromisoformat)
     p.add_argument("--bars", type=int, default=300)
     args = p.parse_args()
     import ccxt
@@ -164,7 +165,9 @@ def main():
     def factory(venue):
         return getattr(ccxt, venue)({"enableRateLimit": True, "timeout": 30000})
     rows, summary = refresh(read_csv(args.ranking), original,
-                            read_csv(args.current_production), factory, bars=args.bars)
+                            read_csv(args.current_production), factory,
+                            today=args.closed_day + timedelta(days=1) if args.closed_day else None,
+                            bars=args.bars)
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=True)
     with (output / "refreshed_ranking.csv").open("w", newline="", encoding="utf-8") as f:
@@ -177,3 +180,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

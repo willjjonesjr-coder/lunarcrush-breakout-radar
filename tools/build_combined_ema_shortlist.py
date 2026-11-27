@@ -14,7 +14,8 @@ FIELDS = ("research_rank", "coin_id", "symbol", "name", "breakout_score",
           "identity_status", "shortlist_status", "ema_status", "screen_status", "ema_day", "exchange", "pair",
           *EMA, "price_corroboration_status", "market_cap_label",
           "liquidity_label", "confirmation_label", "production_confirmation_blockers",
-          "due_diligence_required")
+          "due_diligence_required", "alternate_venue_status", "kraken_usd_spot",
+          "alternate_coingecko_id", "alternate_corroborating_venues", "alternate_price_disagreement")
 
 
 def unique(rows, key):
@@ -57,10 +58,11 @@ def evidence(out, row, outcome, identity_status, history_day, exchange, pair):
                **{k: row[k] for k in EMA})
 
 
-def build(production, inventory, provisional, closed_day):
+def build(production, inventory, provisional, closed_day, alternate=()):
     current = unique(production, "id")
     verified = unique(inventory["assets"], "coin_id")
     research = unique(provisional, "coin_id")
+    alternates = unique(alternate, "coin_id")
     if not current or any(day(r.get("expected_complete_day")) != closed_day for r in current.values()):
         raise ValueError("Production snapshot does not match requested closed UTC day")
     if day(inventory.get("as_of")) != closed_day + timedelta(days=1):
@@ -121,6 +123,25 @@ def build(production, inventory, provisional, closed_day):
 
     for out in audit:
         state = out["screen_status"]
+        alt = alternates.get(out["coin_id"])
+        if (alt and state not in {"OUTSIDE_ELIGIBLE_COHORT", "NO_CURRENT_BREAKOUT_SCORE",
+                                 "CONFLICT_REVIEW", "ALIGNED", "NOT_ALIGNED"}
+                and out["breakout_score"] >= MIN_BREAKOUT_SCORE):
+            out.update(alternate_venue_status=alt.get("status", ""),
+                       kraken_usd_spot=alt.get("kraken_usd_spot", ""),
+                       alternate_coingecko_id=alt.get("coingecko_id", ""),
+                       alternate_corroborating_venues=alt.get("corroborating_venues", ""),
+                       alternate_price_disagreement="YES" if alt.get("disagreement") else "")
+            if (alt.get("status") == "CORROBORATED" and day(alt.get("closed_day")) == closed_day
+                    and identity(alt) == identity(out) and alt.get("coingecko_id")
+                    and (number(alt.get("corroborating_venues")) or 0) >= 1
+                    and alt.get("exchange") not in {"", None, "kraken"}
+                    and str(alt.get("pair", "")).partition("/")[0] == out["symbol"].upper()
+                    and has_emas(alt) and alt.get("technical_status") in
+                    {"PROVISIONAL EMA ALIGNED", "PROVISIONAL EMA NOT ALIGNED"}):
+                state = "ALIGNED" if alt["technical_status"] == "PROVISIONAL EMA ALIGNED" else "NOT_ALIGNED"
+                evidence(out, alt, state, "PROVISIONAL", closed_day.isoformat(), alt["exchange"], alt["pair"])
+                out["price_corroboration_status"] = "ALTERNATE_VENUE_PRICE_CORROBORATED"
         out["ema_status"] = {
             "ALIGNED": "EMA SUPPORTS BREAKOUT",
             "NOT_ALIGNED": "EMA DOES NOT QUALIFY",
@@ -155,6 +176,7 @@ def main():
     p.add_argument("--production", required=True, type=Path)
     p.add_argument("--inventory", required=True, type=Path)
     p.add_argument("--provisional", required=True, type=Path)
+    p.add_argument("--alternate", type=Path)
     p.add_argument("--closed-day", type=date.fromisoformat,
                    default=datetime.now(timezone.utc).date() - timedelta(days=1))
     p.add_argument("--output", required=True, type=Path)
@@ -166,7 +188,8 @@ def main():
 
     shortlist, audit, summary = build(read_csv(args.production),
                                       json.loads(args.inventory.read_text(encoding="utf-8")),
-                                      read_csv(args.provisional), args.closed_day)
+                                      read_csv(args.provisional), args.closed_day,
+                                      json.loads(args.alternate.read_text()) if args.alternate else ())
     args.output.mkdir(parents=True, exist_ok=True)
     for name, items in (("combined_shortlist.csv", shortlist), ("combined_screen_audit.csv", audit)):
         with (args.output / name).open("w", newline="", encoding="utf-8") as f:
@@ -180,3 +203,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
