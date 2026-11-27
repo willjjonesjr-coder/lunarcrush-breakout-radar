@@ -58,7 +58,10 @@ class TestCombinedShortlist(unittest.TestCase):
                       provisional(7, ema200="nan"), provisional(99)]
         production = [prod(i, "70") for i in range(1, 8)]
         top, audit, summary = build(production, inventory(), candidates, CLOSED)
-        self.assertEqual(top, [])
+        self.assertEqual([x["coin_id"] for x in top], ["3", "4", "5", "6", "7"])
+        self.assertEqual(top[2]["ema_status"], "EMA DOES NOT QUALIFY")
+        self.assertTrue(all(x["ema_status"] == "EMA NOT EVALUATED"
+                            for x in (top[0], top[1], top[3], top[4])))
         self.assertEqual([x["screen_status"] for x in audit],
                          ["CONFLICT_REVIEW", "CONFLICT_REVIEW", "STALE_PROVISIONAL",
                           "INCOMPLETE_PROVISIONAL", "NOT_ALIGNED", "PROVISIONAL_NOT_REFRESHED",
@@ -69,8 +72,24 @@ class TestCombinedShortlist(unittest.TestCase):
         top, audit, _ = build([prod(1, "81", **EMAS, ema_history_source="VERIFIED EXCHANGE MAPPING",
                                          technical_status="EMA NOT CONFIRMED")],
                               inventory(verified(1, "EMA NOT CONFIRMED")), [provisional(1)], CLOSED)
-        self.assertEqual(top, [])
+        self.assertEqual(len(top), 1)
         self.assertEqual(audit[0]["identity_status"], "VERIFIED")
+        self.assertEqual(top[0]["ema_status"], "EMA DOES NOT QUALIFY")
+
+    def test_ema_neither_controls_eligibility_nor_changes_rank(self):
+        top, audit, summary = build(
+            [prod(1, "92"), prod(2, "70"), prod(3, "54.99"), prod(4, "55"),
+             prod(5, "nan")],
+            inventory(), [provisional(2), provisional(3)], CLOSED)
+        self.assertEqual([x["coin_id"] for x in top], ["1", "2", "4"])
+        self.assertEqual(top[0]["ema_status"], "EMA NOT EVALUATED")
+        self.assertEqual(top[0]["identity_status"], "UNVERIFIED")
+        self.assertEqual(top[1]["ema_status"], "EMA SUPPORTS BREAKOUT")
+        self.assertEqual(audit[2]["ema_status"], "EMA SUPPORTS BREAKOUT")
+        self.assertEqual(audit[2]["shortlist_status"], "BELOW_BREAKOUT_SCORE_THRESHOLD")
+        self.assertEqual(audit[4]["shortlist_status"], "NO_CURRENT_BREAKOUT_SCORE")
+        self.assertEqual(summary["shortlist_by_ema_status"],
+                         {"EMA NOT EVALUATED": 2, "EMA SUPPORTS BREAKOUT": 1})
 
     def test_duplicate_id_and_stale_snapshots_are_errors(self):
         with self.assertRaisesRegex(ValueError, "duplicate"):
