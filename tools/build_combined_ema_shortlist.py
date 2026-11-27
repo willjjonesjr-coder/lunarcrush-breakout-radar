@@ -1,4 +1,4 @@
-"""Build a research-only EMA shortlist; do not mutate production or send alerts."""
+"""Build a research breakout shortlist with optional EMA evidence; do not mutate production or send alerts."""
 import argparse
 import csv
 import json
@@ -8,8 +8,10 @@ from math import isfinite
 from pathlib import Path
 
 EMA = ("ema50", "ema100", "ema200")
+# Same lower bound as the production BREAKOUT / MOMENTUM score band.
+MIN_BREAKOUT_SCORE = 55.0
 FIELDS = ("research_rank", "coin_id", "symbol", "name", "breakout_score",
-          "identity_status", "screen_status", "ema_day", "exchange", "pair",
+          "identity_status", "shortlist_status", "ema_status", "screen_status", "ema_day", "exchange", "pair",
           *EMA, "price_corroboration_status", "market_cap_label",
           "liquidity_label", "confirmation_label", "production_confirmation_blockers",
           "due_diligence_required")
@@ -75,7 +77,7 @@ def build(production, inventory, provisional, closed_day):
                    liquidity_label=row.get("liquidity_label", ""),
                    confirmation_label=row.get("confirmation_label", ""),
                    production_confirmation_blockers=row.get("confirmation_blockers", ""),
-                   due_diligence_required="YES")
+                   due_diligence_required="YES", identity_status="UNVERIFIED")
         if match:
             out["price_corroboration_status"] = match.get("price_corroboration_status", "")
         audit.append(out)
@@ -117,7 +119,20 @@ def build(production, inventory, provisional, closed_day):
                      else "NOT_ALIGNED", "PROVISIONAL", closed_day.isoformat(),
                      match["exchange"], match["pair"])
 
-    shortlist = sorted((o for o in audit if o["screen_status"] == "ALIGNED"),
+    for out in audit:
+        state = out["screen_status"]
+        out["ema_status"] = {
+            "ALIGNED": "EMA SUPPORTS BREAKOUT",
+            "NOT_ALIGNED": "EMA DOES NOT QUALIFY",
+        }.get(state, "EMA NOT EVALUATED")
+        if state in {"OUTSIDE_ELIGIBLE_COHORT", "NO_CURRENT_BREAKOUT_SCORE", "CONFLICT_REVIEW"}:
+            out["shortlist_status"] = state
+        elif out["breakout_score"] < MIN_BREAKOUT_SCORE:
+            out["shortlist_status"] = "BELOW_BREAKOUT_SCORE_THRESHOLD"
+        else:
+            out["shortlist_status"] = "RESEARCH_CANDIDATE"
+
+    shortlist = sorted((o for o in audit if o["shortlist_status"] == "RESEARCH_CANDIDATE"),
                        key=lambda o: (-o["breakout_score"], int(o["coin_id"])))
     for rank, row in enumerate(shortlist, 1):
         row["research_rank"] = rank
@@ -127,7 +142,11 @@ def build(production, inventory, provisional, closed_day):
                "evaluable_by_identity": dict(sorted(Counter(o["identity_status"] for o in audit
                    if o["screen_status"] in {"ALIGNED", "NOT_ALIGNED"}).items())),
                "shortlist_by_identity": dict(sorted(Counter(o["identity_status"] for o in shortlist).items())),
-               "shortlist_count": len(shortlist), "policy": "Research only; no production promotions or alerts."}
+               "shortlist_by_ema_status": dict(sorted(Counter(o["ema_status"] for o in shortlist).items())),
+               "shortlist_status_counts": dict(sorted(Counter(o["shortlist_status"] for o in audit).items())),
+               "minimum_breakout_score": MIN_BREAKOUT_SCORE,
+               "shortlist_count": len(shortlist),
+               "policy": "EMA is supporting evidence only. Research only; no production promotions or alerts."}
     return shortlist, audit, summary
 
 

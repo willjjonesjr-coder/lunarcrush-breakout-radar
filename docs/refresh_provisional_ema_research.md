@@ -56,13 +56,21 @@ production radar, production EMA inventory, ranking, or notifications.
 After the production snapshot for the latest completed UTC day is available,
 run **Refresh current provisional EMA research (no alerts)**. The existing
 artifact also contains `combined_shortlist.csv`, `combined_screen_audit.csv`,
-and `combined_screen_summary.json`. Both identity paths use the same current
-production breakout score, with no rank bonus for verified identity. Rows must
-pass their existing EMA screen. Verified evidence wins when both paths exist;
-provisional rows are clearly labeled and require manual identity checks.
+and `combined_screen_summary.json`. The shortlist is for manual research,
+not a list of confirmed breakouts. Rank by the current production breakout
+score (minimum 55, the existing BREAKOUT / MOMENTUM score floor), without
+any bonus for EMA or verified identity. Keep the current-day price, analyzed
+cohort, and conflict checks.
 
-Stale histories, known price or identity conflicts, and unscored rows stay
-out of the shortlist. The audit shows why. Smaller cap and thin liquidity are
-visible flags, not new rank gates. A stale production snapshot fails the
-combined step rather than publishing misleading results; the refresh artifact
-is still uploaded. None of these outputs changes production or sends alerts.
+Read `shortlist_status` for inclusion and `ema_status` for supporting evidence:
+`EMA SUPPORTS BREAKOUT`, `EMA DOES NOT QUALIFY`, or `EMA NOT EVALUATED`.
+The latter includes missing, stale, or incomplete EMA evidence; the original
+`screen_status` preserves the reason. A coin with a fresh score can be
+shortlisted in any of those three EMA states, but stale EMA data can never earn
+the supporting label. Verified evidence takes precedence over provisional
+evidence. An explicit identity or price conflict on the provisional path stays
+out, while unverified and provisional names remain clearly labeled for manual
+due diligence. Market cap and liquidity are still flags, not new gates.
+
+A stale production snapshot fails the combined step. None of these outputs
+changes production scoring, confirms a trade, or sends alerts.
