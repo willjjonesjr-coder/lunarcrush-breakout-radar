@@ -6,6 +6,7 @@ Historical ranking is retained whole; only CURRENT_ANALYZED entries are refreshe
 """
 import argparse
 import csv
+import hashlib
 import json
 import re
 from collections import Counter
@@ -23,6 +24,34 @@ FIELDS = (
     "production_eligible", "alert_eligible",
 )
 SAFE_VENUES = {"kraken", "coinbase", "binance"}
+SEED_PATH = Path(__file__).resolve().parents[1] / "config/provisional_research_seed.json"
+SEED_SHA256 = "c3f5a0061509185ca82f8be354b1b7fc5fb67b098158dde37ed35aa0132c5491"
+
+
+def load_seed(path=None):
+    raw = (path or SEED_PATH).read_bytes()
+    if hashlib.sha256(raw).hexdigest() != SEED_SHA256:
+        raise ValueError("Pinned research identity evidence is missing or changed; not safe to publish")
+    seed = json.loads(raw)
+    if seed["schema_version"] != 1:
+        raise ValueError("Unsupported research identity evidence version")
+    return seed["ranking"], seed["original_report"], seed["source"]
+
+
+def conflict(row):
+    return (any(word in row.get("price_corroboration_status", "").upper()
+                for word in ("CONFLICT", "FAIL", "MISMATCH"))
+            or any("CONFLICT" in row.get(key, "").upper()
+                   for key in ("refresh_status", "current_selection_status")))
+
+
+def retain_baseline_holds(rows, baseline):
+    result = unique_rows(rows, "coin_id", "research refresh")
+    for cid, row in unique_rows(baseline, "coin_id", "baseline identity plan").items():
+        if conflict(row):
+            result[cid] = row
+    return list(result.values())
+
 
 
 def read_csv(path):
@@ -65,7 +94,7 @@ def eligible_pair(report_row, rank):
 
 
 def refresh(ranking, original_report, current_rows, exchange_factory,
-            today=None, bars=300):
+            today=None, bars=300, plan_only=False):
     if bars < 300:
         raise ValueError("EMA refresh requires at least 300 completed bars")
     today = today or datetime.now(timezone.utc).date()
@@ -99,6 +128,11 @@ def refresh(ranking, original_report, current_rows, exchange_factory,
                           reason="Not in current analyzed production cohort; no live market fetch")
             results.append(result)
             continue
+        if conflict(result):
+            result.update(refresh_status="PRICE_CONFLICT_REVIEW",
+                          reason="Archived price conflict retained without market fetch")
+            results.append(result)
+            continue
         if status != "CURRENT_ANALYZED":
             # Older ranking mismatches cannot silently become current without review.
             result.update(refresh_status="REVIEW_CURRENT_SELECTION_CHANGE",
@@ -112,6 +146,11 @@ def refresh(ranking, original_report, current_rows, exchange_factory,
             results.append(result)
             continue
         result.update(exchange=venue, pair=pair)
+        if plan_only:
+            result.update(refresh_status="HISTORY_NOT_FETCHED",
+                          reason="Identity evidence read; optional exchange history not yet refreshed")
+            results.append(result)
+            continue
         try:
             if venue not in clients:
                 clients[venue] = exchange_factory(venue)
@@ -149,35 +188,70 @@ def refresh(ranking, original_report, current_rows, exchange_factory,
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--ranking", required=True)
-    p.add_argument("--provisional-report", required=True)
+    p.add_argument("--ranking", type=Path)
+    p.add_argument("--provisional-report", type=Path)
+    p.add_argument("--plan-only", action="store_true")
+    p.add_argument("--retain-holds", type=Path, action="append", default=[])
     p.add_argument("--current-production", default="reports/breakout_radar.csv")
     p.add_argument("--output", default="reports/provisional_ema_refresh")
     p.add_argument("--closed-day", type=date.fromisoformat)
     p.add_argument("--bars", type=int, default=300)
     args = p.parse_args()
-    import ccxt
-    original = json.loads(Path(args.provisional_report).read_text(encoding="utf-8"))
+    if bool(args.ranking) != bool(args.provisional_report):
+        p.error("Pass both historical overrides or neither")
+    try:
+        seed_ranking, seed_original, source = load_seed()
+    except (OSError, ValueError, KeyError) as exc:
+        p.error(f"Cannot verify durable identity evidence: {exc}")
+    ranking, original = seed_ranking, seed_original
+    if args.ranking:
+        ranking = read_csv(args.ranking)
+        original = json.loads(args.provisional_report.read_text(encoding="utf-8"))
+        if not ranking:
+            p.error("Historical ranking must not be empty")
     if not isinstance(original, dict) or not isinstance(original.get("assets"), list):
         p.error("Expected original provisional research report.json")
     if not (original.get("required_completed_day") and original.get("as_of")):
         p.error("Original provisional report missing provenance")
+
     def factory(venue):
+        import ccxt
         return getattr(ccxt, venue)({"enableRateLimit": True, "timeout": 30000})
-    rows, summary = refresh(read_csv(args.ranking), original,
-                            read_csv(args.current_production), factory,
-                            today=args.closed_day + timedelta(days=1) if args.closed_day else None,
-                            bars=args.bars)
+
+    today = args.closed_day + timedelta(days=1) if args.closed_day else None
+    production = read_csv(args.current_production)
+    rows, summary = refresh(ranking, original, production, factory, today=today,
+                            bars=args.bars, plan_only=args.plan_only)
+    if args.ranking:
+        seed_rows, _ = refresh(seed_ranking, seed_original, production, None, today=today,
+                               bars=args.bars, plan_only=True)
+        rows = retain_baseline_holds(rows, seed_rows)
+        for baseline in args.retain_holds:
+            rows = retain_baseline_holds(rows, read_csv(baseline))
+        summary["cohort_size"] = len(rows)
+        summary["refreshed"] = sum(r["refresh_status"] == "REFRESHED_PROVISIONAL" for r in rows)
+        summary["refreshed_aligned"] = sum(r["refreshed_technical_status"] == "PROVISIONAL EMA ALIGNED" for r in rows)
+        summary["status_counts"] = dict(sorted(Counter(r["refresh_status"] for r in rows).items()))
+        summary["current_candidates"] = sum(r["current_selection_status"] == "CURRENT_ANALYZED" for r in rows)
+        summary["historical_retained"] = sum(r["refresh_status"] == "RETAINED_HISTORICAL_ONLY" for r in rows)
+    summary["identity_source"] = "validated_archive_overrides" if args.ranking else "pinned_repository_seed"
+    summary["pinned_identity_source_artifacts"] = source
+    summary["provisional_history_mode"] = "NOT_REFRESHED" if args.plan_only else "REFRESH_ATTEMPTED"
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=True)
-    with (output / "refreshed_ranking.csv").open("w", newline="", encoding="utf-8") as f:
+    tmp = output / "refreshed_ranking.csv.tmp"
+    with tmp.open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=FIELDS)
         w.writeheader()
         w.writerows(rows)
-    (output / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(output / "refreshed_ranking.csv")
+    tmp = output / "summary.json.tmp"
+    tmp.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    tmp.replace(output / "summary.json")
     print(json.dumps(summary, indent=2))
 
 
 if __name__ == "__main__":
     main()
+
 
